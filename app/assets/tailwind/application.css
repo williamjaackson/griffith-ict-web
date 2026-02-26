@@ -21,6 +21,16 @@
   --color-gray-200: #CCCCCC;
   --color-gray-100: #E8E8E8;
 
+  /* Light-mode palette */
+  --color-cream: #FAF7F2;
+  --color-cream-dark: #F0EBE3;
+  --color-ink: #1A1715;
+  --color-ink-light: #6B6560;
+  --color-ink-lighter: #A39E98;
+  --color-border: #E5DFD7;
+  --color-red-50: #FEF0F0;
+  --color-red-100: #FDDEDE;
+
   /* Glows */
   --color-glow-red: rgba(240, 62, 62, 0.15);
   --color-glow-red-strong: rgba(240, 62, 62, 0.3);
@@ -124,6 +134,29 @@ body::after {
 
 .nav__toggle-input:checked ~ .nav__toggle span:nth-child(3) {
   transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Light theme overrides */
+body.theme-light {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+}
+
+body.theme-light::after {
+  display: none;
+}
+
+body.theme-light .nav--scrolled {
+  background-color: rgba(250, 247, 242, 0.95) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+body.theme-light .nav__toggle-input:checked ~ .nav__menu {
+  background-color: rgba(250, 247, 242, 0.98);
 }
 
 /* Reduced motion */
