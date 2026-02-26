@@ -525,7 +525,13 @@ body.theme-v13 .nav--scrolled {
   border-bottom: 3px solid var(--color-v13-black);
 }
 
-/* V13 mobile nav: checkbox is direct child of nav, menu is sibling */
+/* V13 mobile nav: default and active states fully in CSS to avoid Tailwind specificity issues */
+body.theme-v13 .v13-nav__menu {
+  opacity: 0;
+  pointer-events: none;
+  background-color: var(--color-v13-bg);
+}
+
 body.theme-v13 .nav__toggle-input:checked ~ .v13-nav__menu {
   opacity: 1;
   pointer-events: auto;
@@ -533,7 +539,7 @@ body.theme-v13 .nav__toggle-input:checked ~ .v13-nav__menu {
 
 /* V13 hamburger animation via :has() since label is nested inside inner div */
 body.theme-v13 nav:has(.nav__toggle-input:checked) .nav__toggle span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
+  transform: rotate(45deg) translateY(8px);
 }
 
 body.theme-v13 nav:has(.nav__toggle-input:checked) .nav__toggle span:nth-child(2) {
@@ -541,7 +547,7 @@ body.theme-v13 nav:has(.nav__toggle-input:checked) .nav__toggle span:nth-child(2
 }
 
 body.theme-v13 nav:has(.nav__toggle-input:checked) .nav__toggle span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
+  transform: rotate(-45deg) translateY(-8px);
 }
 
 /* Reduced motion */

@@ -10,7 +10,7 @@
 
   <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between relative z-20">
     <a href="#" class="flex items-center gap-3 group">
-      <img src="/gic-icon.png" alt="GIC" class="h-9 w-auto transition-transform duration-300 group-hover:scale-105">
+      <img src="/gic-icon.png" alt="GIC" class="h-9 w-auto rounded-full border-3 border-v13-black transition-transform duration-300 group-hover:scale-105">
     </a>
 
     <ul class="hidden md:flex items-center gap-8" style="font-family: 'Plus Jakarta Sans', sans-serif;">
@@ -31,7 +31,7 @@
     </label>
   </div>
 
-  <div class="v13-nav__menu fixed inset-0 z-10 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-all duration-500 md:hidden" style="font-family: 'Unbounded', sans-serif; background-color: #FAF7F2;">
+  <div class="v13-nav__menu fixed inset-0 z-10 flex flex-col items-center justify-center gap-8 transition-all duration-500 md:hidden" style="font-family: 'Unbounded', sans-serif;">
     <a href="#about" class="text-2xl font-bold text-v13-black hover:text-v13-red transition-colors" onclick="document.getElementById('nav-toggle').checked = false">About</a>
     <a href="#events" class="text-2xl font-bold text-v13-black hover:text-v13-red transition-colors" onclick="document.getElementById('nav-toggle').checked = false">Events</a>
     <a href="#community" class="text-2xl font-bold text-v13-black hover:text-v13-red transition-colors" onclick="document.getElementById('nav-toggle').checked = false">Community</a>
@@ -74,16 +74,16 @@
       </div>
 
       <%# Stats — stacked on mobile, row on tablet, column on desktop %>
-      <div class="lg:col-span-2 flex flex-col sm:flex-row lg:flex-col gap-4 mt-8 sm:mt-0 animate-fade-up-4">
-        <div class="flex-1 bg-v13-red text-white border-3 border-v13-black p-6 sm:rotate-2 transition-all duration-200 hover:rotate-0">
+      <div class="lg:col-span-2 flex flex-col md:flex-row lg:flex-col gap-4 mt-8 md:mt-0 animate-fade-up-4">
+        <div class="flex-1 bg-v13-red text-white border-3 border-v13-black p-6 md:rotate-2 transition-all duration-200 hover:rotate-0">
           <span class="block text-4xl md:text-5xl font-extrabold" style="font-family: 'Unbounded', sans-serif;">400+</span>
           <span class="text-white/70 text-sm font-semibold" style="font-family: 'Plus Jakarta Sans', sans-serif;">Members</span>
         </div>
-        <div class="flex-1 bg-v13-red-pale text-v13-black border-3 border-v13-black p-6 sm:-rotate-1 transition-all duration-200 hover:rotate-0">
+        <div class="flex-1 bg-v13-red-pale text-v13-black border-3 border-v13-black p-6 md:-rotate-1 transition-all duration-200 hover:rotate-0">
           <span class="block text-4xl md:text-5xl font-extrabold" style="font-family: 'Unbounded', sans-serif;">Weekly</span>
           <span class="text-v13-gray text-sm font-semibold" style="font-family: 'Plus Jakarta Sans', sans-serif;">Events</span>
         </div>
-        <div class="flex-1 bg-v13-cream text-v13-black border-3 border-v13-black p-6 sm:rotate-1 transition-all duration-200 hover:rotate-0">
+        <div class="flex-1 bg-v13-cream text-v13-black border-3 border-v13-black p-6 md:rotate-1 transition-all duration-200 hover:rotate-0">
           <span class="block text-4xl md:text-5xl font-extrabold" style="font-family: 'Unbounded', sans-serif;">2</span>
           <span class="text-v13-gray text-sm font-semibold" style="font-family: 'Plus Jakarta Sans', sans-serif;">Campuses</span>
         </div>
@@ -353,9 +353,8 @@
   <div class="max-w-6xl mx-auto">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
       <div class="md:col-span-2">
-        <div class="flex items-center gap-1 mb-4">
-          <img src="/gic-icon.png" alt="" class="h-7 w-auto">
-          <img src="/gic-wordmark-white.png" alt="Griffith ICT Club" class="h-4 w-auto">
+        <div class="mb-4">
+          <img src="/gic-wordmark-white.png" alt="Griffith ICT Club" class="h-6 w-auto">
         </div>
         <p class="text-white/40 text-sm leading-relaxed max-w-sm" style="font-family: 'Plus Jakarta Sans', sans-serif;">
           Made with questionable amounts of caffeine by students who should probably be studying.
