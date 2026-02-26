@@ -1,2 +1,371 @@
 <% content_for(:title) { "GIC — Griffith ICT Club" } %>
-<p>Page 13 — coming soon</p>
+
+<%# ═══════════════════════════════════════════════════════════
+    NAVIGATION
+    ═══════════════════════════════════════════════════════════ %>
+<nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-3 group">
+      <img src="/gic-icon.png" alt="GIC" class="h-9 w-auto transition-transform duration-300 group-hover:scale-105">
+    </a>
+
+    <ul class="hidden md:flex items-center gap-8" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+      <li><a href="#about" class="text-v13-gray hover:text-v13-black transition-colors duration-200 text-sm font-semibold">About</a></li>
+      <li><a href="#events" class="text-v13-gray hover:text-v13-black transition-colors duration-200 text-sm font-semibold">Events</a></li>
+      <li><a href="#community" class="text-v13-gray hover:text-v13-black transition-colors duration-200 text-sm font-semibold">Community</a></li>
+      <li><a href="#sponsors" class="text-v13-gray hover:text-v13-black transition-colors duration-200 text-sm font-semibold">Sponsors</a></li>
+    </ul>
+
+    <a href="#community" class="hidden md:inline-flex items-center gap-2 bg-v13-red text-white text-sm font-bold px-5 py-2.5 border-3 border-v13-black transition-all duration-200 hover:translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[4px_4px_0px_#222222]" style="font-family: 'Unbounded', sans-serif; font-weight: 600;">
+      Join Us
+    </a>
+
+    <input type="checkbox" id="nav-toggle" class="nav__toggle-input hidden" aria-label="Toggle navigation">
+    <label for="nav-toggle" class="nav__toggle md:hidden flex flex-col gap-1.5 cursor-pointer z-50 relative" aria-hidden="true">
+      <span class="block w-6 h-0.5 bg-v13-black transition-transform duration-300 origin-center"></span>
+      <span class="block w-6 h-0.5 bg-v13-black transition-opacity duration-300"></span>
+      <span class="block w-6 h-0.5 bg-v13-black transition-transform duration-300 origin-center"></span>
+    </label>
+
+    <div class="nav__menu fixed inset-0 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-all duration-500 md:hidden" style="font-family: 'Unbounded', sans-serif;">
+      <a href="#about" class="text-2xl font-bold text-v13-black hover:text-v13-red transition-colors" onclick="document.getElementById('nav-toggle').checked = false">About</a>
+      <a href="#events" class="text-2xl font-bold text-v13-black hover:text-v13-red transition-colors" onclick="document.getElementById('nav-toggle').checked = false">Events</a>
+      <a href="#community" class="text-2xl font-bold text-v13-black hover:text-v13-red transition-colors" onclick="document.getElementById('nav-toggle').checked = false">Community</a>
+      <a href="#sponsors" class="text-2xl font-bold text-v13-black hover:text-v13-red transition-colors" onclick="document.getElementById('nav-toggle').checked = false">Sponsors</a>
+      <a href="#community" class="mt-4 bg-v13-red text-white font-bold px-8 py-3 border-3 border-v13-black transition-all duration-200" onclick="document.getElementById('nav-toggle').checked = false">Join Us</a>
+    </div>
+  </div>
+</nav>
+
+<%# ═══════════════════════════════════════════════════════════
+    HERO
+    ═══════════════════════════════════════════════════════════ %>
+<header class="min-h-screen flex items-center px-6 pt-20 pb-16">
+  <div class="max-w-6xl mx-auto w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
+      <div class="lg:col-span-3">
+        <div class="animate-fade-up inline-block bg-v13-red text-white border-3 border-v13-black px-4 py-1.5 mb-8 -rotate-2">
+          <span class="text-sm font-bold" style="font-family: 'Unbounded', sans-serif; font-weight: 600;">GRIFFITH ICT CLUB</span>
+        </div>
+
+        <h1 class="animate-fade-up-1 text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-v13-black leading-[0.95] mb-8" style="font-family: 'Unbounded', sans-serif; font-weight: 800;">
+          Build.<br>Learn.<br>
+          <span class="relative inline-block">
+            Connect.
+            <span class="absolute -bottom-1 left-0 right-0 h-4 bg-v13-red/20 -z-10"></span>
+          </span>
+        </h1>
+
+        <p class="animate-fade-up-2 text-v13-gray text-lg md:text-xl max-w-lg leading-relaxed mb-10" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+          The student community where you'll find your people in tech.
+          Whether you're just starting out or already deep in it — come learn, meet like-minded students, and get ahead.
+        </p>
+
+        <div class="animate-fade-up-3 flex flex-wrap gap-4">
+          <a href="#community" class="bg-v13-red text-white font-bold px-8 py-4 border-3 border-v13-black transition-all duration-200 hover:translate-x-1 hover:-translate-y-1 hover:shadow-[5px_5px_0px_#222222] text-base" style="font-family: 'Unbounded', sans-serif; font-weight: 600;">
+            Join our Discord
+          </a>
+          <a href="#about" class="bg-white text-v13-black font-bold px-8 py-4 border-3 border-v13-black transition-all duration-200 hover:translate-x-1 hover:-translate-y-1 hover:shadow-[5px_5px_0px_#D32F2F] text-base" style="font-family: 'Unbounded', sans-serif; font-weight: 600;">
+            Learn more
+          </a>
+        </div>
+      </div>
+
+      <%# Stats — stacked brutalist cards %>
+      <div class="lg:col-span-2 flex flex-row lg:flex-col gap-4 animate-fade-up-4">
+        <div class="flex-1 bg-v13-red text-white border-3 border-v13-black p-6 rotate-2 transition-all duration-200 hover:rotate-0">
+          <span class="block text-4xl md:text-5xl font-extrabold" style="font-family: 'Unbounded', sans-serif;">400+</span>
+          <span class="text-white/70 text-sm font-semibold" style="font-family: 'Plus Jakarta Sans', sans-serif;">Members</span>
+        </div>
+        <div class="flex-1 bg-v13-red-pale text-v13-black border-3 border-v13-black p-6 -rotate-1 transition-all duration-200 hover:rotate-0">
+          <span class="block text-4xl md:text-5xl font-extrabold" style="font-family: 'Unbounded', sans-serif;">6+</span>
+          <span class="text-v13-gray text-sm font-semibold" style="font-family: 'Plus Jakarta Sans', sans-serif;">Partners</span>
+        </div>
+        <div class="flex-1 bg-v13-cream text-v13-black border-3 border-v13-black p-6 rotate-1 transition-all duration-200 hover:rotate-0">
+          <span class="block text-4xl md:text-5xl font-extrabold" style="font-family: 'Unbounded', sans-serif;">2</span>
+          <span class="text-v13-gray text-sm font-semibold" style="font-family: 'Plus Jakarta Sans', sans-serif;">Campuses</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<%# ═══════════════════════════════════════════════════════════
+    ABOUT
+    ═══════════════════════════════════════════════════════════ %>
+<section id="about" class="py-24 md:py-32 px-6 border-t-3 border-v13-black">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal mb-16">
+      <h2 class="text-3xl md:text-5xl text-v13-black mb-4" style="font-family: 'Unbounded', sans-serif; font-weight: 800;">By students, for students.</h2>
+      <p class="text-v13-gray text-lg max-w-2xl leading-relaxed" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+        Griffith ICT Club (GIC) is Griffith University's club for everything tech. With divisions on the Gold Coast and Nathan, you'll build skills, make friends, and kickstart your career in tech.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div class="reveal bg-white border-3 border-v13-black p-7 shadow-[6px_6px_0px_#D32F2F] transition-all duration-200 hover:shadow-[8px_8px_0px_#D32F2F] hover:translate-x-[-2px] hover:translate-y-[-2px]">
+        <div class="w-10 h-10 bg-v13-red/10 flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-v13-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z"/></svg>
+        </div>
+        <h3 class="text-v13-black font-bold text-xl mb-2" style="font-family: 'Unbounded', sans-serif; font-weight: 700;">Social Events</h3>
+        <p class="text-v13-gray text-sm leading-relaxed" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+          Game nights, BBQs, trivia, and casual hangouts. The best part of uni
+          is the people, and we make sure you meet them.
+        </p>
+      </div>
+
+      <div class="reveal bg-white border-3 border-v13-black p-7 shadow-[6px_6px_0px_#E57373] transition-all duration-200 hover:shadow-[8px_8px_0px_#E57373] hover:translate-x-[-2px] hover:translate-y-[-2px]">
+        <div class="w-10 h-10 bg-v13-red/10 flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-v13-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M18.75 4.236c.982.143 1.954.317 2.916.52A6.003 6.003 0 0016.27 9.728M18.75 4.236V4.5c0 2.108-.966 3.99-2.48 5.228m0 0a6.023 6.023 0 01-2.27.308 6.023 6.023 0 01-2.27-.308"/></svg>
+        </div>
+        <h3 class="text-v13-black font-bold text-xl mb-2" style="font-family: 'Unbounded', sans-serif; font-weight: 700;">Hackathons</h3>
+        <p class="text-v13-gray text-sm leading-relaxed" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+          Team up, ship fast, win prizes. We design and run our own hackathons
+          that everyone can participate in.
+        </p>
+      </div>
+
+      <div class="reveal bg-white border-3 border-v13-black p-7 shadow-[6px_6px_0px_#B71C1C] transition-all duration-200 hover:shadow-[8px_8px_0px_#B71C1C] hover:translate-x-[-2px] hover:translate-y-[-2px]">
+        <div class="w-10 h-10 bg-v13-red/10 flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-v13-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z"/></svg>
+        </div>
+        <h3 class="text-v13-black font-bold text-xl mb-2" style="font-family: 'Unbounded', sans-serif; font-weight: 700;">Industry Events</h3>
+        <p class="text-v13-gray text-sm leading-relaxed" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+          Connect with companies hiring grads. Hear from engineers, ask questions,
+          and get your foot in the door early.
+        </p>
+      </div>
+
+      <div class="reveal bg-white border-3 border-v13-black p-7 shadow-[6px_6px_0px_#222222] transition-all duration-200 hover:shadow-[8px_8px_0px_#222222] hover:translate-x-[-2px] hover:translate-y-[-2px]">
+        <div class="w-10 h-10 bg-v13-red/10 flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-v13-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6m0 0 2.77-.693a9 9 0 0 1 6.208.682l.108.054a9 9 0 0 0 6.086.71l3.114-.732a48.524 48.524 0 0 1-.005-10.499l-3.11.732a9 9 0 0 1-6.085-.711l-.108-.054a9 9 0 0 0-6.208-.682L3 4.5M3 15V4.5"/></svg>
+        </div>
+        <h3 class="text-v13-black font-bold text-xl mb-2" style="font-family: 'Unbounded', sans-serif; font-weight: 700;">Capture the Flags</h3>
+        <p class="text-v13-gray text-sm leading-relaxed" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+          Put your skills to the test with cybersecurity challenges. Solve puzzles,
+          crack codes, and compete with your mates in our CTF events.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# ═══════════════════════════════════════════════════════════
+    EVENTS
+    ═══════════════════════════════════════════════════════════ %>
+<section id="events" class="py-24 md:py-32 px-6 bg-v13-red-pale/40 border-y-3 border-v13-black">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal mb-16">
+      <div class="inline-block bg-v13-black text-white px-4 py-1.5 mb-4">
+        <span class="text-sm font-bold" style="font-family: 'Unbounded', sans-serif; font-weight: 600;">UPCOMING</span>
+      </div>
+      <h2 class="text-3xl md:text-5xl text-v13-black" style="font-family: 'Unbounded', sans-serif; font-weight: 800;">What's happening next</h2>
+    </div>
+
+    <div class="flex flex-col gap-5">
+      <article class="reveal flex bg-white border-3 border-v13-black overflow-hidden transition-all duration-200 hover:translate-x-1 hover:-translate-y-1 hover:shadow-[5px_5px_0px_#D32F2F]">
+        <div class="w-3 bg-v13-red shrink-0"></div>
+        <div class="p-6 flex flex-col sm:flex-row gap-5 flex-1">
+          <div class="shrink-0" style="font-family: 'Unbounded', sans-serif;">
+            <span class="block text-4xl text-v13-black font-extrabold">12</span>
+            <span class="text-v13-gray text-xs uppercase tracking-wider font-bold">MAR</span>
+          </div>
+          <div class="flex-1">
+            <div class="flex flex-wrap gap-2 mb-2">
+              <span class="bg-v13-red text-white text-xs font-bold px-3 py-1 border-2 border-v13-black" style="font-family: 'Unbounded', sans-serif; font-weight: 600;">Workshop</span>
+            </div>
+            <h3 class="text-v13-black font-bold text-lg mb-2" style="font-family: 'Unbounded', sans-serif; font-weight: 700;">Intro to Git & GitHub</h3>
+            <p class="text-v13-gray text-sm leading-relaxed mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+              From your first commit to opening a pull request. All levels welcome.
+            </p>
+            <div class="flex flex-wrap gap-3 text-v13-gray text-xs font-medium" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+              <span>6:00 PM</span>
+              <span>Nathan Campus, N44</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="reveal flex bg-white border-3 border-v13-black overflow-hidden transition-all duration-200 hover:translate-x-1 hover:-translate-y-1 hover:shadow-[5px_5px_0px_#D32F2F]">
+        <div class="w-3 bg-v13-red-light shrink-0"></div>
+        <div class="p-6 flex flex-col sm:flex-row gap-5 flex-1">
+          <div class="shrink-0" style="font-family: 'Unbounded', sans-serif;">
+            <span class="block text-4xl text-v13-black font-extrabold">19</span>
+            <span class="text-v13-gray text-xs uppercase tracking-wider font-bold">MAR</span>
+          </div>
+          <div class="flex-1">
+            <div class="flex flex-wrap gap-2 mb-2">
+              <span class="bg-v13-red-pale text-v13-red text-xs font-bold px-3 py-1 border-2 border-v13-black" style="font-family: 'Unbounded', sans-serif; font-weight: 600;">Social</span>
+            </div>
+            <h3 class="text-v13-black font-bold text-lg mb-2" style="font-family: 'Unbounded', sans-serif; font-weight: 700;">Welcome Week BBQ</h3>
+            <p class="text-v13-gray text-sm leading-relaxed mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+              Free food, lawn games, and good vibes. Bring your mates or come solo.
+            </p>
+            <div class="flex flex-wrap gap-3 text-v13-gray text-xs font-medium" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+              <span>12:00 PM</span>
+              <span>Gold Coast Campus, G40 Lawn</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="reveal flex bg-white border-3 border-v13-black overflow-hidden transition-all duration-200 hover:translate-x-1 hover:-translate-y-1 hover:shadow-[5px_5px_0px_#D32F2F]">
+        <div class="w-3 bg-v13-red-dark shrink-0"></div>
+        <div class="p-6 flex flex-col sm:flex-row gap-5 flex-1">
+          <div class="shrink-0" style="font-family: 'Unbounded', sans-serif;">
+            <span class="block text-4xl text-v13-black font-extrabold">02</span>
+            <span class="text-v13-gray text-xs uppercase tracking-wider font-bold">APR</span>
+          </div>
+          <div class="flex-1">
+            <div class="flex flex-wrap gap-2 mb-2">
+              <span class="bg-v13-red-dark text-white text-xs font-bold px-3 py-1 border-2 border-v13-black" style="font-family: 'Unbounded', sans-serif; font-weight: 600;">Hackathon</span>
+            </div>
+            <h3 class="text-v13-black font-bold text-lg mb-2" style="font-family: 'Unbounded', sans-serif; font-weight: 700;">GIC Hack Day 2026</h3>
+            <p class="text-v13-gray text-sm leading-relaxed mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+              24 hours. One idea. Ship something awesome. Teams of 2–4, all skill levels.
+            </p>
+            <div class="flex flex-wrap gap-3 text-v13-gray text-xs font-medium" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+              <span>9:00 AM – 9:00 AM</span>
+              <span>Nathan Campus, N78</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="reveal mt-10">
+      <a href="#community" class="inline-flex items-center gap-2 bg-white text-v13-black font-bold px-6 py-3 border-3 border-v13-black transition-all duration-200 hover:translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_#D32F2F] text-sm" style="font-family: 'Unbounded', sans-serif; font-weight: 600;">
+        See all events
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<%# ═══════════════════════════════════════════════════════════
+    COMMUNITY
+    ═══════════════════════════════════════════════════════════ %>
+<section id="community" class="py-24 md:py-32 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal mb-16">
+      <h2 class="text-3xl md:text-5xl text-v13-black mb-4" style="font-family: 'Unbounded', sans-serif; font-weight: 800;">Find us everywhere</h2>
+      <p class="text-v13-gray text-lg max-w-2xl leading-relaxed" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+        Our Discord is the hub for everything. But we're also on the other platforms you use.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <a href="#" class="reveal group bg-[#5865F2] border-3 border-v13-black p-6 flex items-start gap-5 transition-all duration-200 hover:translate-x-1 hover:-translate-y-1 hover:shadow-[5px_5px_0px_#D32F2F] block">
+        <div class="text-white shrink-0">
+          <svg viewBox="0 0 24 24" fill="currentColor" class="w-9 h-9"><path d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.36-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08-.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.17.33.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12z"/></svg>
+        </div>
+        <div>
+          <h3 class="text-white font-bold text-lg mb-1" style="font-family: 'Unbounded', sans-serif; font-weight: 700;">Discord</h3>
+          <p class="text-white/70 text-sm" style="font-family: 'Plus Jakarta Sans', sans-serif;">Our home base. Chat, ask questions, find teammates.</p>
+        </div>
+      </a>
+
+      <a href="#" class="reveal group bg-v13-black border-3 border-v13-black p-6 flex items-start gap-5 transition-all duration-200 hover:translate-x-1 hover:-translate-y-1 hover:shadow-[5px_5px_0px_#D32F2F] block">
+        <div class="text-white shrink-0">
+          <svg viewBox="0 0 24 24" fill="currentColor" class="w-9 h-9"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        </div>
+        <div>
+          <h3 class="text-white font-bold text-lg mb-1" style="font-family: 'Unbounded', sans-serif; font-weight: 700;">GitHub</h3>
+          <p class="text-white/70 text-sm" style="font-family: 'Plus Jakarta Sans', sans-serif;">Open source projects, workshop code, and club infra.</p>
+        </div>
+      </a>
+
+      <a href="#" class="reveal group bg-[#0A66C2] border-3 border-v13-black p-6 flex items-start gap-5 transition-all duration-200 hover:translate-x-1 hover:-translate-y-1 hover:shadow-[5px_5px_0px_#D32F2F] block">
+        <div class="text-white shrink-0">
+          <svg viewBox="0 0 24 24" fill="currentColor" class="w-9 h-9"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </div>
+        <div>
+          <h3 class="text-white font-bold text-lg mb-1" style="font-family: 'Unbounded', sans-serif; font-weight: 700;">LinkedIn</h3>
+          <p class="text-white/70 text-sm" style="font-family: 'Plus Jakarta Sans', sans-serif;">Professional updates, event recaps, and job leads.</p>
+        </div>
+      </a>
+
+      <a href="#" class="reveal group bg-v13-red border-3 border-v13-black p-6 flex items-start gap-5 transition-all duration-200 hover:translate-x-1 hover:-translate-y-1 hover:shadow-[5px_5px_0px_#222222] block">
+        <div class="text-white shrink-0">
+          <svg viewBox="0 0 24 24" fill="currentColor" class="w-9 h-9"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 1 0 0-12.324zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405a1.441 1.441 0 0 1-2.88 0 1.441 1.441 0 0 1 2.88 0z"/></svg>
+        </div>
+        <div>
+          <h3 class="text-white font-bold text-lg mb-1" style="font-family: 'Unbounded', sans-serif; font-weight: 700;">Instagram</h3>
+          <p class="text-white/70 text-sm" style="font-family: 'Plus Jakarta Sans', sans-serif;">Event photos, reels, and behind-the-scenes content.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<%# ═══════════════════════════════════════════════════════════
+    SPONSORS
+    ═══════════════════════════════════════════════════════════ %>
+<section id="sponsors" class="py-24 md:py-32 px-6 border-t-3 border-v13-black">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal mb-16">
+      <div class="inline-block bg-v13-red text-white border-3 border-v13-black px-4 py-1.5 mb-4 rotate-1">
+        <span class="text-sm font-bold" style="font-family: 'Unbounded', sans-serif; font-weight: 600;">OUR PARTNERS</span>
+      </div>
+      <h2 class="text-3xl md:text-5xl text-v13-black mb-4" style="font-family: 'Unbounded', sans-serif; font-weight: 800;">Backed by industry</h2>
+      <p class="text-v13-gray text-lg max-w-2xl leading-relaxed" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+        We partner with companies who believe in supporting the next generation of tech talent.
+        Sponsors help us run bigger events, better hackathons, and provide real-world opportunities for our members.
+      </p>
+    </div>
+
+    <div class="reveal grid grid-cols-2 md:grid-cols-4 gap-5 mb-10">
+      <div class="flex items-center justify-center h-24 bg-white border-3 border-dashed border-v13-black/30 text-v13-gray/40 text-sm font-bold" style="font-family: 'Plus Jakarta Sans', sans-serif;">Your logo here</div>
+      <div class="flex items-center justify-center h-24 bg-white border-3 border-dashed border-v13-black/30 text-v13-gray/40 text-sm font-bold" style="font-family: 'Plus Jakarta Sans', sans-serif;">Your logo here</div>
+      <div class="flex items-center justify-center h-24 bg-white border-3 border-dashed border-v13-black/30 text-v13-gray/40 text-sm font-bold" style="font-family: 'Plus Jakarta Sans', sans-serif;">Your logo here</div>
+      <div class="flex items-center justify-center h-24 bg-v13-red border-3 border-v13-black">
+        <a href="#" class="text-white font-bold text-sm transition-colors" style="font-family: 'Unbounded', sans-serif; font-weight: 600;">Sponsor us &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# ═══════════════════════════════════════════════════════════
+    FOOTER
+    ═══════════════════════════════════════════════════════════ %>
+<footer class="bg-v13-black border-t-3 border-v13-black pt-16 pb-8 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-2 mb-4">
+          <img src="/gic-icon.png" alt="GIC" class="h-8 w-auto">
+          <img src="/gic-wordmark-white.png" alt="riffith ICT Club" class="h-5 w-auto">
+        </div>
+        <p class="text-white/40 text-sm leading-relaxed max-w-sm" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+          Made with questionable amounts of caffeine by students who should probably be studying.
+          You've scrolled this far? Honestly, we didn't think you'd read this.
+          Go join the Discord already.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="text-v13-red font-bold text-sm mb-4" style="font-family: 'Unbounded', sans-serif; font-weight: 600;">Club</h4>
+        <ul class="flex flex-col gap-3" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+          <li><a href="#about" class="text-white/50 hover:text-white transition-colors text-sm">About</a></li>
+          <li><a href="#events" class="text-white/50 hover:text-white transition-colors text-sm">Events</a></li>
+          <li><a href="#sponsors" class="text-white/50 hover:text-white transition-colors text-sm">Sponsors</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-v13-red font-bold text-sm mb-4" style="font-family: 'Unbounded', sans-serif; font-weight: 600;">Connect</h4>
+        <ul class="flex flex-col gap-3" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+          <li><a href="#" class="text-white/50 hover:text-white transition-colors text-sm">Discord</a></li>
+          <li><a href="#" class="text-white/50 hover:text-white transition-colors text-sm">GitHub</a></li>
+          <li><a href="#" class="text-white/50 hover:text-white transition-colors text-sm">LinkedIn</a></li>
+          <li><a href="#" class="text-white/50 hover:text-white transition-colors text-sm">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-white/30 text-xs" style="font-family: 'Plus Jakarta Sans', sans-serif;">&copy; <%= Date.current.year %> Griffith ICT Club. Built by students.</p>
+      <a href="https://www.griffith.edu.au" target="_blank" rel="noopener" class="text-white/30 hover:text-white/50 transition-colors text-xs" style="font-family: 'Plus Jakarta Sans', sans-serif;">Griffith University</a>
+    </div>
+  </div>
+</footer>
