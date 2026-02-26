@@ -1,6 +1,6 @@
 module Ui
   class ButtonComponent < ViewComponent::Base
-    BASE_CLASSES = "inline-flex items-center justify-center text-center font-bold border-3 border-brand-black transition-all duration-200 hover:-translate-y-1 active:translate-y-0 active:shadow-none"
+    BASE_CLASSES = "inline-flex items-center justify-center text-center font-bold border-3 border-brand-black transition-all duration-200 hover:-translate-y-1 active:translate-y-0"
 
     VARIANT_CLASSES = {
       primary: "bg-brand-red text-white",
@@ -13,8 +13,8 @@ module Ui
     }.freeze
 
     SHADOW_CLASSES = {
-      primary: "hover:shadow-[5px_5px_0px_var(--color-brand-black)]",
-      secondary: "hover:shadow-[5px_5px_0px_var(--color-brand-red)]"
+      primary: "hover:shadow-[5px_5px_0px_var(--color-brand-black)] active:shadow-[0px_0px_0px_var(--color-brand-black)]",
+      secondary: "hover:shadow-[5px_5px_0px_var(--color-brand-red)] active:shadow-[0px_0px_0px_var(--color-brand-red)]"
     }.freeze
 
     def initialize(label:, href:, variant:, size: :base, **options)
