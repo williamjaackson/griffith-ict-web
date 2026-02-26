@@ -1,5 +1,5 @@
 <%
-  base_classes = "inline-block font-bold border-brand-black transition-all duration-200"
+  base_classes = "inline-block font-bold border-3 border-brand-black transition-all duration-200"
 
   variant_classes = case variant
   when :primary
@@ -10,9 +10,9 @@
 
   size_classes = case size
   when :base
-    "px-8 py-4 text-base border-3 hover:translate-x-1 hover:-translate-y-1"
+    "px-8 py-4 text-base hover:translate-x-1 hover:-translate-y-1"
   when :sm
-    "px-5 py-2.5 text-sm border-2 hover:translate-x-0.5 hover:-translate-y-0.5"
+    "px-5 py-2.5 text-sm hover:translate-x-0.5 hover:-translate-y-0.5"
   end
 
   shadow_classes = {
