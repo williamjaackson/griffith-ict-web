@@ -11,6 +11,8 @@ gem "puma", ">= 5.0"
 
 # Use Tailwind CSS [https://github.com/rails/tailwindcss-rails]
 gem "tailwindcss-rails"
+# Component framework for encapsulated view components [https://viewcomponent.org]
+gem "view_component"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
