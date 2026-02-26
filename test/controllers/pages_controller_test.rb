@@ -65,4 +65,9 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     get "/12"
     assert_response :success
   end
+
+  test "should get v13" do
+    get "/13"
+    assert_response :success
+  end
 end

@@ -48,4 +48,8 @@ class PagesController < ApplicationController
   def v12
     render layout: "redbrutalist"
   end
+
+  def v13
+    render layout: "v13"
+  end
 end

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= content_for(:title) || "GIC — Griffith ICT Club" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Griffith ICT Club (GIC) is an inclusive student community for all ICT students at Griffith University. Workshops, hackathons, socials, and more.">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="GIC — Griffith ICT Club">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <meta property="og:title" content="GIC — Griffith ICT Club">
+    <meta property="og:description" content="An inclusive student tech community at Griffith University. Workshops, hackathons, socials, and industry connections.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/gic-icon.png">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="/gic-icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/gic-icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app %>
+    <script src="/application.js" defer></script>
+  </head>
+
+  <body class="theme-v13">
+    <%= yield %>
+  </body>
+</html>

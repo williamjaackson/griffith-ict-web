@@ -105,6 +105,16 @@
   --color-ref-muted: #A39E98;
   --color-ref-border: #E2DCD4;
 
+  /* V13 palette */
+  --color-v13-bg: #FAF7F2;
+  --color-v13-red: #D32F2F;
+  --color-v13-red-light: #E57373;
+  --color-v13-red-pale: #FCEAEA;
+  --color-v13-red-dark: #B71C1C;
+  --color-v13-black: #222222;
+  --color-v13-gray: #6B6560;
+  --color-v13-cream: #F0EBE3;
+
   /* Red brutalist palette */
   --color-rb-bg: #FFFAF5;
   --color-rb-black: #1A1110;
@@ -497,6 +507,26 @@ body.theme-redbrutalist .nav--scrolled {
 
 body.theme-redbrutalist .nav__toggle-input:checked ~ .nav__menu {
   background-color: var(--color-rb-bg);
+}
+
+/* V13 theme overrides */
+body.theme-v13 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background-color: var(--color-v13-bg);
+  color: var(--color-v13-gray);
+}
+
+body.theme-v13::after {
+  display: none;
+}
+
+body.theme-v13 .nav--scrolled {
+  background-color: var(--color-v13-bg) !important;
+  border-bottom: 3px solid var(--color-v13-black);
+}
+
+body.theme-v13 .nav__toggle-input:checked ~ .nav__menu {
+  background-color: var(--color-v13-bg);
 }
 
 /* Reduced motion */
