@@ -10,5 +10,6 @@ class PagesController < ApplicationController
   end
 
   def v3
+    render layout: "bento"
   end
 end

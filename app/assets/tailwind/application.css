@@ -21,6 +21,14 @@
   --color-gray-200: #CCCCCC;
   --color-gray-100: #E8E8E8;
 
+  /* Bento palette */
+  --color-surface: #F4F5F7;
+  --color-card: #FFFFFF;
+  --color-text: #1B1F23;
+  --color-text-secondary: #5E6770;
+  --color-text-tertiary: #9CA3AB;
+  --color-stroke: #E1E4E8;
+
   /* Light-mode palette */
   --color-cream: #FAF7F2;
   --color-cream-dark: #F0EBE3;
@@ -157,6 +165,29 @@ body.theme-light .nav--scrolled {
 
 body.theme-light .nav__toggle-input:checked ~ .nav__menu {
   background-color: rgba(250, 247, 242, 0.98);
+}
+
+/* Bento theme overrides */
+body.theme-bento {
+  font-family: "Karla", sans-serif;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+}
+
+body.theme-bento::after {
+  display: none;
+}
+
+body.theme-bento .nav--scrolled {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+body.theme-bento .nav__toggle-input:checked ~ .nav__menu {
+  background-color: rgba(244, 245, 247, 0.98);
 }
 
 /* Reduced motion */
