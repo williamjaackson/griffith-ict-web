@@ -21,4 +21,6 @@ Rails.application.routes.draw do
   get "8", to: "pages#v8"
   get "9", to: "pages#v9"
   get "10", to: "pages#v10"
+  get "11", to: "pages#v11"
+  get "12", to: "pages#v12"
 end

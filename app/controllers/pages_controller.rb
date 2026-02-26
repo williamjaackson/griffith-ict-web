@@ -40,4 +40,12 @@ class PagesController < ApplicationController
   def v10
     render layout: "profile"
   end
+
+  def v11
+    render layout: "refined"
+  end
+
+  def v12
+    render layout: "redbrutalist"
+  end
 end

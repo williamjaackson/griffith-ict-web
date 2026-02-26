@@ -97,6 +97,24 @@
   --color-prof-border: #E8E2DA;
   --color-prof-red: #D93025;
 
+  /* Refined palette */
+  --color-ref-bg: #FAF8F4;
+  --color-ref-surface: #F0ECE4;
+  --color-ref-ink: #1A1715;
+  --color-ref-text: #5C5650;
+  --color-ref-muted: #A39E98;
+  --color-ref-border: #E2DCD4;
+
+  /* Red brutalist palette */
+  --color-rb-bg: #FFFAF5;
+  --color-rb-black: #1A1110;
+  --color-rb-gray: #5C4F4A;
+  --color-rb-red: #E63B2E;
+  --color-rb-red-light: #FF6B5C;
+  --color-rb-red-pale: #FEEAE7;
+  --color-rb-red-dark: #B91C1C;
+  --color-rb-cream: #FFF5F0;
+
   /* Glows */
   --color-glow-red: rgba(240, 62, 62, 0.15);
   --color-glow-red-strong: rgba(240, 62, 62, 0.3);
@@ -436,6 +454,49 @@ body.theme-profile details[open] .faq-answer {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Refined theme overrides */
+body.theme-refined {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background-color: var(--color-ref-bg);
+  color: var(--color-ref-text);
+}
+
+body.theme-refined::after {
+  display: none;
+}
+
+body.theme-refined .nav--scrolled {
+  background-color: rgba(250, 248, 244, 0.95) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--color-ref-border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+body.theme-refined .nav__toggle-input:checked ~ .nav__menu {
+  background-color: rgba(250, 248, 244, 0.98);
+}
+
+/* Red brutalist theme overrides */
+body.theme-redbrutalist {
+  font-family: "Work Sans", sans-serif;
+  background-color: var(--color-rb-bg);
+  color: var(--color-rb-gray);
+}
+
+body.theme-redbrutalist::after {
+  display: none;
+}
+
+body.theme-redbrutalist .nav--scrolled {
+  background-color: var(--color-rb-bg) !important;
+  border-bottom: 3px solid var(--color-rb-black);
+}
+
+body.theme-redbrutalist .nav__toggle-input:checked ~ .nav__menu {
+  background-color: var(--color-rb-bg);
 }
 
 /* Reduced motion */
