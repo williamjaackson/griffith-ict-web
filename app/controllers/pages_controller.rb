@@ -36,4 +36,8 @@ class PagesController < ApplicationController
   def v9
     render layout: "modern"
   end
+
+  def v10
+    render layout: "profile"
+  end
 end
