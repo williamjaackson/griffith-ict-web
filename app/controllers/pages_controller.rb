@@ -32,4 +32,8 @@ class PagesController < ApplicationController
   def v8
     render layout: "brutalist"
   end
+
+  def v9
+    render layout: "modern"
+  end
 end

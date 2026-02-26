@@ -80,6 +80,13 @@
   --color-neu-blue: #60A5FA;
   --color-neu-bg: #FFFDF5;
 
+  /* Modern palette */
+  --color-mod-dark: #111111;
+  --color-mod-gray: #71717A;
+  --color-mod-muted: #A1A1AA;
+  --color-mod-border: #E4E4E7;
+  --color-mod-surface: #FAFAFA;
+
   /* Glows */
   --color-glow-red: rgba(240, 62, 62, 0.15);
   --color-glow-red-strong: rgba(240, 62, 62, 0.3);
@@ -340,6 +347,28 @@ body.theme-brutalist .nav--scrolled {
 
 body.theme-brutalist .nav__toggle-input:checked ~ .nav__menu {
   background-color: var(--color-neu-bg);
+}
+
+/* Modern theme overrides */
+body.theme-modern {
+  font-family: "IBM Plex Sans", sans-serif;
+  background-color: #FFFFFF;
+  color: var(--color-mod-gray);
+}
+
+body.theme-modern::after {
+  display: none;
+}
+
+body.theme-modern .nav--scrolled {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid var(--color-mod-border);
+}
+
+body.theme-modern .nav__toggle-input:checked ~ .nav__menu {
+  background-color: rgba(255, 255, 255, 0.98);
 }
 
 /* Reduced motion */

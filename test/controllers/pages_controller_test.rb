@@ -45,4 +45,9 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     get "/8"
     assert_response :success
   end
+
+  test "should get v9" do
+    get "/9"
+    assert_response :success
+  end
 end
