@@ -1,0 +1,24 @@
+<%
+  base_classes = "inline-block font-bold border-3 border-v13-black transition-all duration-200"
+
+  variant_classes = case variant
+  when :primary
+    "bg-v13-red text-white"
+  when :secondary
+    "bg-white text-v13-black"
+  end
+
+  size_classes = case size
+  when :base
+    "px-8 py-4 text-base hover:translate-x-1 hover:-translate-y-1"
+  when :sm
+    "px-5 py-2.5 text-sm hover:translate-x-0.5 hover:-translate-y-0.5"
+  end
+
+  shadow_size = size == :sm ? "4px" : "5px"
+  shadow_color = variant == :primary ? "#222222" : "#D32F2F"
+  shadow_class = "hover:shadow-[#{shadow_size}_#{shadow_size}_0px_#{shadow_color}]"
+
+  classes = [base_classes, variant_classes, size_classes, shadow_class, options.delete(:class)].compact.join(" ")
+%>
+<%= link_to label, href, class: classes, style: "font-family: 'Unbounded', sans-serif; font-weight: 600;", **options %>
