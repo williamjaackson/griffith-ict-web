@@ -3,6 +3,9 @@
 @theme {
   --color-v13-bg: #FAF7F2;
   --color-v13-gray: #6B6560;
+  --color-v13-red: #D32F2F;
+  --color-v13-black: #222222;
+  --color-v13-cream: #F0EBE3;
 }
 
 body {
