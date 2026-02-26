@@ -1,10 +1,14 @@
-<% content_for(:title) { "GIC — Griffith ICT Club" } %>
+<% content_for(:title) { "GIC - Griffith ICT Club" } %>
 
 <%# ═══════════════════════════════════════════════════════════
-    NAVIGATION
+    NAVIGATION — restructured for reliable mobile support
+    Checkbox + menu are direct children of <nav> so CSS sibling
+    selectors work. Inner bar content sits above via z-index.
     ═══════════════════════════════════════════════════════════ %>
 <nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+  <input type="checkbox" id="nav-toggle" class="nav__toggle-input absolute opacity-0 pointer-events-none" aria-label="Toggle navigation">
+
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between relative z-20">
     <a href="#" class="flex items-center gap-3 group">
       <img src="/gic-icon.png" alt="GIC" class="h-9 w-auto transition-transform duration-300 group-hover:scale-105">
     </a>
@@ -20,20 +24,19 @@
       Join Us
     </a>
 
-    <input type="checkbox" id="nav-toggle" class="nav__toggle-input hidden" aria-label="Toggle navigation">
-    <label for="nav-toggle" class="nav__toggle md:hidden flex flex-col gap-1.5 cursor-pointer z-50 relative" aria-hidden="true">
+    <label for="nav-toggle" class="nav__toggle md:hidden flex flex-col gap-1.5 cursor-pointer relative" aria-hidden="true">
       <span class="block w-6 h-0.5 bg-v13-black transition-transform duration-300 origin-center"></span>
       <span class="block w-6 h-0.5 bg-v13-black transition-opacity duration-300"></span>
       <span class="block w-6 h-0.5 bg-v13-black transition-transform duration-300 origin-center"></span>
     </label>
+  </div>
 
-    <div class="nav__menu fixed inset-0 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-all duration-500 md:hidden" style="font-family: 'Unbounded', sans-serif;">
-      <a href="#about" class="text-2xl font-bold text-v13-black hover:text-v13-red transition-colors" onclick="document.getElementById('nav-toggle').checked = false">About</a>
-      <a href="#events" class="text-2xl font-bold text-v13-black hover:text-v13-red transition-colors" onclick="document.getElementById('nav-toggle').checked = false">Events</a>
-      <a href="#community" class="text-2xl font-bold text-v13-black hover:text-v13-red transition-colors" onclick="document.getElementById('nav-toggle').checked = false">Community</a>
-      <a href="#sponsors" class="text-2xl font-bold text-v13-black hover:text-v13-red transition-colors" onclick="document.getElementById('nav-toggle').checked = false">Sponsors</a>
-      <a href="#community" class="mt-4 bg-v13-red text-white font-bold px-8 py-3 border-3 border-v13-black transition-all duration-200" onclick="document.getElementById('nav-toggle').checked = false">Join Us</a>
-    </div>
+  <div class="v13-nav__menu fixed inset-0 z-10 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-all duration-500 md:hidden" style="font-family: 'Unbounded', sans-serif; background-color: #FAF7F2;">
+    <a href="#about" class="text-2xl font-bold text-v13-black hover:text-v13-red transition-colors" onclick="document.getElementById('nav-toggle').checked = false">About</a>
+    <a href="#events" class="text-2xl font-bold text-v13-black hover:text-v13-red transition-colors" onclick="document.getElementById('nav-toggle').checked = false">Events</a>
+    <a href="#community" class="text-2xl font-bold text-v13-black hover:text-v13-red transition-colors" onclick="document.getElementById('nav-toggle').checked = false">Community</a>
+    <a href="#sponsors" class="text-2xl font-bold text-v13-black hover:text-v13-red transition-colors" onclick="document.getElementById('nav-toggle').checked = false">Sponsors</a>
+    <a href="#community" class="mt-4 bg-v13-red text-white font-bold px-8 py-3 border-3 border-v13-black transition-all duration-200" onclick="document.getElementById('nav-toggle').checked = false">Join Us</a>
   </div>
 </nav>
 
@@ -42,7 +45,7 @@
     ═══════════════════════════════════════════════════════════ %>
 <header class="min-h-screen flex items-center px-6 pt-20 pb-16">
   <div class="max-w-6xl mx-auto w-full">
-    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-8 items-center">
       <div class="lg:col-span-3">
         <div class="animate-fade-up inline-block bg-v13-red text-white border-3 border-v13-black px-4 py-1.5 mb-8 -rotate-2">
           <span class="text-sm font-bold" style="font-family: 'Unbounded', sans-serif; font-weight: 600;">GRIFFITH ICT CLUB</span>
@@ -57,8 +60,7 @@
         </h1>
 
         <p class="animate-fade-up-2 text-v13-gray text-lg md:text-xl max-w-lg leading-relaxed mb-10" style="font-family: 'Plus Jakarta Sans', sans-serif;">
-          The student community where you'll find your people in tech.
-          Whether you're just starting out or already deep in it — come learn, meet like-minded students, and get ahead.
+          The student community where you'll find your people. You're a professional or know nothing at all? It doesn't matter. Come learn new skills, meet like-minded peers, and get ahead.
         </p>
 
         <div class="animate-fade-up-3 flex flex-wrap gap-4">
@@ -71,17 +73,17 @@
         </div>
       </div>
 
-      <%# Stats — stacked brutalist cards %>
-      <div class="lg:col-span-2 flex flex-row lg:flex-col gap-4 animate-fade-up-4">
-        <div class="flex-1 bg-v13-red text-white border-3 border-v13-black p-6 rotate-2 transition-all duration-200 hover:rotate-0">
+      <%# Stats — stacked on mobile, row on tablet, column on desktop %>
+      <div class="lg:col-span-2 flex flex-col sm:flex-row lg:flex-col gap-4 mt-8 sm:mt-0 animate-fade-up-4">
+        <div class="flex-1 bg-v13-red text-white border-3 border-v13-black p-6 sm:rotate-2 transition-all duration-200 hover:rotate-0">
           <span class="block text-4xl md:text-5xl font-extrabold" style="font-family: 'Unbounded', sans-serif;">400+</span>
           <span class="text-white/70 text-sm font-semibold" style="font-family: 'Plus Jakarta Sans', sans-serif;">Members</span>
         </div>
-        <div class="flex-1 bg-v13-red-pale text-v13-black border-3 border-v13-black p-6 -rotate-1 transition-all duration-200 hover:rotate-0">
-          <span class="block text-4xl md:text-5xl font-extrabold" style="font-family: 'Unbounded', sans-serif;">6+</span>
-          <span class="text-v13-gray text-sm font-semibold" style="font-family: 'Plus Jakarta Sans', sans-serif;">Partners</span>
+        <div class="flex-1 bg-v13-red-pale text-v13-black border-3 border-v13-black p-6 sm:-rotate-1 transition-all duration-200 hover:rotate-0">
+          <span class="block text-4xl md:text-5xl font-extrabold" style="font-family: 'Unbounded', sans-serif;">Weekly</span>
+          <span class="text-v13-gray text-sm font-semibold" style="font-family: 'Plus Jakarta Sans', sans-serif;">Events</span>
         </div>
-        <div class="flex-1 bg-v13-cream text-v13-black border-3 border-v13-black p-6 rotate-1 transition-all duration-200 hover:rotate-0">
+        <div class="flex-1 bg-v13-cream text-v13-black border-3 border-v13-black p-6 sm:rotate-1 transition-all duration-200 hover:rotate-0">
           <span class="block text-4xl md:text-5xl font-extrabold" style="font-family: 'Unbounded', sans-serif;">2</span>
           <span class="text-v13-gray text-sm font-semibold" style="font-family: 'Plus Jakarta Sans', sans-serif;">Campuses</span>
         </div>
@@ -91,19 +93,23 @@
 </header>
 
 <%# ═══════════════════════════════════════════════════════════
-    ABOUT
+    ABOUT — order: Social, Industry, Hackathon, Workshops
+    Shadow colours match event sidebar colours
+    Last 2 cards collapse on mobile behind "Show all"
     ═══════════════════════════════════════════════════════════ %>
 <section id="about" class="py-24 md:py-32 px-6 border-t-3 border-v13-black">
   <div class="max-w-6xl mx-auto">
     <div class="reveal mb-16">
       <h2 class="text-3xl md:text-5xl text-v13-black mb-4" style="font-family: 'Unbounded', sans-serif; font-weight: 800;">By students, for students.</h2>
       <p class="text-v13-gray text-lg max-w-2xl leading-relaxed" style="font-family: 'Plus Jakarta Sans', sans-serif;">
-        Griffith ICT Club (GIC) is Griffith University's club for everything tech. With divisions on the Gold Coast and Nathan, you'll build skills, make friends, and kickstart your career in tech.
+        Griffith ICT Club (GIC) is Griffith University's club for everything tech. With divisions on the Gold Coast and Nathan, you'll build skills, make friends, and kickstart your career.
       </p>
     </div>
 
+    <%# First 2 cards — always visible %>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-      <div class="reveal bg-white border-3 border-v13-black p-7 shadow-[6px_6px_0px_#D32F2F] transition-all duration-200 hover:shadow-[8px_8px_0px_#D32F2F] hover:translate-x-[-2px] hover:translate-y-[-2px]">
+      <%# Social — Light Red shadow (#E57373) %>
+      <div class="reveal bg-white border-3 border-v13-black p-7 shadow-[6px_6px_0px_#E57373] transition-all duration-200 hover:shadow-[8px_8px_0px_#E57373] hover:translate-x-[-2px] hover:translate-y-[-2px]">
         <div class="w-10 h-10 bg-v13-red/10 flex items-center justify-center mb-4">
           <svg class="w-5 h-5 text-v13-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z"/></svg>
         </div>
@@ -114,17 +120,7 @@
         </p>
       </div>
 
-      <div class="reveal bg-white border-3 border-v13-black p-7 shadow-[6px_6px_0px_#E57373] transition-all duration-200 hover:shadow-[8px_8px_0px_#E57373] hover:translate-x-[-2px] hover:translate-y-[-2px]">
-        <div class="w-10 h-10 bg-v13-red/10 flex items-center justify-center mb-4">
-          <svg class="w-5 h-5 text-v13-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M18.75 4.236c.982.143 1.954.317 2.916.52A6.003 6.003 0 0016.27 9.728M18.75 4.236V4.5c0 2.108-.966 3.99-2.48 5.228m0 0a6.023 6.023 0 01-2.27.308 6.023 6.023 0 01-2.27-.308"/></svg>
-        </div>
-        <h3 class="text-v13-black font-bold text-xl mb-2" style="font-family: 'Unbounded', sans-serif; font-weight: 700;">Hackathons</h3>
-        <p class="text-v13-gray text-sm leading-relaxed" style="font-family: 'Plus Jakarta Sans', sans-serif;">
-          Team up, ship fast, win prizes. We design and run our own hackathons
-          that everyone can participate in.
-        </p>
-      </div>
-
+      <%# Industry — Dark Red shadow (#B71C1C) %>
       <div class="reveal bg-white border-3 border-v13-black p-7 shadow-[6px_6px_0px_#B71C1C] transition-all duration-200 hover:shadow-[8px_8px_0px_#B71C1C] hover:translate-x-[-2px] hover:translate-y-[-2px]">
         <div class="w-10 h-10 bg-v13-red/10 flex items-center justify-center mb-4">
           <svg class="w-5 h-5 text-v13-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z"/></svg>
@@ -135,18 +131,43 @@
           and get your foot in the door early.
         </p>
       </div>
+    </div>
 
-      <div class="reveal bg-white border-3 border-v13-black p-7 shadow-[6px_6px_0px_#222222] transition-all duration-200 hover:shadow-[8px_8px_0px_#222222] hover:translate-x-[-2px] hover:translate-y-[-2px]">
+    <%# Last 2 cards — hidden on mobile, revealed by "Show all" %>
+    <div class="hidden sm:grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6" id="about-extra">
+      <%# Hackathon — Red shadow (#D32F2F) %>
+      <div class="reveal bg-white border-3 border-v13-black p-7 shadow-[6px_6px_0px_#D32F2F] transition-all duration-200 hover:shadow-[8px_8px_0px_#D32F2F] hover:translate-x-[-2px] hover:translate-y-[-2px]">
         <div class="w-10 h-10 bg-v13-red/10 flex items-center justify-center mb-4">
-          <svg class="w-5 h-5 text-v13-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6m0 0 2.77-.693a9 9 0 0 1 6.208.682l.108.054a9 9 0 0 0 6.086.71l3.114-.732a48.524 48.524 0 0 1-.005-10.499l-3.11.732a9 9 0 0 1-6.085-.711l-.108-.054a9 9 0 0 0-6.208-.682L3 4.5M3 15V4.5"/></svg>
+          <svg class="w-5 h-5 text-v13-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M18.75 4.236c.982.143 1.954.317 2.916.52A6.003 6.003 0 0016.27 9.728M18.75 4.236V4.5c0 2.108-.966 3.99-2.48 5.228m0 0a6.023 6.023 0 01-2.27.308 6.023 6.023 0 01-2.27-.308"/></svg>
         </div>
-        <h3 class="text-v13-black font-bold text-xl mb-2" style="font-family: 'Unbounded', sans-serif; font-weight: 700;">Capture the Flags</h3>
+        <h3 class="text-v13-black font-bold text-xl mb-2" style="font-family: 'Unbounded', sans-serif; font-weight: 700;">Hackathons</h3>
         <p class="text-v13-gray text-sm leading-relaxed" style="font-family: 'Plus Jakarta Sans', sans-serif;">
-          Put your skills to the test with cybersecurity challenges. Solve puzzles,
-          crack codes, and compete with your mates in our CTF events.
+          Team up, ship fast, win prizes. We design and run our own hackathons
+          that everyone can participate in.
+        </p>
+      </div>
+
+      <%# Workshops — Faint Red shadow (#FCEAEA) %>
+      <div class="reveal bg-white border-3 border-v13-black p-7 shadow-[6px_6px_0px_#FCEAEA] transition-all duration-200 hover:shadow-[8px_8px_0px_#FCEAEA] hover:translate-x-[-2px] hover:translate-y-[-2px]">
+        <div class="w-10 h-10 bg-v13-red/10 flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-v13-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z"/></svg>
+        </div>
+        <h3 class="text-v13-black font-bold text-xl mb-2" style="font-family: 'Unbounded', sans-serif; font-weight: 700;">Workshops</h3>
+        <p class="text-v13-gray text-sm leading-relaxed" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+          Hands-on sessions covering web dev, cloud, AI, cybersecurity, and more.
+          Learn by building real things.
         </p>
       </div>
     </div>
+
+    <button
+      id="about-show-all"
+      class="sm:hidden mt-6 w-full bg-white text-v13-black font-bold py-3 border-3 border-v13-black transition-all duration-200 hover:translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_#D32F2F] text-sm"
+      style="font-family: 'Unbounded', sans-serif; font-weight: 600;"
+      onclick="document.getElementById('about-extra').classList.remove('hidden'); document.getElementById('about-extra').classList.add('grid'); this.remove();"
+    >
+      Show all
+    </button>
   </div>
 </section>
 
@@ -222,10 +243,10 @@
             </div>
             <h3 class="text-v13-black font-bold text-lg mb-2" style="font-family: 'Unbounded', sans-serif; font-weight: 700;">GIC Hack Day 2026</h3>
             <p class="text-v13-gray text-sm leading-relaxed mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">
-              24 hours. One idea. Ship something awesome. Teams of 2–4, all skill levels.
+              24 hours. One idea. Ship something awesome. Teams of 2 to 4, all skill levels.
             </p>
             <div class="flex flex-wrap gap-3 text-v13-gray text-xs font-medium" style="font-family: 'Plus Jakarta Sans', sans-serif;">
-              <span>9:00 AM – 9:00 AM</span>
+              <span>9:00 AM to 9:00 AM</span>
               <span>Nathan Campus, N78</span>
             </div>
           </div>
@@ -332,9 +353,9 @@
   <div class="max-w-6xl mx-auto">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
       <div class="md:col-span-2">
-        <div class="flex items-center gap-2 mb-4">
-          <img src="/gic-icon.png" alt="GIC" class="h-8 w-auto">
-          <img src="/gic-wordmark-white.png" alt="riffith ICT Club" class="h-5 w-auto">
+        <div class="flex items-center gap-1 mb-4">
+          <img src="/gic-icon.png" alt="" class="h-7 w-auto">
+          <img src="/gic-wordmark-white.png" alt="Griffith ICT Club" class="h-4 w-auto">
         </div>
         <p class="text-white/40 text-sm leading-relaxed max-w-sm" style="font-family: 'Plus Jakarta Sans', sans-serif;">
           Made with questionable amounts of caffeine by students who should probably be studying.
