@@ -1,1 +1,143 @@
 @import "tailwindcss";
+
+@theme {
+  /* Typography */
+  --font-display: "Unbounded", sans-serif;
+  --font-body: "Instrument Sans", sans-serif;
+
+  /* Brand reds */
+  --color-red-400: #FF5C5C;
+  --color-red-500: #F03E3E;
+  --color-red-600: #D32F2F;
+  --color-red-900: #2A0A0A;
+
+  /* Neutrals (warm-tinted) */
+  --color-gray-950: #0A0A0A;
+  --color-gray-900: #121212;
+  --color-gray-850: #1A1A1A;
+  --color-gray-800: #222222;
+  --color-gray-600: #666666;
+  --color-gray-400: #999999;
+  --color-gray-200: #CCCCCC;
+  --color-gray-100: #E8E8E8;
+
+  /* Glows */
+  --color-glow-red: rgba(240, 62, 62, 0.15);
+  --color-glow-red-strong: rgba(240, 62, 62, 0.3);
+
+  /* Animations */
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-fade-up-1: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+  --animate-fade-up-2: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+  --animate-fade-up-3: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+  --animate-fade-up-4: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+  --animate-fade-up-5: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+  --animate-pulse-line: pulse-line 2s ease-in-out infinite;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulse-line {
+    0%, 100% {
+      opacity: 0.3;
+      transform: scaleY(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scaleY(1.2);
+    }
+  }
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-gray-950);
+  color: var(--color-gray-200);
+}
+
+/* Grain overlay for texture */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger reveal children */
+.reveal--visible:nth-child(2) { transition-delay: 0.1s; }
+.reveal--visible:nth-child(3) { transition-delay: 0.15s; }
+.reveal--visible:nth-child(4) { transition-delay: 0.2s; }
+
+/* Nav scroll state */
+.nav--scrolled {
+  background-color: rgba(10, 10, 10, 0.9) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--color-gray-800);
+}
+
+/* Mobile nav overlay */
+.nav__toggle-input:checked ~ .nav__menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.nav__toggle-input:checked ~ .nav__toggle span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.nav__toggle-input:checked ~ .nav__toggle span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav__toggle-input:checked ~ .nav__toggle span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  body::after { display: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
