@@ -15,13 +15,13 @@
     "px-5 py-2.5 text-sm hover:-translate-y-1"
   end
 
-  shadow_classes = {
-    [:primary, :base]   => "hover:shadow-[5px_5px_0px_#222222]",
-    [:primary, :sm]     => "hover:shadow-[5px_5px_0px_#222222]",
-    [:secondary, :base] => "hover:shadow-[5px_5px_0px_#D32F2F]",
-    [:secondary, :sm]   => "hover:shadow-[5px_5px_0px_#D32F2F]",
-  }
+  shadow_class = case variant
+  when :primary
+    "hover:shadow-[5px_5px_0px_var(--color-brand-black)]"
+  when :secondary
+    "hover:shadow-[5px_5px_0px_var(--color-brand-red)]"
+  end
 
-  classes = [base_classes, variant_classes, size_classes, shadow_classes[[variant, size]], options.delete(:class)].compact.join(" ")
+  classes = [base_classes, variant_classes, size_classes, shadow_class, options.delete(:class)].compact.join(" ")
 %>
 <%= link_to label, href, class: classes, style: "font-family: 'Unbounded', sans-serif; font-weight: 600;", **options %>
