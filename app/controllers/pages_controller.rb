@@ -20,4 +20,16 @@ class PagesController < ApplicationController
   def v5
     render layout: "campus"
   end
+
+  def v6
+    render layout: "pop"
+  end
+
+  def v7
+    render layout: "institutional"
+  end
+
+  def v8
+    render layout: "brutalist"
+  end
 end

@@ -55,6 +55,31 @@
   --color-campus-gray: #64748B;
   --color-campus-light: #F8FAFC;
 
+  /* Pop palette */
+  --color-pop-dark: #1A1A1A;
+  --color-pop-gray: #6B7280;
+  --color-pop-pink: #EC4899;
+  --color-pop-blue: #3B82F6;
+  --color-pop-lime: #84CC16;
+  --color-pop-orange: #F97316;
+  --color-pop-light: #F9FAFB;
+
+  /* Institutional palette */
+  --color-inst-navy: #1E3A5F;
+  --color-inst-gray: #4B5563;
+  --color-inst-border: #D1D5DB;
+  --color-inst-accent: #B91C1C;
+  --color-inst-light: #F3F4F6;
+  --color-inst-bg: #FAFAFA;
+
+  /* Brutalist palette */
+  --color-neu-black: #000000;
+  --color-neu-gray: #374151;
+  --color-neu-yellow: #FDE047;
+  --color-neu-pink: #F472B6;
+  --color-neu-blue: #60A5FA;
+  --color-neu-bg: #FFFDF5;
+
   /* Glows */
   --color-glow-red: rgba(240, 62, 62, 0.15);
   --color-glow-red-strong: rgba(240, 62, 62, 0.3);
@@ -249,6 +274,72 @@ body.theme-campus .nav--scrolled {
 
 body.theme-campus .nav__toggle-input:checked ~ .nav__menu {
   background-color: rgba(255, 255, 255, 0.98);
+}
+
+/* Pop theme overrides */
+body.theme-pop {
+  font-family: "DM Sans", sans-serif;
+  background-color: #FFFFFF;
+  color: var(--color-pop-gray);
+}
+
+body.theme-pop::after {
+  display: none;
+}
+
+body.theme-pop .nav--scrolled {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid #E5E7EB;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+body.theme-pop .nav__toggle-input:checked ~ .nav__menu {
+  background-color: rgba(255, 255, 255, 0.98);
+}
+
+/* Institutional theme overrides */
+body.theme-institutional {
+  font-family: "Inter", sans-serif;
+  background-color: var(--color-inst-bg);
+  color: var(--color-inst-gray);
+}
+
+body.theme-institutional::after {
+  display: none;
+}
+
+body.theme-institutional .nav--scrolled {
+  background-color: rgba(250, 250, 250, 0.95) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--color-inst-border);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+body.theme-institutional .nav__toggle-input:checked ~ .nav__menu {
+  background-color: rgba(250, 250, 250, 0.98);
+}
+
+/* Brutalist theme overrides */
+body.theme-brutalist {
+  font-family: "Work Sans", sans-serif;
+  background-color: var(--color-neu-bg);
+  color: var(--color-neu-gray);
+}
+
+body.theme-brutalist::after {
+  display: none;
+}
+
+body.theme-brutalist .nav--scrolled {
+  background-color: var(--color-neu-bg) !important;
+  border-bottom: 3px solid var(--color-neu-black);
+}
+
+body.theme-brutalist .nav__toggle-input:checked ~ .nav__menu {
+  background-color: var(--color-neu-bg);
 }
 
 /* Reduced motion */
