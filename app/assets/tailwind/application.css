@@ -39,6 +39,22 @@
   --color-red-50: #FEF0F0;
   --color-red-100: #FDDEDE;
 
+  /* Terminal palette */
+  --color-navy-950: #0D1117;
+  --color-navy-900: #161B22;
+  --color-navy-800: #21262D;
+  --color-navy-700: #30363D;
+  --color-terminal-green: #3FB950;
+  --color-terminal-cyan: #58A6FF;
+  --color-terminal-yellow: #D29922;
+  --color-terminal-text: #C9D1D9;
+  --color-terminal-muted: #8B949E;
+
+  /* Campus palette */
+  --color-campus-dark: #1A1A2E;
+  --color-campus-gray: #64748B;
+  --color-campus-light: #F8FAFC;
+
   /* Glows */
   --color-glow-red: rgba(240, 62, 62, 0.15);
   --color-glow-red-strong: rgba(240, 62, 62, 0.3);
@@ -188,6 +204,51 @@ body.theme-bento .nav--scrolled {
 
 body.theme-bento .nav__toggle-input:checked ~ .nav__menu {
   background-color: rgba(244, 245, 247, 0.98);
+}
+
+/* Terminal theme overrides */
+body.theme-terminal {
+  font-family: "Manrope", sans-serif;
+  background-color: var(--color-navy-950);
+  color: var(--color-terminal-text);
+}
+
+body.theme-terminal::after {
+  display: none;
+}
+
+body.theme-terminal .nav--scrolled {
+  background-color: rgba(13, 17, 23, 0.95) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--color-navy-800);
+}
+
+body.theme-terminal .nav__toggle-input:checked ~ .nav__menu {
+  background-color: rgba(13, 17, 23, 0.98);
+}
+
+/* Campus theme overrides */
+body.theme-campus {
+  font-family: "Nunito", sans-serif;
+  background-color: #FFFFFF;
+  color: var(--color-campus-gray);
+}
+
+body.theme-campus::after {
+  display: none;
+}
+
+body.theme-campus .nav--scrolled {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid #E2E8F0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+body.theme-campus .nav__toggle-input:checked ~ .nav__menu {
+  background-color: rgba(255, 255, 255, 0.98);
 }
 
 /* Reduced motion */

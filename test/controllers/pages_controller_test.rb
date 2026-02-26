@@ -20,4 +20,14 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     get "/3"
     assert_response :success
   end
+
+  test "should get v4" do
+    get "/4"
+    assert_response :success
+  end
+
+  test "should get v5" do
+    get "/5"
+    assert_response :success
+  end
 end
