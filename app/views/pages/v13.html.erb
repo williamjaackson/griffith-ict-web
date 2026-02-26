@@ -10,7 +10,7 @@
 
   <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between relative z-20">
     <a href="#" class="flex items-center gap-3 group">
-      <img src="/gic-icon.png" alt="GIC" class="h-9 w-auto rounded-full border-3 border-v13-black transition-transform duration-300 group-hover:scale-105">
+      <img src="/gic-icon.png" alt="GIC" class="h-9 w-auto transition-transform duration-300 group-hover:scale-105">
     </a>
 
     <ul class="hidden md:flex items-center gap-8" style="font-family: 'Plus Jakarta Sans', sans-serif;">
@@ -147,8 +147,8 @@
         </p>
       </div>
 
-      <%# Workshops — Faint Red shadow (#FCEAEA) %>
-      <div class="reveal bg-white border-3 border-v13-black p-7 shadow-[6px_6px_0px_#FCEAEA] transition-all duration-200 hover:shadow-[8px_8px_0px_#FCEAEA] hover:translate-x-[-2px] hover:translate-y-[-2px]">
+      <%# Workshops — Soft Red shadow (#F0A8A8) %>
+      <div class="reveal bg-white border-3 border-v13-black p-7 shadow-[6px_6px_0px_#F0A8A8] transition-all duration-200 hover:shadow-[8px_8px_0px_#F0A8A8] hover:translate-x-[-2px] hover:translate-y-[-2px]">
         <div class="w-10 h-10 bg-v13-red/10 flex items-center justify-center mb-4">
           <svg class="w-5 h-5 text-v13-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z"/></svg>
         </div>
@@ -184,8 +184,9 @@
     </div>
 
     <div class="flex flex-col gap-5">
-      <article class="reveal flex bg-white border-3 border-v13-black overflow-hidden transition-all duration-200 hover:translate-x-1 hover:-translate-y-1 hover:shadow-[5px_5px_0px_#D32F2F]">
-        <div class="w-3 bg-v13-red shrink-0"></div>
+      <%# Workshop — Soft Red sidebar (#F0A8A8) %>
+      <article class="reveal flex bg-white border-3 border-v13-black overflow-hidden transition-all duration-200 hover:translate-x-1 hover:-translate-y-1 hover:shadow-[5px_5px_0px_#F0A8A8]">
+        <div class="w-3 shrink-0" style="background-color: #F0A8A8;"></div>
         <div class="p-6 flex flex-col sm:flex-row gap-5 flex-1">
           <div class="shrink-0" style="font-family: 'Unbounded', sans-serif;">
             <span class="block text-4xl text-v13-black font-extrabold">12</span>
@@ -193,7 +194,7 @@
           </div>
           <div class="flex-1">
             <div class="flex flex-wrap gap-2 mb-2">
-              <span class="bg-v13-red text-white text-xs font-bold px-3 py-1 border-2 border-v13-black" style="font-family: 'Unbounded', sans-serif; font-weight: 600;">Workshop</span>
+              <span class="text-v13-red text-xs font-bold px-3 py-1 border-2 border-v13-black" style="font-family: 'Unbounded', sans-serif; font-weight: 600; background-color: #F0A8A8;">Workshop</span>
             </div>
             <h3 class="text-v13-black font-bold text-lg mb-2" style="font-family: 'Unbounded', sans-serif; font-weight: 700;">Intro to Git & GitHub</h3>
             <p class="text-v13-gray text-sm leading-relaxed mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">
@@ -207,8 +208,9 @@
         </div>
       </article>
 
-      <article class="reveal flex bg-white border-3 border-v13-black overflow-hidden transition-all duration-200 hover:translate-x-1 hover:-translate-y-1 hover:shadow-[5px_5px_0px_#D32F2F]">
-        <div class="w-3 bg-v13-red-light shrink-0"></div>
+      <%# Social — Light Red sidebar (#E57373) %>
+      <article class="reveal flex bg-white border-3 border-v13-black overflow-hidden transition-all duration-200 hover:translate-x-1 hover:-translate-y-1 hover:shadow-[5px_5px_0px_#E57373]">
+        <div class="w-3 shrink-0" style="background-color: #E57373;"></div>
         <div class="p-6 flex flex-col sm:flex-row gap-5 flex-1">
           <div class="shrink-0" style="font-family: 'Unbounded', sans-serif;">
             <span class="block text-4xl text-v13-black font-extrabold">19</span>
@@ -216,7 +218,7 @@
           </div>
           <div class="flex-1">
             <div class="flex flex-wrap gap-2 mb-2">
-              <span class="bg-v13-red-pale text-v13-red text-xs font-bold px-3 py-1 border-2 border-v13-black" style="font-family: 'Unbounded', sans-serif; font-weight: 600;">Social</span>
+              <span class="text-white text-xs font-bold px-3 py-1 border-2 border-v13-black" style="font-family: 'Unbounded', sans-serif; font-weight: 600; background-color: #E57373;">Social</span>
             </div>
             <h3 class="text-v13-black font-bold text-lg mb-2" style="font-family: 'Unbounded', sans-serif; font-weight: 700;">Welcome Week BBQ</h3>
             <p class="text-v13-gray text-sm leading-relaxed mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">
@@ -230,8 +232,33 @@
         </div>
       </article>
 
-      <article class="reveal flex bg-white border-3 border-v13-black overflow-hidden transition-all duration-200 hover:translate-x-1 hover:-translate-y-1 hover:shadow-[5px_5px_0px_#D32F2F]">
+      <%# Industry — Dark Red sidebar (#B71C1C) %>
+      <article class="reveal flex bg-white border-3 border-v13-black overflow-hidden transition-all duration-200 hover:translate-x-1 hover:-translate-y-1 hover:shadow-[5px_5px_0px_#B71C1C]">
         <div class="w-3 bg-v13-red-dark shrink-0"></div>
+        <div class="p-6 flex flex-col sm:flex-row gap-5 flex-1">
+          <div class="shrink-0" style="font-family: 'Unbounded', sans-serif;">
+            <span class="block text-4xl text-v13-black font-extrabold">26</span>
+            <span class="text-v13-gray text-xs uppercase tracking-wider font-bold">MAR</span>
+          </div>
+          <div class="flex-1">
+            <div class="flex flex-wrap gap-2 mb-2">
+              <span class="bg-v13-red-dark text-white text-xs font-bold px-3 py-1 border-2 border-v13-black" style="font-family: 'Unbounded', sans-serif; font-weight: 600;">Industry</span>
+            </div>
+            <h3 class="text-v13-black font-bold text-lg mb-2" style="font-family: 'Unbounded', sans-serif; font-weight: 700;">Tech Careers Panel</h3>
+            <p class="text-v13-gray text-sm leading-relaxed mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+              Engineers from local companies share their journeys and answer your questions. Pizza included.
+            </p>
+            <div class="flex flex-wrap gap-3 text-v13-gray text-xs font-medium" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+              <span>5:30 PM</span>
+              <span>Gold Coast Campus, G09</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <%# Hackathon — Red sidebar (#D32F2F) %>
+      <article class="reveal flex bg-white border-3 border-v13-black overflow-hidden transition-all duration-200 hover:translate-x-1 hover:-translate-y-1 hover:shadow-[5px_5px_0px_#D32F2F]">
+        <div class="w-3 bg-v13-red shrink-0"></div>
         <div class="p-6 flex flex-col sm:flex-row gap-5 flex-1">
           <div class="shrink-0" style="font-family: 'Unbounded', sans-serif;">
             <span class="block text-4xl text-v13-black font-extrabold">02</span>
@@ -239,7 +266,7 @@
           </div>
           <div class="flex-1">
             <div class="flex flex-wrap gap-2 mb-2">
-              <span class="bg-v13-red-dark text-white text-xs font-bold px-3 py-1 border-2 border-v13-black" style="font-family: 'Unbounded', sans-serif; font-weight: 600;">Hackathon</span>
+              <span class="bg-v13-red text-white text-xs font-bold px-3 py-1 border-2 border-v13-black" style="font-family: 'Unbounded', sans-serif; font-weight: 600;">Hackathon</span>
             </div>
             <h3 class="text-v13-black font-bold text-lg mb-2" style="font-family: 'Unbounded', sans-serif; font-weight: 700;">GIC Hack Day 2026</h3>
             <p class="text-v13-gray text-sm leading-relaxed mb-2" style="font-family: 'Plus Jakarta Sans', sans-serif;">
