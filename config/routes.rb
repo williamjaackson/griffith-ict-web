@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   get "design_system", to: "pages#design_system"
+  get "sponsorship", to: "pages#sponsorship"
 
   root "pages#home"
 end

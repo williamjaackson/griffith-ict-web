@@ -4,4 +4,7 @@ class PagesController < ApplicationController
 
   def design_system
   end
+
+  def sponsorship
+  end
 end
