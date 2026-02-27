@@ -28,8 +28,8 @@ body {
 
 /* Text selection */
 ::selection {
-  background-color: color-mix(in srgb, var(--color-brand-red) 20%, transparent);
-  color: inherit;
+  background-color: rgba(240, 168, 168, 0.6);
+  color: var(--color-brand-black);
 }
 
 /* Custom scrollbar */
