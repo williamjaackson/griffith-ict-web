@@ -1,7 +1,7 @@
 <section id="sponsors" class="py-24 md:py-32 px-6 border-t-3 border-brand-black" style="background-color: #F0EBE3;">
   <div class="max-w-6xl mx-auto">
     <div class="mb-16">
-      <%= ui_badge("OUR PARTNERS", class: "rotate-1 mb-4") %>
+      <%= ui_badge("OUR PARTNERS", class: "rotate-2 mb-4") %>
       <%= ui_heading("Backed by industry.", level: 2) %>
       <p class="text-brand-gray text-lg max-w-2xl leading-relaxed">
         We partner with companies who believe in supporting the next generation of tech talent.
@@ -13,9 +13,9 @@
       <div class="flex items-center justify-center h-24 bg-white border-3 border-dashed border-brand-black/30 text-brand-gray/40 text-sm font-bold">Your logo here</div>
       <div class="flex items-center justify-center h-24 bg-white border-3 border-dashed border-brand-black/30 text-brand-gray/40 text-sm font-bold">Your logo here</div>
       <div class="flex items-center justify-center h-24 bg-white border-3 border-dashed border-brand-black/30 text-brand-gray/40 text-sm font-bold">Your logo here</div>
-      <div class="flex items-center justify-center h-24 bg-brand-red border-3 border-brand-black">
-        <a href="#" class="text-white font-bold text-sm" style="font-family: 'Unbounded', sans-serif;">Sponsor us &rarr;</a>
-      </div>
+      <%= ui_card(color: "#D32F2F", class: "grid place-items-center", href: "#sponsors") do %>
+        <p class="text-white font-bold">Sponsor Us &rarr;</p>
+      <% end %>
     </div>
   </div>
 </section>
