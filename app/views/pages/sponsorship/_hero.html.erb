@@ -19,7 +19,7 @@
       In return, get direct access to Griffith's most engaged tech talent.
     </p>
     <div class="animate-hero-in flex flex-wrap gap-4" style="animation-delay: 300ms;">
-      <%= ui_button("Get in touch", href: "mailto:griffithictclub@gmail.com", variant: :primary) %>
+      <%= ui_button("Get in touch", href: "mailto:#{Rails.application.config.socials[:email]}", variant: :primary) %>
       <%= ui_button("Back to home", href: "/", variant: :secondary) %>
     </div>
   </div>
