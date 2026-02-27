@@ -20,6 +20,10 @@
   --color-tier-ruby: #D32F2F;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--color-brand-bg);
   color: var(--color-brand-gray);
