@@ -7,7 +7,7 @@ export default class extends Controller {
     this.observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          this._animate(0)
+          this._animate(this.cardTargets.length - 1)
           this.observer.disconnect()
         }
       })
@@ -21,13 +21,13 @@ export default class extends Controller {
   }
 
   _animate(index) {
+    if (index < 0) return
     const card = this.cardTargets[index]
-    if (!card) return
 
     const rotation = card.dataset.rotation
 
     setTimeout(() => {
-      this._animate(index + 1)
+      this._animate(index - 1)
     }, 150)
 
     requestAnimationFrame(() => {
