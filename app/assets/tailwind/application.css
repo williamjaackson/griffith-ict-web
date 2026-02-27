@@ -71,20 +71,21 @@ body {
 }
 
 ::view-transition-old(root) {
-  animation: curtain-hide 0.25s cubic-bezier(0.7, 0, 0.3, 1) both;
+  animation: sweep-out 0.4s linear both;
 }
 
 ::view-transition-new(root) {
-  animation: curtain-reveal 0.25s cubic-bezier(0.7, 0, 0.3, 1) both;
+  animation: sweep-in 0.4s linear both;
 }
 
-@keyframes curtain-hide {
+@keyframes sweep-out {
   0% { clip-path: inset(0 0 0 0); }
-  100% { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0 0 100%); }
 }
 
-@keyframes curtain-reveal {
-  0% { clip-path: inset(0 0 0 100%); }
+@keyframes sweep-in {
+  0% { clip-path: inset(0 100% 0 0); }
+  40% { clip-path: inset(0 100% 0 0); }
   100% { clip-path: inset(0 0 0 0); }
 }
 
