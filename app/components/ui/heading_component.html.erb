@@ -1,1 +1,1 @@
-<%= content_tag tag, @text, class: classes, style: style, **@options %>
+<%= content_tag tag, class: classes, style: style, **@options do %><%= formatted_text %><% end %>
