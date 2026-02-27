@@ -14,6 +14,15 @@
     <%= ui_badge("Small Color Badge", size: :sm, color: "#E57373") %>
   </div>
 
+  <div class="flex flex-wrap items-center gap-6">
+    <%= ui_logo %>
+    <%= ui_logo(type: :full) %>
+  </div>
+  <div class="flex flex-wrap items-center gap-6 bg-brand-black p-4">
+    <%= ui_logo %>
+    <%= ui_logo(type: :full, variant: :white) %>
+  </div>
+
   <div class="flex flex-wrap items-start gap-4">
     <%= ui_button("Primary Button", href: "#", variant: :primary) %>
     <%= ui_button("Secondary Button", href: "#", variant: :secondary) %>
