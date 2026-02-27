@@ -3,7 +3,7 @@
 
   <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between relative z-20">
     <a href="/" class="flex items-center gap-3 group">
-      <%= ui_logo(class: "transition-transform duration-300 group-hover:scale-105") %>
+      <%= helpers.ui_logo(class: "transition-transform duration-300 group-hover:scale-105") %>
     </a>
 
     <ul class="hidden md:flex items-center gap-8" style="font-family: 'Plus Jakarta Sans', sans-serif;">
@@ -16,7 +16,7 @@
       <% end %>
     </ul>
 
-    <%= ui_button(cta[:label], href: cta[:href], variant: :primary, size: :sm, class: "hidden md:inline-flex") %>
+    <%= helpers.ui_button(cta[:label], href: cta[:href], variant: :primary, size: :sm, class: "hidden md:inline-flex") %>
 
     <label for="nav-toggle" class="nav__toggle md:hidden flex flex-col gap-1.5 cursor-pointer relative z-20" aria-hidden="true">
       <span class="block w-6 h-0.5 bg-brand-black transition-transform duration-300 origin-center"></span>
