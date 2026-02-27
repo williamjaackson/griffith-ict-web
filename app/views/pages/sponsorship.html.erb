@@ -24,7 +24,7 @@
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <%# Bronze %>
-      <%= ui_card(sidebar: "var(--color-brand-red-300)") do %>
+      <%= ui_card(sidebar: "var(--color-brand-red-300)", class: "-rotate-2") do %>
         <%= ui_badge("BRONZE", size: :sm, color: "var(--color-brand-red-300)") %>
         <p class="text-brand-gray text-sm mt-4 mb-6 leading-relaxed">
           Get your brand in front of our members and show your support for the student tech community.
@@ -50,7 +50,7 @@
       <% end %>
 
       <%# Silver %>
-      <%= ui_card(sidebar: "var(--color-brand-red)") do %>
+      <%= ui_card(sidebar: "var(--color-brand-red)", class: "rotate-2") do %>
         <%= ui_badge("SILVER", size: :sm) %>
         <p class="text-brand-gray text-sm mt-4 mb-6 leading-relaxed">
           Everything in Bronze, plus direct access to students through events and panels.
@@ -80,7 +80,7 @@
       <% end %>
 
       <%# Gold %>
-      <%= ui_card(sidebar: "var(--color-brand-red-dark)") do %>
+      <%= ui_card(sidebar: "var(--color-brand-red-dark)", class: "-rotate-2") do %>
         <%= ui_badge("GOLD", size: :sm, color: "var(--color-brand-red-dark)") %>
         <p class="text-brand-gray text-sm mt-4 mb-6 leading-relaxed">
           The full partnership. A dedicated event, top billing, and first access to our talent pool.
