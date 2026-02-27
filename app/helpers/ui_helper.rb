@@ -14,4 +14,8 @@ module UiHelper
   def ui_logo(type: :icon, variant: :black, **options)
     render Ui::LogoComponent.new(type: type, variant: variant, **options)
   end
+
+  def ui_card(**options, &block)
+    render Ui::CardComponent.new(**options), &block
+  end
 end
