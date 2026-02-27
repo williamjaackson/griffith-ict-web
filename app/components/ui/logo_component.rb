@@ -7,7 +7,7 @@ module Ui
 
     SIZE_CLASSES = {
       icon: "h-8 w-auto",
-      full: "h-6 w-auto"
+      full: "h-12 w-auto"
     }.freeze
 
     def initialize(type: :icon, **options)
