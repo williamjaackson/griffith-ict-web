@@ -1,11 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-v13-bg: #FAF7F2;
-  --color-v13-gray: #6B6560;
+  --color-brand-bg: #FAF7F2;
+  --color-brand-gray: #6B6560;
+  --color-brand-red: #D32F2F;
+  --color-brand-black: #222222;
+  --color-brand-cream: #F0EBE3;
 }
 
 body {
-  background-color: var(--color-v13-bg);
-  color: var(--color-v13-gray);
+  background-color: var(--color-brand-bg);
+  color: var(--color-brand-gray);
 }
