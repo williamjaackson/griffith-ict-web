@@ -17,21 +17,21 @@
       </div>
 
       <div class="lg:col-span-2 flex flex-col md:flex-row lg:flex-col gap-5 mt-8 md:mt-0" data-controller="domino">
-        <div data-domino-target="card" data-rotation="rotate-1" class="opacity-0 translate-y-4">
+        <div data-domino-target="card" data-rotation="rotate-2" class="domino-card">
           <%= ui_card(color: "var(--color-brand-red)") do %>
             <span class="block text-4xl md:text-5xl font-extrabold text-white" style="font-family: 'Unbounded', sans-serif;">400+</span>
             <span class="text-white/70 text-sm font-semibold">Members</span>
           <% end %>
         </div>
 
-        <div data-domino-target="card" data-rotation="-rotate-2" class="opacity-0 translate-y-4">
+        <div data-domino-target="card" data-rotation="-rotate-2" class="domino-card">
           <%= ui_card(color: "var(--color-brand-red-50)") do %>
             <span class="block text-4xl md:text-5xl font-extrabold text-brand-black" style="font-family: 'Unbounded', sans-serif;">Weekly</span>
             <span class="text-brand-gray text-sm font-semibold">Events</span>
           <% end %>
         </div>
 
-        <div data-domino-target="card" data-rotation="rotate-1" class="opacity-0 translate-y-4">
+        <div data-domino-target="card" data-rotation="rotate-2" class="domino-card">
           <%= ui_card(color: "var(--color-brand-cream)") do %>
             <span class="block text-4xl md:text-5xl font-extrabold text-brand-black" style="font-family: 'Unbounded', sans-serif;">2</span>
             <span class="text-brand-gray text-sm font-semibold">Campuses</span>

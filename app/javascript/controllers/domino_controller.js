@@ -7,7 +7,7 @@ export default class extends Controller {
     this.observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          this._animate()
+          this._animate(0)
           this.observer.disconnect()
         }
       })
@@ -20,15 +20,18 @@ export default class extends Controller {
     this.observer?.disconnect()
   }
 
-  _animate() {
-    this.cardTargets.forEach((card, index) => {
-      const rotation = card.dataset.rotation
+  _animate(index) {
+    const card = this.cardTargets[index]
+    if (!card) return
 
-      setTimeout(() => {
-        card.classList.add("domino-ready")
-        card.classList.remove("opacity-0", "translate-y-4")
-        card.classList.add(rotation)
-      }, index * 150)
+    const rotation = card.dataset.rotation
+
+    card.addEventListener("transitionend", () => {
+      this._animate(index + 1)
+    }, { once: true })
+
+    requestAnimationFrame(() => {
+      card.classList.add(rotation)
     })
   }
 }
