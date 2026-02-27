@@ -28,8 +28,8 @@ body {
 
 /* Text selection */
 ::selection {
-  background-color: var(--color-brand-red);
-  color: white;
+  background-color: var(--color-brand-red-200);
+  color: var(--color-brand-black);
 }
 
 /* Custom scrollbar */
