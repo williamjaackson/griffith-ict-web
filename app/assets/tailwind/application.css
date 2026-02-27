@@ -13,3 +13,34 @@ body {
   color: var(--color-brand-gray);
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
+
+/* Navbar — scrolled state */
+.nav--scrolled {
+  background-color: var(--color-brand-bg);
+  border-bottom: 3px solid var(--color-brand-black);
+}
+
+/* Navbar — mobile menu (hidden by default, shown on checkbox) */
+.nav__menu {
+  opacity: 0;
+  pointer-events: none;
+  background-color: var(--color-brand-bg);
+}
+
+.nav__toggle-input:checked ~ .nav__menu {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Navbar — hamburger animation */
+nav:has(.nav__toggle-input:checked) .nav__toggle span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+nav:has(.nav__toggle-input:checked) .nav__toggle span:nth-child(2) {
+  opacity: 0;
+}
+
+nav:has(.nav__toggle-input:checked) .nav__toggle span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
