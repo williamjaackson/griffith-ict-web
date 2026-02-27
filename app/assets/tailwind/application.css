@@ -62,24 +62,24 @@ body {
   navigation: auto;
 }
 
-@keyframes wipe-in {
-  from { transform: translateX(100%); }
-  to { transform: translateX(0); }
-}
-
-@keyframes wipe-out {
-  from { transform: translateX(0); }
-  to { transform: translateX(-100%); }
+::view-transition-group(root) {
+  background-color: var(--color-brand-red);
 }
 
 ::view-transition-old(root) {
-  animation: wipe-out 0.3s cubic-bezier(0.7, 0, 0.3, 1) both;
-  z-index: 1;
+  animation: 0.15s step-end both fade-out;
 }
 
 ::view-transition-new(root) {
-  animation: wipe-in 0.3s cubic-bezier(0.7, 0, 0.3, 1) both;
-  z-index: 2;
+  animation: 0.15s step-start 0.15s both fade-in;
+}
+
+@keyframes fade-out {
+  to { opacity: 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
 }
 
 ::view-transition-group(navbar) {
