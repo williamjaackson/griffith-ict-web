@@ -26,23 +26,21 @@
   </div>
 
   <div class="flex flex-wrap items-start gap-6">
-    <%= ui_card(color: "#D32F2F", class: "p-6") do %>
+    <%= ui_card(color: "#D32F2F") do %>
       <p class="text-white/80 text-sm">Coloured Card</p>
     <% end %>
 
-    <%= ui_card(shadow: "#E57373", class: "p-7") do %>
-    <%= ui_heading("Emphasised Card", level: 3) %>
+    <%= ui_card(shadow: "#E57373") do %>
+      <%= ui_heading("Emphasised Card", level: 3) %>
     <% end %>
 
-    <%= ui_card(href: "#", color: "#5865F2", class: "p-6") do %>
+    <%= ui_card(href: "#", color: "#5865F2") do %>
       <p class="text-white/80 text-sm">Clickable Card</p>
     <% end %>
 
     <%= ui_card(href: "#", sidebar: "#F0A8A8") do %>
-      <div class="pl-6 py-4 pr-4">
-        <%= ui_heading("Card", level: 3) %>
-        <p class="text-sm mt-1">That has a Sidebar</p>
-      </div>
+      <%= ui_heading("Card", level: 3) %>
+      <p class="text-sm mt-1">That has a Sidebar</p>
     <% end %>
   </div>
 
