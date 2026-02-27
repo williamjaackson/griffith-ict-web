@@ -28,6 +28,10 @@ module Ui
 
     private
 
+    def style
+      "font-family: 'Unbounded', sans-serif; font-weight: 600;"
+    end
+
     def classes
       [
         BASE_CLASSES,
