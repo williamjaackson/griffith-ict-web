@@ -66,19 +66,24 @@ body {
   background-color: var(--color-brand-red);
 }
 
+::view-transition-image-pair(root) {
+  isolation: auto;
+  mix-blend-mode: normal;
+}
+
 ::view-transition-old(root) {
-  animation: 0.15s step-end both fade-out;
+  animation: 0.1s step-end both flash-out;
 }
 
 ::view-transition-new(root) {
-  animation: 0.15s step-start 0.15s both fade-in;
+  animation: 0.1s step-start 0.25s both flash-in;
 }
 
-@keyframes fade-out {
+@keyframes flash-out {
   to { opacity: 0; }
 }
 
-@keyframes fade-in {
+@keyframes flash-in {
   from { opacity: 0; }
 }
 
