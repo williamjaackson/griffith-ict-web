@@ -1,9 +1,14 @@
 <div class="flex flex-col items-start gap-8">
-  <h1 class="text-2xl font-bold">hello, world!</h1>
+  <%= ui_heading("Heading Numero Uno", level: 1, highlight: "Numero Uno") %>
+  <%= ui_heading("Heading 2", level: 2) %>
+  <%= ui_heading("Heading 3", level: 3) %>
+  <%= ui_heading("Heading 4", level: 4) %>
+
+  <p class="text-lg max-w-2xl leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
 
   <div class="flex flex-wrap items-start gap-4">
-    <%= ui_button("Join our Discord", href: "#", variant: :primary) %>
-    <%= ui_button("Learn more", href: "#", variant: :secondary) %>
-    <%= ui_button("Join Us", href: "#", variant: :primary, size: :sm) %>
+    <%= ui_button("Primary Button", href: "#", variant: :primary) %>
+    <%= ui_button("Secondary Button", href: "#", variant: :secondary) %>
+    <%= ui_button("Small Button", href: "#", variant: :primary, size: :sm) %>
   </div>
 </div>

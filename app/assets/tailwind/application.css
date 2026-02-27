@@ -11,4 +11,5 @@
 body {
   background-color: var(--color-brand-bg);
   color: var(--color-brand-gray);
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
