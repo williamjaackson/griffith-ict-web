@@ -45,13 +45,6 @@ body {
   background-color: var(--color-brand-red-dark);
 }
 
-/* Firefox */
-@supports (scrollbar-color: auto) {
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-brand-red) var(--color-brand-cream);
-  }
-}
 
 /* Hamburger animation */
 .hamburger[data-open="true"] span:nth-child(1) {
