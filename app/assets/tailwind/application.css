@@ -89,6 +89,10 @@ body {
   100% { clip-path: inset(0 0 0 0); }
 }
 
+/* Scroll reveal */
+.reveal-up { opacity: 0; transform: translateY(20px); transition: opacity 0.4s, transform 0.4s cubic-bezier(0.2, 0, 0, 1); }
+.reveal-up.revealed { opacity: 1; transform: translateY(0); }
+
 /* Hamburger animation */
 .hamburger[data-open="true"] span:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
