@@ -7,8 +7,9 @@
     <ul class="hidden md:flex items-center gap-8" style="font-family: 'Plus Jakarta Sans', sans-serif;">
       <% links.each do |link| %>
         <li>
-          <a href="<%= link[:href] %>" class="text-brand-gray hover:text-brand-black transition-colors duration-200 text-sm font-semibold">
+          <a href="<%= link[:href] %>" class="relative text-brand-gray hover:text-brand-black transition-colors duration-200 text-sm font-semibold group">
             <%= link[:label] %>
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-red transition-all duration-300 group-hover:w-full"></span>
           </a>
         </li>
       <% end %>
