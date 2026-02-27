@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["menu", "toggle", "logo"]
+  static targets = ["menu", "toggle"]
 
   connect() {
     this._scroll = this._scroll.bind(this)
@@ -26,14 +26,6 @@ export default class extends Controller {
   closeMenu() {
     if (!this.open) return
     this.toggleMenu()
-  }
-
-  spinLogo() {
-    this.logoTarget.classList.add("is-spinning")
-  }
-
-  spinDone() {
-    this.logoTarget.classList.remove("is-spinning")
   }
 
   _scroll() {
