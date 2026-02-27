@@ -3,9 +3,17 @@
 @theme {
   --color-brand-bg: #FAF7F2;
   --color-brand-gray: #6B6560;
-  --color-brand-red: #D32F2F;
   --color-brand-black: #222222;
   --color-brand-cream: #F0EBE3;
+
+  --color-brand-red-50: #FCEAEA;
+  --color-brand-red-200: #F0A8A8;
+  --color-brand-red-300: #E57373;
+  --color-brand-red: #D32F2F;
+  --color-brand-red-dark: #B71C1C;
+
+  --color-brand-discord: #5865F2;
+  --color-brand-linkedin: #0A66C2;
 }
 
 body {
