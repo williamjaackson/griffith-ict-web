@@ -1,0 +1,56 @@
+<section id="about" class="py-24 md:py-32 px-6 border-t-3 border-brand-black bg-brand-cream">
+  <div class="max-w-6xl mx-auto">
+    <div class="mb-16">
+      <%= ui_heading("By students, for students.", level: 2) %>
+      <p class="text-brand-gray text-lg max-w-2xl leading-relaxed">
+        Griffith ICT Club (GIC) is Griffith University's club for everything tech. With divisions on the Gold Coast and Nathan, you'll build skills, make friends, and kickstart your career.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <%= ui_card(shadow: "var(--color-brand-red-300)") do %>
+        <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-brand-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z"/></svg>
+        </div>
+        <%= ui_heading("Social Events", level: 3) %>
+        <p class="text-brand-gray text-sm leading-relaxed">
+          Game nights, BBQs, trivia, and casual hangouts. The best part of uni
+          is the people, and we make sure you meet them.
+        </p>
+      <% end %>
+
+      <%= ui_card(shadow: "var(--color-brand-red-dark)") do %>
+        <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-brand-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z"/></svg>
+        </div>
+        <%= ui_heading("Industry Events", level: 3) %>
+        <p class="text-brand-gray text-sm leading-relaxed">
+          Connect with companies hiring grads. Hear from engineers, ask questions,
+          and get your foot in the door early.
+        </p>
+      <% end %>
+
+      <%= ui_card(shadow: "var(--color-brand-red)") do %>
+        <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-brand-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M18.75 4.236c.982.143 1.954.317 2.916.52A6.003 6.003 0 0016.27 9.728M18.75 4.236V4.5c0 2.108-.966 3.99-2.48 5.228m0 0a6.023 6.023 0 01-2.27.308 6.023 6.023 0 01-2.27-.308"/></svg>
+        </div>
+        <%= ui_heading("Hackathons", level: 3) %>
+        <p class="text-brand-gray text-sm leading-relaxed">
+          Team up, ship fast, win prizes. We design and run our own hackathons
+          that everyone can participate in.
+        </p>
+      <% end %>
+
+      <%= ui_card(shadow: "var(--color-brand-red-200)") do %>
+        <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-brand-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z"/></svg>
+        </div>
+        <%= ui_heading("Workshops", level: 3) %>
+        <p class="text-brand-gray text-sm leading-relaxed">
+          Hands-on sessions covering web dev, cloud, AI, cybersecurity, and more.
+          Learn by building real things.
+        </p>
+      <% end %>
+    </div>
+  </div>
+</section>
