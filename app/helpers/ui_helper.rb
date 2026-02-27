@@ -11,8 +11,8 @@ module UiHelper
     render Ui::BadgeComponent.new(text: text, variant: variant, size: size, color: color, **options)
   end
 
-  def ui_logo(type: :icon, variant: :black, **options)
-    render Ui::LogoComponent.new(type: type, variant: variant, **options)
+  def ui_logo(**options)
+    render Ui::LogoComponent.new(**options)
   end
 
   def ui_card(**options, &block)
