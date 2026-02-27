@@ -13,3 +13,16 @@ body {
   color: var(--color-brand-gray);
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
+
+/* Hamburger animation */
+.hamburger[data-open="true"] span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger[data-open="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger[data-open="true"] span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}

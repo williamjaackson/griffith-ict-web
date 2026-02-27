@@ -18,4 +18,8 @@ module UiHelper
   def ui_card(**options, &block)
     render Ui::CardComponent.new(**options), &block
   end
+
+  def ui_navbar
+    render Ui::NavbarComponent.new
+  end
 end
