@@ -71,12 +71,16 @@ body {
 }
 
 ::view-transition-old(root) {
-  animation: none;
-  opacity: 0;
+  animation: curtain-hide 0.25s cubic-bezier(0.7, 0, 0.3, 1) both;
 }
 
 ::view-transition-new(root) {
   animation: curtain-reveal 0.25s cubic-bezier(0.7, 0, 0.3, 1) both;
+}
+
+@keyframes curtain-hide {
+  0% { clip-path: inset(0 0 0 0); }
+  100% { clip-path: inset(0 100% 0 0); }
 }
 
 @keyframes curtain-reveal {
