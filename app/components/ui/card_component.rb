@@ -16,7 +16,7 @@ module Ui
     end
 
     def classes
-      parts = ["border-3 border-brand-black relative overflow-hidden"]
+      parts = ["border-3 border-brand-black relative overflow-hidden p-6"]
       parts << (@color ? "" : "bg-white")
       if @href
         parts << "transition-all duration-200 hover:-translate-y-1 active:translate-y-0 active:shadow-none"
