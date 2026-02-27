@@ -30,4 +30,28 @@
     <%= ui_button("Secondary Button", href: "#", variant: :secondary) %>
     <%= ui_button("Small Button", href: "#", variant: :primary, size: :sm) %>
   </div>
+
+  <div class="flex flex-wrap items-start gap-6">
+    <%= ui_card(color: "#D32F2F", class: "p-6") do %>
+      <p class="text-white font-bold text-2xl">42</p>
+      <p class="text-white/80 text-sm">Members</p>
+    <% end %>
+
+    <%= ui_card(shadow: "#E57373", class: "p-7") do %>
+      <p class="font-bold text-lg">About Us</p>
+      <p class="text-sm mt-1">We are the Griffith ICT Club.</p>
+    <% end %>
+
+    <%= ui_card(href: "#", color: "#5865F2", class: "p-6") do %>
+      <p class="text-white font-bold text-lg">Discord</p>
+      <p class="text-white/80 text-sm">Join our community</p>
+    <% end %>
+
+    <%= ui_card(href: "#", sidebar: "#F0A8A8") do %>
+      <div class="pl-6 py-4 pr-4">
+        <p class="font-bold">Upcoming Event</p>
+        <p class="text-sm mt-1">Workshop — March 5</p>
+      </div>
+    <% end %>
+  </div>
 </div>
