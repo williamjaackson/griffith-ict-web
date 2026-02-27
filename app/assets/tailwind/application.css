@@ -59,7 +59,7 @@ body {
 
 /* Domino card animation */
 .domino-card {
-  transition: transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: rotate 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* Hamburger animation */
