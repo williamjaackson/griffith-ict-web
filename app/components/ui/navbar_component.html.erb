@@ -1,6 +1,4 @@
 <nav data-controller="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-  <input type="checkbox" id="nav-toggle" class="absolute opacity-0 pointer-events-none" aria-label="Toggle navigation">
-
   <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between relative z-20">
     <a href="/" class="flex items-center gap-3 group">
       <%= helpers.ui_logo(class: "transition-transform duration-300 group-hover:scale-105") %>
@@ -18,20 +16,20 @@
 
     <%= helpers.ui_button(cta[:label], href: cta[:href], variant: :primary, size: :sm, class: "hidden md:inline-flex") %>
 
-    <label for="nav-toggle" class="nav__toggle md:hidden flex flex-col gap-1.5 cursor-pointer relative z-20" aria-hidden="true">
+    <button data-navbar-target="toggle" data-action="navbar#toggleMenu" class="hamburger md:hidden flex flex-col gap-1.5 cursor-pointer relative z-20" aria-label="Toggle navigation">
       <span class="block w-6 h-0.5 bg-brand-black transition-transform duration-300 origin-center"></span>
       <span class="block w-6 h-0.5 bg-brand-black transition-opacity duration-300"></span>
       <span class="block w-6 h-0.5 bg-brand-black transition-transform duration-300 origin-center"></span>
-    </label>
+    </button>
   </div>
 
-  <div class="nav__menu fixed inset-0 z-10 flex flex-col items-center justify-center gap-8 transition-all duration-500 md:hidden" style="font-family: 'Unbounded', sans-serif;">
+  <div data-navbar-target="menu" class="fixed inset-0 z-10 flex flex-col items-center justify-center gap-8 bg-brand-bg opacity-0 pointer-events-none transition-all duration-500 md:hidden" style="font-family: 'Unbounded', sans-serif;">
     <% links.each do |link| %>
-      <a href="<%= link[:href] %>" class="text-2xl font-bold text-brand-black hover:text-brand-red transition-colors" onclick="document.getElementById('nav-toggle').checked = false">
+      <a href="<%= link[:href] %>" class="text-2xl font-bold text-brand-black hover:text-brand-red transition-colors" data-action="navbar#closeMenu">
         <%= link[:label] %>
       </a>
     <% end %>
-    <a href="<%= cta[:href] %>" class="mt-4 bg-brand-red text-white font-bold px-8 py-3 border-3 border-brand-black transition-all duration-200" onclick="document.getElementById('nav-toggle').checked = false">
+    <a href="<%= cta[:href] %>" class="mt-4 bg-brand-red text-white font-bold px-8 py-3 border-3 border-brand-black transition-all duration-200" data-action="navbar#closeMenu">
       <%= cta[:label] %>
     </a>
   </div>
