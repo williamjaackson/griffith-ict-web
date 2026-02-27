@@ -23,6 +23,10 @@ module Ui
 
     def link_groups = LINK_GROUPS
 
+    def socials
+      Rails.application.config.socials
+    end
+
     def year
       Date.current.year
     end
