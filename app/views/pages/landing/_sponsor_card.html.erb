@@ -1,20 +1,24 @@
-<%
-  tier_colors = {
-    "OPAL" => "var(--color-tier-opal)",
-    "AMBER" => "var(--color-tier-amber)",
-    "RUBY" => "var(--color-tier-ruby)"
-  }
-  tier_color = tier_colors[tier.upcase]
-%>
-<div>
-  <%= ui_card(class: "group flex items-center justify-center !p-4 h-24 !overflow-visible", href: website, target: "_blank") do %>
-    <%= ui_badge(tier.upcase, size: :sm, color: tier_color, class: "absolute -top-3 -right-3 rotate-12") %>
-    <%= image_tag logo, alt: name, class: "max-h-full max-w-full object-contain" %>
-    <%= ui_badge(name.upcase, size: :sm, variant: :dark, class: "absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity") %>
-  <% end %>
-  <% if local_assigns[:description] %>
-    <p class="text-brand-gray/60 text-xs mt-3 leading-relaxed">
-      <%= description %>
-    </p>
-  <% end %>
-</div>
+<% if local_assigns[:placeholder] %>
+  <div class="flex items-center justify-center h-24 bg-white border-3 border-dashed border-brand-black/30 text-brand-gray/40 text-sm font-bold">Your logo here</div>
+<% else %>
+  <%
+    tier_colors = {
+      "OPAL" => "var(--color-tier-opal)",
+      "AMBER" => "var(--color-tier-amber)",
+      "RUBY" => "var(--color-tier-ruby)"
+    }
+    tier_color = tier_colors[tier.upcase]
+  %>
+  <div>
+    <%= ui_card(class: "group flex items-center justify-center !p-4 h-24 !overflow-visible", href: website, target: "_blank") do %>
+      <%= ui_badge(tier.upcase, size: :sm, color: tier_color, class: "absolute -top-3 -right-3 rotate-12") %>
+      <%= image_tag logo, alt: name, class: "max-h-full max-w-full object-contain" %>
+      <%= ui_badge(name.upcase, size: :sm, variant: :dark, class: "absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity") %>
+    <% end %>
+    <% if local_assigns[:description] %>
+      <p class="text-brand-gray/60 text-xs mt-3 leading-relaxed">
+        <%= description %>
+      </p>
+    <% end %>
+  </div>
+<% end %>

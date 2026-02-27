@@ -10,14 +10,9 @@
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 reveal-up" data-reveal-target="item" style="transition-delay: 100ms;">
-      <%= render "pages/landing/sponsor_card",
-        logo: "/sponsors/parklands.png",
-        website: "https://www.parklandsbeachvolleyball.com/",
-        tier: "opal",
-        name: "Parklands Beach Volleyball",
-        description: "Okay, okay. We know this isn't a tech company. We just think everyone should have some Fun, Friendly, Fitness." %>
-      <div class="flex items-center justify-center h-24 bg-white border-3 border-dashed border-brand-black/30 text-brand-gray/40 text-sm font-bold">Your logo here</div>
-      <div class="flex items-center justify-center h-24 bg-white border-3 border-dashed border-brand-black/30 text-brand-gray/40 text-sm font-bold">Your logo here</div>
+      <%= render "pages/landing/sponsor_card", placeholder: true %>
+      <%= render "pages/landing/sponsor_card", placeholder: true %>
+      <%= render "pages/landing/sponsor_card", placeholder: true %>
       <%= ui_card(color: "var(--color-brand-red)", class: "grid place-items-center h-24", href: "/sponsorship") do %>
         <p class="text-white font-bold">Sponsor Us &rarr;</p>
       <% end %>
