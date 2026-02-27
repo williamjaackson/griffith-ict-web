@@ -17,7 +17,7 @@ module Ui
       secondary: "hover:shadow-[5px_5px_0px_var(--color-brand-red)]"
     }.freeze
 
-    def initialize(label:, href:, variant:, size: :base, target: nil, **options)
+    def initialize(label:, href: nil, variant:, size: :base, target: nil, **options)
       @label = label
       @href = href
       @variant = variant.to_sym
