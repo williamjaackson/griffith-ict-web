@@ -10,4 +10,8 @@ module UiHelper
   def ui_badge(text, variant: :primary, size: :base, color: nil, **options)
     render Ui::BadgeComponent.new(text: text, variant: variant, size: size, color: color, **options)
   end
+
+  def ui_logo(**options)
+    render Ui::LogoComponent.new(**options)
+  end
 end
