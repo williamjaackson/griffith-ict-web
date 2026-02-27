@@ -28,7 +28,7 @@ body {
 
 /* Text selection */
 ::selection {
-  background-color: var(--color-brand-red-200);
+  background-color: color-mix(in srgb, var(--color-brand-red) 20%, transparent);
   color: var(--color-brand-black);
 }
 
