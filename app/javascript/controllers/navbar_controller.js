@@ -8,7 +8,9 @@ export default class extends Controller {
     this.element.classList.remove("transition-all", "duration-300")
     this._scroll()
     requestAnimationFrame(() => {
-      this.element.classList.add("transition-all", "duration-300")
+      requestAnimationFrame(() => {
+        this.element.classList.add("transition-all", "duration-300")
+      })
     })
     window.addEventListener("scroll", this._scroll, { passive: true })
     this.open = false
