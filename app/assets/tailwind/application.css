@@ -20,7 +20,7 @@ body {
   to { transform: rotate(-360deg); }
 }
 
-.logo-spin:hover {
+.logo-spin.is-spinning {
   animation: spin-ccw 0.5s ease-in-out;
 }
 
