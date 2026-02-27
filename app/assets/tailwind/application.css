@@ -57,6 +57,23 @@ body {
 }
 
 
+/* Hero fade-up animation */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  opacity: 0;
+  animation: fade-up 0.6s ease-out forwards;
+}
+
 /* Hamburger animation */
 .hamburger[data-open="true"] span:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
