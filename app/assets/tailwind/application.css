@@ -62,13 +62,21 @@ body {
   navigation: auto;
 }
 
+::view-transition-group(root) {
+  background-color: var(--color-brand-red);
+}
+
+::view-transition-image-pair(root) {
+  isolation: auto;
+}
+
 ::view-transition-old(root) {
   animation: none;
+  opacity: 0;
 }
 
 ::view-transition-new(root) {
   animation: curtain-reveal 0.5s cubic-bezier(0.7, 0, 0.3, 1) both;
-  box-shadow: -8px 0 0 0 var(--color-brand-red), -12px 0 0 0 var(--color-brand-black);
 }
 
 @keyframes curtain-reveal {
