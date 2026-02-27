@@ -1,10 +1,10 @@
 module Ui
   class LogoComponent < ViewComponent::Base
     IMAGES = {
-      icon: "/gic-logo-icon.png",
+      icon: "/logo/icon.png",
       full: {
-        black: "/gic-logo-black-text.png",
-        white: "/gic-logo-white-text.png"
+        black: "/logo/full.png",
+        white: "/logo/dark-mode-full.png"
       }
     }.freeze
 
