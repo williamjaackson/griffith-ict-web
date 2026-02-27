@@ -10,12 +10,9 @@ module Ui
         ]
       },
       {
-        title: "Connect",
+        title: "Resources",
         links: [
-          { label: "Discord", href: "#" },
-          { label: "GitHub", href: "#" },
-          { label: "LinkedIn", href: "#" },
-          { label: "Instagram", href: "#" }
+          { label: "Design System", href: "/design_system" }
         ]
       }
     ].freeze
