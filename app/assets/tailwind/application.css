@@ -14,6 +14,16 @@ body {
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
+/* Logo spin */
+@keyframes spin-ccw {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+.logo-spin:hover {
+  animation: spin-ccw 0.5s ease-in-out;
+}
+
 /* Hamburger animation */
 .hamburger[data-open="true"] span:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
