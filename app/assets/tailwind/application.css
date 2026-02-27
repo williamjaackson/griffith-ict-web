@@ -26,34 +26,28 @@ body {
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-/* Custom scrollbar — hidden until scroll */
+/* Text selection */
+::selection {
+  background-color: var(--color-brand-red);
+  color: white;
+}
+
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 14px;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: transparent;
-  border-left: 3px solid transparent;
-  transition: background-color 0.3s, border-color 0.3s;
+  background-color: var(--color-brand-cream);
+  border-left: 3px solid var(--color-brand-black);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: transparent;
-  border-left: 3px solid transparent;
-  transition: background-color 0.3s, border-color 0.3s;
-}
-
-.has-scrolled::-webkit-scrollbar-track {
-  background-color: var(--color-brand-cream);
-  border-left-color: var(--color-brand-black);
-}
-
-.has-scrolled::-webkit-scrollbar-thumb {
   background-color: var(--color-brand-red);
-  border-left-color: var(--color-brand-black);
+  border-left: 3px solid var(--color-brand-black);
 }
 
-.has-scrolled::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
   background-color: var(--color-brand-red-dark);
 }
 
