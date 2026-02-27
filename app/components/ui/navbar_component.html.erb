@@ -14,7 +14,9 @@
       <% end %>
     </ul>
 
-    <%= helpers.ui_button(cta[:label], href: cta[:href], variant: :primary, size: :sm, class: "hidden md:inline-flex") %>
+    <div class="hidden md:block">
+      <%= helpers.ui_button(cta[:label], href: cta[:href], variant: :primary, size: :sm) %>
+    </div>
 
     <button data-navbar-target="toggle" data-action="navbar#toggleMenu" class="hamburger md:hidden flex flex-col gap-1.5 cursor-pointer relative z-20" aria-label="Toggle navigation">
       <span class="block w-6 h-0.5 bg-brand-black transition-transform duration-300 origin-center"></span>
