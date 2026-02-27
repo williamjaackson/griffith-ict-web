@@ -23,9 +23,9 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-      <%# Supporter %>
-      <%= ui_card(sidebar: "var(--color-brand-red-300)", class: "-rotate-2") do %>
-        <%= ui_badge("CONTRIBUTOR", size: :sm, color: "var(--color-brand-red-300)") %>
+      <%# Opal %>
+      <%= ui_card(sidebar: "var(--color-tier-opal)", class: "-rotate-2") do %>
+        <%= ui_badge("OPAL", size: :sm, color: "var(--color-tier-opal)") %>
         <p class="text-brand-gray text-sm mt-4 mb-6 leading-relaxed">
           Get your brand in front of our members and show your support for the student tech community.
         </p>
@@ -49,11 +49,11 @@
         </ul>
       <% end %>
 
-      <%# Partner %>
-      <%= ui_card(sidebar: "var(--color-brand-red)", class: "rotate-2") do %>
-        <%= ui_badge("COLLABORATOR", size: :sm) %>
+      <%# Amber %>
+      <%= ui_card(sidebar: "var(--color-tier-amber)", class: "rotate-2") do %>
+        <%= ui_badge("AMBER", size: :sm, color: "var(--color-tier-amber)") %>
         <p class="text-brand-gray text-sm mt-4 mb-6 leading-relaxed">
-          Everything in Contributor, plus direct access to students through events and panels.
+          Everything in Opal, plus direct access to students through events and panels.
         </p>
         <ul class="flex flex-col gap-3 text-sm">
           <li class="flex items-start gap-2 text-brand-gray/40">
@@ -91,9 +91,9 @@
         </ul>
       <% end %>
 
-      <%# Principal %>
-      <%= ui_card(sidebar: "var(--color-brand-red-dark)", class: "-rotate-2") do %>
-        <%= ui_badge("MAINTAINER", size: :sm, color: "var(--color-brand-red-dark)") %>
+      <%# Ruby %>
+      <%= ui_card(sidebar: "var(--color-tier-ruby)", class: "-rotate-2") do %>
+        <%= ui_badge("RUBY", size: :sm, color: "var(--color-tier-ruby)") %>
         <p class="text-brand-gray text-sm mt-4 mb-6 leading-relaxed">
           The full partnership. A dedicated event, top billing, and first access to our talent pool.
         </p>
