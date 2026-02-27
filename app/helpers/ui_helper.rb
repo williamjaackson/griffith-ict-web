@@ -6,4 +6,8 @@ module UiHelper
   def ui_heading(text, level: 1, **options)
     render Ui::HeadingComponent.new(text: text, level: level, **options)
   end
+
+  def ui_badge(text, variant: :primary, size: :base, color: nil, **options)
+    render Ui::BadgeComponent.new(text: text, variant: variant, size: size, color: color, **options)
+  end
 end
