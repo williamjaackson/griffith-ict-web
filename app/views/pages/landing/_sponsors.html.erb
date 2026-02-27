@@ -1,6 +1,6 @@
-<section id="sponsors" class="py-24 md:py-32 px-6 border-t-3 border-brand-black bg-brand-cream">
+<section id="sponsors" class="py-24 md:py-32 px-6 border-t-3 border-brand-black bg-brand-cream" data-controller="reveal">
   <div class="max-w-6xl mx-auto">
-    <div class="mb-16">
+    <div class="mb-16 reveal-up" data-reveal-target="item">
       <%= ui_badge("OUR PARTNERS", class: "rotate-2 mb-4") %>
       <%= ui_heading("Backed by industry.", level: 2) %>
       <p class="text-brand-gray text-lg max-w-2xl leading-relaxed">
@@ -9,7 +9,7 @@
       </p>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-5 reveal-up" data-reveal-target="item" style="transition-delay: 100ms;">
       <%= render "pages/landing/sponsor_card",
         logo: "/sponsors/parklands.png",
         website: "https://www.parklandsbeachvolleyball.com/",
