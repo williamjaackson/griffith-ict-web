@@ -24,4 +24,27 @@
     <%= ui_button("Secondary Button", href: "#", variant: :secondary) %>
     <%= ui_button("Small Button", href: "#", variant: :primary, size: :sm) %>
   </div>
+
+  <div class="flex flex-wrap items-start gap-6">
+    <%= ui_card(color: "#D32F2F") do %>
+      <p class="text-white/80 text-sm">Coloured Card</p>
+    <% end %>
+
+    <%= ui_card(shadow: "#E57373") do %>
+      <%= ui_heading("Emphasised Card", level: 3) %>
+    <% end %>
+
+    <%= ui_card(href: "#", color: "#5865F2") do %>
+      <p class="text-white/80 text-sm">Clickable Card</p>
+    <% end %>
+
+    <%= ui_card(href: "#", sidebar: "#F0A8A8") do %>
+      <%= ui_heading("Card", level: 3) %>
+      <p class="text-sm mt-1">That has a Sidebar</p>
+    <% end %>
+  </div>
+
+  </br>
+  </br>
+  </br>
 </div>
