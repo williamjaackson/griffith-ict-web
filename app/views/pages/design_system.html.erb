@@ -11,7 +11,7 @@
     <%= ui_badge("Tilted Badge", class: "-rotate-2") %>
     <%= ui_badge("Dark Badge", variant: :dark) %>
     <%= ui_badge("Small Badge", size: :sm) %>
-    <%= ui_badge("Small Color Badge", size: :sm, color: "#E57373") %>
+    <%= ui_badge("Small Color Badge", size: :sm, color: "var(--color-brand-red-300)") %>
   </div>
 
   <div class="flex flex-wrap items-center gap-6">
@@ -26,19 +26,19 @@
   </div>
 
   <div class="flex flex-wrap items-start gap-6">
-    <%= ui_card(color: "#D32F2F") do %>
+    <%= ui_card(color: "var(--color-brand-red)") do %>
       <p class="text-white/80 text-sm">Coloured Card</p>
     <% end %>
 
-    <%= ui_card(shadow: "#E57373") do %>
+    <%= ui_card(shadow: "var(--color-brand-red-300)") do %>
       <%= ui_heading("Emphasised Card", level: 3) %>
     <% end %>
 
-    <%= ui_card(href: "#", color: "#5865F2") do %>
+    <%= ui_card(href: "#", color: "var(--color-brand-discord)") do %>
       <p class="text-white/80 text-sm">Clickable Card</p>
     <% end %>
 
-    <%= ui_card(href: "#", sidebar: "#F0A8A8") do %>
+    <%= ui_card(href: "#", sidebar: "var(--color-brand-red-200)") do %>
       <%= ui_heading("Card", level: 3) %>
       <p class="text-sm mt-1">That has a Sidebar</p>
     <% end %>
