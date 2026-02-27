@@ -1,6 +1,6 @@
-<section class="py-24 md:py-32 px-6 border-t-3 border-brand-black bg-brand-cream">
+<section class="py-24 md:py-32 px-6 border-t-3 border-brand-black bg-brand-cream" data-controller="reveal">
   <div class="max-w-6xl mx-auto">
-    <div class="mb-16">
+    <div class="mb-16 reveal-up" data-reveal-target="item">
       <%= ui_heading("Sponsorship tiers.", level: 2) %>
       <p class="text-brand-gray text-lg max-w-2xl leading-relaxed">
         Each tier builds on the one before it. Pick the level that fits your goals and budget.
@@ -8,110 +8,113 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-      <%# Opal %>
-      <%= ui_card(sidebar: "var(--color-tier-opal)", class: "-rotate-2") do %>
-        <%= ui_badge("OPAL", size: :sm, color: "var(--color-tier-opal)") %>
-        <p class="text-2xl font-extrabold text-brand-black mt-3" style="font-family: 'Unbounded', sans-serif;">$500</p>
-        <p class="text-brand-gray text-sm mt-4 mb-6 leading-relaxed">
-          Your brand on our materials. Show your support for the student tech community.
-        </p>
-        <ul class="flex flex-col gap-3 text-sm">
-          <li class="flex items-start gap-2 text-brand-gray">
-            <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
-            Logo on club website
-          </li>
-          <li class="flex items-start gap-2 text-brand-gray">
-            <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
-            Social media recognition
-          </li>
-          <li class="flex items-start gap-2 text-brand-gray">
-            <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
-            Logo at events
-          </li>
-        </ul>
-      <% end %>
+      <div class="reveal-up" data-reveal-target="item" style="transition-delay: 100ms;">
+        <%= ui_card(sidebar: "var(--color-tier-opal)", class: "-rotate-2") do %>
+          <%= ui_badge("OPAL", size: :sm, color: "var(--color-tier-opal)") %>
+          <p class="text-2xl font-extrabold text-brand-black mt-3" style="font-family: 'Unbounded', sans-serif;">$500</p>
+          <p class="text-brand-gray text-sm mt-4 mb-6 leading-relaxed">
+            Your brand on our materials. Show your support for the student tech community.
+          </p>
+          <ul class="flex flex-col gap-3 text-sm">
+            <li class="flex items-start gap-2 text-brand-gray">
+              <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
+              Logo on club website
+            </li>
+            <li class="flex items-start gap-2 text-brand-gray">
+              <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
+              Social media recognition
+            </li>
+            <li class="flex items-start gap-2 text-brand-gray">
+              <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
+              Logo at events
+            </li>
+          </ul>
+        <% end %>
+      </div>
 
-      <%# Amber %>
-      <%= ui_card(sidebar: "var(--color-tier-amber)", class: "rotate-2") do %>
-        <%= ui_badge("AMBER", size: :sm, color: "var(--color-tier-amber)") %>
-        <p class="text-2xl font-extrabold text-brand-black mt-3" style="font-family: 'Unbounded', sans-serif;">$1,250</p>
-        <p class="text-brand-gray text-sm mt-4 mb-6 leading-relaxed">
-          We actively promote you. Your opportunities reach our members directly.
-        </p>
-        <ul class="flex flex-col gap-3 text-sm">
-          <li class="flex items-start gap-2 text-brand-gray">
-            <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
-            Logo on club website
-          </li>
-          <li class="flex items-start gap-2 text-brand-gray">
-            <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
-            Social media recognition
-          </li>
-          <li class="flex items-start gap-2 text-brand-gray">
-            <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
-            Logo at events
-          </li>
-          <li class="flex items-start gap-2 text-brand-gray">
-            <span class="font-bold mt-0.5 text-tier-amber">&#10003;</span>
-            Job and internship promotion
-          </li>
-          <li class="flex items-start gap-2 text-brand-gray">
-            <span class="font-bold mt-0.5 text-tier-amber">&#10003;</span>
-            Newsletter and email promotion
-          </li>
-          <li class="flex items-start gap-2 text-brand-gray">
-            <span class="font-bold mt-0.5 text-tier-amber">&#10003;</span>
-            Promotional materials at events
-          </li>
-        </ul>
-      <% end %>
+      <div class="reveal-up" data-reveal-target="item" style="transition-delay: 200ms;">
+        <%= ui_card(sidebar: "var(--color-tier-amber)", class: "rotate-2") do %>
+          <%= ui_badge("AMBER", size: :sm, color: "var(--color-tier-amber)") %>
+          <p class="text-2xl font-extrabold text-brand-black mt-3" style="font-family: 'Unbounded', sans-serif;">$1,250</p>
+          <p class="text-brand-gray text-sm mt-4 mb-6 leading-relaxed">
+            We actively promote you. Your opportunities reach our members directly.
+          </p>
+          <ul class="flex flex-col gap-3 text-sm">
+            <li class="flex items-start gap-2 text-brand-gray">
+              <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
+              Logo on club website
+            </li>
+            <li class="flex items-start gap-2 text-brand-gray">
+              <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
+              Social media recognition
+            </li>
+            <li class="flex items-start gap-2 text-brand-gray">
+              <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
+              Logo at events
+            </li>
+            <li class="flex items-start gap-2 text-brand-gray">
+              <span class="font-bold mt-0.5 text-tier-amber">&#10003;</span>
+              Job and internship promotion
+            </li>
+            <li class="flex items-start gap-2 text-brand-gray">
+              <span class="font-bold mt-0.5 text-tier-amber">&#10003;</span>
+              Newsletter and email promotion
+            </li>
+            <li class="flex items-start gap-2 text-brand-gray">
+              <span class="font-bold mt-0.5 text-tier-amber">&#10003;</span>
+              Promotional materials at events
+            </li>
+          </ul>
+        <% end %>
+      </div>
 
-      <%# Ruby %>
-      <%= ui_card(sidebar: "var(--color-tier-ruby)", class: "-rotate-2") do %>
-        <%= ui_badge("RUBY", size: :sm, color: "var(--color-tier-ruby)") %>
-        <p class="text-2xl font-extrabold text-brand-black mt-3" style="font-family: 'Unbounded', sans-serif;">$2,500</p>
-        <p class="text-brand-gray text-sm mt-4 mb-6 leading-relaxed">
-          The full partnership. We build events around you and give you top billing everywhere.
-        </p>
-        <ul class="flex flex-col gap-3 text-sm">
-          <li class="flex items-start gap-2 text-brand-gray">
-            <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
-            Logo on club website
-          </li>
-          <li class="flex items-start gap-2 text-brand-gray">
-            <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
-            Social media recognition
-          </li>
-          <li class="flex items-start gap-2 text-brand-gray">
-            <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
-            Logo at events
-          </li>
-          <li class="flex items-start gap-2 text-brand-gray">
-            <span class="font-bold mt-0.5 text-tier-amber">&#10003;</span>
-            Job and internship promotion
-          </li>
-          <li class="flex items-start gap-2 text-brand-gray">
-            <span class="font-bold mt-0.5 text-tier-amber">&#10003;</span>
-            Newsletter and email promotion
-          </li>
-          <li class="flex items-start gap-2 text-brand-gray">
-            <span class="font-bold mt-0.5 text-tier-amber">&#10003;</span>
-            Promotional materials at events
-          </li>
-          <li class="flex items-start gap-2 text-brand-gray">
-            <span class="font-bold mt-0.5 text-tier-ruby">&#10003;</span>
-            Access to networking events
-          </li>
-          <li class="flex items-start gap-2 text-brand-gray">
-            <span class="font-bold mt-0.5 text-tier-ruby">&#10003;</span>
-            Dedicated co-branded event
-          </li>
-          <li class="flex items-start gap-2 text-brand-gray">
-            <span class="font-bold mt-0.5 text-tier-ruby">&#10003;</span>
-            Highest placement on all materials
-          </li>
-        </ul>
-      <% end %>
+      <div class="reveal-up" data-reveal-target="item" style="transition-delay: 300ms;">
+        <%= ui_card(sidebar: "var(--color-tier-ruby)", class: "-rotate-2") do %>
+          <%= ui_badge("RUBY", size: :sm, color: "var(--color-tier-ruby)") %>
+          <p class="text-2xl font-extrabold text-brand-black mt-3" style="font-family: 'Unbounded', sans-serif;">$2,500</p>
+          <p class="text-brand-gray text-sm mt-4 mb-6 leading-relaxed">
+            The full partnership. We build events around you and give you top billing everywhere.
+          </p>
+          <ul class="flex flex-col gap-3 text-sm">
+            <li class="flex items-start gap-2 text-brand-gray">
+              <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
+              Logo on club website
+            </li>
+            <li class="flex items-start gap-2 text-brand-gray">
+              <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
+              Social media recognition
+            </li>
+            <li class="flex items-start gap-2 text-brand-gray">
+              <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
+              Logo at events
+            </li>
+            <li class="flex items-start gap-2 text-brand-gray">
+              <span class="font-bold mt-0.5 text-tier-amber">&#10003;</span>
+              Job and internship promotion
+            </li>
+            <li class="flex items-start gap-2 text-brand-gray">
+              <span class="font-bold mt-0.5 text-tier-amber">&#10003;</span>
+              Newsletter and email promotion
+            </li>
+            <li class="flex items-start gap-2 text-brand-gray">
+              <span class="font-bold mt-0.5 text-tier-amber">&#10003;</span>
+              Promotional materials at events
+            </li>
+            <li class="flex items-start gap-2 text-brand-gray">
+              <span class="font-bold mt-0.5 text-tier-ruby">&#10003;</span>
+              Access to networking events
+            </li>
+            <li class="flex items-start gap-2 text-brand-gray">
+              <span class="font-bold mt-0.5 text-tier-ruby">&#10003;</span>
+              Dedicated co-branded event
+            </li>
+            <li class="flex items-start gap-2 text-brand-gray">
+              <span class="font-bold mt-0.5 text-tier-ruby">&#10003;</span>
+              Highest placement on all materials
+            </li>
+          </ul>
+        <% end %>
+      </div>
     </div>
   </div>
 </section>

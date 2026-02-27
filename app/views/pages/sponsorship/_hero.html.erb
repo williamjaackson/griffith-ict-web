@@ -1,12 +1,24 @@
+<style>
+  @keyframes hero-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-hero-in { animation: hero-in 0.4s cubic-bezier(0.2, 0, 0, 1) both; }
+</style>
+
 <header class="px-6 pt-8 pb-24">
   <div class="max-w-6xl mx-auto">
-    <%= ui_badge("SPONSORSHIP", class: "-rotate-2 mb-8") %>
-    <%= ui_heading("Partner with us.", level: 1, highlight: "with us.") %>
-    <p class="text-brand-gray text-lg md:text-xl max-w-2xl leading-relaxed mb-10">
+    <div class="animate-hero-in">
+      <%= ui_badge("SPONSORSHIP", class: "-rotate-2 mb-8") %>
+    </div>
+    <div class="animate-hero-in" style="animation-delay: 100ms;">
+      <%= ui_heading("Partner with us.", level: 1, highlight: "with us.") %>
+    </div>
+    <p class="animate-hero-in text-brand-gray text-lg md:text-xl max-w-2xl leading-relaxed mb-10" style="animation-delay: 200ms;">
       Help us run bigger events, better hackathons, and create real-world opportunities for 400+ students.
       In return, get direct access to Griffith's most engaged tech talent.
     </p>
-    <div class="flex flex-wrap gap-4">
+    <div class="animate-hero-in flex flex-wrap gap-4" style="animation-delay: 300ms;">
       <%= ui_button("Get in touch", href: "mailto:griffithictclub@gmail.com", variant: :primary) %>
       <%= ui_button("Back to home", href: "/", variant: :secondary) %>
     </div>

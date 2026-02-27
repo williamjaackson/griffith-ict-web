@@ -4,6 +4,7 @@ module Ui
       {
         title: "Club",
         links: [
+          { label: "Home", href: "/" },
           { label: "About", href: "#about" },
           { label: "Events", href: "#events" },
           { label: "Sponsors", href: "#sponsors" }

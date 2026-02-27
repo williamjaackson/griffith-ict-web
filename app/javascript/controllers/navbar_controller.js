@@ -5,8 +5,14 @@ export default class extends Controller {
 
   connect() {
     this._scroll = this._scroll.bind(this)
-    window.addEventListener("scroll", this._scroll, { passive: true })
+    this.element.classList.remove("transition-all", "duration-300")
     this._scroll()
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        this.element.classList.add("transition-all", "duration-300")
+      })
+    })
+    window.addEventListener("scroll", this._scroll, { passive: true })
     this.open = false
   }
 
