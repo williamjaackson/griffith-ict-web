@@ -26,9 +26,9 @@ export default class extends Controller {
 
     const rotation = card.dataset.rotation
 
-    card.addEventListener("transitionend", () => {
+    setTimeout(() => {
       this._animate(index + 1)
-    }, { once: true })
+    }, 150)
 
     requestAnimationFrame(() => {
       card.classList.add(rotation)
