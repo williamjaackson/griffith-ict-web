@@ -5,6 +5,11 @@ module Ui
       full: "/logo/GriffithICTClubLogo.svg"
     }.freeze
 
+    SIZE_CLASSES = {
+      icon: "h-8 w-auto",
+      full: "h-6 w-auto"
+    }.freeze
+
     def initialize(type: :icon, **options)
       @type = type.to_sym
       @extra_class = options.delete(:class)
@@ -22,7 +27,7 @@ module Ui
     end
 
     def classes
-      @extra_class
+      [SIZE_CLASSES[@type], @extra_class].compact.join(" ")
     end
   end
 end
