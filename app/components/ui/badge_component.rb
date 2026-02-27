@@ -1,15 +1,15 @@
 module Ui
   class BadgeComponent < ViewComponent::Base
-    BASE_CLASSES = "inline-block text-white font-bold"
+    BASE_CLASSES = "inline-block text-white font-bold border-3 border-brand-black"
 
     VARIANT_CLASSES = {
-      primary: "bg-brand-red border-3 border-brand-black",
+      primary: "bg-brand-red",
       dark: "bg-brand-black"
     }.freeze
 
     SIZE_CLASSES = {
-      base: "text-sm px-4 py-1.5",
-      sm: "text-xs px-3 py-1 border-2 border-brand-black"
+      base: "text-sm px-4 py-1.5 uppercase",
+      sm: "text-xs px-3 py-1"
     }.freeze
 
     def initialize(text:, variant: :primary, size: :base, color: nil, **options)
