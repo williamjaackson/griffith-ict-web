@@ -76,7 +76,7 @@ body {
 }
 
 ::view-transition-new(root) {
-  animation: curtain-reveal 0.5s cubic-bezier(0.7, 0, 0.3, 1) both;
+  animation: curtain-reveal 0.25s cubic-bezier(0.7, 0, 0.3, 1) both;
 }
 
 @keyframes curtain-reveal {
