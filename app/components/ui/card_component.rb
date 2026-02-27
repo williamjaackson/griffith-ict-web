@@ -36,5 +36,11 @@ module Ui
       end
       styles.join(" ")
     end
+
+    def html_options
+      opts = @options.dup
+      opts[:href] = @href if @href
+      opts
+    end
   end
 end
