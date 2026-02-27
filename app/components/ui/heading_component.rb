@@ -23,9 +23,10 @@ module Ui
       }
     }.freeze
 
-    def initialize(text:, level: 1, **options)
+    def initialize(text:, level: 1, highlight: nil, **options)
       @text = text
       @level = level
+      @highlight = highlight
       @extra_class = options.delete(:class)
       @options = options
     end
@@ -46,6 +47,18 @@ module Ui
 
     def style
       "font-family: 'Unbounded', sans-serif; font-weight: #{config[:weight]};"
+    end
+
+    def formatted_text
+      return @text unless @highlight
+
+      escaped = ERB::Util.html_escape(@text)
+      highlighted = ERB::Util.html_escape(@highlight)
+      replacement = '<span class="relative inline-block">' \
+                    "#{highlighted}" \
+                    '<span class="absolute -bottom-1 left-0 right-0 h-4 bg-brand-red/20 -z-10"></span>' \
+                    "</span>"
+      escaped.sub(highlighted, replacement).html_safe
     end
   end
 end
