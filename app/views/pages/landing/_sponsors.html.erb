@@ -11,7 +11,7 @@
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
       <%= ui_card(class: "flex items-center justify-center !p-4 h-24", href: "https://www.parklandsbeachvolleyball.com/") do %>
-        <%= ui_badge("OPAL", size: :sm, color: "var(--color-tier-opal)", class: "absolute top-0 right-0 border-t-0 border-r-0") %>
+        <span class="absolute -right-8 top-3 rotate-45 bg-tier-opal text-white text-[10px] font-bold px-8 py-0.5 border-y-2 border-brand-black" style="font-family: 'Unbounded', sans-serif;">OPAL</span>
         <%= image_tag "/sponsors/parklands.png", alt: "Parklands Beach Volleyball", class: "max-h-full max-w-full object-contain" %>
       <% end %>
       <div class="flex items-center justify-center h-24 bg-white border-3 border-dashed border-brand-black/30 text-brand-gray/40 text-sm font-bold">Your logo here</div>
