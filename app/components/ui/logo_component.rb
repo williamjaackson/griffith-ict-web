@@ -5,7 +5,7 @@ module Ui
       full: "/logo/GriffithICTClubLogo.svg"
     }.freeze
 
-    def initialize(type: :full, **options)
+    def initialize(type: :icon, **options)
       @type = type.to_sym
       @extra_class = options.delete(:class)
       @options = options
