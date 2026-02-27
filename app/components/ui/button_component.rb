@@ -17,11 +17,12 @@ module Ui
       secondary: "hover:shadow-[5px_5px_0px_var(--color-brand-red)]"
     }.freeze
 
-    def initialize(label:, href:, variant:, size: :base, **options)
+    def initialize(label:, href:, variant:, size: :base, target: nil, **options)
       @label = label
       @href = href
       @variant = variant.to_sym
       @size = size.to_sym
+      @target = target
       @extra_class = options.delete(:class)
       @options = options
     end
@@ -30,6 +31,15 @@ module Ui
 
     def style
       "font-family: 'Unbounded', sans-serif; font-weight: 600;"
+    end
+
+    def link_options
+      opts = @options.dup
+      if @target
+        opts[:target] = @target
+        opts[:rel] = "noopener" if @target == "_blank"
+      end
+      opts
     end
 
     def classes

@@ -12,6 +12,7 @@ module Ui
       {
         title: "Resources",
         links: [
+          { label: "Sponsorship", href: "/sponsorship" },
           { label: "Design System", href: "/design_system" }
         ]
       }
