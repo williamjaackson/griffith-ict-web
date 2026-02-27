@@ -10,9 +10,10 @@
     </div>
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
-      <%= ui_card(class: "flex items-center justify-center !p-4 h-24 !overflow-visible", href: "https://www.parklandsbeachvolleyball.com/") do %>
+      <%= ui_card(class: "group flex items-center justify-center !p-4 h-24 !overflow-visible", href: "https://www.parklandsbeachvolleyball.com/") do %>
         <%= ui_badge("OPAL", size: :sm, color: "var(--color-tier-opal)", class: "absolute -top-3 -right-3 rotate-12") %>
         <%= image_tag "/sponsors/parklands.png", alt: "Parklands Beach Volleyball", class: "max-h-full max-w-full object-contain" %>
+        <%= ui_badge("PARKLANDS BEACH VOLLEYBALL", size: :sm, variant: :dark, class: "absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity") %>
       <% end %>
       <div class="flex items-center justify-center h-24 bg-white border-3 border-dashed border-brand-black/30 text-brand-gray/40 text-sm font-bold">Your logo here</div>
       <div class="flex items-center justify-center h-24 bg-white border-3 border-dashed border-brand-black/30 text-brand-gray/40 text-sm font-bold">Your logo here</div>
