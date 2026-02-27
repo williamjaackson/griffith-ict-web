@@ -7,6 +7,13 @@
   <p class="text-lg max-w-2xl leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
 
   <div class="flex flex-wrap items-start gap-4">
+    <%= ui_badge("Primary Badge") %>
+    <%= ui_badge("Dark Badge", variant: :dark) %>
+    <%= ui_badge("Small Badge", size: :sm) %>
+    <%= ui_badge("Custom Color", size: :sm, color: "#E57373") %>
+  </div>
+
+  <div class="flex flex-wrap items-start gap-4">
     <%= ui_button("Primary Button", href: "#", variant: :primary) %>
     <%= ui_button("Secondary Button", href: "#", variant: :secondary) %>
     <%= ui_button("Small Button", href: "#", variant: :primary, size: :sm) %>
