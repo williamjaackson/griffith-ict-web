@@ -27,9 +27,13 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+  <body class="min-h-screen flex flex-col">
+    <%= ui_navbar %>
+
+    <main class="container mx-auto mt-28 px-5 flex flex-1">
       <%= yield %>
     </main>
+
+    <%= ui_footer %>
   </body>
 </html>
