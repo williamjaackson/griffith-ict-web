@@ -1,0 +1,52 @@
+<div class="flex flex-col items-start gap-8">
+  <%= ui_heading("Heading Numero Uno", level: 1, highlight: "Numero Uno") %>
+  <%= ui_heading("Heading 2", level: 2) %>
+  <%= ui_heading("Heading 3", level: 3) %>
+  <%= ui_heading("Heading 4", level: 4) %>
+
+  <p class="text-lg max-w-2xl leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+
+  <div class="flex flex-wrap items-start gap-4">
+    <%= ui_badge("Primary Badge") %>
+    <%= ui_badge("Tilted Badge", class: "-rotate-2") %>
+    <%= ui_badge("Dark Badge", variant: :dark) %>
+    <%= ui_badge("Small Badge", size: :sm) %>
+    <%= ui_badge("Small Color Badge", size: :sm, color: "#E57373") %>
+  </div>
+
+  <div class="flex flex-wrap items-center gap-6">
+    <%= ui_logo %>
+    <%= ui_logo(type: :full) %>
+  </div>
+
+  <div class="flex flex-wrap items-start gap-4">
+    <%= ui_button("Primary Button", href: "#", variant: :primary) %>
+    <%= ui_button("Secondary Button", href: "#", variant: :secondary) %>
+    <%= ui_button("Small Button", href: "#", variant: :primary, size: :sm) %>
+  </div>
+
+  <div class="flex flex-wrap items-start gap-6">
+    <%= ui_card(color: "#D32F2F", class: "p-6") do %>
+      <p class="text-white/80 text-sm">Coloured Card</p>
+    <% end %>
+
+    <%= ui_card(shadow: "#E57373", class: "p-7") do %>
+    <%= ui_heading("Emphasised Card", level: 3) %>
+    <% end %>
+
+    <%= ui_card(href: "#", color: "#5865F2", class: "p-6") do %>
+      <p class="text-white/80 text-sm">Clickable Card</p>
+    <% end %>
+
+    <%= ui_card(href: "#", sidebar: "#F0A8A8") do %>
+      <div class="pl-6 py-4 pr-4">
+        <%= ui_heading("Card", level: 3) %>
+        <p class="text-sm mt-1">That has a Sidebar</p>
+      </div>
+    <% end %>
+  </div>
+
+  </br>
+  </br>
+  </br>
+</div>
