@@ -1,10 +1,11 @@
 module Ui
   class CardComponent < ViewComponent::Base
-    def initialize(href: nil, color: nil, shadow: nil, sidebar: nil, **options)
+    def initialize(href: nil, color: nil, shadow: nil, sidebar: nil, target: nil, **options)
       @href = href
       @color = color
       @shadow = shadow
       @sidebar = sidebar
+      @target = target
       @extra_class = options.delete(:class)
       @options = options
     end
@@ -40,6 +41,10 @@ module Ui
     def html_options
       opts = @options.dup
       opts[:href] = @href if @href
+      if @target
+        opts[:target] = @target
+        opts[:rel] = "noopener" if @target == "_blank"
+      end
       opts
     end
   end
