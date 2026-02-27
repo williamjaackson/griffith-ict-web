@@ -62,38 +62,18 @@ body {
   navigation: auto;
 }
 
-::view-transition-group(root) {
-  background-color: var(--color-brand-red);
-}
-
-::view-transition-image-pair(root) {
-  isolation: auto;
-  mix-blend-mode: normal;
-}
-
 ::view-transition-old(root) {
-  animation: 0.1s step-end both flash-out;
+  animation: none;
+  opacity: 0;
 }
 
 ::view-transition-new(root) {
-  animation: 0.1s step-start 0.25s both flash-in;
+  animation: curtain-reveal 0.5s cubic-bezier(0.7, 0, 0.3, 1) both;
 }
 
-@keyframes flash-out {
-  to { opacity: 0; }
-}
-
-@keyframes flash-in {
-  from { opacity: 0; }
-}
-
-::view-transition-group(navbar) {
-  animation: none;
-}
-
-::view-transition-old(navbar),
-::view-transition-new(navbar) {
-  animation: none;
+@keyframes curtain-reveal {
+  0% { clip-path: inset(0 0 0 100%); }
+  100% { clip-path: inset(0 0 0 0); }
 }
 
 /* Hamburger animation */
