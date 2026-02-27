@@ -10,12 +10,12 @@
     </div>
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
-      <%= ui_card(class: "flex items-center justify-center p-4", href: "https://www.parklandsbeachvolleyball.com/") do %>
+      <%= ui_card(class: "flex items-center justify-center !p-4 h-24", href: "https://www.parklandsbeachvolleyball.com/") do %>
         <%= image_tag "/sponsors/parklands.png", alt: "Parklands Beach Volleyball", class: "max-h-full max-w-full object-contain" %>
       <% end %>
       <div class="flex items-center justify-center h-24 bg-white border-3 border-dashed border-brand-black/30 text-brand-gray/40 text-sm font-bold">Your logo here</div>
       <div class="flex items-center justify-center h-24 bg-white border-3 border-dashed border-brand-black/30 text-brand-gray/40 text-sm font-bold">Your logo here</div>
-      <%= ui_card(color: "var(--color-brand-red)", class: "grid place-items-center", href: "/sponsorship") do %>
+      <%= ui_card(color: "var(--color-brand-red)", class: "grid place-items-center h-24", href: "/sponsorship") do %>
         <p class="text-white font-bold">Sponsor Us &rarr;</p>
       <% end %>
     </div>
