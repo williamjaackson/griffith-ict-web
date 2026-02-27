@@ -57,6 +57,39 @@ body {
 }
 
 
+/* Page transitions (View Transitions API) */
+@view-transition {
+  navigation: auto;
+}
+
+@keyframes wipe-in {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes wipe-out {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+::view-transition-old(root) {
+  animation: wipe-out 0.3s cubic-bezier(0.7, 0, 0.3, 1) both;
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  animation: wipe-in 0.3s cubic-bezier(0.7, 0, 0.3, 1) both;
+  z-index: 2;
+}
+
+::view-transition-group(navbar) {
+  animation: none;
+}
+
+::view-transition-old(navbar),
+::view-transition-new(navbar) {
+  animation: none;
+}
 
 /* Hamburger animation */
 .hamburger[data-open="true"] span:nth-child(1) {
