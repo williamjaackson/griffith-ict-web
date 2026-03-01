@@ -13,7 +13,7 @@
           <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
             <%= lucide_icon("users", class: "w-5 h-5 text-brand-red") %>
           </div>
-          <%= ui_heading("400+ members", level: 3) %>
+          <%= ui_heading("#{Rails.application.config.meta[:member_count]} members", level: 3) %>
           <p class="text-brand-gray text-sm leading-relaxed">
             Engaged students across software, cybersecurity, data science, and IT. These are your future hires.
           </p>
