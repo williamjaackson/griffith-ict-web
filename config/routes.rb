@@ -13,7 +13,5 @@ Rails.application.routes.draw do
   get "design_system", to: "pages#design_system"
   get "sponsorship", to: "pages#sponsorship"
 
-  get "oembed", to: "oembed#show", defaults: { format: :json }
-
   root "pages#home"
 end
