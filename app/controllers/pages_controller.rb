@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   def home
+    @sponsors = YAML.load_file(Rails.root.join("config/sponsors.yml"))["sponsors"] || []
     render "pages/landing/home"
   end
 
