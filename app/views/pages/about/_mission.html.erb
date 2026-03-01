@@ -1,0 +1,43 @@
+<section class="py-24 md:py-32 px-6 border-t-3 border-brand-black bg-brand-cream" data-controller="reveal">
+  <div class="max-w-6xl mx-auto">
+    <div class="mb-12 reveal-up" data-reveal-target="item">
+      <%= ui_heading("Our mission.", level: 2) %>
+      <p class="text-brand-gray text-lg max-w-2xl leading-relaxed">
+        We exist to give Griffith IT students a community where they can build skills,
+        make friends, and get a head start on their careers. Whether you're into web dev,
+        cybersecurity, AI, or just want to meet other tech students, there's a place for you here.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div class="reveal-up" data-reveal-target="item" style="transition-delay: 100ms;">
+        <%= ui_card(shadow: "var(--color-brand-red-300)") do %>
+          <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-brand-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+            </svg>
+          </div>
+          <%= ui_heading("Two campuses, one club", level: 3) %>
+          <p class="text-brand-gray text-sm leading-relaxed">
+            Active divisions on the Gold Coast and at Nathan, with shared events and a single Discord community that keeps everyone connected.
+          </p>
+        <% end %>
+      </div>
+
+      <div class="reveal-up" data-reveal-target="item" style="transition-delay: 200ms;">
+        <%= ui_card(shadow: "var(--color-brand-red)") do %>
+          <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-brand-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+            </svg>
+          </div>
+          <%= ui_heading("Constitution", level: 3) %>
+          <p class="text-brand-gray text-sm leading-relaxed mb-4">
+            Our constitution outlines how the club is governed, how elections work, and what our objectives are.
+          </p>
+          <%= ui_button("Read our Constitution", href: "#", variant: :secondary, size: :sm) %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

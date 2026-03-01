@@ -1,0 +1,103 @@
+<section id="team" class="py-24 md:py-32 px-6 border-t-3 border-brand-black" data-controller="reveal tabs">
+  <div class="max-w-6xl mx-auto">
+    <div class="mb-12 reveal-up" data-reveal-target="item">
+      <%= ui_heading("Executive team.", level: 2) %>
+      <p class="text-brand-gray text-lg max-w-2xl leading-relaxed">
+        The people who keep things running. Our executive team is elected and appointed each year to lead the club across both campuses.
+      </p>
+    </div>
+
+    <%# Campus tabs %>
+    <div class="flex gap-3 mb-10 reveal-up" data-reveal-target="item" style="transition-delay: 100ms;">
+      <button data-tabs-target="btn" data-action="tabs#select" data-index="0"
+              class="px-6 py-3 text-sm font-bold border-3 border-brand-black cursor-pointer transition-colors duration-200 bg-brand-red text-white"
+              style="font-family: 'Unbounded', sans-serif;">
+        Gold Coast
+      </button>
+      <button data-tabs-target="btn" data-action="tabs#select" data-index="1"
+              class="px-6 py-3 text-sm font-bold border-3 border-brand-black cursor-pointer transition-colors duration-200 bg-white text-brand-black"
+              style="font-family: 'Unbounded', sans-serif;">
+        Nathan
+      </button>
+    </div>
+
+    <%# Gold Coast panel %>
+    <div data-tabs-target="panel">
+      <div class="mb-6 reveal-up" data-reveal-target="item" style="transition-delay: 150ms;">
+        <%= ui_badge("ELECTED", size: :sm) %>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 mb-12">
+        <% [
+          { role: "President", name: "TBD" },
+          { role: "Vice President", name: "TBD" },
+          { role: "Treasurer", name: "TBD" },
+          { role: "Secretary", name: "TBD" }
+        ].each_with_index do |member, i| %>
+          <div class="reveal-up" data-reveal-target="item" style="transition-delay: <%= 200 + (i * 100) %>ms;">
+            <%= ui_card(shadow: "var(--color-brand-red)") do %>
+              <%= ui_heading(member[:role], level: 3) %>
+              <p class="text-brand-gray text-sm"><%= member[:name] %></p>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="mb-6 reveal-up" data-reveal-target="item" style="transition-delay: 150ms;">
+        <%= ui_badge("APPOINTED", size: :sm, variant: :dark) %>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+        <% [
+          { role: "Events Co-ordinator", name: "TBD" },
+          { role: "Social Media Manager", name: "TBD" },
+          { role: "Industry Liaison", name: "TBD" }
+        ].each_with_index do |member, i| %>
+          <div class="reveal-up" data-reveal-target="item" style="transition-delay: <%= 200 + (i * 100) %>ms;">
+            <%= ui_card(shadow: "var(--color-brand-red-300)") do %>
+              <%= ui_heading(member[:role], level: 3) %>
+              <p class="text-brand-gray text-sm"><%= member[:name] %></p>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <%# Nathan panel %>
+    <div data-tabs-target="panel" class="hidden">
+      <div class="mb-6">
+        <%= ui_badge("ELECTED", size: :sm) %>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 mb-12">
+        <% [
+          { role: "President", name: "TBD" },
+          { role: "Vice President", name: "TBD" },
+          { role: "Treasurer", name: "TBD" },
+          { role: "Secretary", name: "TBD" }
+        ].each_with_index do |member, i| %>
+          <div>
+            <%= ui_card(shadow: "var(--color-brand-red)") do %>
+              <%= ui_heading(member[:role], level: 3) %>
+              <p class="text-brand-gray text-sm"><%= member[:name] %></p>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="mb-6">
+        <%= ui_badge("APPOINTED", size: :sm, variant: :dark) %>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <% [
+          { role: "Social Media Manager", name: "TBD" },
+          { role: "Industry Liaison", name: "TBD" }
+        ].each_with_index do |member, i| %>
+          <div>
+            <%= ui_card(shadow: "var(--color-brand-red-300)") do %>
+              <%= ui_heading(member[:role], level: 3) %>
+              <p class="text-brand-gray text-sm"><%= member[:name] %></p>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

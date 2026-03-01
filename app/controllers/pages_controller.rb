@@ -6,6 +6,10 @@ class PagesController < ApplicationController
   def design_system
   end
 
+  def about
+    render "pages/about/about"
+  end
+
   def sponsorship
     render "pages/sponsorship/sponsorship"
   end
