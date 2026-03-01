@@ -9,16 +9,9 @@
     }
     tier_color = tier_colors[tier.upcase]
   %>
-  <div>
-    <%= ui_card(class: "group flex items-center justify-center !p-4 h-24 !overflow-visible", href: website, target: "_blank") do %>
-      <%= ui_badge(tier.upcase, size: :sm, color: tier_color, class: "absolute -top-3 -right-3 rotate-12") %>
-      <%= image_tag logo, alt: name, class: "max-h-full max-w-full object-contain" %>
-      <%= ui_badge(name.upcase, size: :sm, variant: :dark, class: "absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity") %>
-    <% end %>
-    <% if local_assigns[:description] %>
-      <p class="text-brand-gray/60 text-xs mt-3 leading-relaxed">
-        <%= description %>
-      </p>
-    <% end %>
-  </div>
+  <%= ui_card(class: "group flex items-center justify-center !p-4 !h-24 !overflow-visible", href: website, target: "_blank") do %>
+    <%= ui_badge(tier.upcase, size: :sm, color: tier_color, class: "absolute -top-3 -right-3 rotate-12") %>
+    <%= image_tag logo, alt: name, class: "max-h-14 max-w-full object-contain" %>
+    <%= ui_badge(name.upcase, size: :sm, variant: :dark, class: "absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity") %>
+  <% end %>
 <% end %>

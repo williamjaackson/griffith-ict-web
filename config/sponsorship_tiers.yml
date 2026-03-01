@@ -1,0 +1,30 @@
+tiers:
+  - name: Opal
+    price: "$500"
+    color: "var(--color-tier-opal)"
+    rotation: "-rotate-2"
+    description: "Your brand on our materials. Show your support for the student tech community."
+    perks:
+      - Logo on club website
+      - Social media recognition
+      - Logo at events
+
+  - name: Amber
+    price: "$1,250"
+    color: "var(--color-tier-amber)"
+    rotation: "rotate-2"
+    description: "We actively promote you. Your opportunities reach our members directly."
+    perks:
+      - Job and internship promotion
+      - Newsletter and email promotion
+      - Promotional materials at events
+
+  - name: Ruby
+    price: "$2,500"
+    color: "var(--color-tier-ruby)"
+    rotation: "-rotate-2"
+    description: "The full partnership. We build events around you and give you top billing everywhere."
+    perks:
+      - Access to networking events
+      - Dedicated co-branded event
+      - Highest placement on all materials

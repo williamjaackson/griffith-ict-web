@@ -8,113 +8,32 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-      <div class="reveal-up" data-reveal-target="item" style="transition-delay: 100ms;">
-        <%= ui_card(sidebar: "var(--color-tier-opal)", class: "-rotate-2") do %>
-          <%= ui_badge("OPAL", size: :sm, color: "var(--color-tier-opal)") %>
-          <p class="text-2xl font-extrabold text-brand-black mt-3" style="font-family: 'Unbounded', sans-serif;">$500</p>
-          <p class="text-brand-gray text-sm mt-4 mb-6 leading-relaxed">
-            Your brand on our materials. Show your support for the student tech community.
-          </p>
-          <ul class="flex flex-col gap-3 text-sm">
-            <li class="flex items-start gap-2 text-brand-gray">
-              <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
-              Logo on club website
-            </li>
-            <li class="flex items-start gap-2 text-brand-gray">
-              <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
-              Social media recognition
-            </li>
-            <li class="flex items-start gap-2 text-brand-gray">
-              <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
-              Logo at events
-            </li>
-          </ul>
-        <% end %>
-      </div>
-
-      <div class="reveal-up" data-reveal-target="item" style="transition-delay: 200ms;">
-        <%= ui_card(sidebar: "var(--color-tier-amber)", class: "rotate-2") do %>
-          <%= ui_badge("AMBER", size: :sm, color: "var(--color-tier-amber)") %>
-          <p class="text-2xl font-extrabold text-brand-black mt-3" style="font-family: 'Unbounded', sans-serif;">$1,250</p>
-          <p class="text-brand-gray text-sm mt-4 mb-6 leading-relaxed">
-            We actively promote you. Your opportunities reach our members directly.
-          </p>
-          <ul class="flex flex-col gap-3 text-sm">
-            <li class="flex items-start gap-2 text-brand-gray">
-              <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
-              Logo on club website
-            </li>
-            <li class="flex items-start gap-2 text-brand-gray">
-              <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
-              Social media recognition
-            </li>
-            <li class="flex items-start gap-2 text-brand-gray">
-              <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
-              Logo at events
-            </li>
-            <li class="flex items-start gap-2 text-brand-gray">
-              <span class="font-bold mt-0.5 text-tier-amber">&#10003;</span>
-              Job and internship promotion
-            </li>
-            <li class="flex items-start gap-2 text-brand-gray">
-              <span class="font-bold mt-0.5 text-tier-amber">&#10003;</span>
-              Newsletter and email promotion
-            </li>
-            <li class="flex items-start gap-2 text-brand-gray">
-              <span class="font-bold mt-0.5 text-tier-amber">&#10003;</span>
-              Promotional materials at events
-            </li>
-          </ul>
-        <% end %>
-      </div>
-
-      <div class="reveal-up" data-reveal-target="item" style="transition-delay: 300ms;">
-        <%= ui_card(sidebar: "var(--color-tier-ruby)", class: "-rotate-2") do %>
-          <%= ui_badge("RUBY", size: :sm, color: "var(--color-tier-ruby)") %>
-          <p class="text-2xl font-extrabold text-brand-black mt-3" style="font-family: 'Unbounded', sans-serif;">$2,500</p>
-          <p class="text-brand-gray text-sm mt-4 mb-6 leading-relaxed">
-            The full partnership. We build events around you and give you top billing everywhere.
-          </p>
-          <ul class="flex flex-col gap-3 text-sm">
-            <li class="flex items-start gap-2 text-brand-gray">
-              <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
-              Logo on club website
-            </li>
-            <li class="flex items-start gap-2 text-brand-gray">
-              <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
-              Social media recognition
-            </li>
-            <li class="flex items-start gap-2 text-brand-gray">
-              <span class="font-bold mt-0.5 text-tier-opal">&#10003;</span>
-              Logo at events
-            </li>
-            <li class="flex items-start gap-2 text-brand-gray">
-              <span class="font-bold mt-0.5 text-tier-amber">&#10003;</span>
-              Job and internship promotion
-            </li>
-            <li class="flex items-start gap-2 text-brand-gray">
-              <span class="font-bold mt-0.5 text-tier-amber">&#10003;</span>
-              Newsletter and email promotion
-            </li>
-            <li class="flex items-start gap-2 text-brand-gray">
-              <span class="font-bold mt-0.5 text-tier-amber">&#10003;</span>
-              Promotional materials at events
-            </li>
-            <li class="flex items-start gap-2 text-brand-gray">
-              <span class="font-bold mt-0.5 text-tier-ruby">&#10003;</span>
-              Access to networking events
-            </li>
-            <li class="flex items-start gap-2 text-brand-gray">
-              <span class="font-bold mt-0.5 text-tier-ruby">&#10003;</span>
-              Dedicated co-branded event
-            </li>
-            <li class="flex items-start gap-2 text-brand-gray">
-              <span class="font-bold mt-0.5 text-tier-ruby">&#10003;</span>
-              Highest placement on all materials
-            </li>
-          </ul>
-        <% end %>
-      </div>
+      <% accumulated_perks = [] %>
+      <% @tiers.each_with_index do |tier, i| %>
+        <% tier_key = tier["name"].downcase %>
+        <div class="reveal-up" data-reveal-target="item" style="transition-delay: <%= (i + 1) * 100 %>ms;">
+          <%= ui_card(sidebar: tier["color"], class: tier["rotation"]) do %>
+            <%= ui_badge(tier["name"].upcase, size: :sm, color: tier["color"]) %>
+            <p class="text-2xl font-extrabold text-brand-black mt-3" style="font-family: 'Unbounded', sans-serif;"><%= tier["price"] %></p>
+            <p class="text-brand-gray text-sm mt-4 mb-6 leading-relaxed"><%= tier["description"] %></p>
+            <ul class="flex flex-col gap-3 text-sm">
+              <% accumulated_perks.each do |perk| %>
+                <li class="flex items-start gap-2 text-brand-gray">
+                  <span class="font-bold mt-0.5" style="color: var(--color-tier-<%= perk[:tier] %>);">&#10003;</span>
+                  <%= perk[:label] %>
+                </li>
+              <% end %>
+              <% tier["perks"].each do |perk| %>
+                <li class="flex items-start gap-2 text-brand-gray">
+                  <span class="font-bold mt-0.5" style="color: var(--color-tier-<%= tier_key %>);">&#10003;</span>
+                  <%= perk %>
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+        <% tier["perks"].each { |p| accumulated_perks << { label: p, tier: tier_key } } %>
+      <% end %>
     </div>
   </div>
 </section>
