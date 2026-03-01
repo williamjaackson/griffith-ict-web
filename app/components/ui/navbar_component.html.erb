@@ -8,14 +8,14 @@
       <% links.each do |link| %>
         <li>
           <% if link[:children] %>
-            <div data-controller="dropdown" data-action="mouseenter->dropdown#show mouseleave->dropdown#hide" class="relative">
-              <button data-action="dropdown#toggle" class="relative text-brand-gray hover:text-brand-black transition-colors duration-200 text-sm font-semibold group inline-flex items-center gap-1 cursor-pointer">
+            <div data-controller="dropdown" data-action="mouseenter->dropdown#show mouseleave->dropdown#hide focusin->dropdown#show focusout->dropdown#hide" class="relative">
+              <a href="<%= link[:href] %>" class="relative text-brand-gray hover:text-brand-black transition-colors duration-200 text-sm font-semibold group inline-flex items-center gap-1">
                 <%= link[:label] %>
                 <svg class="w-3.5 h-3.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
                 <span class="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-brand-red transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
-              </button>
+              </a>
               <div data-dropdown-target="menu" class="absolute top-full left-1/2 -translate-x-1/2 pt-3 opacity-0 pointer-events-none scale-95 transition-all duration-200 origin-top">
                 <div class="bg-brand-bg border-3 border-brand-black shadow-[4px_4px_0px_var(--color-brand-black)] min-w-48">
                   <% link[:children].each do |child| %>
@@ -50,14 +50,11 @@
   <div data-navbar-target="menu" class="fixed inset-0 z-10 flex flex-col items-center justify-center gap-8 bg-brand-bg opacity-0 pointer-events-none transition-all duration-500 md:hidden" style="font-family: 'Unbounded', sans-serif;">
     <% links.each do |link| %>
       <% if link[:children] %>
-        <div class="flex flex-col items-center gap-3">
-          <span class="text-2xl font-bold text-brand-black"><%= link[:label] %></span>
-          <% link[:children].each do |child| %>
-            <a href="<%= child[:href] %>" class="text-base font-semibold text-brand-gray hover:text-brand-red transition-colors" data-action="navbar#closeMenu" style="font-family: 'Plus Jakarta Sans', sans-serif;">
-              <%= child[:label] %>
-            </a>
-          <% end %>
-        </div>
+        <% link[:children].each do |child| %>
+          <a href="<%= child[:href] %>" class="text-2xl font-bold text-brand-black hover:text-brand-red transition-colors" data-action="navbar#closeMenu">
+            <%= child[:label] %>
+          </a>
+        <% end %>
       <% else %>
         <a href="<%= link[:href] %>" class="text-2xl font-bold text-brand-black hover:text-brand-red transition-colors" data-action="navbar#closeMenu">
           <%= link[:label] %>

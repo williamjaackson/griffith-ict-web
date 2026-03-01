@@ -4,7 +4,7 @@ module Ui
       { label: "About", href: "/#about" },
       { label: "Events", href: "/#events" },
       { label: "Community", href: "/#community" },
-      { label: "Sponsors", children: [
+      { label: "Sponsors", href: "/#sponsors", children: [
         { label: "Our Sponsors", href: "/#sponsors" },
         { label: "Become a Sponsor", href: "/sponsorship" }
       ] }
