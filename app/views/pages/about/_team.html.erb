@@ -8,7 +8,7 @@
     </div>
 
     <%# Campus tabs %>
-    <div class="flex gap-8 mb-10 border-b-3 border-brand-cream reveal-up" data-reveal-target="item" style="transition-delay: 100ms;">
+    <div class="flex gap-8 mb-10 border-b-3 border-brand-gray/20 reveal-up" data-reveal-target="item" style="transition-delay: 100ms;">
       <% @team.each_with_index do |campus, i| %>
         <button data-tabs-target="btn" data-action="tabs#select" data-index="<%= i %>"
                 class="pb-3 text-sm font-bold cursor-pointer transition-colors duration-200 -mb-[3px] <%= i == 0 ? 'text-brand-black border-b-3 border-brand-red' : 'text-brand-gray border-b-3 border-transparent' %>"
