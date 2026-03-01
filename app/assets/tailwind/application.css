@@ -26,7 +26,6 @@ html {
 }
 
 body {
-  overflow-x: hidden;
   background-color: var(--color-brand-bg);
   color: var(--color-brand-gray);
   font-family: 'Plus Jakarta Sans', sans-serif;
@@ -61,10 +60,6 @@ body {
 /* Page transitions (View Transitions API) */
 @view-transition {
   navigation: auto;
-}
-
-[data-controller="navbar"] {
-  view-transition-name: navbar;
 }
 
 ::view-transition-group(root) {
