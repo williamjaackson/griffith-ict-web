@@ -37,7 +37,7 @@
       <div class="lg:col-span-2 flex flex-col md:flex-row lg:flex-col gap-5 mt-8 md:mt-0">
         <div class="animate-hero-stamp" style="animation-delay: 200ms;">
           <%= ui_card(color: "var(--color-brand-red)", class: "rotate-1") do %>
-            <span class="block text-4xl md:text-5xl font-extrabold text-white" style="font-family: 'Unbounded', sans-serif;">400+</span>
+            <span class="block text-4xl md:text-5xl font-extrabold text-white" style="font-family: 'Unbounded', sans-serif;"><%= Rails.application.config.meta[:member_count] %></span>
             <span class="text-white/70 text-sm font-semibold">Members</span>
           <% end %>
         </div>
