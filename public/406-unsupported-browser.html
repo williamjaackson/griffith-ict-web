@@ -120,7 +120,14 @@
     <div class="buttons">
       <a href="https://www.google.com/chrome/" class="btn btn-primary">Download Chrome</a>
       <a href="https://www.mozilla.org/firefox/" class="btn btn-secondary">Download Firefox</a>
+      <a id="report" href="mailto:contact@griffithict.club" class="btn btn-secondary">Report a Bug</a>
     </div>
   </div>
+  <script>
+    var r = document.getElementById('report');
+    var s = encodeURIComponent('Report - Unsupported Browser');
+    var b = encodeURIComponent('Error Code: 406\nRoute: ' + location.href + '\nUser Agent: ' + navigator.userAgent + '\n\nDescribe the issue:\n');
+    r.href = 'mailto:contact@griffithict.club?subject=' + s + '&body=' + b;
+  </script>
 </body>
 </html>
