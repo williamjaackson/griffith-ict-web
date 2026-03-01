@@ -2,6 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["menu", "chevron"]
+  static values = { variant: { type: String, default: "desktop" } }
 
   connect() {
     this._close = this._close.bind(this)
@@ -29,17 +30,12 @@ export default class extends Controller {
     this._hide()
   }
 
-  _isMobile() {
-    return this.menuTarget.classList.contains("grid")
-  }
-
   _show() {
     this.open = true
 
-    if (this._isMobile()) {
+    if (this.variantValue === "mobile") {
       this.menuTarget.style.gridTemplateRows = "1fr"
-      this.menuTarget.classList.remove("opacity-0")
-      this.menuTarget.classList.add("opacity-100")
+      this.menuTarget.classList.replace("opacity-0", "opacity-100")
     } else {
       this.menuTarget.classList.remove("opacity-0", "pointer-events-none", "scale-95")
       this.menuTarget.classList.add("opacity-100", "pointer-events-auto", "scale-100")
@@ -53,10 +49,9 @@ export default class extends Controller {
   _hide() {
     this.open = false
 
-    if (this._isMobile()) {
+    if (this.variantValue === "mobile") {
       this.menuTarget.style.gridTemplateRows = "0fr"
-      this.menuTarget.classList.remove("opacity-100")
-      this.menuTarget.classList.add("opacity-0")
+      this.menuTarget.classList.replace("opacity-100", "opacity-0")
     } else {
       this.menuTarget.classList.add("opacity-0", "pointer-events-none", "scale-95")
       this.menuTarget.classList.remove("opacity-100", "pointer-events-auto", "scale-100")
