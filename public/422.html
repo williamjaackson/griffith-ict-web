@@ -145,7 +145,14 @@
     <div class="buttons">
       <a href="/" class="btn btn-primary">Go Home</a>
       <a href="javascript:history.back()" class="btn btn-secondary">Go Back</a>
+      <a id="report" href="mailto:contact@griffithict.club" class="btn btn-secondary">Report a Bug</a>
     </div>
   </div>
+  <script>
+    var r = document.getElementById('report');
+    var s = encodeURIComponent('Report - Unprocessable Entity');
+    var b = encodeURIComponent('Error Code: 422\nRoute: ' + location.href + '\n\nDescribe the issue:\n');
+    r.href = 'mailto:contact@griffithict.club?subject=' + s + '&body=' + b;
+  </script>
 </body>
 </html>
