@@ -4,16 +4,17 @@ module Site
       {
         title: "Club",
         links: [
-          { label: "Home", href: "/" },
+          { label: "Home", href: "/#" },
           { label: "About", href: "/about#" },
-          { label: "Events", href: "#events" },
-          { label: "Sponsors", href: "#sponsors" }
+          { label: "Community", href: "/#community" },
+          { label: "Sponsors", href: "/#sponsors" }
         ]
       },
       {
         title: "Resources",
         links: [
-          { label: "Sponsorship", href: "/sponsorship" },
+          { label: "Sponsorship", href: "/sponsorship#" },
+          { label: "Executive Team", href: "/about#team" },
           { label: "Design System", href: "/design_system" }
         ]
       }
