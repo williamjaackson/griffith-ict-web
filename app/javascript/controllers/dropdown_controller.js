@@ -29,16 +29,20 @@ export default class extends Controller {
     this._hide()
   }
 
+  _isMobile() {
+    return this.menuTarget.classList.contains("grid")
+  }
+
   _show() {
     this.open = true
-    const menu = this.menuTarget
 
-    if (menu.classList.contains("hidden")) {
-      menu.classList.remove("hidden")
-      menu.classList.add("flex")
+    if (this._isMobile()) {
+      this.menuTarget.style.gridTemplateRows = "1fr"
+      this.menuTarget.classList.remove("opacity-0")
+      this.menuTarget.classList.add("opacity-100")
     } else {
-      menu.classList.remove("opacity-0", "pointer-events-none", "scale-95")
-      menu.classList.add("opacity-100", "pointer-events-auto", "scale-100")
+      this.menuTarget.classList.remove("opacity-0", "pointer-events-none", "scale-95")
+      this.menuTarget.classList.add("opacity-100", "pointer-events-auto", "scale-100")
     }
 
     if (this.hasChevronTarget) {
@@ -48,14 +52,14 @@ export default class extends Controller {
 
   _hide() {
     this.open = false
-    const menu = this.menuTarget
 
-    if (!menu.classList.contains("opacity-0") && !menu.classList.contains("scale-95")) {
-      menu.classList.remove("flex")
-      menu.classList.add("hidden")
+    if (this._isMobile()) {
+      this.menuTarget.style.gridTemplateRows = "0fr"
+      this.menuTarget.classList.remove("opacity-100")
+      this.menuTarget.classList.add("opacity-0")
     } else {
-      menu.classList.add("opacity-0", "pointer-events-none", "scale-95")
-      menu.classList.remove("opacity-100", "pointer-events-auto", "scale-100")
+      this.menuTarget.classList.add("opacity-0", "pointer-events-none", "scale-95")
+      this.menuTarget.classList.remove("opacity-100", "pointer-events-auto", "scale-100")
     }
 
     if (this.hasChevronTarget) {

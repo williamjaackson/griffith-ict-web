@@ -57,12 +57,14 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
           </button>
-          <div data-dropdown-target="menu" class="hidden flex-col items-center gap-4 mt-3">
-            <% link[:children].each do |child| %>
-              <a href="<%= child[:href] %>" class="text-lg font-bold text-brand-gray hover:text-brand-red transition-colors py-1" data-action="navbar#closeMenu">
-                <%= child[:label] %>
-              </a>
-            <% end %>
+          <div data-dropdown-target="menu" class="grid grid-rows-[0fr] transition-[grid-template-rows,opacity] duration-300 opacity-0">
+            <div class="overflow-hidden flex flex-col items-center gap-4 pt-3">
+              <% link[:children].each do |child| %>
+                <a href="<%= child[:href] %>" class="text-lg font-bold text-brand-gray hover:text-brand-red transition-colors py-1" data-action="navbar#closeMenu">
+                  <%= child[:label] %>
+                </a>
+              <% end %>
+            </div>
           </div>
         </div>
       <% else %>
