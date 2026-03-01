@@ -6,10 +6,12 @@
 
     <%= render Ui::Navbar::DesktopComponent.new(links: links, cta: cta) %>
 
-    <button data-navbar-target="toggle" data-action="navbar#toggleMenu" class="hamburger md:hidden flex flex-col gap-1.5 cursor-pointer relative z-20" aria-label="Toggle navigation">
-      <span class="block w-6 h-0.5 bg-brand-black transition-transform duration-300 origin-center"></span>
-      <span class="block w-6 h-0.5 bg-brand-black transition-opacity duration-300"></span>
-      <span class="block w-6 h-0.5 bg-brand-black transition-transform duration-300 origin-center"></span>
+    <button data-navbar-target="toggle" data-action="navbar#toggleMenu" class="hamburger md:hidden cursor-pointer relative z-20 text-brand-black" aria-label="Toggle navigation">
+      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M4 12h16" />
+        <path d="M4 12h16" />
+        <path d="M4 12h16" />
+      </svg>
     </button>
   </div>
 
