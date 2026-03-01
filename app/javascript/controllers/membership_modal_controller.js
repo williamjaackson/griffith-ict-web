@@ -5,7 +5,7 @@ const CHECK_SVG = `<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="
 </svg>`
 
 export default class extends Controller {
-  static targets = ["backdrop", "panel", "step1", "step2", "campusGroupsLink", "discordBadge", "campusGroupsBadge"]
+  static targets = ["backdrop", "panel", "step1", "step2", "campusGroupsLink", "discordBadge", "campusGroupsBadge", "doneSection"]
   static values = {
     goldCoastUrl: String,
     brisbaneUrl: String,
@@ -17,6 +17,7 @@ export default class extends Controller {
     this._onOpen = this.open.bind(this)
     this._onReturn = this._onReturn.bind(this)
     this._pendingStep = null
+    this._completed = new Set()
     window.addEventListener("membership-modal:open", this._onOpen)
   }
 
@@ -70,17 +71,22 @@ export default class extends Controller {
     document.removeEventListener("visibilitychange", this._onReturn)
 
     if (this._pendingStep === "discord") {
-      this._markComplete(this.discordBadgeTarget)
+      this._markComplete(this.discordBadgeTarget, "discord")
     } else if (this._pendingStep === "campus-groups") {
-      this._markComplete(this.campusGroupsBadgeTarget)
+      this._markComplete(this.campusGroupsBadgeTarget, "campus-groups")
     }
     this._pendingStep = null
   }
 
-  _markComplete(badge) {
+  _markComplete(badge, step) {
     badge.classList.remove("bg-brand-red")
     badge.classList.add("bg-green-600")
     badge.innerHTML = CHECK_SVG
+    this._completed.add(step)
+
+    if (this._completed.size === 2) {
+      this.doneSectionTarget.classList.remove("hidden")
+    }
   }
 
   _showStep1() {

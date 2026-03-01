@@ -75,6 +75,11 @@
             </div>
           </div>
         </div>
+
+        <div data-membership-modal-target="doneSection" class="hidden mt-6">
+          <p class="text-brand-gray text-sm mb-3">Don't forget to verify yourself in the Discord.</p>
+          <%= helpers.ui_button("Done", variant: :primary, class: "w-full", data: { action: "membership-modal#close" }) %>
+        </div>
       </div>
 
     </div>
