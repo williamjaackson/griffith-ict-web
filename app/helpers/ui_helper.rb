@@ -19,15 +19,7 @@ module UiHelper
     render Ui::CardComponent.new(**options), &block
   end
 
-  def ui_navbar
-    render Ui::Navbar::Component.new
-  end
-
-  def ui_membership_modal
-    render Ui::MembershipModalComponent.new
-  end
-
-  def ui_footer
-    render Ui::FooterComponent.new
+  def ui_modal(title: nil, **options, &block)
+    render Ui::ModalComponent.new(title: title, **options), &block
   end
 end
