@@ -1,0 +1,23 @@
+name: Deploy
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: root
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
+            cd ~/griffith-ict-web
+            git pull
+            bundle install
+            RAILS_ENV=production bin/rails assets:precompile
+            systemctl restart griffith-web
