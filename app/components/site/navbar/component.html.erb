@@ -4,7 +4,7 @@
       <%= helpers.ui_logo %>
     </a>
 
-    <%= render Ui::Navbar::DesktopComponent.new(links: links, cta: cta) %>
+    <%= render Site::Navbar::DesktopComponent.new(links: links, cta: cta) %>
 
     <button data-navbar-target="toggle" data-action="navbar#toggleMenu" class="hamburger md:hidden cursor-pointer relative z-20 text-brand-black" aria-label="Toggle navigation">
       <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -15,5 +15,5 @@
     </button>
   </div>
 
-  <%= render Ui::Navbar::MobileComponent.new(links: links, cta: cta) %>
+  <%= render Site::Navbar::MobileComponent.new(links: links, cta: cta) %>
 </nav>

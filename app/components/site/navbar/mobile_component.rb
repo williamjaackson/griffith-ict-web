@@ -1,4 +1,4 @@
-module Ui
+module Site
   module Navbar
     class MobileComponent < ViewComponent::Base
       def initialize(links:, cta:)

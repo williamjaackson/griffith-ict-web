@@ -1,4 +1,4 @@
-module Ui
+module Site
   class FooterComponent < ViewComponent::Base
     LINK_GROUPS = [
       {

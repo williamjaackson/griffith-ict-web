@@ -28,13 +28,13 @@
   </head>
 
   <body class="min-h-screen flex flex-col">
-    <%= ui_navbar %>
-    <%= ui_membership_modal %>
+    <%= render Site::Navbar::Component.new %>
+    <%= render Site::MembershipModalComponent.new %>
 
     <main class="flex-1 pt-20">
       <%= yield %>
     </main>
 
-    <%= ui_footer %>
+    <%= render Site::FooterComponent.new %>
   </body>
 </html>

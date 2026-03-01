@@ -1,4 +1,4 @@
-module Ui
+module Site
   module Navbar
     class Component < ViewComponent::Base
       LINKS = [

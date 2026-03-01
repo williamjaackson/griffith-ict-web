@@ -1,4 +1,4 @@
-module Ui
+module Site
   class MembershipModalComponent < ViewComponent::Base
     private
 
