@@ -17,7 +17,7 @@
       <button data-tabs-target="btn" data-action="tabs#select" data-index="1"
               class="px-6 py-3 text-sm font-bold border-3 border-brand-black cursor-pointer transition-colors duration-200 bg-white text-brand-black"
               style="font-family: 'Unbounded', sans-serif;">
-        Nathan
+        Brisbane
       </button>
     </div>
 
@@ -28,10 +28,10 @@
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 mb-12">
         <% [
-          { role: "President", name: "TBD" },
-          { role: "Vice President", name: "TBD" },
-          { role: "Treasurer", name: "TBD" },
-          { role: "Secretary", name: "TBD" }
+          { role: "President", name: "Owen Richardson" },
+          { role: "Vice President", name: "Tylar Pinniger" },
+          { role: "Treasurer", name: "William Jackson" },
+          { role: "Secretary", name: "Zain Abrahams" }
         ].each_with_index do |member, i| %>
           <div class="reveal-up" data-reveal-target="item" style="transition-delay: <%= 200 + (i * 100) %>ms;">
             <%= ui_card(shadow: "var(--color-brand-red)") do %>
@@ -47,9 +47,9 @@
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
         <% [
-          { role: "Events Co-ordinator", name: "TBD" },
-          { role: "Social Media Manager", name: "TBD" },
-          { role: "Industry Liaison", name: "TBD" }
+          { role: "Events Co-ordinator", name: "Tylar Pinniger" },
+          { role: "Social Media Manager", name: "Unassigned" },
+          { role: "Industry Liaison", name: "Julio Medeiros" }
         ].each_with_index do |member, i| %>
           <div class="reveal-up" data-reveal-target="item" style="transition-delay: <%= 200 + (i * 100) %>ms;">
             <%= ui_card(shadow: "var(--color-brand-red-300)") do %>
@@ -61,17 +61,17 @@
       </div>
     </div>
 
-    <%# Nathan panel %>
+    <%# Brisbane panel %>
     <div data-tabs-target="panel" class="hidden">
       <div class="mb-6">
         <%= ui_badge("ELECTED", size: :sm) %>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 mb-12">
         <% [
-          { role: "President", name: "TBD" },
-          { role: "Vice President", name: "TBD" },
-          { role: "Treasurer", name: "TBD" },
-          { role: "Secretary", name: "TBD" }
+          { role: "President", name: "Thi Huyen My Bien" },
+          { role: "Vice President", name: "Cody Jackson" },
+          { role: "Treasurer", name: "Neelakshi Jaglan" },
+          { role: "Secretary", name: "Haruka Iwami" }
         ].each_with_index do |member, i| %>
           <div>
             <%= ui_card(shadow: "var(--color-brand-red)") do %>
@@ -85,10 +85,11 @@
       <div class="mb-6">
         <%= ui_badge("APPOINTED", size: :sm, variant: :dark) %>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
         <% [
-          { role: "Social Media Manager", name: "TBD" },
-          { role: "Industry Liaison", name: "TBD" }
+          { role: "Events Co-ordinator", name: "Suhayla Azeez" },
+          { role: "Social Media Manager", name: "Stacy Bateman" },
+          { role: "Industry Liaison", name: "Johnroy Real" }
         ].each_with_index do |member, i| %>
           <div>
             <%= ui_card(shadow: "var(--color-brand-red-300)") do %>
