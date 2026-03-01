@@ -18,8 +18,6 @@
   --color-tier-opal: #C4B8B0;
   --color-tier-amber: #D4930D;
   --color-tier-ruby: #D32F2F;
-
-  --font-unbounded: 'Unbounded', sans-serif;
 }
 
 html {
@@ -28,6 +26,7 @@ html {
 }
 
 body {
+  overflow-x: hidden;
   background-color: var(--color-brand-bg);
   color: var(--color-brand-gray);
   font-family: 'Plus Jakarta Sans', sans-serif;
