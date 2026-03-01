@@ -36,7 +36,6 @@ export default class extends Controller {
 
   _scroll() {
     const scrolled = window.scrollY > 10
-    this.element.classList.toggle("bg-brand-bg", scrolled)
     this.element.classList.toggle("border-b-3", scrolled)
     this.element.classList.toggle("border-brand-black", scrolled)
   }
