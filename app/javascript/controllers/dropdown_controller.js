@@ -33,10 +33,9 @@ export default class extends Controller {
     this.open = true
     const menu = this.menuTarget
 
-    // Desktop: opacity/scale, Mobile: max-height accordion
-    if (menu.classList.contains("max-h-0")) {
-      menu.classList.remove("max-h-0", "opacity-0")
-      menu.classList.add("max-h-96", "opacity-100", "mt-3")
+    if (menu.classList.contains("hidden")) {
+      menu.classList.remove("hidden")
+      menu.classList.add("flex")
     } else {
       menu.classList.remove("opacity-0", "pointer-events-none", "scale-95")
       menu.classList.add("opacity-100", "pointer-events-auto", "scale-100")
@@ -51,9 +50,9 @@ export default class extends Controller {
     this.open = false
     const menu = this.menuTarget
 
-    if (menu.classList.contains("max-h-96")) {
-      menu.classList.remove("max-h-96", "opacity-100", "mt-3")
-      menu.classList.add("max-h-0", "opacity-0")
+    if (!menu.classList.contains("opacity-0") && !menu.classList.contains("scale-95")) {
+      menu.classList.remove("flex")
+      menu.classList.add("hidden")
     } else {
       menu.classList.add("opacity-0", "pointer-events-none", "scale-95")
       menu.classList.remove("opacity-100", "pointer-events-auto", "scale-100")
