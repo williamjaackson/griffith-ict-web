@@ -19,10 +19,10 @@ export default class extends Controller {
   _update() {
     this.btnTargets.forEach((btn, i) => {
       const active = i === this.indexValue
-      btn.classList.toggle("bg-brand-red", active)
-      btn.classList.toggle("text-white", active)
-      btn.classList.toggle("bg-white", !active)
-      btn.classList.toggle("text-brand-black", !active)
+      btn.classList.toggle("text-brand-black", active)
+      btn.classList.toggle("border-brand-red", active)
+      btn.classList.toggle("text-brand-gray", !active)
+      btn.classList.toggle("border-transparent", !active)
     })
 
     this.panelTargets.forEach((panel, i) => {
