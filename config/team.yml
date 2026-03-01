@@ -1,0 +1,50 @@
+campuses:
+  - name: Gold Coast
+    elected:
+      - role: President
+        name: Owen Richardson
+        icon: crown
+      - role: Vice President
+        name: Tylar Pinniger
+        icon: shield
+      - role: Treasurer
+        name: William Jackson
+        icon: wallet
+      - role: Secretary
+        name: Zain Abrahams
+        icon: file-text
+    appointed:
+      - role: Events Co-ordinator
+        name: Tylar Pinniger
+        icon: calendar
+      - role: Social Media Manager
+        name: ~
+        icon: megaphone
+      - role: Industry Liaison
+        name: Julio Medeiros
+        icon: briefcase
+
+  - name: Brisbane
+    elected:
+      - role: President
+        name: Thi Huyen My Bien
+        icon: crown
+      - role: Vice President
+        name: Cody Jackson
+        icon: shield
+      - role: Treasurer
+        name: Neelakshi Jaglan
+        icon: wallet
+      - role: Secretary
+        name: Haruka Iwami
+        icon: file-text
+    appointed:
+      - role: Events Co-ordinator
+        name: Suhayla Azeez
+        icon: calendar
+      - role: Social Media Manager
+        name: Stacy Bateman
+        icon: megaphone
+      - role: Industry Liaison
+        name: Johnroy Real
+        icon: briefcase

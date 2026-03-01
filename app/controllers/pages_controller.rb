@@ -6,6 +6,11 @@ class PagesController < ApplicationController
   def design_system
   end
 
+  def about
+    @team = YAML.load_file(Rails.root.join("config/team.yml"))["campuses"]
+    render "pages/about/about"
+  end
+
   def sponsorship
     render "pages/sponsorship/sponsorship"
   end

@@ -2,7 +2,10 @@ module Ui
   module Navbar
     class Component < ViewComponent::Base
       LINKS = [
-        { label: "About", href: "/#about" },
+        { label: "About", href: "/about#", children: [
+          { label: "About Us", href: "/about#" },
+          { label: "Executive Team", href: "/about#team" }
+        ] },
         { label: "Events", href: "/#events" },
         { label: "Community", href: "/#community" },
         { label: "Sponsors", href: "/#sponsors", children: [

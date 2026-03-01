@@ -1,0 +1,83 @@
+<section id="team" class="py-24 md:py-32 px-6 border-t-3 border-brand-black bg-brand-cream" data-controller="reveal tabs">
+  <div class="max-w-6xl mx-auto">
+    <div class="mb-12 reveal-up" data-reveal-target="item">
+      <%= ui_heading("Executive team.", level: 2) %>
+      <p class="text-brand-gray text-lg max-w-2xl leading-relaxed">
+        The people who keep things running. Our executive team is elected and appointed each year to lead the club across both campuses.
+      </p>
+    </div>
+
+    <%# Campus tabs %>
+    <div class="flex gap-8 mb-10 border-b-3 border-brand-gray/20 reveal-up" data-reveal-target="item" style="transition-delay: 100ms;">
+      <% @team.each_with_index do |campus, i| %>
+        <button data-tabs-target="btn" data-action="tabs#select" data-index="<%= i %>"
+                class="pb-3 text-sm font-bold cursor-pointer transition-colors duration-200 -mb-[3px] <%= i == 0 ? 'text-brand-black border-b-3 border-brand-red' : 'text-brand-gray border-b-3 border-transparent' %>"
+                style="font-family: 'Unbounded', sans-serif;">
+          <%= campus["name"] %>
+        </button>
+      <% end %>
+    </div>
+
+    <% @team.each_with_index do |campus, ci| %>
+      <div data-tabs-target="panel" class="<%= 'hidden' unless ci == 0 %>">
+        <%# Elected roles %>
+        <div class="mb-6 <%= 'reveal-up' if ci == 0 %>" <%= 'data-reveal-target="item" style="transition-delay: 150ms;"'.html_safe if ci == 0 %>>
+          <%= ui_badge("ELECTED", size: :sm) %>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 mb-12">
+          <% campus["elected"].each_with_index do |member, i| %>
+            <div class="<%= 'reveal-up' if ci == 0 %>" <%= "data-reveal-target=\"item\" style=\"transition-delay: #{200 + (i * 100)}ms;\"".html_safe if ci == 0 %>>
+              <% unassigned = member["name"].nil? %>
+              <% if unassigned %>
+                <div class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream">
+                  <div class="w-10 h-10 bg-brand-gray/10 flex items-center justify-center mb-4">
+                    <%= lucide_icon(member["icon"], class: "w-5 h-5 text-brand-gray opacity-40") %>
+                  </div>
+                  <%= ui_heading(member["role"], level: 3) %>
+                  <p class="text-brand-gray/50 text-sm italic">Unassigned</p>
+                </div>
+              <% else %>
+                <%= ui_card(shadow: "var(--color-brand-red)") do %>
+                  <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
+                    <%= lucide_icon(member["icon"], class: "w-5 h-5 text-brand-red") %>
+                  </div>
+                  <%= ui_heading(member["role"], level: 3) %>
+                  <p class="text-brand-gray text-sm"><%= member["name"] %></p>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
+        <%# Appointed roles %>
+        <div class="mb-6 <%= 'reveal-up' if ci == 0 %>" <%= 'data-reveal-target="item" style="transition-delay: 150ms;"'.html_safe if ci == 0 %>>
+          <%= ui_badge("APPOINTED", size: :sm, variant: :dark) %>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+          <% campus["appointed"].each_with_index do |member, i| %>
+            <div class="<%= 'reveal-up' if ci == 0 %>" <%= "data-reveal-target=\"item\" style=\"transition-delay: #{200 + (i * 100)}ms;\"".html_safe if ci == 0 %>>
+              <% unassigned = member["name"].nil? %>
+              <% if unassigned %>
+                <div class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream">
+                  <div class="w-10 h-10 bg-brand-gray/10 flex items-center justify-center mb-4">
+                    <%= lucide_icon(member["icon"], class: "w-5 h-5 text-brand-gray opacity-40") %>
+                  </div>
+                  <%= ui_heading(member["role"], level: 3) %>
+                  <p class="text-brand-gray/50 text-sm italic">Unassigned</p>
+                </div>
+              <% else %>
+                <%= ui_card(shadow: "var(--color-brand-red-300)") do %>
+                  <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
+                    <%= lucide_icon(member["icon"], class: "w-5 h-5 text-brand-red") %>
+                  </div>
+                  <%= ui_heading(member["role"], level: 3) %>
+                  <p class="text-brand-gray text-sm"><%= member["name"] %></p>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>

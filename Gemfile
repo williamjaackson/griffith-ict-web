@@ -13,6 +13,8 @@ gem "puma", ">= 5.0"
 gem "tailwindcss-rails"
 # Component framework for encapsulated view components [https://viewcomponent.org]
 gem "view_component"
+# Lucide icon library [https://lucide.dev]
+gem "lucide-rails"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
