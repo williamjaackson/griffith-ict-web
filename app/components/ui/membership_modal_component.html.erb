@@ -43,11 +43,12 @@
         <div class="flex flex-col gap-4">
           <%# Step 1: Discord %>
           <div class="flex items-start gap-4">
-            <span class="shrink-0 w-8 h-8 flex items-center justify-center border-3 border-brand-black bg-brand-red text-white font-bold text-sm" style="font-family: 'Unbounded', sans-serif;">1</span>
+            <span data-membership-modal-target="discordBadge" class="shrink-0 w-8 h-8 flex items-center justify-center border-3 border-brand-black bg-brand-red text-white font-bold text-sm transition-colors duration-300" style="font-family: 'Unbounded', sans-serif;">1</span>
             <div class="flex-1">
               <h3 class="font-bold text-brand-black mb-1">Join our Discord</h3>
               <p class="text-brand-gray text-sm mb-2">Our main communication channel for events, help, and chat.</p>
               <a href="<%= discord_url %>" target="_blank" rel="noopener"
+                 data-action="membership-modal#trackClick" data-step="discord"
                  class="inline-flex items-center gap-2 text-sm font-bold text-brand-discord hover:underline">
                 Open Discord
                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -59,11 +60,12 @@
 
           <%# Step 2: CampusGroups %>
           <div class="flex items-start gap-4">
-            <span class="shrink-0 w-8 h-8 flex items-center justify-center border-3 border-brand-black bg-brand-red text-white font-bold text-sm" style="font-family: 'Unbounded', sans-serif;">2</span>
+            <span data-membership-modal-target="campusGroupsBadge" class="shrink-0 w-8 h-8 flex items-center justify-center border-3 border-brand-black bg-brand-red text-white font-bold text-sm transition-colors duration-300" style="font-family: 'Unbounded', sans-serif;">2</span>
             <div class="flex-1">
               <h3 class="font-bold text-brand-black mb-1">Sign up on CampusGroups</h3>
               <p class="text-brand-gray text-sm mb-2">Official Griffith club registration. Takes 30 seconds.</p>
               <a data-membership-modal-target="campusGroupsLink" href="#" target="_blank" rel="noopener"
+                 data-action="membership-modal#trackClick" data-step="campus-groups"
                  class="inline-flex items-center gap-2 text-sm font-bold text-brand-red hover:underline">
                 Open CampusGroups
                 <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">

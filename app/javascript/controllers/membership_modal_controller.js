@@ -1,7 +1,11 @@
 import { Controller } from "@hotwired/stimulus"
 
+const CHECK_SVG = `<svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+</svg>`
+
 export default class extends Controller {
-  static targets = ["backdrop", "panel", "step1", "step2", "campusGroupsLink"]
+  static targets = ["backdrop", "panel", "step1", "step2", "campusGroupsLink", "discordBadge", "campusGroupsBadge"]
   static values = {
     goldCoastUrl: String,
     brisbaneUrl: String,
@@ -11,11 +15,14 @@ export default class extends Controller {
   connect() {
     this._onKeydown = this._onKeydown.bind(this)
     this._onOpen = this.open.bind(this)
+    this._onReturn = this._onReturn.bind(this)
+    this._pendingStep = null
     window.addEventListener("membership-modal:open", this._onOpen)
   }
 
   disconnect() {
     window.removeEventListener("membership-modal:open", this._onOpen)
+    document.removeEventListener("visibilitychange", this._onReturn)
   }
 
   open() {
@@ -49,8 +56,31 @@ export default class extends Controller {
     this._showStep2()
   }
 
+  trackClick(event) {
+    this._pendingStep = event.currentTarget.dataset.step
+    document.addEventListener("visibilitychange", this._onReturn)
+  }
+
   back() {
     this._showStep1()
+  }
+
+  _onReturn() {
+    if (document.visibilityState !== "visible") return
+    document.removeEventListener("visibilitychange", this._onReturn)
+
+    if (this._pendingStep === "discord") {
+      this._markComplete(this.discordBadgeTarget)
+    } else if (this._pendingStep === "campus-groups") {
+      this._markComplete(this.campusGroupsBadgeTarget)
+    }
+    this._pendingStep = null
+  }
+
+  _markComplete(badge) {
+    badge.classList.remove("bg-brand-red")
+    badge.classList.add("bg-green-600")
+    badge.innerHTML = CHECK_SVG
   }
 
   _showStep1() {
