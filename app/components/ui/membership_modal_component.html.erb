@@ -20,21 +20,9 @@
         <p class="text-brand-gray text-sm mb-6">This helps us point you to the right sign-up link.</p>
 
         <div class="flex flex-col gap-3">
-          <button data-action="membership-modal#selectLocation" data-location="gold-coast"
-                  class="w-full text-left px-5 py-4 border-3 border-brand-black bg-white text-brand-black font-bold hover:bg-brand-cream hover:-translate-y-0.5 hover:shadow-[4px_4px_0px_var(--color-brand-black)] transition-all duration-200 cursor-pointer"
-                  style="font-family: 'Plus Jakarta Sans', sans-serif;">
-            Gold Coast
-          </button>
-          <button data-action="membership-modal#selectLocation" data-location="brisbane"
-                  class="w-full text-left px-5 py-4 border-3 border-brand-black bg-white text-brand-black font-bold hover:bg-brand-cream hover:-translate-y-0.5 hover:shadow-[4px_4px_0px_var(--color-brand-black)] transition-all duration-200 cursor-pointer"
-                  style="font-family: 'Plus Jakarta Sans', sans-serif;">
-            Brisbane
-          </button>
-          <button data-action="membership-modal#selectLocation" data-location="online"
-                  class="w-full text-left px-5 py-4 border-3 border-brand-black bg-white text-brand-black font-bold hover:bg-brand-cream hover:-translate-y-0.5 hover:shadow-[4px_4px_0px_var(--color-brand-black)] transition-all duration-200 cursor-pointer"
-                  style="font-family: 'Plus Jakarta Sans', sans-serif;">
-            Online
-          </button>
+          <%= helpers.ui_button("Gold Coast", variant: :secondary, class: "w-full", data: { action: "membership-modal#selectLocation", location: "gold-coast" }) %>
+          <%= helpers.ui_button("Brisbane", variant: :secondary, class: "w-full", data: { action: "membership-modal#selectLocation", location: "brisbane" }) %>
+          <%= helpers.ui_button("Online", variant: :secondary, class: "w-full", data: { action: "membership-modal#selectLocation", location: "online" }) %>
         </div>
       </div>
 
