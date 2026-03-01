@@ -94,10 +94,6 @@ body {
 .reveal-up.revealed { opacity: 1; transform: translateY(0); }
 
 /* Hamburger animation */
-.hamburger span {
-  transition: transform 0.3s, opacity 0.3s;
-}
-
 .hamburger[data-open="true"] span:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
 }
