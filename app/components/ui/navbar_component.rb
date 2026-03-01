@@ -17,10 +17,10 @@ module Ui
     def links = LINKS
     def cta = CTA
 
-    def chevron_svg(css_class:)
+    def chevron_svg(css_class:, **attrs)
       tag.svg(
         tag.path(d: "M19 9l-7 7-7-7", stroke_linecap: "round", stroke_linejoin: "round"),
-        class: css_class, fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", stroke_width: "2.5"
+        class: css_class, fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", stroke_width: "2.5", **attrs
       )
     end
 
