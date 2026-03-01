@@ -11,7 +11,7 @@ module Ui
         ] }
       ].freeze
 
-      CTA = { label: "Join Us", href: "/#community" }.freeze
+      CTA = { label: "Become a Member" }.freeze
 
       private
 

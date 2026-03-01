@@ -1,0 +1,92 @@
+<div data-controller="membership-modal"
+     data-membership-modal-gold-coast-url-value="<%= gold_coast_url %>"
+     data-membership-modal-brisbane-url-value="<%= brisbane_url %>"
+     data-membership-modal-discord-url-value="<%= discord_url %>">
+
+  <%# Backdrop %>
+  <div data-membership-modal-target="backdrop"
+       data-action="click->membership-modal#closeBackdrop"
+       class="fixed inset-0 z-50 bg-brand-black/50 flex items-center justify-center px-6 opacity-0 pointer-events-none transition-opacity duration-300">
+
+    <%# Panel %>
+    <div data-membership-modal-target="panel"
+         class="bg-brand-bg border-3 border-brand-black shadow-[6px_6px_0px_var(--color-brand-black)] w-full max-w-md p-8 scale-95 opacity-0 transition-all duration-300">
+
+      <%# Step 1: Location picker %>
+      <div data-membership-modal-target="step1">
+        <h2 class="text-2xl font-bold text-brand-black mb-2" style="font-family: 'Unbounded', sans-serif;">
+          Where are you studying?
+        </h2>
+        <p class="text-brand-gray text-sm mb-6">This helps us point you to the right sign-up link.</p>
+
+        <div class="flex flex-col gap-3">
+          <%= helpers.ui_button("Gold Coast", variant: :secondary, class: "w-full", data: { action: "membership-modal#selectLocation", location: "gold-coast" }) %>
+          <%= helpers.ui_button("Brisbane", variant: :secondary, class: "w-full", data: { action: "membership-modal#selectLocation", location: "brisbane" }) %>
+          <%= helpers.ui_button("Online", variant: :secondary, class: "w-full", data: { action: "membership-modal#selectLocation", location: "online" }) %>
+        </div>
+      </div>
+
+      <%# Step 2: Join steps %>
+      <div data-membership-modal-target="step2" class="hidden">
+        <button data-action="membership-modal#back" class="text-brand-gray hover:text-brand-black text-sm font-semibold mb-4 inline-flex items-center gap-1 cursor-pointer transition-colors">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+          Back
+        </button>
+
+        <h2 class="text-2xl font-bold text-brand-black mb-2" style="font-family: 'Unbounded', sans-serif;">
+          Become a Member
+        </h2>
+        <p class="text-brand-gray text-sm mb-6">Two quick steps and you're in.</p>
+
+        <div class="flex flex-col gap-3">
+          <%# Step 1: Discord %>
+          <a href="<%= discord_url %>" target="_blank" rel="noopener"
+             data-action="membership-modal#trackClick" data-step="discord"
+             class="flex items-start gap-4 p-4 hover:bg-brand-cream transition-colors duration-200 group cursor-pointer">
+            <span data-membership-modal-target="discordBadge" class="mt-1 shrink-0 w-8 h-8 flex items-center justify-center border-3 border-brand-black bg-brand-red text-white font-bold text-sm transition-colors duration-300" style="font-family: 'Unbounded', sans-serif;">1</span>
+            <div class="flex-1">
+              <h3 class="font-bold text-brand-black mb-1">Join our Discord</h3>
+              <p class="text-brand-gray text-sm">Our main communication channel for events, help, and chat.</p>
+              <span class="text-sm font-bold text-brand-discord group-hover:underline inline-flex items-center gap-2 mt-2">
+                Open Discord
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+                </svg>
+              </span>
+            </div>
+          </a>
+
+          <%# Step 2: CampusGroups %>
+          <a data-membership-modal-target="campusGroupsLink" href="#" target="_blank" rel="noopener"
+             data-action="membership-modal#trackClick" data-step="campus-groups"
+             class="flex items-start gap-4 p-4 hover:bg-brand-cream transition-colors duration-200 group cursor-pointer">
+            <span data-membership-modal-target="campusGroupsBadge" class="mt-1 shrink-0 w-8 h-8 flex items-center justify-center border-3 border-brand-black bg-brand-red text-white font-bold text-sm transition-colors duration-300" style="font-family: 'Unbounded', sans-serif;">2</span>
+            <div class="flex-1">
+              <h3 class="font-bold text-brand-black mb-1">Sign up on CampusGroups</h3>
+              <p class="text-brand-gray text-sm">Official Griffith club registration. Takes 30 seconds.</p>
+              <span class="text-sm font-bold text-brand-red group-hover:underline inline-flex items-center gap-2 mt-2">
+                Open CampusGroups
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+                </svg>
+              </span>
+            </div>
+          </a>
+        </div>
+
+        <div data-membership-modal-target="doneSection" class="hidden mt-8 pt-8 border-t-3 border-brand-cream text-center">
+          <h3 class="font-bold text-brand-black text-lg mb-1" style="font-family: 'Unbounded', sans-serif;">You're Done!</h3>
+          <p class="text-brand-gray text-sm mb-4">Don't forget to verify yourself in the Discord so you can start chatting.</p>
+          <button data-action="membership-modal#close"
+                  class="w-full px-8 py-4 text-base inline-flex items-center justify-center text-center font-bold border-3 border-brand-black bg-green-600 text-white cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-[5px_5px_0px_var(--color-brand-black)] active:translate-y-0 active:shadow-none"
+                  style="font-family: 'Unbounded', sans-serif; font-weight: 600;">
+            Done
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
