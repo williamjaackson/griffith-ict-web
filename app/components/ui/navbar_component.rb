@@ -4,7 +4,10 @@ module Ui
       { label: "About", href: "/#about" },
       { label: "Events", href: "/#events" },
       { label: "Community", href: "/#community" },
-      { label: "Sponsors", href: "/#sponsors" }
+      { label: "Sponsors", children: [
+        { label: "Our Sponsors", href: "/#sponsors" },
+        { label: "Become a Sponsor", href: "/sponsorship" }
+      ] }
     ].freeze
 
     CTA = { label: "Join Us", href: "/#community" }.freeze
