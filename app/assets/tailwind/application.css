@@ -18,6 +18,8 @@
   --color-tier-opal: #C4B8B0;
   --color-tier-amber: #D4930D;
   --color-tier-ruby: #D32F2F;
+
+  --font-unbounded: 'Unbounded', sans-serif;
 }
 
 html {
