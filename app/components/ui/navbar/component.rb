@@ -7,7 +7,7 @@ module Ui
         { label: "Community", href: "/#community" },
         { label: "Sponsors", href: "/#sponsors", children: [
           { label: "Our Sponsors", href: "/#sponsors" },
-          { label: "Become a Sponsor", href: "/sponsorship" }
+          { label: "Become a Sponsor", href: "/sponsorship#" }
         ] }
       ].freeze
 
