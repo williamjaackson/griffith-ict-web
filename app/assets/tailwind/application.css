@@ -63,6 +63,10 @@ body {
   navigation: auto;
 }
 
+[data-controller="navbar"] {
+  view-transition-name: navbar;
+}
+
 ::view-transition-group(root) {
   background-color: var(--color-brand-red);
 }
