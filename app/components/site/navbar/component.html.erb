@@ -1,0 +1,19 @@
+<nav data-controller="navbar" class="bg-brand-bg fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between relative z-20">
+    <a href="/#" class="flex items-center gap-3 group">
+      <%= helpers.ui_logo %>
+    </a>
+
+    <%= render Site::Navbar::DesktopComponent.new(links: links, cta: cta) %>
+
+    <button data-navbar-target="toggle" data-action="navbar#toggleMenu" class="hamburger md:hidden cursor-pointer relative z-20 text-brand-black" aria-label="Toggle navigation">
+      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M4 12h16" />
+        <path d="M4 12h16" />
+        <path d="M4 12h16" />
+      </svg>
+    </button>
+  </div>
+
+  <%= render Site::Navbar::MobileComponent.new(links: links, cta: cta) %>
+</nav>
