@@ -1,17 +1,17 @@
-<div <% wrapper_data.each do |key, value| %>data-<%= key.to_s.dasherize %>=<%= value.to_s.inspect %> <% end %>>
+<%= tag.div data: wrapper_data do %>
   <%# Backdrop %>
-  <div <% if controller %>data-<%= controller %>-target="backdrop" data-action="click-><%= controller %>#closeBackdrop"<% end %>
-       class="fixed inset-0 z-50 bg-brand-black/50 flex items-center justify-center px-6 opacity-0 pointer-events-none transition-opacity duration-300">
+  <%= tag.div data: backdrop_data,
+              class: "fixed inset-0 z-50 bg-brand-black/50 flex items-center justify-center px-6 opacity-0 pointer-events-none transition-opacity duration-300" do %>
 
     <%# Panel %>
-    <div <% if controller %>data-<%= controller %>-target="panel"<% end %>
-         class="bg-brand-bg border-3 border-brand-black shadow-[6px_6px_0px_var(--color-brand-black)] w-full max-w-md p-8 scale-95 opacity-0 transition-all duration-300">
+    <%= tag.div data: panel_data,
+                class: "bg-brand-bg border-3 border-brand-black shadow-[6px_6px_0px_var(--color-brand-black)] w-full max-w-md p-8 scale-95 opacity-0 transition-all duration-300" do %>
 
       <% if title %>
         <%= helpers.ui_heading(title, level: 2, class: "!text-2xl !mb-2") %>
       <% end %>
 
       <%= content %>
-    </div>
-  </div>
-</div>
+    <% end %>
+  <% end %>
+<% end %>

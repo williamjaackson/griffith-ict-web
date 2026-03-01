@@ -15,5 +15,15 @@ module Ui
       attrs[:controller] = controller if controller
       attrs
     end
+
+    def backdrop_data
+      return {} unless controller
+      { "#{controller}-target" => "backdrop", action: "click->#{controller}#closeBackdrop" }
+    end
+
+    def panel_data
+      return {} unless controller
+      { "#{controller}-target" => "panel" }
+    end
   end
 end
