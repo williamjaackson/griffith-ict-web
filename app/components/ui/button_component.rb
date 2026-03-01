@@ -1,6 +1,6 @@
 module Ui
   class ButtonComponent < ViewComponent::Base
-    BASE_CLASSES = "inline-flex items-center justify-center text-center font-bold border-3 border-brand-black transition-all duration-200 hover:-translate-y-1 active:translate-y-0 active:shadow-none"
+    BASE_CLASSES = "inline-flex items-center justify-center text-center font-bold border-3 border-brand-black cursor-pointer transition-all duration-200 hover:-translate-y-1 active:translate-y-0 active:shadow-none"
 
     VARIANT_CLASSES = {
       primary: "bg-brand-red text-white",

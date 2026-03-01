@@ -10,6 +10,12 @@ export default class extends Controller {
 
   connect() {
     this._onKeydown = this._onKeydown.bind(this)
+    this._onOpen = this.open.bind(this)
+    window.addEventListener("membership-modal:open", this._onOpen)
+  }
+
+  disconnect() {
+    window.removeEventListener("membership-modal:open", this._onOpen)
   }
 
   open() {
