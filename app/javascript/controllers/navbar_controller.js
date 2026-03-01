@@ -31,7 +31,17 @@ export default class extends Controller {
 
   closeMenu() {
     if (!this.open) return
+    this._collapseAccordions()
     this.toggleMenu()
+  }
+
+  _collapseAccordions() {
+    this.menuTarget
+      .querySelectorAll("[data-controller='accordion']")
+      .forEach((el) => {
+        const controller = this.application.getControllerForElementAndIdentifier(el, "accordion")
+        if (controller?.open) controller.collapse()
+      })
   }
 
   _scroll() {
