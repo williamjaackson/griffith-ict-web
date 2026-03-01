@@ -9,96 +9,75 @@
 
     <%# Campus tabs %>
     <div class="flex gap-3 mb-10 reveal-up" data-reveal-target="item" style="transition-delay: 100ms;">
-      <button data-tabs-target="btn" data-action="tabs#select" data-index="0"
-              class="px-6 py-3 text-sm font-bold border-3 border-brand-black cursor-pointer transition-colors duration-200 bg-brand-red text-white"
-              style="font-family: 'Unbounded', sans-serif;">
-        Gold Coast
-      </button>
-      <button data-tabs-target="btn" data-action="tabs#select" data-index="1"
-              class="px-6 py-3 text-sm font-bold border-3 border-brand-black cursor-pointer transition-colors duration-200 bg-white text-brand-black"
-              style="font-family: 'Unbounded', sans-serif;">
-        Brisbane
-      </button>
+      <% @team.each_with_index do |campus, i| %>
+        <button data-tabs-target="btn" data-action="tabs#select" data-index="<%= i %>"
+                class="px-6 py-3 text-sm font-bold border-3 border-brand-black cursor-pointer transition-colors duration-200 <%= i == 0 ? 'bg-brand-red text-white' : 'bg-white text-brand-black' %>"
+                style="font-family: 'Unbounded', sans-serif;">
+          <%= campus["name"] %>
+        </button>
+      <% end %>
     </div>
 
-    <%# Gold Coast panel %>
-    <div data-tabs-target="panel">
-      <div class="mb-6 reveal-up" data-reveal-target="item" style="transition-delay: 150ms;">
-        <%= ui_badge("ELECTED", size: :sm) %>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 mb-12">
-        <% [
-          { role: "President", name: "Owen Richardson" },
-          { role: "Vice President", name: "Tylar Pinniger" },
-          { role: "Treasurer", name: "William Jackson" },
-          { role: "Secretary", name: "Zain Abrahams" }
-        ].each_with_index do |member, i| %>
-          <div class="reveal-up" data-reveal-target="item" style="transition-delay: <%= 200 + (i * 100) %>ms;">
-            <%= ui_card(shadow: "var(--color-brand-red)") do %>
-              <%= ui_heading(member[:role], level: 3) %>
-              <p class="text-brand-gray text-sm"><%= member[:name] %></p>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
+    <% @team.each_with_index do |campus, ci| %>
+      <div data-tabs-target="panel" class="<%= 'hidden' unless ci == 0 %>">
+        <%# Elected roles %>
+        <div class="mb-6 <%= 'reveal-up' if ci == 0 %>" <%= 'data-reveal-target="item" style="transition-delay: 150ms;"'.html_safe if ci == 0 %>>
+          <%= ui_badge("ELECTED", size: :sm) %>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 mb-12">
+          <% campus["elected"].each_with_index do |member, i| %>
+            <div class="<%= 'reveal-up' if ci == 0 %>" <%= "data-reveal-target=\"item\" style=\"transition-delay: #{200 + (i * 100)}ms;\"".html_safe if ci == 0 %>>
+              <% unassigned = member["name"].nil? %>
+              <% if unassigned %>
+                <div class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream">
+                  <div class="w-10 h-10 bg-brand-gray/10 flex items-center justify-center mb-4">
+                    <%= lucide_icon(member["icon"], class: "w-5 h-5 text-brand-gray/40") %>
+                  </div>
+                  <%= ui_heading(member["role"], level: 3) %>
+                  <p class="text-brand-gray/50 text-sm italic">Unassigned</p>
+                </div>
+              <% else %>
+                <%= ui_card(shadow: "var(--color-brand-red)") do %>
+                  <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
+                    <%= lucide_icon(member["icon"], class: "w-5 h-5 text-brand-red") %>
+                  </div>
+                  <%= ui_heading(member["role"], level: 3) %>
+                  <p class="text-brand-gray text-sm"><%= member["name"] %></p>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
 
-      <div class="mb-6 reveal-up" data-reveal-target="item" style="transition-delay: 150ms;">
-        <%= ui_badge("APPOINTED", size: :sm, variant: :dark) %>
+        <%# Appointed roles %>
+        <div class="mb-6 <%= 'reveal-up' if ci == 0 %>" <%= 'data-reveal-target="item" style="transition-delay: 150ms;"'.html_safe if ci == 0 %>>
+          <%= ui_badge("APPOINTED", size: :sm, variant: :dark) %>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+          <% campus["appointed"].each_with_index do |member, i| %>
+            <div class="<%= 'reveal-up' if ci == 0 %>" <%= "data-reveal-target=\"item\" style=\"transition-delay: #{200 + (i * 100)}ms;\"".html_safe if ci == 0 %>>
+              <% unassigned = member["name"].nil? %>
+              <% if unassigned %>
+                <div class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream">
+                  <div class="w-10 h-10 bg-brand-gray/10 flex items-center justify-center mb-4">
+                    <%= lucide_icon(member["icon"], class: "w-5 h-5 text-brand-gray/40") %>
+                  </div>
+                  <%= ui_heading(member["role"], level: 3) %>
+                  <p class="text-brand-gray/50 text-sm italic">Unassigned</p>
+                </div>
+              <% else %>
+                <%= ui_card(shadow: "var(--color-brand-red-300)") do %>
+                  <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
+                    <%= lucide_icon(member["icon"], class: "w-5 h-5 text-brand-red") %>
+                  </div>
+                  <%= ui_heading(member["role"], level: 3) %>
+                  <p class="text-brand-gray text-sm"><%= member["name"] %></p>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-        <% [
-          { role: "Events Co-ordinator", name: "Tylar Pinniger" },
-          { role: "Social Media Manager", name: "Unassigned" },
-          { role: "Industry Liaison", name: "Julio Medeiros" }
-        ].each_with_index do |member, i| %>
-          <div class="reveal-up" data-reveal-target="item" style="transition-delay: <%= 200 + (i * 100) %>ms;">
-            <%= ui_card(shadow: "var(--color-brand-red-300)") do %>
-              <%= ui_heading(member[:role], level: 3) %>
-              <p class="text-brand-gray text-sm"><%= member[:name] %></p>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-
-    <%# Brisbane panel %>
-    <div data-tabs-target="panel" class="hidden">
-      <div class="mb-6">
-        <%= ui_badge("ELECTED", size: :sm) %>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 mb-12">
-        <% [
-          { role: "President", name: "Thi Huyen My Bien" },
-          { role: "Vice President", name: "Cody Jackson" },
-          { role: "Treasurer", name: "Neelakshi Jaglan" },
-          { role: "Secretary", name: "Haruka Iwami" }
-        ].each_with_index do |member, i| %>
-          <div>
-            <%= ui_card(shadow: "var(--color-brand-red)") do %>
-              <%= ui_heading(member[:role], level: 3) %>
-              <p class="text-brand-gray text-sm"><%= member[:name] %></p>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-
-      <div class="mb-6">
-        <%= ui_badge("APPOINTED", size: :sm, variant: :dark) %>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-        <% [
-          { role: "Events Co-ordinator", name: "Suhayla Azeez" },
-          { role: "Social Media Manager", name: "Stacy Bateman" },
-          { role: "Industry Liaison", name: "Johnroy Real" }
-        ].each_with_index do |member, i| %>
-          <div>
-            <%= ui_card(shadow: "var(--color-brand-red-300)") do %>
-              <%= ui_heading(member[:role], level: 3) %>
-              <p class="text-brand-gray text-sm"><%= member[:name] %></p>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-    </div>
+    <% end %>
   </div>
 </section>

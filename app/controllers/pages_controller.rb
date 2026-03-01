@@ -7,6 +7,7 @@ class PagesController < ApplicationController
   end
 
   def about
+    @team = YAML.load_file(Rails.root.join("config/team.yml"))["campuses"]
     render "pages/about/about"
   end
 
