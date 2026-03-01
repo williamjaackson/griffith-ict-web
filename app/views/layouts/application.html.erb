@@ -10,10 +10,8 @@
     <meta name="theme-color" content="<%= meta[:theme_color] %>">
     <meta name="description" content="<%= meta[:description] %>">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="<%= meta[:site_name] %>">
     <meta property="og:description" content="<%= meta[:description] %>">
-    <meta property="og:site_name" content="<%= meta[:site_name] %>">
-    <meta property="og:image" content="<%= meta[:og_image] %>">
+    <meta property="og:image" content="<%= meta[:url] %><%= meta[:og_image] %>">
     <link type="application/json+oembed" href="<%= meta[:url] %>/oembed">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
