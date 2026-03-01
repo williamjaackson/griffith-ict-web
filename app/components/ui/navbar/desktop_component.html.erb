@@ -31,5 +31,5 @@
 </ul>
 
 <div class="hidden md:block">
-  <%= helpers.ui_button(cta[:label], href: cta[:href], variant: :primary, size: :sm) %>
+  <%= helpers.ui_button(cta[:label], variant: :primary, size: :sm, data: { action: "membership-modal#open" }) %>
 </div>

@@ -23,6 +23,10 @@ module UiHelper
     render Ui::Navbar::Component.new
   end
 
+  def ui_membership_modal
+    render Ui::MembershipModalComponent.new
+  end
+
   def ui_footer
     render Ui::FooterComponent.new
   end
