@@ -20,7 +20,7 @@ module UiHelper
   end
 
   def ui_navbar
-    render Ui::NavbarComponent.new
+    render Ui::Navbar::Component.new
   end
 
   def ui_footer
