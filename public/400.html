@@ -114,6 +114,16 @@
       box-shadow: 5px 5px 0px #222222;
     }
 
+    .btn-secondary {
+      background: #FFFFFF;
+      color: #222222;
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-4px);
+      box-shadow: 5px 5px 0px #D32F2F;
+    }
+
     @keyframes fade-up {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -134,7 +144,14 @@
     <p class="message">Something about that request didn't quite make sense. Double-check the URL and try again — we'll be here.</p>
     <div class="buttons">
       <a href="/" class="btn btn-primary">Go Home</a>
+      <a id="report" href="mailto:contact@griffithict.club" class="btn btn-secondary">Report a Bug</a>
     </div>
   </div>
+  <script>
+    var r = document.getElementById('report');
+    var s = encodeURIComponent('Report - Bad Request');
+    var b = encodeURIComponent('Error Code: 400\nRoute: ' + location.href + '\n\nDescribe the issue:\n');
+    r.href = 'mailto:contact@griffithict.club?subject=' + s + '&body=' + b;
+  </script>
 </body>
 </html>
