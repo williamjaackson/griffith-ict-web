@@ -154,8 +154,14 @@
     <p class="message">This page doesn't exist. If you think something's broken, let us know.</p>
     <div class="buttons">
       <a href="/" class="btn btn-primary">Go Home</a>
-      <a href="mailto:contact@griffithict.club?subject=Bug Report" class="btn btn-secondary">Report a Bug</a>
+      <a id="report" href="mailto:contact@griffithict.club" class="btn btn-secondary">Report a Bug</a>
     </div>
   </div>
+  <script>
+    var r = document.getElementById('report');
+    var s = encodeURIComponent('Report - Page Not Found');
+    var b = encodeURIComponent('Error Code: 404\nRoute: ' + location.href + '\n\nDescribe the issue:\n');
+    r.href = 'mailto:contact@griffithict.club?subject=' + s + '&body=' + b;
+  </script>
 </body>
 </html>
