@@ -2,6 +2,5 @@ sponsors: []
   # Example entry:
   # - name: Acme Corp
   #   tier: Amber
-  #   logo: sponsors/acme.png
+  #   logo: /sponsors/acme.png
   #   website: https://acme.com
-  #   description: Optional short description.
