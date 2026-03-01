@@ -12,6 +12,7 @@ class PagesController < ApplicationController
   end
 
   def sponsorship
+    @tiers = YAML.load_file(Rails.root.join("config/sponsorship_tiers.yml"))["tiers"]
     render "pages/sponsorship/sponsorship"
   end
 end
