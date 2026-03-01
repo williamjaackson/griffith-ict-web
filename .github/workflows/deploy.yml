@@ -9,15 +9,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to VPS
-        uses: appleboy/ssh-action@v1
+        uses: nick-fields/retry@v3
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: root
-          key: ${{ secrets.VPS_SSH_KEY }}
-          script: |
-            export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
-            cd ~/griffith-ict-web
-            git pull
-            bundle install
-            RAILS_ENV=production bin/rails assets:precompile
-            systemctl restart griffith-web
+          timeout_minutes: 5
+          max_attempts: 3
+          retry_wait_seconds: 30
+          command: |
+            echo "${{ secrets.VPS_SSH_KEY }}" > /tmp/deploy_key
+            chmod 600 /tmp/deploy_key
+            ssh -o StrictHostKeyChecking=no -o ConnectTimeout=30 -i /tmp/deploy_key root@${{ secrets.VPS_HOST }} '
+              export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
+              cd ~/griffith-ict-web
+              git pull
+              bundle install
+              RAILS_ENV=production bin/rails assets:precompile
+              systemctl restart griffith-web
+            '
+            rm -f /tmp/deploy_key
