@@ -5,9 +5,12 @@ export default class extends Controller {
 
   connect() {
     this._scroll = this._scroll.bind(this)
+    this.element.classList.remove("transition-all", "duration-300")
     this._scroll()
     requestAnimationFrame(() => {
-      this.element.classList.add("transition-all", "duration-300")
+      requestAnimationFrame(() => {
+        this.element.classList.add("transition-all", "duration-300")
+      })
     })
     window.addEventListener("scroll", this._scroll, { passive: true })
     this.open = false
@@ -28,17 +31,7 @@ export default class extends Controller {
 
   closeMenu() {
     if (!this.open) return
-    this._collapseAccordions()
     this.toggleMenu()
-  }
-
-  _collapseAccordions() {
-    this.menuTarget
-      .querySelectorAll("[data-controller='accordion']")
-      .forEach((el) => {
-        const controller = this.application.getControllerForElementAndIdentifier(el, "accordion")
-        if (controller?.open) controller.collapse()
-      })
   }
 
   _scroll() {
