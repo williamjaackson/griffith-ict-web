@@ -50,11 +50,16 @@
   <div data-navbar-target="menu" class="fixed inset-0 z-10 flex flex-col items-center justify-center gap-8 bg-brand-bg opacity-0 pointer-events-none transition-all duration-500 md:hidden" style="font-family: 'Unbounded', sans-serif;">
     <% links.each do |link| %>
       <% if link[:children] %>
-        <% link[:children].each do |child| %>
-          <a href="<%= child[:href] %>" class="text-2xl font-bold text-brand-black hover:text-brand-red transition-colors" data-action="navbar#closeMenu">
-            <%= child[:label] %>
+        <div class="flex flex-col items-center gap-2">
+          <a href="<%= link[:href] %>" class="text-2xl font-bold text-brand-black hover:text-brand-red transition-colors" data-action="navbar#closeMenu">
+            <%= link[:label] %>
           </a>
-        <% end %>
+          <% link[:children].each do |child| %>
+            <a href="<%= child[:href] %>" class="text-sm font-semibold text-brand-gray hover:text-brand-red transition-colors" data-action="navbar#closeMenu" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+              <%= child[:label] %>
+            </a>
+          <% end %>
+        </div>
       <% else %>
         <a href="<%= link[:href] %>" class="text-2xl font-bold text-brand-black hover:text-brand-red transition-colors" data-action="navbar#closeMenu">
           <%= link[:label] %>
