@@ -24,6 +24,7 @@
           <%# Elected roles %>
           <div class="mb-6 <%= 'reveal-up' if ci == 0 %>" <%= 'data-reveal-target="item" style="transition-delay: 150ms;"'.html_safe if ci == 0 %>>
             <%= ui_badge("ELECTED", size: :sm) %>
+            <p class="text-brand-gray text-sm mt-2">Voted on by members at the Annual General Meeting.</p>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 <%= 'mb-12' if campus["appointed"]&.any? %>">
             <% campus["elected"].each_with_index do |member, i| %>
@@ -55,6 +56,7 @@
           <%# Appointed roles %>
           <div class="mb-6 <%= 'reveal-up' if ci == 0 %>" <%= 'data-reveal-target="item" style="transition-delay: 150ms;"'.html_safe if ci == 0 %>>
             <%= ui_badge("APPOINTED", size: :sm, variant: :dark) %>
+            <p class="text-brand-gray text-sm mt-2">Voted on by the executive team. Applications are opened as needed.</p>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
             <% campus["appointed"].each_with_index do |member, i| %>
