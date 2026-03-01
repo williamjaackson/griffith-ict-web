@@ -1,4 +1,4 @@
-<nav data-controller="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+<nav data-controller="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-brand-bg">
   <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between relative z-20">
     <a href="/#" class="flex items-center gap-3 group">
       <%= helpers.ui_logo %>
@@ -6,7 +6,7 @@
 
     <%= render Ui::Navbar::DesktopComponent.new(links: links, cta: cta) %>
 
-    <button data-navbar-target="toggle" data-action="navbar#toggleMenu" class="hamburger md:hidden flex flex-col gap-1.5 cursor-pointer relative z-20" aria-label="Toggle navigation">
+    <button data-navbar-target="toggle" data-action="navbar#toggleMenu" class="hamburger md:hidden flex flex-col gap-2 cursor-pointer relative z-20" aria-label="Toggle navigation">
       <span class="block w-6 h-0.5 bg-brand-black transition-transform duration-300 origin-center"></span>
       <span class="block w-6 h-0.5 bg-brand-black transition-opacity duration-300"></span>
       <span class="block w-6 h-0.5 bg-brand-black transition-transform duration-300 origin-center"></span>
