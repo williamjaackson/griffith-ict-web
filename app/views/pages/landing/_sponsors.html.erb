@@ -40,19 +40,42 @@
         perk_total = [((perk_count / 5.0).ceil * 5), 5].max
         perk_placeholder_count = perk_total - perk_count
       %>
-      <div class="mt-16 reveal-up" data-reveal-target="item" style="transition-delay: 200ms;">
+      <div class="mt-16 reveal-up" data-reveal-target="item" data-controller="perk-modal" style="transition-delay: 200ms;">
         <p class="text-brand-gray text-base mb-6">We also partner with these companies to bring perks to our members.</p>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
           <% @perks.each do |perk| %>
-            <%= ui_card(class: "group flex items-center justify-center !p-3 !h-20 !overflow-visible", href: perk["website"], target: "_blank") do %>
+            <button type="button"
+                    class="group flex items-center justify-center relative border-3 border-brand-black bg-white !p-3 h-20 overflow-visible cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-[5px_5px_0px_var(--color-brand-red)] active:translate-y-0 active:shadow-none"
+                    data-action="perk-modal#open"
+                    data-perk-name="<%= perk["name"] %>"
+                    data-perk-logo="<%= perk["logo"] %>"
+                    data-perk-description="<%= perk["description"] %>"
+                    data-perk-website="<%= perk["website"] %>">
               <%= image_tag perk["logo"], alt: perk["name"], class: "max-h-10 max-w-full object-contain" %>
               <%= ui_badge(perk["name"].upcase, size: :sm, variant: :dark, class: "absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity") %>
-            <% end %>
+            </button>
           <% end %>
 
           <% perk_placeholder_count.times do %>
             <div class="flex items-center justify-center h-20 bg-white border-3 border-dashed border-brand-black/30 text-brand-gray/40 text-sm font-bold">Your logo here</div>
           <% end %>
+        </div>
+
+        <%# Perk detail modal (shares perk-modal controller scope with parent div) %>
+        <div data-perk-modal-target="backdrop" data-action="click->perk-modal#closeBackdrop"
+             class="fixed inset-0 z-50 bg-brand-black/50 flex items-center justify-center px-6 opacity-0 pointer-events-none transition-opacity duration-300">
+          <div data-perk-modal-target="panel"
+               class="bg-brand-bg border-3 border-brand-black shadow-[6px_6px_0px_var(--color-brand-black)] w-full max-w-md p-8 scale-95 opacity-0 transition-all duration-300">
+            <div class="flex flex-col items-center text-center">
+              <img data-perk-modal-target="logo" src="" alt="" class="max-h-16 max-w-full object-contain mb-4">
+              <h2 data-perk-modal-target="name" class="text-2xl font-bold text-brand-black mb-3" style="font-family: 'Unbounded', sans-serif;"></h2>
+              <p data-perk-modal-target="description" class="text-brand-gray leading-relaxed mb-6"></p>
+              <a data-perk-modal-target="link" href="#" target="_blank" rel="noopener"
+                 class="inline-flex items-center justify-center text-center font-bold border-3 border-brand-black bg-brand-red text-white px-8 py-4 text-base cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-[5px_5px_0px_var(--color-brand-black)] active:translate-y-0 active:shadow-none"
+                 style="font-family: 'Unbounded', sans-serif; font-weight: 600;">
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     <% end %>
