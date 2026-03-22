@@ -9,6 +9,8 @@ perks:
   - name: DataCamp
     logo: /sponsors/datacamp.png
     website: https://www.datacamp.com/
+    description: "Members get free access to DataCamp's full learning platform — covering Python, R, SQL, and more through hands-on courses and real-world projects."
   - name: Red Bull
     logo: /sponsors/redbull.png
     website: https://www.redbull.com/au-en
+    description: "Red Bull keeps our members fuelled with free drinks at club events, hackathons, and study sessions."
