@@ -4,3 +4,11 @@ sponsors: []
   #   tier: Amber
   #   logo: /sponsors/acme.png
   #   website: https://acme.com
+
+perks:
+  - name: DataCamp
+    logo: /sponsors/datacamp.png
+    website: https://www.datacamp.com/
+  - name: Red Bull
+    logo: /sponsors/redbull.png
+    website: https://www.redbull.com/au-en
