@@ -10,7 +10,8 @@ module Site
         { label: "Community", href: "/#community" },
         { label: "Sponsors", href: "/#sponsors", children: [
           { label: "Our Sponsors", href: "/#sponsors" },
-          { label: "Become a Sponsor", href: "/sponsorship#" }
+          { label: "Become a Sponsor", href: "/sponsorship#" },
+          { label: "Perks Program", href: "/sponsorship#perks-program" }
         ] }
       ].freeze
 
