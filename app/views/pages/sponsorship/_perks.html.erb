@@ -1,0 +1,13 @@
+<section class="py-24 md:py-32 px-6 border-t-3 border-brand-black bg-brand-cream" data-controller="reveal">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal-up" data-reveal-target="item">
+      <%= ui_badge("PERKS PROGRAM", class: "-rotate-1 mb-4") %>
+      <%= ui_heading("Got something to offer our members?", level: 2) %>
+      <p class="text-brand-gray text-lg max-w-2xl leading-relaxed mb-10">
+        If your company offers a product or service that benefits students, we'd love to feature you in our perks program.
+        Members get access to exclusive deals, and your brand gets in front of <%= Rails.application.config.meta[:member_count] %>+ engaged tech students.
+      </p>
+      <%= ui_button("Get in touch", href: "mailto:#{Rails.application.config.socials[:email]}", variant: :secondary) %>
+    </div>
+  </div>
+</section>
