@@ -33,5 +33,28 @@
         <p class="text-white font-bold">Sponsor Us &rarr;</p>
       <% end %>
     </div>
+
+    <% if @perks.any? %>
+      <%
+        perk_count = @perks.size
+        perk_total = [((perk_count / 5.0).ceil * 5), 5].max
+        perk_placeholder_count = perk_total - perk_count
+      %>
+      <div class="mt-16 reveal-up" data-reveal-target="item" style="transition-delay: 200ms;">
+        <p class="text-brand-gray text-base mb-6">We also partner with these companies to bring perks to our members.</p>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+          <% @perks.each do |perk| %>
+            <%= ui_card(class: "group flex items-center justify-center !p-3 !h-20 !overflow-visible", href: perk["website"], target: "_blank") do %>
+              <%= image_tag perk["logo"], alt: perk["name"], class: "max-h-10 max-w-full object-contain" %>
+              <%= ui_badge(perk["name"].upcase, size: :sm, variant: :dark, class: "absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity") %>
+            <% end %>
+          <% end %>
+
+          <% perk_placeholder_count.times do %>
+            <div class="flex items-center justify-center h-20 bg-white border-3 border-dashed border-brand-black/30 text-brand-gray/40 text-sm font-bold">Your logo here</div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </section>
