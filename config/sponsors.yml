@@ -4,3 +4,15 @@ sponsors: []
   #   tier: Amber
   #   logo: /sponsors/acme.png
   #   website: https://acme.com
+
+perks:
+  - name: DataCamp
+    logo: /sponsors/datacamp.png
+    icon: /sponsors/datacamp-icon.png
+    website: https://www.datacamp.com/
+    description: "Members get free access to DataCamp's full learning platform, covering Python, R, SQL, and more through hands-on courses and real-world projects."
+  - name: Red Bull
+    logo: /sponsors/redbull.png
+    icon: /sponsors/redbull-icon.png
+    website: https://www.redbull.com/au-en
+    description: "Red Bull keeps our members fuelled with free drinks at club events, hackathons, and more."
