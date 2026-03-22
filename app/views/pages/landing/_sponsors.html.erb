@@ -37,8 +37,12 @@
     <% if @perks.any? %>
       <%
         perk_count = @perks.size
-        perk_total = [((perk_count / 5.0).ceil * 5), 5].max
-        perk_placeholder_count = perk_total - perk_count
+        # Placeholders to fill rows at each breakpoint
+        md_total = [((perk_count / 5.0).ceil * 5), 5].max
+        sm_total = [((perk_count / 3.0).ceil * 3), 3].max
+        base_total = [((perk_count / 2.0).ceil * 2), 2].max
+        full_total = [md_total, sm_total, base_total].max
+        perk_placeholder_count = full_total - perk_count
       %>
       <div class="mt-16 reveal-up" data-reveal-target="item" style="transition-delay: 200ms;">
         <p class="text-brand-gray text-base mb-6">Our <a href="/sponsorship#perks-program" class="text-brand-red font-bold hover:underline">perks program</a> partners with companies to bring exclusive deals to our members.</p>
@@ -56,8 +60,26 @@
             </button>
           <% end %>
 
-          <% perk_placeholder_count.times do %>
-            <div class="flex items-center justify-center h-20 bg-white border-3 border-dashed border-brand-black/30 text-brand-gray/40 text-sm font-bold">Your logo here</div>
+          <% perk_placeholder_count.times do |i| %>
+            <%
+              idx = perk_count + i + 1
+              # Determine visibility at each breakpoint (each overrides the previous)
+              classes = ["flex items-center justify-center h-20 bg-white border-3 border-dashed border-brand-black/30 text-brand-gray/40 text-sm font-bold"]
+              if idx > base_total
+                classes << "hidden"          # hide on mobile (2-col)
+              end
+              if idx <= sm_total
+                classes << "sm:flex"          # show on sm (3-col)
+              else
+                classes << "sm:hidden"        # hide on sm
+              end
+              if idx <= md_total
+                classes << "md:flex"          # show on md (5-col)
+              else
+                classes << "md:hidden"        # hide on md
+              end
+            %>
+            <div class="<%= classes.join(' ') %>">Your logo here</div>
           <% end %>
         </div>
 
