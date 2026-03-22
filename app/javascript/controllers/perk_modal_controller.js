@@ -16,7 +16,6 @@ export default class extends Controller {
     this.nameTarget.textContent = perkName
     this.descriptionTarget.textContent = perkDescription
     this.linkTarget.href = perkWebsite
-    this.linkTarget.textContent = `Check it out`
 
     this.backdropTarget.classList.remove("opacity-0", "pointer-events-none")
     this.backdropTarget.classList.add("opacity-100", "pointer-events-auto")
