@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["backdrop", "panel", "logo", "name", "description", "link"]
+  static targets = ["backdrop", "panel", "icon", "name", "description", "link"]
 
   connect() {
     this._onKeydown = this._onKeydown.bind(this)
@@ -9,10 +9,10 @@ export default class extends Controller {
 
   open(event) {
     const card = event.currentTarget
-    const { perkName, perkLogo, perkDescription, perkWebsite } = card.dataset
+    const { perkName, perkIcon, perkDescription, perkWebsite } = card.dataset
 
-    this.logoTarget.src = perkLogo
-    this.logoTarget.alt = perkName
+    this.iconTarget.src = perkIcon
+    this.iconTarget.alt = perkName
     this.nameTarget.textContent = perkName
     this.descriptionTarget.textContent = perkDescription
     this.linkTarget.href = perkWebsite
