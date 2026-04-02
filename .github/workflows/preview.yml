@@ -1,0 +1,189 @@
+name: Preview
+
+on:
+  pull_request:
+    types: [labeled, unlabeled, closed, synchronize]
+
+concurrency:
+  group: preview-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  deploy-preview:
+    if: >
+      (github.event.action == 'labeled' && github.event.label.name == 'preview') ||
+      (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'preview'))
+    runs-on: ubuntu-latest
+    steps:
+      # Port allocation: 4000 + PR number. When this limit is hit, switch to
+      # Unix sockets — have Puma bind to /opt/previews/pr-{number}/tmp/puma.sock
+      # and proxy_pass to unix:/path/to/puma.sock in nginx. No port math, infinite previews.
+      - name: Check port range
+        run: |
+          PR_NUMBER=${{ github.event.pull_request.number }}
+          if [ "$PR_NUMBER" -gt 1000 ]; then
+            echo "::error::PR #${PR_NUMBER} exceeds port range for preview deployments (4000 + PR number). Re-engineer the port allocation strategy (see comment above)."
+            exit 1
+          fi
+
+      - name: Deploy preview
+        uses: nick-fields/retry@v3
+        env:
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+        with:
+          timeout_minutes: 5
+          max_attempts: 3
+          retry_wait_seconds: 30
+          command: |
+            echo "$VPS_SSH_KEY" > /tmp/deploy_key
+            chmod 600 /tmp/deploy_key
+
+            PR_NUMBER=${{ github.event.pull_request.number }}
+            PR_BRANCH=${{ github.event.pull_request.head.ref }}
+            PR_REPO=${{ github.event.pull_request.head.repo.clone_url }}
+            PORT=$((4000 + PR_NUMBER))
+
+            ssh -o StrictHostKeyChecking=no -o ConnectTimeout=30 -i /tmp/deploy_key root@$VPS_HOST bash -s <<DEPLOY_SCRIPT
+              export PATH="\$HOME/.rbenv/bin:\$HOME/.rbenv/shims:\$PATH"
+              PREVIEW_DIR="/opt/previews/pr-${PR_NUMBER}"
+
+              # Clone or update
+              if [ -d "\$PREVIEW_DIR" ]; then
+                cd "\$PREVIEW_DIR"
+                git fetch origin
+                git checkout "${PR_BRANCH}"
+                git reset --hard "origin/${PR_BRANCH}"
+              else
+                git clone --branch "${PR_BRANCH}" "${PR_REPO}" "\$PREVIEW_DIR"
+                cd "\$PREVIEW_DIR"
+              fi
+
+              # Install dependencies and build
+              bundle install --jobs 4
+              RAILS_ENV=production bin/rails db:prepare
+              SECRET_KEY_BASE=\$(cat /opt/previews/.secret_key_base) RAILS_ENV=production bin/rails assets:precompile
+
+              # Write systemd override with PORT and SECRET_KEY_BASE
+              mkdir -p /etc/systemd/system/griffith-preview@${PR_NUMBER}.service.d
+              cat > /etc/systemd/system/griffith-preview@${PR_NUMBER}.service.d/override.conf <<EOF
+            [Service]
+            Environment="PORT=${PORT}"
+            Environment="SECRET_KEY_BASE=\$(cat /opt/previews/.secret_key_base)"
+            EOF
+
+              # Start or restart the preview service
+              systemctl daemon-reload
+              systemctl enable --now griffith-preview@${PR_NUMBER}
+              systemctl restart griffith-preview@${PR_NUMBER}
+
+              # Write nginx server block
+              cat > /etc/nginx/conf.d/preview-pr-${PR_NUMBER}.conf <<EOF
+            server {
+                listen 80;
+                server_name preview-${PR_NUMBER}.griffithict.club;
+
+                location / {
+                    proxy_pass http://127.0.0.1:${PORT};
+                    proxy_set_header Host \\\$host;
+                    proxy_set_header X-Real-IP \\\$remote_addr;
+                    proxy_set_header X-Forwarded-For \\\$proxy_add_x_forwarded_for;
+                    proxy_set_header X-Forwarded-Proto https;
+                }
+            }
+            EOF
+
+              nginx -t && systemctl reload nginx
+            DEPLOY_SCRIPT
+
+            rm -f /tmp/deploy_key
+
+      - name: Comment preview URL
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.payload.pull_request.number;
+            const url = `https://preview-${prNumber}.griffithict.club`;
+            const body = `## Preview Deployment\n\nThis PR has been deployed to: ${url}\n\nThe preview will be torn down when the \`preview\` label is removed or this PR is closed.`;
+
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+            });
+            const existing = comments.data.find(c =>
+              c.user.type === 'Bot' && c.body.includes('Preview Deployment')
+            );
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body,
+              });
+            }
+
+  teardown-preview:
+    if: >
+      (github.event.action == 'unlabeled' && github.event.label.name == 'preview') ||
+      (github.event.action == 'closed' && contains(github.event.pull_request.labels.*.name, 'preview'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Teardown preview
+        uses: nick-fields/retry@v3
+        env:
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+        with:
+          timeout_minutes: 5
+          max_attempts: 3
+          retry_wait_seconds: 30
+          command: |
+            echo "$VPS_SSH_KEY" > /tmp/deploy_key
+            chmod 600 /tmp/deploy_key
+
+            PR_NUMBER=${{ github.event.pull_request.number }}
+
+            ssh -o StrictHostKeyChecking=no -o ConnectTimeout=30 -i /tmp/deploy_key root@$VPS_HOST bash -s <<TEARDOWN_SCRIPT
+              systemctl stop griffith-preview@${PR_NUMBER} 2>/dev/null || true
+              systemctl disable griffith-preview@${PR_NUMBER} 2>/dev/null || true
+              rm -rf /etc/systemd/system/griffith-preview@${PR_NUMBER}.service.d
+              systemctl daemon-reload
+
+              rm -f /etc/nginx/conf.d/preview-pr-${PR_NUMBER}.conf
+              nginx -t && systemctl reload nginx
+
+              rm -rf /opt/previews/pr-${PR_NUMBER}
+            TEARDOWN_SCRIPT
+
+            rm -f /tmp/deploy_key
+
+      - name: Comment teardown
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.payload.pull_request.number;
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+            });
+            const existing = comments.data.find(c =>
+              c.user.type === 'Bot' && c.body.includes('Preview Deployment')
+            );
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body: '## Preview Deployment\n\n~~This PR\'s preview has been torn down.~~',
+              });
+            }
