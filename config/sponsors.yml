@@ -16,8 +16,3 @@ perks:
     icon: /sponsors/redbull-icon.png
     website: https://www.redbull.com/au-en
     description: "Red Bull keeps our members fuelled with free drinks at club events, hackathons, and more."
-  - name: Cohort
-    logo: /sponsors/cohort.png
-    icon: /sponsors/cohort-icon.png
-    website: https://www.cohortspace.com.au/
-    description: "Cohort Innovation Space helps us to host hackathons, CTFs, and other club events, to spread awareness of their NextGen Student Incubator program."
