@@ -4,6 +4,9 @@ on:
   pull_request:
     types: [labeled, unlabeled, closed, synchronize]
 
+permissions:
+  pull-requests: write
+
 concurrency:
   group: preview-pr-${{ github.event.pull_request.number }}
   cancel-in-progress: true
@@ -80,8 +83,11 @@ jobs:
               # Write nginx server block
               cat > /etc/nginx/conf.d/preview-pr-${PR_NUMBER}.conf <<EOF
             server {
-                listen 80;
+                listen 443 ssl;
                 server_name preview-${PR_NUMBER}.griffithict.club;
+
+                ssl_certificate /etc/ssl/cloudflare-origin.pem;
+                ssl_certificate_key /etc/ssl/cloudflare-origin-key.pem;
 
                 location / {
                     proxy_pass http://127.0.0.1:${PORT};
@@ -91,6 +97,12 @@ jobs:
                     proxy_set_header X-Forwarded-Proto https;
                 }
             }
+
+            server {
+                listen 80;
+                server_name preview-${PR_NUMBER}.griffithict.club;
+                return 301 https://\\\$host\\\$request_uri;
+            }
             EOF
 
               nginx -t && systemctl reload nginx
@@ -98,36 +110,20 @@ jobs:
 
             rm -f /tmp/deploy_key
 
-      - name: Comment preview URL
+      - name: Add preview URL to PR description
         uses: actions/github-script@v7
         with:
           script: |
             const prNumber = context.payload.pull_request.number;
-            const url = `https://preview-${prNumber}.griffithict.club`;
-            const body = `## Preview Deployment\n\nThis PR has been deployed to: ${url}\n\nThe preview will be torn down when the \`preview\` label is removed or this PR is closed.`;
+            const previewLine = `🚀 Preview Site: https://preview-${prNumber}.griffithict.club/`;
+            const currentBody = context.payload.pull_request.body || '';
 
-            const comments = await github.rest.issues.listComments({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: prNumber,
-            });
-            const existing = comments.data.find(c =>
-              c.user.type === 'Bot' && c.body.includes('Preview Deployment')
-            );
-
-            if (existing) {
-              await github.rest.issues.updateComment({
+            if (!currentBody.includes(previewLine)) {
+              await github.rest.pulls.update({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                comment_id: existing.id,
-                body,
-              });
-            } else {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: prNumber,
-                body,
+                pull_number: prNumber,
+                body: previewLine + '\n\n' + currentBody,
               });
             }
 
@@ -166,24 +162,19 @@ jobs:
 
             rm -f /tmp/deploy_key
 
-      - name: Comment teardown
+      - name: Remove preview URL from PR description
         uses: actions/github-script@v7
         with:
           script: |
             const prNumber = context.payload.pull_request.number;
-            const comments = await github.rest.issues.listComments({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: prNumber,
-            });
-            const existing = comments.data.find(c =>
-              c.user.type === 'Bot' && c.body.includes('Preview Deployment')
-            );
-            if (existing) {
-              await github.rest.issues.updateComment({
+            const currentBody = context.payload.pull_request.body || '';
+            const cleaned = currentBody.replace(/🚀 Preview Site: https:\/\/preview-\d+\.griffithict\.club\/\n?\n?/, '');
+
+            if (cleaned !== currentBody) {
+              await github.rest.pulls.update({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                comment_id: existing.id,
-                body: '## Preview Deployment\n\n~~This PR\'s preview has been torn down.~~',
+                pull_number: prNumber,
+                body: cleaned,
               });
             }
