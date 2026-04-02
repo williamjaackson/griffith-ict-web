@@ -73,6 +73,7 @@ jobs:
             [Service]
             Environment="PORT=${PORT}"
             Environment="SECRET_KEY_BASE=\$(cat /opt/previews/.secret_key_base)"
+            Environment="PREVIEW_PR_NUMBER=${PR_NUMBER}"
             EOF
 
               # Start or restart the preview service
