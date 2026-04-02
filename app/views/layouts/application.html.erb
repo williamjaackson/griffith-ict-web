@@ -30,9 +30,50 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app %>
     <%= javascript_importmap_tags %>
+
+    <% pr_number = ENV["PREVIEW_PR_NUMBER"].presence %>
+    <% preview_env = pr_number ? :preview : (Rails.env.development? ? :development : nil) %>
+    <% if preview_env %>
+      <style>
+        #preview-banner {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 9999;
+          text-align: center;
+          font-size: 0.875rem;
+          font-weight: 700;
+          padding: 0.375rem;
+          background-color: #80E23A;
+        }
+        #preview-banner { color: #000; }
+        #preview-banner a { text-decoration: underline; color: inherit; }
+        body { padding-top: var(--preview-h); }
+        nav[data-controller="navbar"] { top: var(--preview-h) !important; }
+      </style>
+    <% end %>
   </head>
 
   <body class="min-h-screen flex flex-col">
+    <% if preview_env %>
+      <div id="preview-banner">
+        <% if preview_env == :preview %>
+          <div>You are on a preview branch. Information may be outdated or incorrect.</div>
+          <div><a href="<%= meta[:url] %>">Return to griffithict.club</a> · <a href="<%= Rails.application.config.socials[:github] %>pull/<%= pr_number %>" target="_blank" rel="noopener">View PR #<%= pr_number %></a></div>
+        <% else %>
+          <div>You are on a development branch. Information may be outdated or incorrect.</div>
+          <div><a href="<%= meta[:url] %>">Return to griffithict.club</a></div>
+        <% end %>
+      </div>
+      <script>
+        (() => {
+          const update = () => document.documentElement.style.setProperty('--preview-h', document.getElementById('preview-banner').offsetHeight + 'px');
+          update();
+          window.addEventListener('resize', update);
+        })();
+      </script>
+    <% end %>
     <%= render Site::Navbar::Component.new %>
     <%= render Site::MembershipModalComponent.new %>
 
