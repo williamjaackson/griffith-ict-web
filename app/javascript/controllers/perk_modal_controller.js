@@ -11,8 +11,14 @@ export default class extends Controller {
     const card = event.currentTarget
     const { perkName, perkIcon, perkDescription, perkWebsite } = card.dataset
 
-    this.iconTarget.src = perkIcon
+    this.iconTarget.style.opacity = "0"
     this.iconTarget.alt = perkName
+    const img = new Image()
+    img.src = perkIcon
+    img.onload = () => {
+      this.iconTarget.src = perkIcon
+      this.iconTarget.style.opacity = "1"
+    }
     this.nameTarget.textContent = perkName
     this.descriptionTarget.textContent = perkDescription
     this.linkTarget.href = perkWebsite
