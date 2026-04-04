@@ -1,8 +1,10 @@
-<div class="min-h-screen bg-brand-bg flex items-center justify-center px-4">
-  <div class="w-full max-w-md">
-    <div class="text-center mb-8">
-      <h1 class="font-[Unbounded] font-bold text-3xl text-brand-black">Sign in</h1>
-      <p class="text-brand-gray mt-2">Griffith ICT Club Staff</p>
+<section class="px-6 py-24 md:py-32">
+  <div class="max-w-md mx-auto">
+    <div class="mb-8">
+      <%= ui_heading("Staff sign in.", level: 2, highlight: "sign in.") %>
+      <p class="text-brand-gray text-lg leading-relaxed">
+        For club executives and administrators only.
+      </p>
     </div>
 
     <% if alert = flash[:alert] %>
@@ -31,4 +33,4 @@
       <% end %>
     </div>
   </div>
-</div>
+</section>
