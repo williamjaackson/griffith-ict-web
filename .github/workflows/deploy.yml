@@ -22,6 +22,8 @@ jobs:
               cd ~/griffith-ict-web
               git pull
               bundle install
+              RAILS_ENV=production bin/rails db:migrate
+              RAILS_ENV=production bin/rails db:seed
               RAILS_ENV=production bin/rails assets:precompile
               systemctl restart griffith-web
             '
