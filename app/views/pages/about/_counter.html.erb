@@ -1,0 +1,40 @@
+<section class="py-24 md:py-32 px-6 border-t-3 border-brand-black bg-brand-cream" data-controller="reveal counter" data-counter-since-value="<%= Rails.application.config.meta[:established_at] %>">
+  <div class="max-w-6xl mx-auto">
+    <div class="mb-16 reveal-up" data-reveal-target="item">
+      <%= ui_heading("Since day one.", level: 2, highlight: "day one.") %>
+      <p class="text-brand-gray text-lg max-w-2xl leading-relaxed">
+        Established 2025. Here's how long we've been building, learning, and connecting.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+      <div class="reveal-up" data-reveal-target="item" style="transition-delay: 100ms;">
+        <%= ui_card(color: "var(--color-brand-red)") do %>
+          <span data-counter-target="days" class="block text-4xl md:text-5xl font-extrabold text-white" style="font-family: 'Unbounded', sans-serif;">&mdash;</span>
+          <span class="text-white/70 text-sm font-semibold">Days</span>
+        <% end %>
+      </div>
+
+      <div class="reveal-up" data-reveal-target="item" style="transition-delay: 200ms;">
+        <%= ui_card(color: "var(--color-brand-red-50)") do %>
+          <span data-counter-target="hours" class="block text-4xl md:text-5xl font-extrabold text-brand-black" style="font-family: 'Unbounded', sans-serif;">&mdash;</span>
+          <span class="text-brand-gray text-sm font-semibold">Hours</span>
+        <% end %>
+      </div>
+
+      <div class="reveal-up" data-reveal-target="item" style="transition-delay: 300ms;">
+        <%= ui_card do %>
+          <span data-counter-target="minutes" class="block text-4xl md:text-5xl font-extrabold text-brand-black" style="font-family: 'Unbounded', sans-serif;">&mdash;</span>
+          <span class="text-brand-gray text-sm font-semibold">Minutes</span>
+        <% end %>
+      </div>
+
+      <div class="reveal-up" data-reveal-target="item" style="transition-delay: 400ms;">
+        <%= ui_card(color: "var(--color-brand-cream)") do %>
+          <span data-counter-target="seconds" class="block text-4xl md:text-5xl font-extrabold text-brand-black" style="font-family: 'Unbounded', sans-serif;">&mdash;</span>
+          <span class="text-brand-gray text-sm font-semibold">Seconds</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
