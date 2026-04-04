@@ -24,6 +24,12 @@ module Admin
 
     def destroy
       invite = Invite.find(params[:id])
+
+      if invite.accepted?
+        redirect_to admin_invites_path, alert: "Accepted invites cannot be revoked.", status: :see_other
+        return
+      end
+
       invite.destroy
       redirect_to admin_invites_path, notice: "Invite revoked.", status: :see_other
     end
