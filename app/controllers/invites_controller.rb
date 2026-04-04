@@ -1,6 +1,4 @@
 class InvitesController < ApplicationController
-  layout "bare"
-
   allow_unauthenticated_access
 
   before_action :set_invite
