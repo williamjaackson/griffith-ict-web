@@ -19,6 +19,14 @@ module UiHelper
     render Ui::CardComponent.new(**options), &block
   end
 
+  def ui_input(label:, **options, &block)
+    render Ui::InputComponent.new(label: label, **options), &block
+  end
+
+  def ui_input_classes
+    Ui::InputComponent::INPUT_CLASSES
+  end
+
   def ui_modal(title: nil, **options, &block)
     render Ui::ModalComponent.new(title: title, **options), &block
   end
