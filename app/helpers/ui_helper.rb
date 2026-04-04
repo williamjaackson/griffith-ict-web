@@ -27,6 +27,10 @@ module UiHelper
     Ui::InputComponent::INPUT_CLASSES
   end
 
+  def ui_select(name:, options:, selected: nil, label: nil)
+    render Ui::SelectComponent.new(name: name, options: options, selected: selected, label: label)
+  end
+
   def ui_modal(title: nil, **options, &block)
     render Ui::ModalComponent.new(title: title, **options), &block
   end

@@ -16,7 +16,11 @@
       <% end %>
 
       <%= ui_input(label: "Role") do %>
-        <%= form.select :role, Invite.roles.keys.map { |r| [r.capitalize, r] }, {}, class: ui_input_classes %>
+        <%= ui_select(
+          name: "invite[role]",
+          options: Invite.roles.keys.map { |r| { label: r.capitalize, value: r } },
+          selected: @invite.role || "exec"
+        ) %>
       <% end %>
 
       <div class="flex items-center gap-3">
