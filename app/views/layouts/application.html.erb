@@ -76,9 +76,9 @@
     <% end %>
     <%= render Site::Navbar::Component.new %>
     <%= render Site::MembershipModalComponent.new %>
-    <%= render Site::FlashComponent.new(flash: flash) %>
 
     <main class="flex-1 pt-20">
+      <%= render Site::FlashComponent.new(flash: flash) %>
       <%= yield %>
     </main>
 

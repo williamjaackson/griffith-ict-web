@@ -1,9 +1,5 @@
-<div data-controller="flash" class="fixed top-4 right-4 z-[10000] flex flex-col gap-2" style="pointer-events: none;">
-  <% messages.each do |msg| %>
-    <div data-flash-target="toast"
-         class="<%= styles_for(msg[:type]) %> border-3 border-brand-black shadow-[4px_4px_0px_var(--color-brand-black)] px-5 py-3 text-sm font-semibold max-w-sm animate-flash-in"
-         style="pointer-events: auto;">
-      <%= msg[:message] %>
-    </div>
-  <% end %>
-</div>
+<% messages.each do |msg| %>
+  <div class="<%= styles_for(msg[:type]) %> border-b-3 border-brand-black px-6 py-3 text-sm font-semibold text-center">
+    <%= msg[:message] %>
+  </div>
+<% end %>

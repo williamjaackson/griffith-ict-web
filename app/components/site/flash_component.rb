@@ -21,9 +21,9 @@ module Site
       when :alert
         "bg-brand-red text-white"
       when :notice
-        "bg-brand-black text-white"
+        "bg-green-600 text-white"
       else
-        "bg-brand-black text-white"
+        "bg-brand-cream text-brand-black"
       end
     end
   end
