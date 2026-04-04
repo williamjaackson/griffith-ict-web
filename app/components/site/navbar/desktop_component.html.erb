@@ -30,6 +30,10 @@
   <% end %>
 </ul>
 
-<div class="hidden md:block">
+<div class="hidden md:flex items-center gap-4">
+  <% if helpers.authenticated? %>
+    <%= link_to "Admin", helpers.admin_invites_path, class: "text-sm font-semibold text-brand-gray hover:text-brand-black transition-colors" if helpers.current_user.admin? %>
+    <%= button_to "Sign out", helpers.session_path, method: :delete, class: "text-sm font-semibold text-brand-gray hover:text-brand-black transition-colors cursor-pointer" %>
+  <% end %>
   <%= helpers.ui_button(cta[:label], variant: :primary, size: :sm, onclick: "window.dispatchEvent(new CustomEvent('membership-modal:open'))") %>
 </div>

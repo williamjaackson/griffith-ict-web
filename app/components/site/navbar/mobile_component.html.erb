@@ -25,4 +25,13 @@
     <% end %>
   <% end %>
   <%= helpers.ui_button(cta[:label], variant: :primary, data: { action: "navbar#closeMenu" }, onclick: "window.dispatchEvent(new CustomEvent('membership-modal:open'))") %>
+
+  <% if helpers.authenticated? %>
+    <div class="flex flex-col items-center gap-4 mt-4 pt-4 border-t-2 border-brand-cream">
+      <% if helpers.current_user.admin? %>
+        <a href="<%= helpers.admin_invites_path %>" class="text-lg font-bold text-brand-gray hover:text-brand-red transition-colors" data-action="navbar#closeMenu">Admin</a>
+      <% end %>
+      <%= button_to "Sign out", helpers.session_path, method: :delete, class: "text-lg font-bold text-brand-gray hover:text-brand-red transition-colors cursor-pointer", data: { action: "navbar#closeMenu" } %>
+    </div>
+  <% end %>
 </div>
