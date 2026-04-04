@@ -86,9 +86,11 @@ jobs:
 
               # Install dependencies and build
               bundle install --jobs 4
+              export SECRET_KEY_BASE=\$(cat /opt/previews/.secret_key_base)
+              set -a && source /opt/previews/.env && set +a
               RAILS_ENV=production bin/rails db:prepare
-              ADMIN_PASSWORD=preview SECRET_KEY_BASE=\$(cat /opt/previews/.secret_key_base) RAILS_ENV=production bin/rails db:seed
-              SECRET_KEY_BASE=\$(cat /opt/previews/.secret_key_base) RAILS_ENV=production bin/rails assets:precompile
+              RAILS_ENV=production bin/rails db:seed
+              RAILS_ENV=production bin/rails assets:precompile
 
               # Write systemd override with PORT and SECRET_KEY_BASE
               mkdir -p /etc/systemd/system/griffith-preview@${PR_NUMBER}.service.d
