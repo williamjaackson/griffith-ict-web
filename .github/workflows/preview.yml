@@ -86,7 +86,6 @@ jobs:
 
               # Install dependencies and build
               bundle install --jobs 4
-              export SECRET_KEY_BASE=\$(cat /opt/previews/.secret_key_base)
               set -a && source /opt/previews/.env && set +a
               RAILS_ENV=production bin/rails db:prepare
               RAILS_ENV=production bin/rails db:seed
@@ -97,8 +96,8 @@ jobs:
               cat > /etc/systemd/system/griffith-preview@${PR_NUMBER}.service.d/override.conf <<EOF
             [Service]
             Environment="PORT=${PORT}"
-            Environment="SECRET_KEY_BASE=\$(cat /opt/previews/.secret_key_base)"
             Environment="PREVIEW_PR_NUMBER=${PR_NUMBER}"
+            EnvironmentFile=/opt/previews/.env
             EOF
 
               # Start or restart the preview service
