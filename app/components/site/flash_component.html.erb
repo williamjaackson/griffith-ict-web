@@ -1,9 +1,9 @@
 <div class="px-6 pt-6" data-controller="flash">
   <div class="max-w-6xl mx-auto flex flex-col gap-2">
     <% messages.each do |msg| %>
-      <div data-flash-target="toast" class="<%= styles_for(msg[:type]) %> border-3 border-brand-black px-5 py-3 text-sm font-semibold flex items-center justify-between">
-        <span><%= msg[:message] %></span>
-        <button data-action="flash#dismiss" class="ml-4 opacity-60 hover:opacity-100 transition-opacity cursor-pointer" aria-label="Dismiss">&times;</button>
+      <div data-flash-target="toast" class="<%= styles_for(msg[:type]) %> border-3 border-brand-black px-5 py-3 text-sm font-semibold text-center relative">
+        <%= msg[:message] %>
+        <button data-action="flash#dismiss" class="absolute right-3 top-1/2 -translate-y-1/2 opacity-60 hover:opacity-100 transition-opacity cursor-pointer text-lg leading-none" aria-label="Dismiss">&times;</button>
       </div>
     <% end %>
   </div>
