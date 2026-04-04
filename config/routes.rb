@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resource :session, only: %i[new create destroy]
-  resource :account, only: %i[show]
+  resource :account, only: %i[show], controller: "account"
 
   resources :invites, only: [], param: :token do
     member do
