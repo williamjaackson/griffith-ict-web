@@ -1,0 +1,30 @@
+<div class="max-w-lg mx-auto px-4 py-12">
+  <h1 class="font-[Unbounded] font-bold text-3xl text-brand-black mb-8">New invite</h1>
+
+  <% if @invite.errors.any? %>
+    <div class="py-2 px-3 bg-brand-red-50 mb-5 text-brand-red font-medium rounded-lg">
+      <% @invite.errors.full_messages.each do |message| %>
+        <p><%= message %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="bg-white border-3 border-brand-black p-8 shadow-[6px_6px_0px_var(--color-brand-black)]">
+    <%= form_with model: [:admin, @invite], class: "space-y-5" do |form| %>
+      <div>
+        <label class="block text-sm font-semibold text-brand-black mb-1">Email address</label>
+        <%= form.email_field :email, required: true, autofocus: true, placeholder: "name@example.com", class: "block w-full rounded-md border-2 border-brand-cream bg-brand-bg focus:outline-none focus:border-brand-red px-3 py-2.5" %>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-brand-black mb-1">Role</label>
+        <%= form.select :role, Invite.roles.keys.map { |r| [r.capitalize, r] }, {}, class: "block w-full rounded-md border-2 border-brand-cream bg-brand-bg focus:outline-none focus:border-brand-red px-3 py-2.5" %>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <%= form.submit "Create invite", class: "inline-flex items-center justify-center text-center font-bold border-3 border-brand-black cursor-pointer transition-all duration-200 hover:-translate-y-1 active:translate-y-0 active:shadow-none bg-brand-red text-white px-5 py-2.5 text-sm hover:shadow-[5px_5px_0px_var(--color-brand-black)]", style: "font-family: 'Unbounded', sans-serif; font-weight: 600;" %>
+        <%= link_to "Cancel", admin_invites_path, class: "text-sm font-semibold text-brand-gray hover:text-brand-black" %>
+      </div>
+    <% end %>
+  </div>
+</div>

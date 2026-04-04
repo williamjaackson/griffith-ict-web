@@ -1,0 +1,44 @@
+<div class="max-w-4xl mx-auto px-4 py-12">
+  <div class="flex items-center justify-between mb-8">
+    <h1 class="font-[Unbounded] font-bold text-3xl text-brand-black">Invites</h1>
+    <%= link_to "New invite", new_admin_invite_path, class: "inline-flex items-center justify-center text-center font-bold border-3 border-brand-black cursor-pointer transition-all duration-200 hover:-translate-y-1 active:translate-y-0 active:shadow-none bg-brand-red text-white px-5 py-2.5 text-sm hover:shadow-[5px_5px_0px_var(--color-brand-black)]", style: "font-family: 'Unbounded', sans-serif; font-weight: 600;" %>
+  </div>
+
+  <% if flash[:notice] %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-600 font-medium rounded-lg"><%= flash[:notice] %></p>
+  <% end %>
+
+  <% if @invites.any? %>
+    <div class="space-y-3">
+      <% @invites.each do |invite| %>
+        <div class="bg-white border-3 border-brand-black p-5 flex items-center justify-between" data-controller="clipboard">
+          <div>
+            <p class="font-semibold text-brand-black"><%= invite.email %></p>
+            <p class="text-sm text-brand-gray">
+              <%= invite.role.capitalize %> ·
+              <% if invite.accepted? %>
+                <span class="text-green-600">Accepted</span>
+              <% elsif invite.expired? %>
+                <span class="text-brand-red">Expired</span>
+              <% else %>
+                Expires <%= time_ago_in_words(invite.expires_at) %> from now
+              <% end %>
+            </p>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <% unless invite.accepted? || invite.expired? %>
+              <button data-action="clipboard#copy" data-clipboard-text-value="<%= accept_invite_url(token: invite.token) %>" class="text-sm font-semibold text-brand-black border-2 border-brand-black px-3 py-1.5 cursor-pointer hover:bg-brand-cream transition-colors">
+                Copy link
+              </button>
+            <% end %>
+
+            <%= button_to "Revoke", admin_invite_path(invite), method: :delete, class: "text-sm font-semibold text-brand-red border-2 border-brand-red px-3 py-1.5 cursor-pointer hover:bg-brand-red-50 transition-colors", data: { turbo_confirm: "Revoke this invite?" } %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-brand-gray">No invites yet.</p>
+  <% end %>
+</div>
