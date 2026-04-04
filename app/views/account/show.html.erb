@@ -18,7 +18,7 @@
       Signed in as <span class="text-brand-black font-semibold"><%= current_user.email_address %></span>
     </p>
     <div class="animate-hero-in flex flex-wrap gap-4" style="animation-delay: 300ms;">
-      <%= button_to "Sign out", session_path, method: :delete, class: "inline-flex items-center justify-center text-center font-bold border-3 border-brand-black cursor-pointer transition-all duration-200 hover:-translate-y-1 active:translate-y-0 active:shadow-none bg-white text-brand-black px-8 py-4 text-base hover:shadow-[5px_5px_0px_var(--color-brand-red)]", style: "font-family: 'Unbounded', sans-serif; font-weight: 600;" %>
+      <%= button_to "Sign out", session_path, method: :delete, class: "inline-flex items-center justify-center text-center font-bold border-3 border-brand-black cursor-pointer transition-all duration-200 hover:-translate-y-1 active:translate-y-0 active:shadow-none bg-brand-red text-white px-8 py-4 text-base hover:shadow-[5px_5px_0px_var(--color-brand-black)]", style: "font-family: 'Unbounded', sans-serif; font-weight: 600;" %>
       <%= ui_button("Back to home", href: "/", variant: :secondary) %>
     </div>
   </div>
