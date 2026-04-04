@@ -1,0 +1,32 @@
+<div class="max-w-lg mx-auto px-4 py-12">
+  <h1 class="font-[Unbounded] font-bold text-3xl text-brand-black mb-8">New invite</h1>
+
+  <% if @invite.errors.any? %>
+    <div class="py-2 px-3 bg-brand-red-50 mb-5 text-brand-red font-medium rounded-lg">
+      <% @invite.errors.full_messages.each do |message| %>
+        <p><%= message %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="bg-white border-3 border-brand-black p-8 shadow-[6px_6px_0px_var(--color-brand-black)]">
+    <%= form_with model: [:admin, @invite], class: "space-y-5" do |form| %>
+      <%= ui_input(label: "Email address") do %>
+        <%= form.email_field :email, required: true, autofocus: true, placeholder: "name@example.com", class: ui_input_classes %>
+      <% end %>
+
+      <%= ui_input(label: "Role") do %>
+        <%= ui_select(
+          name: "invite[role]",
+          options: Invite.roles.keys.map { |r| { label: r.capitalize, value: r } },
+          selected: @invite.role || "exec"
+        ) %>
+      <% end %>
+
+      <div class="flex items-center gap-3">
+        <%= form.submit "Create invite", class: ui_button_classes(size: :sm), style: ui_button_style %>
+        <%= link_to "Cancel", admin_invites_path, class: "text-sm font-semibold text-brand-gray hover:text-brand-black" %>
+      </div>
+    <% end %>
+  </div>
+</div>

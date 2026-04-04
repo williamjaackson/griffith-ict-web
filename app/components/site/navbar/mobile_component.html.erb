@@ -24,5 +24,10 @@
       </a>
     <% end %>
   <% end %>
-  <%= helpers.ui_button(cta[:label], variant: :primary, data: { action: "navbar#closeMenu" }, onclick: "window.dispatchEvent(new CustomEvent('membership-modal:open'))") %>
+
+  <% if helpers.authenticated? %>
+    <%= helpers.ui_button("Account", href: helpers.account_path, variant: :secondary, data: { action: "navbar#closeMenu" }) %>
+  <% else %>
+    <%= helpers.ui_button(cta[:label], variant: :primary, data: { action: "navbar#closeMenu" }, onclick: "window.dispatchEvent(new CustomEvent('membership-modal:open'))") %>
+  <% end %>
 </div>

@@ -31,5 +31,9 @@
 </ul>
 
 <div class="hidden md:block">
-  <%= helpers.ui_button(cta[:label], variant: :primary, size: :sm, onclick: "window.dispatchEvent(new CustomEvent('membership-modal:open'))") %>
+  <% if helpers.authenticated? %>
+    <%= helpers.ui_button("Account", href: helpers.account_path, variant: :secondary, size: :sm) %>
+  <% else %>
+    <%= helpers.ui_button(cta[:label], variant: :primary, size: :sm, onclick: "window.dispatchEvent(new CustomEvent('membership-modal:open'))") %>
+  <% end %>
 </div>

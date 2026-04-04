@@ -78,6 +78,7 @@
     <%= render Site::MembershipModalComponent.new %>
 
     <main class="flex-1 pt-20">
+      <%= render Site::FlashComponent.new(flash: flash) %>
       <%= yield %>
     </main>
 
