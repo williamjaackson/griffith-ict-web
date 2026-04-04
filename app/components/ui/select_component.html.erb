@@ -10,10 +10,10 @@
   </button>
 
   <div data-select-target="menu" class="absolute top-full left-0 right-0 mt-1 z-10 opacity-0 pointer-events-none scale-95 transition-all duration-200 origin-top">
-    <div class="bg-brand-bg border-3 border-brand-black shadow-[4px_4px_0px_var(--color-brand-black)]">
+    <div class="bg-white rounded-md border-2 border-brand-cream overflow-hidden shadow-lg">
       <% @options.each do |option| %>
         <button type="button" data-action="select#pick" data-value="<%= option[:value] %>" data-label="<%= option[:label] %>"
-                class="block w-full text-left px-4 py-3 text-sm font-semibold text-brand-gray hover:text-brand-black hover:bg-brand-cream transition-colors duration-150 border-b-3 border-brand-black last:border-b-0 cursor-pointer">
+                class="block w-full text-left px-3 py-2.5 text-sm text-brand-gray hover:text-brand-black hover:bg-brand-bg transition-colors duration-150 cursor-pointer">
           <%= option[:label] %>
         </button>
       <% end %>
