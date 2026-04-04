@@ -1,0 +1,29 @@
+<section class="px-6 pb-24" data-controller="counter" data-counter-since-value="1738536420">
+  <div class="max-w-6xl mx-auto">
+    <div class="animate-hero-in" style="animation-delay: 400ms;">
+      <%= ui_card(color: "var(--color-brand-cream)") do %>
+        <p class="text-brand-gray text-sm font-semibold mb-4" style="font-family: 'Plus Jakarta Sans', sans-serif;">
+          Established 3 February 2025
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+          <div>
+            <span data-counter-target="days" class="block text-4xl md:text-5xl font-extrabold text-brand-black" style="font-family: 'Unbounded', sans-serif;">—</span>
+            <span class="text-brand-gray text-sm font-semibold">Days</span>
+          </div>
+          <div>
+            <span data-counter-target="hours" class="block text-4xl md:text-5xl font-extrabold text-brand-black" style="font-family: 'Unbounded', sans-serif;">—</span>
+            <span class="text-brand-gray text-sm font-semibold">Hours</span>
+          </div>
+          <div>
+            <span data-counter-target="minutes" class="block text-4xl md:text-5xl font-extrabold text-brand-black" style="font-family: 'Unbounded', sans-serif;">—</span>
+            <span class="text-brand-gray text-sm font-semibold">Minutes</span>
+          </div>
+          <div>
+            <span data-counter-target="seconds" class="block text-4xl md:text-5xl font-extrabold text-brand-black" style="font-family: 'Unbounded', sans-serif;">—</span>
+            <span class="text-brand-gray text-sm font-semibold">Seconds</span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
