@@ -22,6 +22,7 @@ jobs:
               cd ~/griffith-ict-web
               git pull
               bundle install
+              set -a && source .env && set +a
               RAILS_ENV=production bin/rails db:migrate
               RAILS_ENV=production bin/rails db:seed
               RAILS_ENV=production bin/rails assets:precompile
