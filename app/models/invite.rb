@@ -3,6 +3,8 @@ class Invite < ApplicationRecord
 
   enum :role, { admin: 0, exec: 1 }
 
+  validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+
   before_create { self.token = SecureRandom.urlsafe_base64(32) }
 
   scope :pending, -> { where(accepted_at: nil).where("expires_at > ?", Time.current) }
