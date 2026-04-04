@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  allow_unauthenticated_access
+
   def home
     config = YAML.load_file(Rails.root.join("config/sponsors.yml"))
     @sponsors = config["sponsors"] || []
