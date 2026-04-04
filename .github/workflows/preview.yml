@@ -87,6 +87,7 @@ jobs:
               # Install dependencies and build
               bundle install --jobs 4
               RAILS_ENV=production bin/rails db:prepare
+              ADMIN_PASSWORD=preview SECRET_KEY_BASE=\$(cat /opt/previews/.secret_key_base) RAILS_ENV=production bin/rails db:seed
               SECRET_KEY_BASE=\$(cat /opt/previews/.secret_key_base) RAILS_ENV=production bin/rails assets:precompile
 
               # Write systemd override with PORT and SECRET_KEY_BASE
