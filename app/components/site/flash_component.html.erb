@@ -1,5 +1,9 @@
-<% messages.each do |msg| %>
-  <div class="<%= styles_for(msg[:type]) %> border-b-3 border-brand-black px-6 py-3 text-sm font-semibold text-center">
-    <%= msg[:message] %>
+<div class="px-6 pt-6">
+  <div class="max-w-6xl mx-auto flex flex-col gap-2">
+    <% messages.each do |msg| %>
+      <div class="<%= styles_for(msg[:type]) %> border-3 border-brand-black px-5 py-3 text-sm font-semibold text-center">
+        <%= msg[:message] %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
