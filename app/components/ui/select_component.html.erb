@@ -13,7 +13,7 @@
     <div class="bg-white rounded-md border-2 border-brand-cream overflow-hidden shadow-lg">
       <% @options.each do |option| %>
         <button type="button" data-action="select#pick" data-value="<%= option[:value] %>" data-label="<%= option[:label] %>"
-                class="block w-full text-left px-3 py-2.5 text-sm text-brand-gray hover:text-brand-black hover:bg-brand-bg transition-colors duration-150 cursor-pointer">
+                class="block w-full text-left px-3 py-2.5 text-sm text-brand-gray hover:text-brand-black hover:bg-brand-bg transition-colors duration-150 cursor-pointer border-b border-brand-cream last:border-b-0">
           <%= option[:label] %>
         </button>
       <% end %>
