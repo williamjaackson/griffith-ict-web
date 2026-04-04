@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :invites, only: [], param: :token do
     member do
       get :accept
-      post :accept
+      post :complete
     end
   end
 

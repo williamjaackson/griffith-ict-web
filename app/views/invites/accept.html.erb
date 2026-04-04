@@ -16,7 +16,7 @@
     <% end %>
 
     <div class="bg-white border-3 border-brand-black p-8 shadow-[6px_6px_0px_var(--color-brand-black)]">
-      <%= form_with url: accept_invite_path(token: @invite.token), method: :post, class: "space-y-5" do |form| %>
+      <%= form_with url: complete_invite_path(token: @invite.token), method: :post, class: "space-y-5" do |form| %>
         <%= ui_input(label: "Email address") do %>
           <input type="email" value="<%= @invite.email %>" disabled class="block w-full rounded-md border-2 border-brand-cream bg-brand-cream/50 px-3 py-2.5 text-brand-gray">
         <% end %>

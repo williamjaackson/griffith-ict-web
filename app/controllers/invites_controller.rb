@@ -4,23 +4,26 @@ class InvitesController < ApplicationController
   before_action :set_invite
 
   def accept
-    if request.post?
-      user = User.new(
-        email_address: @invite.email,
-        role: @invite.role,
-        password: params[:password],
-        password_confirmation: params[:password_confirmation]
-      )
+  end
 
-      if user.save
-        @invite.update!(accepted_at: Time.current)
-        start_new_session_for(user)
-        redirect_to root_path, notice: "Welcome! Your account has been created."
-      else
-        @errors = user.errors
-        render :accept, status: :unprocessable_entity
-      end
+  def complete
+    user = User.new(
+      email_address: @invite.email,
+      role: @invite.role,
+      password: params[:password],
+      password_confirmation: params[:password_confirmation]
+    )
+
+    ActiveRecord::Base.transaction do
+      user.save!
+      @invite.update!(accepted_at: Time.current)
     end
+
+    start_new_session_for(user)
+    redirect_to root_path, notice: "Welcome! Your account has been created."
+  rescue ActiveRecord::RecordInvalid
+    @errors = user.errors
+    render :accept, status: :unprocessable_entity
   end
 
   private
