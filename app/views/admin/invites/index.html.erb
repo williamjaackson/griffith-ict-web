@@ -12,6 +12,7 @@
             <p class="font-semibold text-brand-black"><%= invite.email %></p>
             <p class="text-sm text-brand-gray">
               <%= invite.role.capitalize %> ·
+              Invited by <%= invite.invited_by.email_address %> ·
               <% if invite.accepted? %>
                 <span class="text-green-600">Accepted</span>
               <% elsif invite.expired? %>
@@ -22,15 +23,17 @@
             </p>
           </div>
 
-          <div class="flex items-center gap-2">
-            <% unless invite.accepted? || invite.expired? %>
-              <button data-action="clipboard#copy" class="text-sm font-semibold text-brand-black border-2 border-brand-black px-3 py-1.5 cursor-pointer hover:bg-brand-cream transition-colors">
-                Copy link
-              </button>
-            <% end %>
+          <% unless invite.accepted? %>
+            <div class="flex items-center gap-2">
+              <% unless invite.expired? %>
+                <button data-action="clipboard#copy" class="text-sm font-semibold text-brand-black border-2 border-brand-black px-3 py-1.5 cursor-pointer hover:bg-brand-cream transition-colors">
+                  Copy link
+                </button>
+              <% end %>
 
-            <%= button_to "Revoke", admin_invite_path(invite), method: :delete, class: "text-sm font-semibold text-brand-red border-2 border-brand-red px-3 py-1.5 cursor-pointer hover:bg-brand-red-50 transition-colors", data: { turbo_confirm: "Revoke this invite?" } %>
-          </div>
+              <%= button_to "Revoke", admin_invite_path(invite), method: :delete, class: "text-sm font-semibold text-brand-red border-2 border-brand-red px-3 py-1.5 cursor-pointer hover:bg-brand-red-50 transition-colors", data: { turbo_confirm: "Revoke this invite?" } %>
+            </div>
+          <% end %>
         </div>
       <% end %>
     </div>
