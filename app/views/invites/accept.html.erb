@@ -1,0 +1,39 @@
+<div class="min-h-screen bg-brand-bg flex items-center justify-center px-4">
+  <div class="w-full max-w-md">
+    <div class="text-center mb-8">
+      <h1 class="font-[Unbounded] font-bold text-3xl text-brand-black">Create your account</h1>
+      <p class="text-brand-gray mt-2">You've been invited to join as <span class="font-semibold"><%= @invite.role %></span></p>
+    </div>
+
+    <% if @errors&.any? %>
+      <div class="py-2 px-3 bg-brand-red-50 mb-5 text-brand-red font-medium rounded-lg">
+        <% @errors.full_messages.each do |message| %>
+          <p><%= message %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="bg-white border-3 border-brand-black p-8 shadow-[6px_6px_0px_var(--color-brand-black)]">
+      <%= form_with url: accept_invite_path(token: @invite.token), method: :post, class: "space-y-5" do |form| %>
+        <div>
+          <label class="block text-sm font-semibold text-brand-black mb-1">Email address</label>
+          <input type="email" value="<%= @invite.email %>" disabled class="block w-full rounded-md border-2 border-brand-cream bg-brand-cream/50 px-3 py-2.5 text-brand-gray">
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-brand-black mb-1">Password</label>
+          <%= form.password_field :password, required: true, autocomplete: "new-password", placeholder: "Choose a password", minlength: 8, maxlength: 72, class: "block w-full rounded-md border-2 border-brand-cream bg-brand-bg focus:outline-none focus:border-brand-red px-3 py-2.5" %>
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-brand-black mb-1">Confirm password</label>
+          <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password", placeholder: "Confirm your password", minlength: 8, maxlength: 72, class: "block w-full rounded-md border-2 border-brand-cream bg-brand-bg focus:outline-none focus:border-brand-red px-3 py-2.5" %>
+        </div>
+
+        <div>
+          <%= form.submit "Create account", class: "w-full inline-flex items-center justify-center text-center font-bold border-3 border-brand-black cursor-pointer transition-all duration-200 hover:-translate-y-1 active:translate-y-0 active:shadow-none bg-brand-red text-white px-8 py-3 text-base hover:shadow-[5px_5px_0px_var(--color-brand-black)]", style: "font-family: 'Unbounded', sans-serif; font-weight: 600;" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
