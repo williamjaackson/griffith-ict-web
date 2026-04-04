@@ -24,7 +24,7 @@
       <% end %>
 
       <div class="flex items-center gap-3">
-        <%= form.submit "Create invite", class: "inline-flex items-center justify-center text-center font-bold border-3 border-brand-black cursor-pointer transition-all duration-200 hover:-translate-y-1 active:translate-y-0 active:shadow-none bg-brand-red text-white px-5 py-2.5 text-sm hover:shadow-[5px_5px_0px_var(--color-brand-black)]", style: "font-family: 'Unbounded', sans-serif; font-weight: 600;" %>
+        <%= form.submit "Create invite", class: ui_button_classes(size: :sm), style: ui_button_style %>
         <%= link_to "Cancel", admin_invites_path, class: "text-sm font-semibold text-brand-gray hover:text-brand-black" %>
       </div>
     <% end %>

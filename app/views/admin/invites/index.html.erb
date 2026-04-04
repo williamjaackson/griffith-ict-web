@@ -1,7 +1,7 @@
 <div class="max-w-4xl mx-auto px-4 py-12">
   <div class="flex items-center justify-between mb-8">
     <h1 class="font-[Unbounded] font-bold text-3xl text-brand-black">Invites</h1>
-    <%= link_to "New invite", new_admin_invite_path, class: "inline-flex items-center justify-center text-center font-bold border-3 border-brand-black cursor-pointer transition-all duration-200 hover:-translate-y-1 active:translate-y-0 active:shadow-none bg-brand-red text-white px-5 py-2.5 text-sm hover:shadow-[5px_5px_0px_var(--color-brand-black)]", style: "font-family: 'Unbounded', sans-serif; font-weight: 600;" %>
+    <%= ui_button("New invite", href: new_admin_invite_path, variant: :primary, size: :sm) %>
   </div>
 
   <% if @invites.any? %>

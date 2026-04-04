@@ -27,6 +27,19 @@ module UiHelper
     Ui::InputComponent::INPUT_CLASSES
   end
 
+  def ui_button_classes(variant: :primary, size: :base)
+    [
+      Ui::ButtonComponent::BASE_CLASSES,
+      Ui::ButtonComponent::VARIANT_CLASSES[variant],
+      Ui::ButtonComponent::SIZE_CLASSES[size],
+      Ui::ButtonComponent::SHADOW_CLASSES[variant]
+    ].join(" ")
+  end
+
+  def ui_button_style
+    "font-family: 'Unbounded', sans-serif; font-weight: 600;"
+  end
+
   def ui_select(name:, options:, selected: nil, label: nil)
     render Ui::SelectComponent.new(name: name, options: options, selected: selected, label: label)
   end

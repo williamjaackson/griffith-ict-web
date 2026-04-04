@@ -30,7 +30,7 @@
         <% end %>
 
         <div>
-          <%= form.submit "Create account", class: "w-full inline-flex items-center justify-center text-center font-bold border-3 border-brand-black cursor-pointer transition-all duration-200 hover:-translate-y-1 active:translate-y-0 active:shadow-none bg-brand-red text-white px-8 py-3 text-base hover:shadow-[5px_5px_0px_var(--color-brand-black)]", style: "font-family: 'Unbounded', sans-serif; font-weight: 600;" %>
+          <%= form.submit "Create account", class: "w-full #{ui_button_classes}", style: ui_button_style %>
         </div>
       <% end %>
     </div>
