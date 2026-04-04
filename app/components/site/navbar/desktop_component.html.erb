@@ -30,10 +30,24 @@
   <% end %>
 </ul>
 
-<div class="hidden md:flex items-center gap-4">
+<div class="hidden md:block">
   <% if helpers.authenticated? %>
-    <%= link_to "Admin", helpers.admin_invites_path, class: "text-sm font-semibold text-brand-gray hover:text-brand-black transition-colors" if helpers.current_user.admin? %>
-    <%= button_to "Sign out", helpers.session_path, method: :delete, class: "text-sm font-semibold text-brand-gray hover:text-brand-black transition-colors cursor-pointer" %>
+    <div data-controller="dropdown" data-action="mouseenter->dropdown#show mouseleave->dropdown#hide focusin->dropdown#show focusout->dropdown#hide" class="relative">
+      <%= helpers.ui_button("Account", variant: :secondary, size: :sm) %>
+      <div data-dropdown-target="menu" class="absolute top-full right-0 pt-3 opacity-0 pointer-events-none scale-95 transition-all duration-200 origin-top">
+        <div class="bg-brand-bg border-3 border-brand-black shadow-[4px_4px_0px_var(--color-brand-black)] min-w-48">
+          <% if helpers.current_user.admin? %>
+            <a href="<%= helpers.admin_invites_path %>" class="block px-5 py-3 text-sm font-semibold text-brand-gray hover:text-brand-black hover:bg-brand-cream transition-colors duration-150 border-b-3 border-brand-black">
+              Admin
+            </a>
+          <% end %>
+          <%= button_to helpers.session_path, method: :delete, class: "block w-full text-left px-5 py-3 text-sm font-semibold text-brand-gray hover:text-brand-black hover:bg-brand-cream transition-colors duration-150 cursor-pointer" do %>
+            Sign out
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <%= helpers.ui_button(cta[:label], variant: :primary, size: :sm, onclick: "window.dispatchEvent(new CustomEvent('membership-modal:open'))") %>
   <% end %>
-  <%= helpers.ui_button(cta[:label], variant: :primary, size: :sm, onclick: "window.dispatchEvent(new CustomEvent('membership-modal:open'))") %>
 </div>
