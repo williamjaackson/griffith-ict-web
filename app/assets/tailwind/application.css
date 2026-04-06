@@ -137,7 +137,7 @@ h4.heading { @apply text-sm mb-4 text-brand-red; font-weight: 600; }
 }
 
 .input-field {
-  @apply block w-full rounded-md border-2 border-brand-cream bg-brand-bg focus:outline-none focus:border-brand-red px-3 py-2.5;
+  @apply w-full rounded-md border-2 border-brand-cream bg-brand-bg focus:outline-none focus:border-brand-red px-3 py-2.5;
 }
 .input-label {
   @apply block text-sm font-semibold text-brand-black mb-1;
