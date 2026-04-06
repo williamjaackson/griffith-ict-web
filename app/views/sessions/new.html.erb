@@ -1,7 +1,7 @@
 <section class="px-6 py-24 md:py-32">
   <div class="max-w-md mx-auto">
     <div class="mb-8">
-      <%= ui_heading("Staff sign in.", level: 2, highlight: "sign in.") %>
+      <h2 class="heading">Staff <span class="heading-highlight">sign in.</span></h2>
       <p class="text-brand-gray text-lg leading-relaxed">
         For club executives and administrators only.
       </p>
@@ -9,16 +9,18 @@
 
     <div class="bg-white border-3 border-brand-black p-8 shadow-[6px_6px_0px_var(--color-brand-black)]">
       <%= form_with url: session_url, class: "space-y-5" do |form| %>
-        <%= ui_input(label: "Email address") do %>
-          <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "you@griffithict.club", value: params[:email_address], class: ui_input_classes %>
-        <% end %>
-
-        <%= ui_input(label: "Password") do %>
-          <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72, class: ui_input_classes %>
-        <% end %>
+        <div>
+          <label class="input-label">Email address</label>
+          <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "you@griffithict.club", value: params[:email_address], class: "input-field" %>
+        </div>
 
         <div>
-          <%= form.submit "Sign in", class: "w-full #{ui_button_classes}", style: ui_button_style %>
+          <label class="input-label">Password</label>
+          <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72, class: "input-field" %>
+        </div>
+
+        <div>
+          <button type="submit" class="btn btn-primary w-full">Sign in</button>
         </div>
       <% end %>
     </div>

@@ -9,18 +9,18 @@
 <header class="px-6 pt-8 pb-24">
   <div class="max-w-6xl mx-auto">
     <div class="animate-hero-in">
-      <%= ui_badge("SPONSORSHIP", class: "-rotate-2 mb-8") %>
+      <span class="badge -rotate-2 mb-8">SPONSORSHIP</span>
     </div>
     <div class="animate-hero-in" style="animation-delay: 100ms;">
-      <%= ui_heading("Partner with us.", level: 1, highlight: "with us.") %>
+      <h1 class="heading">Partner <span class="heading-highlight">with us.</span></h1>
     </div>
     <p class="animate-hero-in text-brand-gray text-lg md:text-xl max-w-2xl leading-relaxed mb-10" style="animation-delay: 200ms;">
       Help us run bigger events, better hackathons, and create real-world opportunities for <%= Rails.application.config.meta[:member_count] %> students.
       In return, get direct access to Griffith's most engaged tech talent.
     </p>
     <div class="animate-hero-in flex flex-wrap gap-4" style="animation-delay: 300ms;">
-      <%= ui_button("Get in touch", href: "mailto:#{Rails.application.config.socials[:email]}", variant: :primary) %>
-      <%= ui_button("Back to home", href: "/", variant: :secondary) %>
+      <a href="mailto:<%= Rails.application.config.socials[:email] %>" class="btn btn-primary">Get in touch</a>
+      <a href="/" class="btn btn-secondary">Back to home</a>
     </div>
   </div>
 </header>

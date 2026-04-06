@@ -1,4 +1,4 @@
-<%= helpers.ui_modal(controller: "membership-modal",
+<%= render Ui::ModalComponent.new(controller: "membership-modal",
                     membership_modal_gold_coast_url_value: gold_coast_url,
                     membership_modal_brisbane_url_value: brisbane_url,
                     membership_modal_discord_url_value: discord_url) do %>
@@ -11,9 +11,9 @@
     <p class="text-brand-gray text-sm mb-6">This helps us point you to the right sign-up link.</p>
 
     <div class="flex flex-col gap-3">
-      <%= helpers.ui_button("Gold Coast", variant: :secondary, class: "w-full", data: { action: "membership-modal#selectLocation", location: "gold-coast" }) %>
-      <%= helpers.ui_button("Brisbane", variant: :secondary, class: "w-full", data: { action: "membership-modal#selectLocation", location: "brisbane" }) %>
-      <%= helpers.ui_button("Online", variant: :secondary, class: "w-full", data: { action: "membership-modal#selectLocation", location: "online" }) %>
+      <button class="btn btn-secondary w-full" data-action="membership-modal#selectLocation" data-location="gold-coast">Gold Coast</button>
+      <button class="btn btn-secondary w-full" data-action="membership-modal#selectLocation" data-location="brisbane">Brisbane</button>
+      <button class="btn btn-secondary w-full" data-action="membership-modal#selectLocation" data-location="online">Online</button>
     </div>
   </div>
 
@@ -71,8 +71,7 @@
       <h3 class="font-bold text-brand-black text-lg mb-1" style="font-family: 'Unbounded', sans-serif;">You're Done!</h3>
       <p class="text-brand-gray text-sm mb-4">Don't forget to verify yourself in the Discord so you can start chatting.</p>
       <button data-action="membership-modal#close"
-              class="w-full px-8 py-4 text-base inline-flex items-center justify-center text-center font-bold border-3 border-brand-black bg-green-600 text-white cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-[5px_5px_0px_var(--color-brand-black)] active:translate-y-0 active:shadow-none"
-              style="font-family: 'Unbounded', sans-serif; font-weight: 600;">
+              class="btn btn-primary w-full !bg-green-600">
         Done
       </button>
     </div>

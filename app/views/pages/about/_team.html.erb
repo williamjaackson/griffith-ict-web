@@ -1,7 +1,7 @@
 <section id="team" class="py-24 md:py-32 px-6 border-t-3 border-brand-black" data-controller="reveal tabs">
   <div class="max-w-6xl mx-auto">
     <div class="mb-12 reveal-up" data-reveal-target="item">
-      <%= ui_heading("Executive team.", level: 2) %>
+      <h2 class="heading">Executive team.</h2>
       <p class="text-brand-gray text-lg max-w-2xl leading-relaxed">
         The people who keep things running. Our executive team is elected and appointed each year to lead the club across both campuses.
       </p>
@@ -23,7 +23,7 @@
         <% if campus["elected"]&.any? %>
           <%# Elected roles %>
           <div class="mb-6 <%= 'reveal-up' if ci == 0 %>" <%= 'data-reveal-target="item" style="transition-delay: 150ms;"'.html_safe if ci == 0 %>>
-            <%= ui_badge("ELECTED", size: :sm) %>
+            <span class="badge badge-sm">ELECTED</span>
             <p class="text-brand-gray text-sm mt-2">Voted on by members at the Annual General Meeting.</p>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 <%= 'mb-12' if campus["appointed"]&.any? %>">
@@ -35,17 +35,17 @@
                     <div class="w-10 h-10 bg-brand-gray/10 flex items-center justify-center mb-4">
                       <%= lucide_icon(member["icon"], class: "w-5 h-5 text-brand-gray opacity-40") %>
                     </div>
-                    <%= ui_heading(member["role"], level: 3) %>
+                    <h3 class="heading"><%= member["role"] %></h3>
                     <p class="text-brand-gray/50 text-sm italic">Unassigned</p>
                   </div>
                 <% else %>
-                  <%= ui_card(shadow: "var(--color-brand-red)") do %>
+                  <div class="card" style="box-shadow: 5px 5px 0px var(--color-brand-red);">
                     <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
                       <%= lucide_icon(member["icon"], class: "w-5 h-5 text-brand-red") %>
                     </div>
-                    <%= ui_heading(member["role"], level: 3) %>
+                    <h3 class="heading"><%= member["role"] %></h3>
                     <p class="text-brand-gray text-sm"><%= member["name"] %></p>
-                  <% end %>
+                  </div>
                 <% end %>
               </div>
             <% end %>
@@ -55,7 +55,7 @@
         <% if campus["appointed"]&.any? %>
           <%# Appointed roles %>
           <div class="mb-6 <%= 'reveal-up' if ci == 0 %>" <%= 'data-reveal-target="item" style="transition-delay: 150ms;"'.html_safe if ci == 0 %>>
-            <%= ui_badge("APPOINTED", size: :sm, variant: :dark) %>
+            <span class="badge badge-dark badge-sm">APPOINTED</span>
             <p class="text-brand-gray text-sm mt-2">Voted on by the executive team. Applications are opened as needed.</p>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
@@ -67,17 +67,17 @@
                     <div class="w-10 h-10 bg-brand-gray/10 flex items-center justify-center mb-4">
                       <%= lucide_icon(member["icon"], class: "w-5 h-5 text-brand-gray opacity-40") %>
                     </div>
-                    <%= ui_heading(member["role"], level: 3) %>
+                    <h3 class="heading"><%= member["role"] %></h3>
                     <p class="text-brand-gray/50 text-sm italic">Unassigned</p>
                   </div>
                 <% else %>
-                  <%= ui_card(shadow: "var(--color-brand-red-300)") do %>
+                  <div class="card" style="box-shadow: 5px 5px 0px var(--color-brand-red-300);">
                     <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
                       <%= lucide_icon(member["icon"], class: "w-5 h-5 text-brand-red") %>
                     </div>
-                    <%= ui_heading(member["role"], level: 3) %>
+                    <h3 class="heading"><%= member["role"] %></h3>
                     <p class="text-brand-gray text-sm"><%= member["name"] %></p>
-                  <% end %>
+                  </div>
                 <% end %>
               </div>
             <% end %>

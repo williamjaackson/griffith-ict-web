@@ -1,11 +1,11 @@
 <section class="py-24 md:py-32 px-6 border-t-3 border-brand-black bg-brand-cream" data-controller="reveal">
   <div class="max-w-6xl mx-auto text-center reveal-up" data-reveal-target="item">
-    <%= ui_heading("Ready to partner?", level: 2) %>
+    <h2 class="heading">Ready to partner?</h2>
     <p class="text-brand-gray text-lg max-w-xl mx-auto leading-relaxed mb-10">
       Reach out and we'll send you our full sponsorship prospectus. We'd love to work with you.
     </p>
     <div class="flex flex-wrap justify-center gap-4">
-      <%= ui_button("Get in touch", href: "mailto:#{Rails.application.config.socials[:email]}", variant: :primary) %>
+      <a href="mailto:<%= Rails.application.config.socials[:email] %>" class="btn btn-primary">Get in touch</a>
     </div>
   </div>
 </section>

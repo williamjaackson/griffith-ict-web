@@ -9,17 +9,17 @@
 <header class="px-6 pt-8 pb-24">
   <div class="max-w-6xl mx-auto">
     <div class="animate-hero-in">
-      <%= ui_badge(current_user.role.upcase, class: "-rotate-2 mb-8") %>
+      <span class="badge -rotate-2 mb-8"><%= current_user.role.upcase %></span>
     </div>
     <div class="animate-hero-in" style="animation-delay: 100ms;">
-      <%= ui_heading("Your account.", level: 1, highlight: "account.") %>
+      <h1 class="heading">Your <span class="heading-highlight">account.</span></h1>
     </div>
     <p class="animate-hero-in text-brand-gray text-lg md:text-xl max-w-2xl leading-relaxed mb-10" style="animation-delay: 200ms;">
       Signed in as <span class="text-brand-black font-semibold"><%= current_user.email_address %></span>
     </p>
     <div class="animate-hero-in flex flex-wrap gap-4" style="animation-delay: 300ms;">
-      <%= button_to "Sign out", session_path, method: :delete, class: ui_button_classes, style: ui_button_style %>
-      <%= ui_button("Back to home", href: "/", variant: :secondary) %>
+      <%= button_to "Sign out", session_path, method: :delete, class: "btn btn-primary" %>
+      <a href="/" class="btn btn-secondary">Back to home</a>
     </div>
   </div>
 </header>

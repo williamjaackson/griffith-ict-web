@@ -1,7 +1,7 @@
 <div class="max-w-4xl mx-auto px-4 py-12">
   <div class="flex items-center justify-between mb-8">
     <h1 class="font-[Unbounded] font-bold text-3xl text-brand-black">Invites</h1>
-    <%= ui_button("New invite", href: new_admin_invite_path, variant: :primary, size: :sm) %>
+    <a href="<%= new_admin_invite_path %>" class="btn btn-primary btn-sm">New invite</a>
   </div>
 
   <% if @invites.any? %>

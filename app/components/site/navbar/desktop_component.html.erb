@@ -32,8 +32,8 @@
 
 <div class="hidden md:block">
   <% if helpers.authenticated? %>
-    <%= helpers.ui_button("Account", href: helpers.account_path, variant: :secondary, size: :sm) %>
+    <a href="<%= helpers.account_path %>" class="btn btn-secondary btn-sm">Account</a>
   <% else %>
-    <%= helpers.ui_button(cta[:label], variant: :primary, size: :sm, onclick: "window.dispatchEvent(new CustomEvent('membership-modal:open'))") %>
+    <button class="btn btn-primary btn-sm" onclick="window.dispatchEvent(new CustomEvent('membership-modal:open'))"><%= cta[:label] %></button>
   <% end %>
 </div>

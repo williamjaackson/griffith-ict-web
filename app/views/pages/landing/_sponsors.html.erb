@@ -8,8 +8,8 @@
 <section id="sponsors" class="py-24 md:py-32 px-6 border-t-3 border-brand-black bg-brand-cream" data-controller="reveal perk-modal">
   <div class="max-w-6xl mx-auto">
     <div class="mb-16 reveal-up" data-reveal-target="item">
-      <%= ui_badge("OUR PARTNERS", class: "rotate-2 mb-4") %>
-      <%= ui_heading("Backed by industry.", level: 2) %>
+      <span class="badge rotate-2 mb-4">OUR PARTNERS</span>
+      <h2 class="heading">Backed by industry.</h2>
       <p class="text-brand-gray text-lg max-w-2xl leading-relaxed">
         We partner with companies who believe in supporting the next generation of tech talent.
         Sponsors help us run bigger events, better hackathons, and provide real-world opportunities for our members.
@@ -29,9 +29,9 @@
         <%= render "pages/landing/sponsor_card", placeholder: true %>
       <% end %>
 
-      <%= ui_card(color: "var(--color-brand-red)", class: "grid place-items-center h-24", href: "/sponsorship") do %>
+      <a href="/sponsorship" class="card card-link hover:shadow-[5px_5px_0px_var(--color-brand-black)] grid place-items-center h-24" style="background-color: var(--color-brand-red);">
         <p class="text-white font-bold">Sponsor Us &rarr;</p>
-      <% end %>
+      </a>
     </div>
 
     <% if @perks.any? %>
@@ -52,7 +52,7 @@
                     data-perk-description="<%= perk["description"] %>"
                     data-perk-website="<%= perk["website"] %>">
               <%= image_tag perk["logo"], alt: perk["name"], class: "max-h-10 max-w-full object-contain" %>
-              <%= ui_badge(perk["name"].upcase, size: :sm, variant: :dark, class: "absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity") %>
+              <span class="badge badge-dark badge-sm absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity"><%= perk["name"].upcase %></span>
             </button>
           <% end %>
 
@@ -74,9 +74,7 @@
       <img data-perk-modal-target="icon" src="" alt="" class="max-h-16 object-contain mb-4">
       <h2 data-perk-modal-target="name" class="text-2xl font-bold text-brand-black mb-3" style="font-family: 'Unbounded', sans-serif;"></h2>
       <p data-perk-modal-target="description" class="text-brand-gray leading-relaxed mb-6"></p>
-      <a data-perk-modal-target="link" href="#" target="_blank" rel="noopener"
-         class="inline-flex items-center justify-center text-center font-bold border-3 border-brand-black bg-brand-red text-white px-8 py-4 text-base cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-[5px_5px_0px_var(--color-brand-black)] active:translate-y-0 active:shadow-none"
-         style="font-family: 'Unbounded', sans-serif; font-weight: 600;">
+      <a data-perk-modal-target="link" href="#" target="_blank" rel="noopener" class="btn btn-primary">
         Check it out
       </a>
     </div>

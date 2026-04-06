@@ -9,17 +9,17 @@
 <header class="px-6 pt-8 pb-24">
   <div class="max-w-6xl mx-auto">
     <div class="animate-hero-in">
-      <%= ui_badge("ABOUT", class: "-rotate-2 mb-8") %>
+      <span class="badge -rotate-2 mb-8">ABOUT</span>
     </div>
     <div class="animate-hero-in" style="animation-delay: 100ms;">
-      <%= ui_heading("Meet the club.", level: 1, highlight: "the club.") %>
+      <h1 class="heading">Meet <span class="heading-highlight">the club.</span></h1>
     </div>
     <p class="animate-hero-in text-brand-gray text-lg md:text-xl max-w-2xl leading-relaxed mb-10" style="animation-delay: 200ms;">
       Griffith ICT Club is Griffith University's student-run tech community. We run events, hackathons, and workshops across the Gold Coast and Nathan campuses.
     </p>
     <div class="animate-hero-in flex flex-wrap gap-4" style="animation-delay: 300ms;">
-      <%= ui_button("Become a Member", variant: :primary, onclick: "window.dispatchEvent(new CustomEvent('membership-modal:open'))") %>
-      <%= ui_button("Back to home", href: "/", variant: :secondary) %>
+      <button class="btn btn-primary" onclick="window.dispatchEvent(new CustomEvent('membership-modal:open'))">Become a Member</button>
+      <a href="/" class="btn btn-secondary">Back to home</a>
     </div>
   </div>
 </header>
