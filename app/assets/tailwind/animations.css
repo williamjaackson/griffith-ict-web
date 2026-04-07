@@ -1,0 +1,84 @@
+/* Entrance animations */
+@keyframes enter-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes enter-stamp {
+  0% { opacity: 0; transform: scale(1.3) translateY(-30px); }
+  60% { opacity: 1; transform: scale(0.97) translateY(2px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Stagger: auto-delays children by 100ms each */
+.stagger > :nth-child(1) { --stagger: 0ms; }
+.stagger > :nth-child(2) { --stagger: 100ms; }
+.stagger > :nth-child(3) { --stagger: 200ms; }
+.stagger > :nth-child(4) { --stagger: 300ms; }
+.stagger > :nth-child(5) { --stagger: 400ms; }
+.stagger > :nth-child(6) { --stagger: 500ms; }
+.stagger > :nth-child(7) { --stagger: 600ms; }
+.stagger > :nth-child(8) { --stagger: 700ms; }
+
+/* Plays immediately on load (heroes) */
+.enter > * {
+  animation: enter-up 0.4s cubic-bezier(0.2, 0, 0, 1) both;
+  animation-delay: var(--stagger, 0ms);
+}
+.enter-stamp {
+  animation: enter-stamp 0.35s cubic-bezier(0.2, 0, 0, 1) both;
+  animation-delay: var(--stagger, 0ms);
+}
+
+/* Plays on scroll (reveal controller adds .entered) */
+.reveal > * {
+  opacity: 0;
+}
+.reveal.entered > * {
+  animation: enter-up 0.4s cubic-bezier(0.2, 0, 0, 1) both;
+  animation-delay: var(--stagger, 0ms);
+}
+
+/* Page transitions (View Transitions API) */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-group(root) {
+  background-color: var(--color-brand-red);
+}
+
+::view-transition-image-pair(root) {
+  isolation: auto;
+}
+
+::view-transition-old(root) {
+  animation: sweep-out 0.4s linear both;
+}
+
+::view-transition-new(root) {
+  animation: sweep-in 0.4s linear both;
+}
+
+@keyframes sweep-out {
+  0% { clip-path: inset(0 0 0 0); }
+  100% { clip-path: inset(0 0 0 100%); }
+}
+
+@keyframes sweep-in {
+  0% { clip-path: inset(0 100% 0 0); }
+  40% { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+
+/* Hamburger animation */
+.hamburger svg path {
+  transition: transform 0.3s, opacity 0.3s;
+  transform-origin: center;
+}
+
+.hamburger svg path:nth-child(1) { transform: translateY(-5px); }
+.hamburger svg path:nth-child(3) { transform: translateY(5px); }
+
+.hamburger[data-open="true"] svg path:nth-child(1) { transform: rotate(45deg); }
+.hamburger[data-open="true"] svg path:nth-child(2) { opacity: 0; }
+.hamburger[data-open="true"] svg path:nth-child(3) { transform: rotate(-45deg); }
