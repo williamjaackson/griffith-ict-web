@@ -124,13 +124,14 @@ body {
 .reveal > * {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.4s cubic-bezier(0.2, 0, 0, 1), transform 0.4s cubic-bezier(0.2, 0, 0, 1);
+  transition-property: opacity, transform;
+  transition-duration: 0.4s;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
   transition-delay: var(--stagger, 0ms);
 }
 .reveal.entered > * {
   opacity: 1;
   transform: translateY(0);
-  transition-delay: 0ms;
 }
 
 /* UI primitives */
