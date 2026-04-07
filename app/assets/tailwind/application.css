@@ -32,8 +32,10 @@ body {
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-:where(h1, h2, h3, h4) {
-  color: var(--color-brand-black);
+@layer base {
+  h1, h2, h3, h4 {
+    color: var(--color-brand-black);
+  }
 }
 
 /* Text selection */
