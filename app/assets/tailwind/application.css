@@ -61,9 +61,6 @@ body {
 main > section {
   @apply py-24 md:py-32 px-6 border-t-3 border-brand-black;
 }
-main > section.section-compact {
-  @apply py-16 md:py-20;
-}
 main > section:nth-of-type(odd) {
   background-color: var(--color-brand-cream);
 }
