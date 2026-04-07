@@ -1,14 +1,14 @@
-<section class="py-24 md:py-32 px-6 border-t-3 border-brand-black" data-controller="reveal">
+<section class="py-24 md:py-32 px-6 border-t-3 border-brand-black">
   <div class="max-w-6xl mx-auto">
-    <div class="mb-16 reveal-up" data-reveal-target="item">
+    <div class="mb-16 reveal">
       <h2 class="heading">Why sponsor us?</h2>
       <p class="text-brand-gray text-lg max-w-2xl leading-relaxed">
         We're the largest tech club at Griffith. Here's what you get access to.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-      <div class="reveal-up" data-reveal-target="item" style="transition-delay: 100ms;">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 reveal stagger">
+      <div>
         <div class="card" style="box-shadow: 5px 5px 0px var(--color-brand-red-300);">
           <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
             <%= lucide_icon("users", class: "w-5 h-5 text-brand-red") %>
@@ -20,7 +20,7 @@
         </div>
       </div>
 
-      <div class="reveal-up" data-reveal-target="item" style="transition-delay: 200ms;">
+      <div>
         <div class="card" style="box-shadow: 5px 5px 0px var(--color-brand-red-dark);">
           <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
             <%= lucide_icon("calendar", class: "w-5 h-5 text-brand-red") %>
@@ -32,7 +32,7 @@
         </div>
       </div>
 
-      <div class="reveal-up" data-reveal-target="item" style="transition-delay: 300ms;">
+      <div>
         <div class="card" style="box-shadow: 5px 5px 0px var(--color-brand-red);">
           <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
             <%= lucide_icon("map-pin", class: "w-5 h-5 text-brand-red") %>
@@ -44,7 +44,7 @@
         </div>
       </div>
 
-      <div class="reveal-up" data-reveal-target="item" style="transition-delay: 400ms;">
+      <div>
         <div class="card" style="box-shadow: 5px 5px 0px var(--color-brand-red-200);">
           <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
             <%= lucide_icon("monitor", class: "w-5 h-5 text-brand-red") %>

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./animations.css";
 
 @theme {
   --color-brand-bg: #FAF7F2;
@@ -56,43 +57,6 @@ body {
   background-color: var(--color-brand-red-dark);
 }
 
-
-/* Page transitions (View Transitions API) */
-@view-transition {
-  navigation: auto;
-}
-
-::view-transition-group(root) {
-  background-color: var(--color-brand-red);
-}
-
-::view-transition-image-pair(root) {
-  isolation: auto;
-}
-
-::view-transition-old(root) {
-  animation: sweep-out 0.4s linear both;
-}
-
-::view-transition-new(root) {
-  animation: sweep-in 0.4s linear both;
-}
-
-@keyframes sweep-out {
-  0% { clip-path: inset(0 0 0 0); }
-  100% { clip-path: inset(0 0 0 100%); }
-}
-
-@keyframes sweep-in {
-  0% { clip-path: inset(0 100% 0 0); }
-  40% { clip-path: inset(0 100% 0 0); }
-  100% { clip-path: inset(0 0 0 0); }
-}
-
-/* Scroll reveal */
-.reveal-up { opacity: 0; transform: translateY(20px); transition: opacity 0.4s, transform 0.4s cubic-bezier(0.2, 0, 0, 1); }
-.reveal-up.revealed { opacity: 1; transform: translateY(0); }
-
 /* UI primitives */
 .heading {
   font-family: 'Unbounded', sans-serif;
@@ -142,16 +106,3 @@ h4.heading { @apply text-sm mb-4 text-brand-red; font-weight: 600; }
 .input-label {
   @apply block text-sm font-semibold text-brand-black mb-1;
 }
-
-/* Hamburger animation */
-.hamburger svg path {
-  transition: transform 0.3s, opacity 0.3s;
-  transform-origin: center;
-}
-
-.hamburger svg path:nth-child(1) { transform: translateY(-5px); }
-.hamburger svg path:nth-child(3) { transform: translateY(5px); }
-
-.hamburger[data-open="true"] svg path:nth-child(1) { transform: rotate(45deg); }
-.hamburger[data-open="true"] svg path:nth-child(2) { opacity: 0; }
-.hamburger[data-open="true"] svg path:nth-child(3) { transform: rotate(-45deg); }

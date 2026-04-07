@@ -1,13 +1,13 @@
-<section id="community" class="py-24 md:py-32 px-6 border-t-3 border-brand-black" data-controller="reveal">
+<section id="community" class="py-24 md:py-32 px-6 border-t-3 border-brand-black">
   <div class="max-w-6xl mx-auto">
-    <div class="mb-16 reveal-up" data-reveal-target="item">
+    <div class="mb-16 reveal">
       <h2 class="heading">Find us everywhere.</h2>
       <p class="text-brand-gray text-lg max-w-2xl leading-relaxed">
         Our Discord is the hub for everything. But we're also on the other platforms you use.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 reveal-up" data-reveal-target="item" style="transition-delay: 100ms;">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 reveal stagger">
       <a href="<%= Rails.application.config.socials[:discord] %>" target="_blank" rel="noopener" class="card card-link hover:shadow-[5px_5px_0px_var(--color-brand-discord)]" style="background-color: var(--color-brand-discord);">
         <div class="flex items-start gap-5">
           <div class="text-white shrink-0">
