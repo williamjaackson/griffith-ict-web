@@ -26,8 +26,10 @@ export default class extends Controller {
   #scan() {
     this.element.querySelectorAll(".stagger").forEach((parent) => {
       if (parent.dataset.staggerApplied) return
+      const interval = parseInt(parent.dataset.staggerInterval) || 100
+      const offset = parseInt(parent.dataset.staggerOffset) || 0
       Array.from(parent.children).forEach((child, i) => {
-        child.style.setProperty("--stagger", `${i * 100}ms`)
+        child.style.setProperty("--stagger", `${offset + i * interval}ms`)
       })
       parent.dataset.staggerApplied = true
     })
