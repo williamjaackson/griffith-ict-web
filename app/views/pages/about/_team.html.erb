@@ -1,6 +1,6 @@
 <section id="team" class="py-24 md:py-32 px-6 border-t-3 border-brand-black" data-controller="reveal tabs">
   <div class="max-w-6xl mx-auto">
-    <div class="mb-12 reveal-up" data-reveal-target="item">
+    <div class="mb-12 reveal">
       <h2 class="heading">Executive team.</h2>
       <p class="text-brand-gray text-lg max-w-2xl leading-relaxed">
         The people who keep things running. Our executive team is elected and appointed each year to lead the club across both campuses.
@@ -8,7 +8,7 @@
     </div>
 
     <%# Campus tabs %>
-    <div class="flex gap-8 mb-10 border-b-3 border-brand-gray/20 reveal-up" data-reveal-target="item" style="transition-delay: 100ms;">
+    <div class="flex gap-8 mb-10 border-b-3 border-brand-gray/20 reveal">
       <% @team.each_with_index do |campus, i| %>
         <button data-tabs-target="btn" data-action="tabs#select" data-index="<%= i %>"
                 class="pb-3 text-sm font-bold cursor-pointer transition-colors duration-200 -mb-[3px] <%= i == 0 ? 'text-brand-black border-b-3 border-brand-red' : 'text-brand-gray border-b-3 border-transparent' %>"
@@ -21,14 +21,13 @@
     <% @team.each_with_index do |campus, ci| %>
       <div data-tabs-target="panel" class="<%= 'hidden' unless ci == 0 %>">
         <% if campus["elected"]&.any? %>
-          <%# Elected roles %>
-          <div class="mb-6 <%= 'reveal-up' if ci == 0 %>" <%= 'data-reveal-target="item" style="transition-delay: 150ms;"'.html_safe if ci == 0 %>>
+          <div class="mb-6 reveal">
             <span class="badge badge-sm">ELECTED</span>
             <p class="text-brand-gray text-sm mt-2">Voted on by members at the Annual General Meeting.</p>
           </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 <%= 'mb-12' if campus["appointed"]&.any? %>">
-            <% campus["elected"].each_with_index do |member, i| %>
-              <div class="<%= 'reveal-up' if ci == 0 %>" <%= "data-reveal-target=\"item\" style=\"transition-delay: #{200 + (i * 100)}ms;\"".html_safe if ci == 0 %>>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 reveal stagger <%= 'mb-12' if campus["appointed"]&.any? %>">
+            <% campus["elected"].each do |member| %>
+              <div>
                 <% unassigned = member["name"].nil? %>
                 <% if unassigned %>
                   <div class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream">
@@ -53,14 +52,13 @@
         <% end %>
 
         <% if campus["appointed"]&.any? %>
-          <%# Appointed roles %>
-          <div class="mb-6 <%= 'reveal-up' if ci == 0 %>" <%= 'data-reveal-target="item" style="transition-delay: 150ms;"'.html_safe if ci == 0 %>>
+          <div class="mb-6 reveal">
             <span class="badge badge-dark badge-sm">APPOINTED</span>
             <p class="text-brand-gray text-sm mt-2">Voted on by the executive team. Applications are opened as needed.</p>
           </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-            <% campus["appointed"].each_with_index do |member, i| %>
-              <div class="<%= 'reveal-up' if ci == 0 %>" <%= "data-reveal-target=\"item\" style=\"transition-delay: #{200 + (i * 100)}ms;\"".html_safe if ci == 0 %>>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 reveal stagger">
+            <% campus["appointed"].each do |member| %>
+              <div>
                 <% unassigned = member["name"].nil? %>
                 <% if unassigned %>
                   <div class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream">

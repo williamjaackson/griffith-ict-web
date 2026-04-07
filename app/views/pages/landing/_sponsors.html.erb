@@ -7,7 +7,7 @@
 
 <section id="sponsors" class="py-24 md:py-32 px-6 border-t-3 border-brand-black bg-brand-cream" data-controller="reveal perk-modal">
   <div class="max-w-6xl mx-auto">
-    <div class="mb-16 reveal-up" data-reveal-target="item">
+    <div class="mb-16 reveal">
       <span class="badge rotate-2 mb-4">OUR PARTNERS</span>
       <h2 class="heading">Backed by industry.</h2>
       <p class="text-brand-gray text-lg max-w-2xl leading-relaxed">
@@ -16,7 +16,7 @@
       </p>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 reveal-up" data-reveal-target="item" style="transition-delay: 100ms;">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 reveal">
       <% @sponsors.each do |sponsor| %>
         <%= render "pages/landing/sponsor_card",
               name: sponsor["name"],
@@ -40,7 +40,7 @@
         perk_total = [((perk_count / 6.0).ceil * 6), 6].max
         perk_placeholder_count = perk_total - perk_count
       %>
-      <div class="mt-16 reveal-up" data-reveal-target="item" style="transition-delay: 200ms;">
+      <div class="mt-16 reveal">
         <p class="text-brand-gray text-base mb-6">Our <a href="/sponsorship#perks-program" class="text-brand-red font-bold hover:underline">perks program</a> partners with companies and organisations that support our members.</p>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-4">
           <% @perks.each do |perk| %>
