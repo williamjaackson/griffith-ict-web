@@ -26,7 +26,7 @@ export default class extends Controller {
   #scan() {
     this.element.querySelectorAll(".stagger").forEach((parent) => {
       if (parent.dataset.staggerApplied) return
-      const interval = parseInt(parent.dataset.staggerInterval) || 150
+      const interval = parseInt(parent.dataset.staggerInterval) || 100
       const defaultOffset = parent.classList.contains("enter") ? 0 : 150
       const offset = parseInt(parent.dataset.staggerOffset) || defaultOffset
       Array.from(parent.children).forEach((child, i) => {

@@ -9,13 +9,13 @@
  * Both use the same `enter-up` keyframe (fade up from 20px).
  *
  * Staggering:
- *   Add `.stagger` to the same parent to auto-delay children by 150ms each.
+ *   Add `.stagger` to the same parent to auto-delay children by 100ms each.
  *   The animation controller sets `--stagger` on each child automatically,
  *   so there is no limit on the number of children. Works with both
  *   `.enter` and `.reveal`.
  *
  *   Options (via data attributes):
- *     data-stagger-interval="200"  — 200ms between each child (default: 150)
+ *     data-stagger-interval="150"  — 150ms between each child (default: 100)
  *     data-stagger-offset="300"    — first child starts at 300ms
  *                                    (default: 0 for .enter, 150 for .reveal)
  *
