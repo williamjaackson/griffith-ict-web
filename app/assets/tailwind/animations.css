@@ -1,4 +1,34 @@
-/* Entrance animations */
+/*
+ * Animation System
+ *
+ * Unified entrance animation system for the site. Two triggers, one look:
+ *
+ *   .enter    — plays immediately on page load (used on hero sections)
+ *   .reveal   — plays when scrolled into view (uses the reveal Stimulus controller)
+ *
+ * Both use the same `enter-up` keyframe (fade up from 20px).
+ *
+ * Staggering:
+ *   Add `.stagger` to the same parent to auto-delay children by 100ms each
+ *   via a `--stagger` CSS variable set per nth-child. Works with both
+ *   `.enter` and `.reveal`.
+ *
+ * Variants:
+ *   .enter-stamp — scale-bounce entrance (landing hero stat cards).
+ *                  Set `--stagger` inline for custom delay timing.
+ *
+ * Usage:
+ *   <div class="enter stagger">     — hero: children fade in staggered on load
+ *   <div class="reveal stagger">    — section: children fade in staggered on scroll
+ *   <div class="reveal">            — section: single block fades in on scroll
+ *   <div class="enter-stamp">       — individual element with bounce entrance
+ */
+
+
+/* ============================================================
+ * Entrance animation system
+ * ============================================================ */
+
 @keyframes enter-up {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -38,7 +68,11 @@
   animation-delay: var(--stagger, 0ms);
 }
 
-/* Page transitions (View Transitions API) */
+
+/* ============================================================
+ * Page transitions (View Transitions API)
+ * ============================================================ */
+
 @view-transition {
   navigation: auto;
 }
@@ -70,7 +104,12 @@
   100% { clip-path: inset(0 0 0 0); }
 }
 
-/* Hamburger animation */
+
+/* ============================================================
+ * Component animations
+ * ============================================================ */
+
+/* Hamburger icon (navbar mobile toggle) */
 .hamburger svg path {
   transition: transform 0.3s, opacity 0.3s;
   transform-origin: center;
