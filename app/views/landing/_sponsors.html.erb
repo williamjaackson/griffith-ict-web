@@ -18,7 +18,7 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 reveal">
       <% @sponsors.each do |sponsor| %>
-        <%= render "pages/landing/sponsor_card",
+        <%= render "landing/sponsor_card",
               name: sponsor["name"],
               tier: sponsor["tier"],
               logo: sponsor["logo"],
@@ -26,7 +26,7 @@
       <% end %>
 
       <% placeholder_count.times do %>
-        <%= render "pages/landing/sponsor_card", placeholder: true %>
+        <%= render "landing/sponsor_card", placeholder: true %>
       <% end %>
 
       <a href="/sponsorship" class="card card-link hover:shadow-[5px_5px_0px_var(--color-brand-black)] grid place-items-center h-24" style="background-color: var(--color-brand-red);">

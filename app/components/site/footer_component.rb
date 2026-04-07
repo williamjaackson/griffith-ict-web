@@ -16,7 +16,7 @@ module Site
           { label: "Sponsorship", href: "/sponsorship#" },
           { label: "Perks Program", href: "/sponsorship#perks-program" },
           { label: "Executive Team", href: "/about#team" },
-          { label: "Design System", href: "/design_system" }
+          { label: "Contact Us", href: "mailto:#{Rails.application.config.socials[:email]}" }
         ]
       }
     ].freeze
