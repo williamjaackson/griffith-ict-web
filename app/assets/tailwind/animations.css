@@ -4,18 +4,27 @@
  * Unified entrance animation system for the site. Two triggers, one look:
  *
  *   .enter    — plays immediately on page load (used on hero sections)
- *   .reveal   — plays when scrolled into view (uses the reveal Stimulus controller)
+ *   .reveal   — plays when scrolled into view (animation controller adds .entered)
  *
  * Both use the same `enter-up` keyframe (fade up from 20px).
  *
  * Staggering:
- *   Add `.stagger` to the same parent to auto-delay children by 100ms each
- *   via a `--stagger` CSS variable set per nth-child. Works with both
+ *   Add `.stagger` to the same parent to auto-delay children by 100ms each.
+ *   The animation controller sets `--stagger` on each child automatically,
+ *   so there is no limit on the number of children. Works with both
  *   `.enter` and `.reveal`.
  *
  * Variants:
  *   .enter-stamp — scale-bounce entrance (landing hero stat cards).
  *                  Set `--stagger` inline for custom delay timing.
+ *
+ * Accessibility:
+ *   All animations are disabled when the user has `prefers-reduced-motion`
+ *   enabled in their OS settings.
+ *
+ * Dynamic content:
+ *   The animation controller uses a MutationObserver to pick up new `.reveal`
+ *   and `.stagger` elements added to the DOM (e.g. via Turbo).
  *
  * Usage:
  *   <div class="enter stagger">     — hero: children fade in staggered on load
