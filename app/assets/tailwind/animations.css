@@ -55,27 +55,39 @@
 
 /* Stagger: delays set by animation controller on connect */
 
-/* Plays immediately on load (heroes) */
-.enter > * {
-  animation: enter-up 0.4s cubic-bezier(0.2, 0, 0, 1) both;
-  animation-delay: var(--stagger, 0ms);
-}
-.enter.stamp > * {
-  animation-name: enter-stamp;
-  animation-duration: 0.35s;
-}
+/* Hidden until triggered */
+.reveal > * { opacity: 0; }
 
-/* Plays on scroll (animation controller adds .entered) */
-.reveal > * {
-  opacity: 0;
-}
+/* Shared entrance (enter plays on load, reveal plays on scroll) */
+.enter > *,
 .reveal.entered > * {
   animation: enter-up 0.4s cubic-bezier(0.2, 0, 0, 1) both;
   animation-delay: var(--stagger, 0ms);
 }
+
+/* Stamp variant: scale-bounce instead of fade-up */
+.enter.stamp > *,
 .reveal.stamp.entered > * {
   animation-name: enter-stamp;
   animation-duration: 0.35s;
+}
+
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .enter > *,
+  .reveal.entered > * {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .reveal > * {
+    opacity: 1;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
 }
 
 
@@ -118,23 +130,6 @@
 /* ============================================================
  * Component animations
  * ============================================================ */
-
-/* Respect user motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  .enter > *,
-  .reveal.entered > * {
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
-  .reveal > * {
-    opacity: 1;
-  }
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation: none;
-  }
-}
 
 /* Hamburger icon (navbar mobile toggle) */
 .hamburger svg path {
