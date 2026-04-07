@@ -58,6 +58,9 @@ body {
 }
 
 /* Layout */
+.container {
+  @apply max-w-6xl mx-auto w-full;
+}
 main > header {
   @apply px-6 pt-8 pb-24;
 }

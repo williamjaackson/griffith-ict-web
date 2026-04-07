@@ -1,5 +1,5 @@
 <div class="px-6 pt-6" data-controller="flash">
-  <div class="max-w-6xl mx-auto flex flex-col gap-2">
+  <div class="container flex flex-col gap-2">
     <% messages.each do |msg| %>
       <div data-flash-target="toast" class="<%= styles_for(msg[:type]) %> border-3 border-brand-black px-5 py-3 text-sm font-semibold text-center relative">
         <%= msg[:message] %>
