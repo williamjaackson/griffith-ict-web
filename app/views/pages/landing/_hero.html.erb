@@ -13,22 +13,22 @@
         </div>
       </div>
 
-      <div class="lg:col-span-2 flex flex-col md:flex-row lg:flex-col gap-5 mt-8 md:mt-0 stagger">
-        <div class="enter-stamp" style="--stagger: 200ms;">
+      <div class="lg:col-span-2 flex flex-col md:flex-row lg:flex-col gap-5 mt-8 md:mt-0 stagger" data-stagger-offset="200">
+        <div class="enter-stamp">
           <div class="card rotate-1" style="background-color: var(--color-brand-red);">
             <span class="block text-4xl md:text-5xl font-extrabold text-white" style="font-family: 'Unbounded', sans-serif;"><%= Rails.application.config.meta[:member_count] %></span>
             <span class="text-white/70 text-sm font-semibold">Members</span>
           </div>
         </div>
 
-        <div class="enter-stamp" style="--stagger: 350ms;">
+        <div class="enter-stamp">
           <div class="card -rotate-2" style="background-color: var(--color-brand-red-50);">
             <span class="block text-4xl md:text-5xl font-extrabold text-brand-black" style="font-family: 'Unbounded', sans-serif;">Weekly</span>
             <span class="text-brand-gray text-sm font-semibold">Events</span>
           </div>
         </div>
 
-        <div class="enter-stamp" style="--stagger: 500ms;">
+        <div class="enter-stamp">
           <div class="card rotate-1" style="background-color: var(--color-brand-cream);">
             <span class="block text-4xl md:text-5xl font-extrabold text-brand-black" style="font-family: 'Unbounded', sans-serif;">2</span>
             <span class="text-brand-gray text-sm font-semibold">Campuses</span>

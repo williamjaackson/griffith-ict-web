@@ -7,7 +7,7 @@
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start reveal stagger" data-stagger-interval="200">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start reveal stagger">
       <% accumulated_perks = [] %>
       <% @tiers.each_with_index do |tier, i| %>
         <% tier_key = tier["name"].downcase %>
