@@ -21,9 +21,8 @@ Rails.application.routes.draw do
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
-  get "about", to: "pages#about"
-  get "design_system", to: "pages#design_system"
-  get "sponsorship", to: "pages#sponsorship"
+  get "about", to: "about#show"
+  get "sponsorship", to: "sponsorship#show"
 
-  root "pages#home"
+  root "landing#show"
 end
