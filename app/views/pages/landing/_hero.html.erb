@@ -1,10 +1,10 @@
-<header class="px-6 pt-8 pb-24">
-  <div class="max-w-6xl mx-auto w-full">
+<header>
+  <div class="container">
     <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-8 items-center">
       <div class="lg:col-span-3 enter stagger">
         <span class="badge -rotate-2 mb-8">GRIFFITH ICT CLUB</span>
         <h1 class="heading">Build. Learn. <span class="heading-highlight">Connect.</span></h1>
-        <p class="text-brand-gray text-lg md:text-xl max-w-lg leading-relaxed mb-10">
+        <p class="text-lg md:text-xl max-w-lg mb-10">
           The student community where you'll find your people. You're a professional or know nothing at all? It doesn't matter. Come learn new skills, meet like-minded peers, and get ahead.
         </p>
         <div class="flex flex-wrap gap-4">
@@ -16,22 +16,22 @@
       <div class="lg:col-span-2 flex flex-col md:flex-row lg:flex-col gap-5 mt-8 md:mt-0 enter stagger stamp" data-stagger-interval="150" data-stagger-offset="200">
         <div>
           <div class="card rotate-1" style="background-color: var(--color-brand-red);">
-            <span class="block text-4xl md:text-5xl font-extrabold text-white" style="font-family: 'Unbounded', sans-serif;"><%= Rails.application.config.meta[:member_count] %></span>
+            <span class="block text-4xl md:text-5xl font-extrabold text-white heading"><%= Rails.application.config.meta[:member_count] %></span>
             <span class="text-white/70 text-sm font-semibold">Members</span>
           </div>
         </div>
 
         <div>
           <div class="card -rotate-2" style="background-color: var(--color-brand-red-50);">
-            <span class="block text-4xl md:text-5xl font-extrabold text-brand-black" style="font-family: 'Unbounded', sans-serif;">Weekly</span>
-            <span class="text-brand-gray text-sm font-semibold">Events</span>
+            <span class="block text-4xl md:text-5xl font-extrabold text-brand-black heading">Weekly</span>
+            <span class="text-sm font-semibold">Events</span>
           </div>
         </div>
 
         <div>
           <div class="card rotate-1" style="background-color: var(--color-brand-cream);">
-            <span class="block text-4xl md:text-5xl font-extrabold text-brand-black" style="font-family: 'Unbounded', sans-serif;">2</span>
-            <span class="text-brand-gray text-sm font-semibold">Campuses</span>
+            <span class="block text-4xl md:text-5xl font-extrabold text-brand-black heading">2</span>
+            <span class="text-sm font-semibold">Campuses</span>
           </div>
         </div>
       </div>

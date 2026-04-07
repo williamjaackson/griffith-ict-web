@@ -5,12 +5,12 @@
   placeholder_count = total - 1 - sponsor_count
 %>
 
-<section id="sponsors" class="py-24 md:py-32 px-6 border-t-3 border-brand-black bg-brand-cream" data-controller="perk-modal">
-  <div class="max-w-6xl mx-auto">
+<section id="sponsors" data-controller="perk-modal">
+  <div class="container">
     <div class="mb-16 reveal">
       <span class="badge rotate-2 mb-4">OUR PARTNERS</span>
       <h2 class="heading">Backed by industry.</h2>
-      <p class="text-brand-gray text-lg max-w-2xl leading-relaxed">
+      <p class="text-lg max-w-2xl">
         We partner with companies who believe in supporting the next generation of tech talent.
         Sponsors help us run bigger events, better hackathons, and provide real-world opportunities for our members.
       </p>
@@ -41,11 +41,11 @@
         perk_placeholder_count = perk_total - perk_count
       %>
       <div class="mt-16 reveal">
-        <p class="text-brand-gray text-base mb-6">Our <a href="/sponsorship#perks-program" class="text-brand-red font-bold hover:underline">perks program</a> partners with companies and organisations that support our members.</p>
+        <p class="text-base mb-6">Our <a href="/sponsorship#perks-program" class="text-brand-red font-bold hover:underline">perks program</a> partners with companies and organisations that support our members.</p>
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-4">
           <% @perks.each do |perk| %>
             <button type="button"
-                    class="group flex items-center justify-center relative border-3 border-brand-black bg-white !p-3 h-20 overflow-visible cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-[5px_5px_0px_var(--color-brand-red)] active:translate-y-0 active:shadow-none"
+                    class="group flex items-center justify-center relative border-3 border-brand-black bg-white p-3 h-20 overflow-visible cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-[5px_5px_0px_var(--color-brand-red)] active:translate-y-0 active:shadow-none"
                     data-action="perk-modal#open"
                     data-perk-name="<%= perk["name"] %>"
                     data-perk-icon="<%= perk["icon"] %>"
@@ -72,8 +72,8 @@
     <div data-perk-modal-target="panel"
          class="bg-brand-bg border-3 border-brand-black shadow-[6px_6px_0px_var(--color-brand-black)] w-full max-w-md p-8 scale-95 opacity-0 transition-all duration-300">
       <img data-perk-modal-target="icon" src="" alt="" class="max-h-16 object-contain mb-4">
-      <h2 data-perk-modal-target="name" class="text-2xl font-bold text-brand-black mb-3" style="font-family: 'Unbounded', sans-serif;"></h2>
-      <p data-perk-modal-target="description" class="text-brand-gray leading-relaxed mb-6"></p>
+      <h3 data-perk-modal-target="name" class="heading mb-3"></h3>
+      <p data-perk-modal-target="description" class="mb-6"></p>
       <a data-perk-modal-target="link" href="#" target="_blank" rel="noopener" class="btn btn-primary">
         Check it out
       </a>

@@ -1,11 +1,11 @@
 <footer class="bg-brand-black border-t-3 border-brand-black pt-16 pb-8 px-6">
-  <div class="max-w-6xl mx-auto">
+  <div class="container">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 mb-16">
       <div class="col-span-2">
         <div class="mb-4">
           <%= image_tag "/logo/GriffithICTClubLogo.svg", alt: "Griffith ICT Club", class: "h-6 w-auto brightness-0 invert", draggable: "false" %>
         </div>
-        <p class="text-white/40 text-sm leading-relaxed max-w-sm mb-5">
+        <p class="text-white/40 text-sm max-w-sm mb-5">
           Made with questionable amounts of caffeine by students who should probably be studying.
           You've scrolled this far? Honestly, we didn't think you'd read this.
           Go join the Discord already.
@@ -28,7 +28,7 @@
 
       <% link_groups.each do |group| %>
         <div>
-          <h4 class="text-brand-red font-bold text-sm mb-4" style="font-family: 'Unbounded', sans-serif; font-weight: 600;"><%= group[:title] %></h4>
+          <h5 class="heading text-brand-red"><%= group[:title] %></h5>
           <ul class="flex flex-col gap-3">
             <% group[:links].each do |link| %>
               <li>

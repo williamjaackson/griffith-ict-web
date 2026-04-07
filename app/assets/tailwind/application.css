@@ -30,6 +30,13 @@ body {
   background-color: var(--color-brand-bg);
   color: var(--color-brand-gray);
   font-family: 'Plus Jakarta Sans', sans-serif;
+  line-height: 1.625; /* leading-relaxed */
+}
+
+@layer base {
+  h1, h2, h3, h4, h5 {
+    color: var(--color-brand-black);
+  }
 }
 
 /* Text selection */
@@ -57,16 +64,30 @@ body {
   background-color: var(--color-brand-red-dark);
 }
 
+/* Layout */
+.container {
+  @apply max-w-6xl mx-auto w-full;
+}
+main > header {
+  @apply px-6 pt-8 pb-24;
+}
+main > section {
+  @apply py-24 md:py-32 px-6 border-t-3 border-brand-black;
+}
+main > section:nth-of-type(odd) {
+  background-color: var(--color-brand-cream);
+}
+
 /* UI primitives */
 .heading {
   font-family: 'Unbounded', sans-serif;
-  color: var(--color-brand-black);
 }
 
 h1.heading { @apply text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.95] mb-8; font-weight: 800; }
 h2.heading { @apply text-3xl md:text-5xl mb-4; font-weight: 800; }
-h3.heading { @apply text-xl mb-2; font-weight: 700; }
-h4.heading { @apply text-sm mb-4 text-brand-red; font-weight: 600; }
+h3.heading { @apply text-2xl md:text-3xl mb-2; font-weight: 700; }
+h4.heading { @apply text-xl mb-2; font-weight: 700; }
+h5.heading { @apply text-sm mb-4; font-weight: 600; }
 
 .heading-highlight {
   @apply relative inline-block;
@@ -95,6 +116,9 @@ h4.heading { @apply text-sm mb-4 text-brand-red; font-weight: 600; }
 
 .card {
   @apply border-3 border-brand-black relative overflow-hidden p-6 h-full bg-white;
+}
+.card-sm {
+  @apply p-4 h-24 overflow-visible;
 }
 .card-link {
   @apply transition-all duration-200 hover:-translate-y-1 active:translate-y-0 active:shadow-none;

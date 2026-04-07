@@ -1,8 +1,8 @@
-<section class="py-24 md:py-32 px-6 border-t-3 border-brand-black bg-brand-cream">
-  <div class="max-w-6xl mx-auto">
+<section>
+  <div class="container">
     <div class="mb-16 reveal">
       <h2 class="heading">Sponsorship tiers.</h2>
-      <p class="text-brand-gray text-lg max-w-2xl leading-relaxed">
+      <p class="text-lg max-w-2xl">
         Each tier builds on the one before it. Pick the level that fits your goals and budget.
       </p>
     </div>
@@ -15,17 +15,17 @@
           <div class="card <%= tier["rotation"] %>">
             <div class="absolute left-0 top-0 bottom-0 w-3" style="background-color: <%= tier["color"] %>;"></div>
             <span class="badge badge-sm" style="background-color: <%= tier["color"] %>;"><%= tier["name"].upcase %></span>
-            <p class="text-2xl font-extrabold text-brand-black mt-3" style="font-family: 'Unbounded', sans-serif;"><%= tier["price"] %></p>
-            <p class="text-brand-gray text-sm mt-4 mb-6 leading-relaxed"><%= tier["description"] %></p>
+            <p class="text-2xl font-extrabold text-brand-black mt-3 heading"><%= tier["price"] %></p>
+            <p class="text-sm mt-4 mb-6"><%= tier["description"] %></p>
             <ul class="flex flex-col gap-3 text-sm">
               <% accumulated_perks.each do |perk| %>
-                <li class="flex items-start gap-2 text-brand-gray">
+                <li class="flex items-start gap-2">
                   <span class="font-bold mt-0.5" style="color: var(--color-tier-<%= perk[:tier] %>);">&#10003;</span>
                   <%= perk[:label] %>
                 </li>
               <% end %>
               <% tier["perks"].each do |perk| %>
-                <li class="flex items-start gap-2 text-brand-gray">
+                <li class="flex items-start gap-2">
                   <span class="font-bold mt-0.5" style="color: var(--color-tier-<%= tier_key %>);">&#10003;</span>
                   <%= perk %>
                 </li>

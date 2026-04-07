@@ -1,6 +1,6 @@
 <div class="max-w-4xl mx-auto px-4 py-12">
   <div class="flex items-center justify-between mb-8">
-    <h1 class="font-[Unbounded] font-bold text-3xl text-brand-black">Invites</h1>
+    <h2 class="heading">Invites</h2>
     <a href="<%= new_admin_invite_path %>" class="btn btn-primary btn-sm">New invite</a>
   </div>
 
@@ -10,7 +10,7 @@
         <div class="bg-white border-3 border-brand-black p-5 flex items-center justify-between" data-controller="clipboard" data-clipboard-text-value="<%= accept_invite_url(token: invite.token) %>">
           <div>
             <p class="font-semibold text-brand-black"><%= invite.email %></p>
-            <p class="text-sm text-brand-gray">
+            <p class="text-sm">
               <%= invite.role.capitalize %> ·
               Invited by <%= invite.invited_by.email_address %> ·
               <% if invite.accepted? %>
@@ -38,6 +38,6 @@
       <% end %>
     </div>
   <% else %>
-    <p class="text-brand-gray">No invites yet.</p>
+    <p class="">No invites yet.</p>
   <% end %>
 </div>
