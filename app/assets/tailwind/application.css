@@ -58,6 +58,9 @@ body {
 }
 
 /* Layout */
+main > header {
+  @apply px-6 pt-8 pb-24;
+}
 main > section {
   @apply py-24 md:py-32 px-6 border-t-3 border-brand-black;
 }
