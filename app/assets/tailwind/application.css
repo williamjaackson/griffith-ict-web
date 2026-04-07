@@ -115,6 +115,9 @@ h4.heading { @apply text-sm mb-4; font-weight: 600; }
 .card {
   @apply border-3 border-brand-black relative overflow-hidden p-6 h-full bg-white;
 }
+.card-sm {
+  @apply p-4 h-24 overflow-visible;
+}
 .card-link {
   @apply transition-all duration-200 hover:-translate-y-1 active:translate-y-0 active:shadow-none;
 }

@@ -45,7 +45,7 @@
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-4">
           <% @perks.each do |perk| %>
             <button type="button"
-                    class="group flex items-center justify-center relative border-3 border-brand-black bg-white !p-3 h-20 overflow-visible cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-[5px_5px_0px_var(--color-brand-red)] active:translate-y-0 active:shadow-none"
+                    class="group flex items-center justify-center relative border-3 border-brand-black bg-white p-3 h-20 overflow-visible cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-[5px_5px_0px_var(--color-brand-red)] active:translate-y-0 active:shadow-none"
                     data-action="perk-modal#open"
                     data-perk-name="<%= perk["name"] %>"
                     data-perk-icon="<%= perk["icon"] %>"

@@ -9,7 +9,7 @@
     }
     tier_color = tier_colors[tier.upcase]
   %>
-  <a href="<%= website %>" target="_blank" rel="noopener" class="card card-link group flex items-center justify-center !p-4 !h-24 !overflow-visible hover:shadow-[5px_5px_0px_var(--color-brand-red)]">
+  <a href="<%= website %>" target="_blank" rel="noopener" class="card card-sm card-link group flex items-center justify-center hover:shadow-[5px_5px_0px_var(--color-brand-red)]">
     <span class="badge badge-sm absolute -top-3 -right-3 rotate-12" style="background-color: <%= tier_color %>;"><%= tier.upcase %></span>
     <%= image_tag logo, alt: name, class: "max-h-14 max-w-full object-contain" %>
     <span class="badge badge-dark badge-sm absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity"><%= name.upcase %></span>
