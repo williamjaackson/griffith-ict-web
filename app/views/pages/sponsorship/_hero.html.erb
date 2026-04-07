@@ -1,24 +1,12 @@
-<style>
-  @keyframes hero-in {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .animate-hero-in { animation: hero-in 0.4s cubic-bezier(0.2, 0, 0, 1) both; }
-</style>
-
 <header class="px-6 pt-8 pb-24">
-  <div class="max-w-6xl mx-auto">
-    <div class="animate-hero-in">
-      <span class="badge -rotate-2 mb-8">SPONSORSHIP</span>
-    </div>
-    <div class="animate-hero-in" style="animation-delay: 100ms;">
-      <h1 class="heading">Partner <span class="heading-highlight">with us.</span></h1>
-    </div>
-    <p class="animate-hero-in text-brand-gray text-lg md:text-xl max-w-2xl leading-relaxed mb-10" style="animation-delay: 200ms;">
+  <div class="max-w-6xl mx-auto enter stagger">
+    <span class="badge -rotate-2 mb-8">SPONSORSHIP</span>
+    <h1 class="heading">Partner <span class="heading-highlight">with us.</span></h1>
+    <p class="text-brand-gray text-lg md:text-xl max-w-2xl leading-relaxed mb-10">
       Help us run bigger events, better hackathons, and create real-world opportunities for <%= Rails.application.config.meta[:member_count] %> students.
       In return, get direct access to Griffith's most engaged tech talent.
     </p>
-    <div class="animate-hero-in flex flex-wrap gap-4" style="animation-delay: 300ms;">
+    <div class="flex flex-wrap gap-4">
       <a href="mailto:<%= Rails.application.config.socials[:email] %>" class="btn btn-primary">Get in touch</a>
       <a href="/" class="btn btn-secondary">Back to home</a>
     </div>
