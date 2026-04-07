@@ -1,32 +1,39 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["item"]
-
   connect() {
-    this.#applyStaggerDelays()
-
-    this.observer = new IntersectionObserver((entries) => {
+    this.intersectionObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("revealed")
-          this.observer.unobserve(entry.target)
+          entry.target.classList.add("entered")
+          this.intersectionObserver.unobserve(entry.target)
         }
       })
     }, { threshold: 0.15 })
 
-    this.itemTargets.forEach((item) => this.observer.observe(item))
+    this.mutationObserver = new MutationObserver(() => this.#scan())
+
+    this.#scan()
+
+    this.mutationObserver.observe(this.element, { childList: true, subtree: true })
   }
 
   disconnect() {
-    this.observer?.disconnect()
+    this.intersectionObserver?.disconnect()
+    this.mutationObserver?.disconnect()
   }
 
-  #applyStaggerDelays() {
+  #scan() {
     this.element.querySelectorAll(".stagger").forEach((parent) => {
+      if (parent.dataset.staggerApplied) return
       Array.from(parent.children).forEach((child, i) => {
         child.style.setProperty("--stagger", `${i * 100}ms`)
       })
+      parent.dataset.staggerApplied = true
+    })
+
+    this.element.querySelectorAll(".reveal:not(.entered)").forEach((el) => {
+      this.intersectionObserver.observe(el)
     })
   }
 }
