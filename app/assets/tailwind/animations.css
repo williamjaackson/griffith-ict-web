@@ -17,7 +17,7 @@
  *   Options (via data attributes):
  *     data-stagger-interval="150"  — 150ms between each child (default: 100)
  *     data-stagger-offset="300"    — first child starts at 300ms
- *                                    (default: 0 for .enter, 150 for .reveal)
+ *                                    (default: 0 for .enter, 100 for .reveal)
  *
  * Variants:
  *   .enter-stamp — scale-bounce entrance (landing hero stat cards).
