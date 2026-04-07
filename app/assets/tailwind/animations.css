@@ -39,15 +39,7 @@
   100% { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-/* Stagger: auto-delays children by 100ms each */
-.stagger > :nth-child(1) { --stagger: 0ms; }
-.stagger > :nth-child(2) { --stagger: 100ms; }
-.stagger > :nth-child(3) { --stagger: 200ms; }
-.stagger > :nth-child(4) { --stagger: 300ms; }
-.stagger > :nth-child(5) { --stagger: 400ms; }
-.stagger > :nth-child(6) { --stagger: 500ms; }
-.stagger > :nth-child(7) { --stagger: 600ms; }
-.stagger > :nth-child(8) { --stagger: 700ms; }
+/* Stagger: delays set by animation controller on connect */
 
 /* Plays immediately on load (heroes) */
 .enter > * {

@@ -4,6 +4,8 @@ export default class extends Controller {
   static targets = ["item"]
 
   connect() {
+    this.#applyStaggerDelays()
+
     this.observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -18,5 +20,13 @@ export default class extends Controller {
 
   disconnect() {
     this.observer?.disconnect()
+  }
+
+  #applyStaggerDelays() {
+    this.element.querySelectorAll(".stagger").forEach((parent) => {
+      Array.from(parent.children).forEach((child, i) => {
+        child.style.setProperty("--stagger", `${i * 100}ms`)
+      })
+    })
   }
 }
