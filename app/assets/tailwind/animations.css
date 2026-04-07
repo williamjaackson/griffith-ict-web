@@ -14,6 +14,9 @@
  *   so there is no limit on the number of children. Works with both
  *   `.enter` and `.reveal`.
  *
+ *   Custom interval:
+ *     data-stagger-interval="200"  — 200ms between each child (default: 100)
+ *
  * Variants:
  *   .enter-stamp — scale-bounce entrance (landing hero stat cards).
  *                  Set `--stagger` inline for custom delay timing.
