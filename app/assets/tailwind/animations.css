@@ -20,8 +20,8 @@
  *                                    (default: 0 for .enter, 100 for .reveal)
  *
  * Variants:
- *   .enter-stamp — scale-bounce entrance (landing hero stat cards).
- *                  Set `--stagger` inline for custom delay timing.
+ *   .stamp — scale-bounce entrance modifier. Add to the parent alongside
+ *            `.enter` or `.reveal` to make all children bounce in.
  *
  * Accessibility:
  *   All animations are disabled when the user has `prefers-reduced-motion`
@@ -35,7 +35,7 @@
  *   <div class="enter stagger">     — hero: children fade in staggered on load
  *   <div class="reveal stagger">    — section: children fade in staggered on scroll
  *   <div class="reveal">            — section: single block fades in on scroll
- *   <div class="enter-stamp">       — individual element with bounce entrance
+ *   <div class="reveal stagger stamp"> — children bounce in on scroll
  */
 
 
@@ -60,18 +60,22 @@
   animation: enter-up 0.4s cubic-bezier(0.2, 0, 0, 1) both;
   animation-delay: var(--stagger, 0ms);
 }
-.enter-stamp {
-  animation: enter-stamp 0.35s cubic-bezier(0.2, 0, 0, 1) both;
-  animation-delay: var(--stagger, 0ms);
+.enter.stamp > * {
+  animation-name: enter-stamp;
+  animation-duration: 0.35s;
 }
 
-/* Plays on scroll (reveal controller adds .entered) */
+/* Plays on scroll (animation controller adds .entered) */
 .reveal > * {
   opacity: 0;
 }
 .reveal.entered > * {
   animation: enter-up 0.4s cubic-bezier(0.2, 0, 0, 1) both;
   animation-delay: var(--stagger, 0ms);
+}
+.reveal.stamp.entered > * {
+  animation-name: enter-stamp;
+  animation-duration: 0.35s;
 }
 
 
@@ -118,7 +122,6 @@
 /* Respect user motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .enter > *,
-  .enter-stamp,
   .reveal.entered > * {
     animation: none;
     opacity: 1;
