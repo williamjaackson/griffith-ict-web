@@ -11,7 +11,7 @@
         <div data-dropdown-target="menu" class="grid grid-rows-[0fr] transition-[grid-template-rows,opacity] duration-300 opacity-0">
           <div class="overflow-hidden flex flex-col items-center pt-2">
             <% link[:children].each do |child| %>
-              <a href="<%= child[:href] %>" class="text-lg font-bold text-brand-gray hover:text-brand-red transition-colors py-2" data-action="navbar#closeMenu">
+              <a href="<%= child[:href] %>" class="text-lg font-bold hover:text-brand-red transition-colors py-2" data-action="navbar#closeMenu">
                 <%= child[:label] %>
               </a>
             <% end %>

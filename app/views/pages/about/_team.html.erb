@@ -2,7 +2,7 @@
   <div class="container">
     <div class="mb-12 reveal">
       <h2 class="heading">Executive team.</h2>
-      <p class="text-brand-gray text-lg max-w-2xl leading-relaxed">
+      <p class="text-lg max-w-2xl">
         The people who keep things running. Our executive team is elected and appointed each year to lead the club across both campuses.
       </p>
     </div>
@@ -11,7 +11,7 @@
     <div class="flex gap-8 mb-10 border-b-3 border-brand-gray/20">
       <% @team.each_with_index do |campus, i| %>
         <button data-tabs-target="btn" data-action="tabs#select" data-index="<%= i %>"
-                class="pb-3 text-sm font-bold cursor-pointer transition-colors duration-200 -mb-[3px] heading <%= i == 0 ? 'text-brand-black border-b-3 border-brand-red' : 'text-brand-gray border-b-3 border-transparent' %>">
+                class="pb-3 text-sm font-bold cursor-pointer transition-colors duration-200 -mb-[3px] heading <%= i == 0 ? 'text-brand-black border-b-3 border-brand-red' : 'border-b-3 border-transparent' %>">
           <%= campus["name"] %>
         </button>
       <% end %>
@@ -22,7 +22,7 @@
         <% if campus["elected"]&.any? %>
           <div class="mb-6 reveal">
             <span class="badge badge-sm">ELECTED</span>
-            <p class="text-brand-gray text-sm mt-2">Voted on by members at the Annual General Meeting.</p>
+            <p class="text-sm mt-2">Voted on by members at the Annual General Meeting.</p>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 reveal stagger <%= 'mb-12' if campus["appointed"]&.any? %>">
             <% campus["elected"].each do |member| %>
@@ -31,7 +31,7 @@
                 <% if unassigned %>
                   <div class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream">
                     <div class="w-10 h-10 bg-brand-gray/10 flex items-center justify-center mb-4">
-                      <%= lucide_icon(member["icon"], class: "w-5 h-5 text-brand-gray opacity-40") %>
+                      <%= lucide_icon(member["icon"], class: "w-5 h-5 opacity-40") %>
                     </div>
                     <h4 class="heading"><%= member["role"] %></h4>
                     <p class="text-brand-gray/50 text-sm italic">Unassigned</p>
@@ -42,7 +42,7 @@
                       <%= lucide_icon(member["icon"], class: "w-5 h-5 text-brand-red") %>
                     </div>
                     <h4 class="heading"><%= member["role"] %></h4>
-                    <p class="text-brand-gray text-sm"><%= member["name"] %></p>
+                    <p class="text-sm"><%= member["name"] %></p>
                   </div>
                 <% end %>
               </div>
@@ -53,7 +53,7 @@
         <% if campus["appointed"]&.any? %>
           <div class="mb-6 reveal">
             <span class="badge badge-dark badge-sm">APPOINTED</span>
-            <p class="text-brand-gray text-sm mt-2">Voted on by the executive team. Applications are opened as needed.</p>
+            <p class="text-sm mt-2">Voted on by the executive team. Applications are opened as needed.</p>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 reveal stagger">
             <% campus["appointed"].each do |member| %>
@@ -62,7 +62,7 @@
                 <% if unassigned %>
                   <div class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream">
                     <div class="w-10 h-10 bg-brand-gray/10 flex items-center justify-center mb-4">
-                      <%= lucide_icon(member["icon"], class: "w-5 h-5 text-brand-gray opacity-40") %>
+                      <%= lucide_icon(member["icon"], class: "w-5 h-5 opacity-40") %>
                     </div>
                     <h4 class="heading"><%= member["role"] %></h4>
                     <p class="text-brand-gray/50 text-sm italic">Unassigned</p>
@@ -73,7 +73,7 @@
                       <%= lucide_icon(member["icon"], class: "w-5 h-5 text-brand-red") %>
                     </div>
                     <h4 class="heading"><%= member["role"] %></h4>
-                    <p class="text-brand-gray text-sm"><%= member["name"] %></p>
+                    <p class="text-sm"><%= member["name"] %></p>
                   </div>
                 <% end %>
               </div>
