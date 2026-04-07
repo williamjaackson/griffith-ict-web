@@ -5,7 +5,7 @@
 
   <%# Step 1: Location picker %>
   <div data-membership-modal-target="step1">
-    <h2 class="text-2xl font-bold text-brand-black mb-2" style="font-family: 'Unbounded', sans-serif;">
+    <h2 class="text-2xl font-bold text-brand-black mb-2 heading">
       Where are you studying?
     </h2>
     <p class="text-brand-gray text-sm mb-6">This helps us point you to the right sign-up link.</p>
@@ -26,7 +26,7 @@
       Back
     </button>
 
-    <h2 class="text-2xl font-bold text-brand-black mb-2" style="font-family: 'Unbounded', sans-serif;">
+    <h2 class="text-2xl font-bold text-brand-black mb-2 heading">
       Become a Member
     </h2>
     <p class="text-brand-gray text-sm mb-6">Two quick steps and you're in.</p>
@@ -36,7 +36,7 @@
       <a href="<%= discord_url %>" target="_blank" rel="noopener"
          data-action="membership-modal#trackClick" data-step="discord"
          class="flex items-start gap-4 p-4 hover:bg-brand-cream transition-colors duration-200 group cursor-pointer">
-        <span data-membership-modal-target="discordBadge" class="mt-1 shrink-0 w-8 h-8 flex items-center justify-center border-3 border-brand-black bg-brand-red text-white font-bold text-sm transition-colors duration-300" style="font-family: 'Unbounded', sans-serif;">1</span>
+        <span data-membership-modal-target="discordBadge" class="mt-1 shrink-0 w-8 h-8 flex items-center justify-center border-3 border-brand-black bg-brand-red text-white font-bold text-sm transition-colors duration-300 heading">1</span>
         <div class="flex-1">
           <h3 class="font-bold text-brand-black mb-1">Join our Discord</h3>
           <p class="text-brand-gray text-sm">Our main communication channel for events, help, and chat.</p>
@@ -53,7 +53,7 @@
       <a data-membership-modal-target="campusGroupsLink" href="#" target="_blank" rel="noopener"
          data-action="membership-modal#trackClick" data-step="campus-groups"
          class="flex items-start gap-4 p-4 hover:bg-brand-cream transition-colors duration-200 group cursor-pointer">
-        <span data-membership-modal-target="campusGroupsBadge" class="mt-1 shrink-0 w-8 h-8 flex items-center justify-center border-3 border-brand-black bg-brand-red text-white font-bold text-sm transition-colors duration-300" style="font-family: 'Unbounded', sans-serif;">2</span>
+        <span data-membership-modal-target="campusGroupsBadge" class="mt-1 shrink-0 w-8 h-8 flex items-center justify-center border-3 border-brand-black bg-brand-red text-white font-bold text-sm transition-colors duration-300 heading">2</span>
         <div class="flex-1">
           <h3 class="font-bold text-brand-black mb-1">Sign up on CampusGroups</h3>
           <p class="text-brand-gray text-sm">Official Griffith club registration. Takes 30 seconds.</p>
@@ -68,7 +68,7 @@
     </div>
 
     <div data-membership-modal-target="doneSection" class="hidden mt-8 pt-8 border-t-3 border-brand-cream text-center">
-      <h3 class="font-bold text-brand-black text-lg mb-1" style="font-family: 'Unbounded', sans-serif;">You're Done!</h3>
+      <h3 class="font-bold text-brand-black text-lg mb-1 heading">You're Done!</h3>
       <p class="text-brand-gray text-sm mb-4">Don't forget to verify yourself in the Discord so you can start chatting.</p>
       <button data-action="membership-modal#close"
               class="btn btn-primary w-full !bg-green-600">

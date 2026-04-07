@@ -15,7 +15,7 @@
           <div class="card <%= tier["rotation"] %>">
             <div class="absolute left-0 top-0 bottom-0 w-3" style="background-color: <%= tier["color"] %>;"></div>
             <span class="badge badge-sm" style="background-color: <%= tier["color"] %>;"><%= tier["name"].upcase %></span>
-            <p class="text-2xl font-extrabold text-brand-black mt-3" style="font-family: 'Unbounded', sans-serif;"><%= tier["price"] %></p>
+            <p class="text-2xl font-extrabold text-brand-black mt-3 heading"><%= tier["price"] %></p>
             <p class="text-brand-gray text-sm mt-4 mb-6 leading-relaxed"><%= tier["description"] %></p>
             <ul class="flex flex-col gap-3 text-sm">
               <% accumulated_perks.each do |perk| %>
