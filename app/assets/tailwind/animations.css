@@ -109,6 +109,24 @@
  * Component animations
  * ============================================================ */
 
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .enter > *,
+  .enter-stamp,
+  .reveal.entered > * {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .reveal > * {
+    opacity: 1;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
 /* Hamburger icon (navbar mobile toggle) */
 .hamburger svg path {
   transition: transform 0.3s, opacity 0.3s;
