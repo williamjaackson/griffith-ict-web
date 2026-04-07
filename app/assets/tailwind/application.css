@@ -93,6 +93,56 @@ body {
 .reveal-up { opacity: 0; transform: translateY(20px); transition: opacity 0.4s, transform 0.4s cubic-bezier(0.2, 0, 0, 1); }
 .reveal-up.revealed { opacity: 1; transform: translateY(0); }
 
+/* UI primitives */
+.heading {
+  font-family: 'Unbounded', sans-serif;
+  color: var(--color-brand-black);
+}
+
+h1.heading { @apply text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.95] mb-8; font-weight: 800; }
+h2.heading { @apply text-3xl md:text-5xl mb-4; font-weight: 800; }
+h3.heading { @apply text-xl mb-2; font-weight: 700; }
+h4.heading { @apply text-sm mb-4 text-brand-red; font-weight: 600; }
+
+.heading-highlight {
+  @apply relative inline-block;
+}
+.heading-highlight::after {
+  content: '';
+  @apply absolute -bottom-1 left-0 right-0 h-4 bg-brand-red/20 -z-10;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center text-center font-bold border-3 border-brand-black cursor-pointer transition-all duration-200 hover:-translate-y-1 active:translate-y-0 active:shadow-none px-8 py-4 text-base;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 600;
+}
+.btn-primary { @apply bg-brand-red text-white hover:shadow-[5px_5px_0px_var(--color-brand-black)]; }
+.btn-secondary { @apply bg-white text-brand-black hover:shadow-[5px_5px_0px_var(--color-brand-red)]; }
+.btn-sm { @apply px-5 py-2.5 text-sm; }
+
+.badge {
+  @apply inline-block text-white font-bold border-3 border-brand-black bg-brand-red text-sm px-4 py-1.5 uppercase;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 600;
+}
+.badge-dark { @apply bg-brand-black; }
+.badge-sm { @apply text-xs px-3 py-1 normal-case; }
+
+.card {
+  @apply border-3 border-brand-black relative overflow-hidden p-6 h-full bg-white;
+}
+.card-link {
+  @apply transition-all duration-200 hover:-translate-y-1 active:translate-y-0 active:shadow-none;
+}
+
+.input-field {
+  @apply w-full rounded-md border-2 border-brand-cream bg-brand-bg focus:outline-none focus:border-brand-red px-3 py-2.5;
+}
+.input-label {
+  @apply block text-sm font-semibold text-brand-black mb-1;
+}
+
 /* Hamburger animation */
 .hamburger svg path {
   transition: transform 0.3s, opacity 0.3s;

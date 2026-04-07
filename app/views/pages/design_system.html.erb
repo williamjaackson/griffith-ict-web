@@ -1,47 +1,48 @@
 <div class="max-w-6xl mx-auto px-6 pt-8 flex flex-col items-start gap-8">
-  <%= ui_heading("Heading Numero Uno", level: 1, highlight: "Numero Uno") %>
-  <%= ui_heading("Heading 2", level: 2) %>
-  <%= ui_heading("Heading 3", level: 3) %>
-  <%= ui_heading("Heading 4", level: 4) %>
+  <h1 class="heading">Heading <span class="heading-highlight">Numero Uno</span></h1>
+  <h2 class="heading">Heading 2</h2>
+  <h3 class="heading">Heading 3</h3>
+  <h4 class="heading">Heading 4</h4>
 
   <p class="text-lg max-w-2xl leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
 
   <div class="flex flex-wrap items-start gap-4">
-    <%= ui_badge("Primary Badge") %>
-    <%= ui_badge("Tilted Badge", class: "-rotate-2") %>
-    <%= ui_badge("Dark Badge", variant: :dark) %>
-    <%= ui_badge("Small Badge", size: :sm) %>
-    <%= ui_badge("Small Color Badge", size: :sm, color: "var(--color-brand-red-300)") %>
+    <span class="badge">Primary Badge</span>
+    <span class="badge -rotate-2">Tilted Badge</span>
+    <span class="badge badge-dark">Dark Badge</span>
+    <span class="badge badge-sm">Small Badge</span>
+    <span class="badge badge-sm" style="background-color: var(--color-brand-red-300);">Small Color Badge</span>
   </div>
 
   <div class="flex flex-wrap items-center gap-6">
-    <%= ui_logo %>
-    <%= ui_logo(type: :full) %>
+    <%= image_tag "/logo/GriffithICTClubIcon.svg", alt: "Griffith ICT Club", class: "h-8 w-auto", draggable: "false" %>
+    <%= image_tag "/logo/GriffithICTClubLogo.svg", alt: "Griffith ICT Club", class: "h-12 w-auto", draggable: "false" %>
   </div>
 
   <div class="flex flex-wrap items-start gap-4">
-    <%= ui_button("Primary Button", href: "#", variant: :primary) %>
-    <%= ui_button("Secondary Button", href: "#", variant: :secondary) %>
-    <%= ui_button("Small Button", href: "#", variant: :primary, size: :sm) %>
+    <a href="#" class="btn btn-primary">Primary Button</a>
+    <a href="#" class="btn btn-secondary">Secondary Button</a>
+    <a href="#" class="btn btn-primary btn-sm">Small Button</a>
   </div>
 
   <div class="flex flex-wrap items-start gap-6">
-    <%= ui_card(color: "var(--color-brand-red)") do %>
+    <div class="card" style="background-color: var(--color-brand-red);">
       <p class="text-white/80 text-sm">Coloured Card</p>
-    <% end %>
+    </div>
 
-    <%= ui_card(shadow: "var(--color-brand-red-300)") do %>
-      <%= ui_heading("Emphasised Card", level: 3) %>
-    <% end %>
+    <div class="card" style="box-shadow: 5px 5px 0px var(--color-brand-red-300);">
+      <h3 class="heading">Emphasised Card</h3>
+    </div>
 
-    <%= ui_card(href: "#", color: "var(--color-brand-discord)") do %>
+    <a href="#" class="card card-link" style="background-color: var(--color-brand-discord);">
       <p class="text-white/80 text-sm">Clickable Card</p>
-    <% end %>
+    </a>
 
-    <%= ui_card(href: "#", sidebar: "var(--color-brand-red-200)") do %>
-      <%= ui_heading("Card", level: 3) %>
+    <a href="#" class="card card-link hover:shadow-[5px_5px_0px_var(--color-brand-red-200)]">
+      <div class="absolute left-0 top-0 bottom-0 w-3" style="background-color: var(--color-brand-red-200);"></div>
+      <h3 class="heading">Card</h3>
       <p class="text-sm mt-1">That has a Sidebar</p>
-    <% end %>
+    </a>
   </div>
 
   </br>

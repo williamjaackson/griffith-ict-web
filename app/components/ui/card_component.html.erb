@@ -1,6 +1,0 @@
-<%= content_tag tag_name, class: classes, style: style, **html_options do %>
-  <% if @sidebar %>
-    <div class="absolute left-0 top-0 bottom-0 w-3" style="background-color: <%= @sidebar %>;"></div>
-  <% end %>
-  <%= content %>
-<% end %>

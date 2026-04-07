@@ -1,7 +1,7 @@
 <section class="py-24 md:py-32 px-6 border-t-3 border-brand-black bg-brand-cream" data-controller="reveal">
   <div class="max-w-6xl mx-auto">
     <div class="mb-16 reveal-up" data-reveal-target="item">
-      <%= ui_heading("Sponsorship tiers.", level: 2) %>
+      <h2 class="heading">Sponsorship tiers.</h2>
       <p class="text-brand-gray text-lg max-w-2xl leading-relaxed">
         Each tier builds on the one before it. Pick the level that fits your goals and budget.
       </p>
@@ -12,8 +12,9 @@
       <% @tiers.each_with_index do |tier, i| %>
         <% tier_key = tier["name"].downcase %>
         <div class="reveal-up" data-reveal-target="item" style="transition-delay: <%= (i + 1) * 100 %>ms;">
-          <%= ui_card(sidebar: tier["color"], class: tier["rotation"]) do %>
-            <%= ui_badge(tier["name"].upcase, size: :sm, color: tier["color"]) %>
+          <div class="card <%= tier["rotation"] %>">
+            <div class="absolute left-0 top-0 bottom-0 w-3" style="background-color: <%= tier["color"] %>;"></div>
+            <span class="badge badge-sm" style="background-color: <%= tier["color"] %>;"><%= tier["name"].upcase %></span>
             <p class="text-2xl font-extrabold text-brand-black mt-3" style="font-family: 'Unbounded', sans-serif;"><%= tier["price"] %></p>
             <p class="text-brand-gray text-sm mt-4 mb-6 leading-relaxed"><%= tier["description"] %></p>
             <ul class="flex flex-col gap-3 text-sm">
@@ -30,7 +31,7 @@
                 </li>
               <% end %>
             </ul>
-          <% end %>
+          </div>
         </div>
         <% tier["perks"].each { |p| accumulated_perks << { label: p, tier: tier_key } } %>
       <% end %>

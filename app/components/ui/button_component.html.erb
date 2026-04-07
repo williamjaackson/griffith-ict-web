@@ -1,5 +1,0 @@
-<% if @href %>
-  <%= link_to @label, @href, class: classes, style: style, **link_options %>
-<% else %>
-  <%= content_tag :button, @label, class: classes, style: style, **link_options %>
-<% end %>

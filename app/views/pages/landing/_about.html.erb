@@ -1,7 +1,7 @@
 <section id="events" class="py-24 md:py-32 px-6 border-t-3 border-brand-black bg-brand-cream" data-controller="reveal expand">
   <div class="max-w-6xl mx-auto">
     <div class="mb-16 reveal-up" data-reveal-target="item">
-      <%= ui_heading("By students, for students.", level: 2) %>
+      <h2 class="heading">By students, for students.</h2>
       <p class="text-brand-gray text-lg max-w-2xl leading-relaxed">
         Griffith ICT Club (GIC) is Griffith University's club for everything tech. With divisions on the Gold Coast and Nathan, you'll build skills, make friends, and kickstart your career.
       </p>
@@ -9,60 +9,60 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
       <div class="reveal-up" data-reveal-target="item" style="transition-delay: 100ms;">
-        <%= ui_card(shadow: "var(--color-brand-red-300)") do %>
+        <div class="card" style="box-shadow: 5px 5px 0px var(--color-brand-red-300);">
           <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
             <%= lucide_icon("smile", class: "w-5 h-5 text-brand-red") %>
           </div>
-          <%= ui_heading("Social Events", level: 3) %>
+          <h3 class="heading">Social Events</h3>
           <p class="text-brand-gray text-sm leading-relaxed">
             Game nights, BBQs, trivia, and casual hangouts. The best part of uni
             is the people, and we make sure you meet them.
           </p>
-        <% end %>
+        </div>
       </div>
 
       <div class="reveal-up" data-reveal-target="item" style="transition-delay: 200ms;">
-        <%= ui_card(shadow: "var(--color-brand-red-dark)") do %>
+        <div class="card" style="box-shadow: 5px 5px 0px var(--color-brand-red-dark);">
           <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
             <%= lucide_icon("briefcase", class: "w-5 h-5 text-brand-red") %>
           </div>
-          <%= ui_heading("Industry Events", level: 3) %>
+          <h3 class="heading">Industry Events</h3>
           <p class="text-brand-gray text-sm leading-relaxed">
             Connect with companies hiring grads. Hear from engineers, ask questions,
             and get your foot in the door early.
           </p>
-        <% end %>
+        </div>
       </div>
 
       <div class="reveal-up hidden sm:block" data-reveal-target="item" data-expand-target="item" style="transition-delay: 300ms;">
-        <%= ui_card(shadow: "var(--color-brand-red)") do %>
+        <div class="card" style="box-shadow: 5px 5px 0px var(--color-brand-red);">
           <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
             <%= lucide_icon("trophy", class: "w-5 h-5 text-brand-red") %>
           </div>
-          <%= ui_heading("Hackathons", level: 3) %>
+          <h3 class="heading">Hackathons</h3>
           <p class="text-brand-gray text-sm leading-relaxed">
             Team up, ship fast, win prizes. We design and run our own hackathons
             that everyone can participate in.
           </p>
-        <% end %>
+        </div>
       </div>
 
       <div class="reveal-up hidden sm:block" data-reveal-target="item" data-expand-target="item" style="transition-delay: 400ms;">
-        <%= ui_card(shadow: "var(--color-brand-red-200)") do %>
+        <div class="card" style="box-shadow: 5px 5px 0px var(--color-brand-red-200);">
           <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
             <%= lucide_icon("code", class: "w-5 h-5 text-brand-red") %>
           </div>
-          <%= ui_heading("Workshops", level: 3) %>
+          <h3 class="heading">Workshops</h3>
           <p class="text-brand-gray text-sm leading-relaxed">
             Hands-on sessions covering web dev, cloud, AI, cybersecurity, and more.
             Learn by building real things.
           </p>
-        <% end %>
+        </div>
       </div>
     </div>
 
     <div class="sm:hidden reveal-up mt-6" data-reveal-target="item" style="transition-delay: 300ms;">
-      <%= ui_button("Show all", variant: :primary, size: :sm, data: { expand_target: "toggle", action: "expand#show" }) %>
+      <button class="btn btn-primary btn-sm" data-expand-target="toggle" data-action="expand#show">Show all</button>
     </div>
   </div>
 </section>
