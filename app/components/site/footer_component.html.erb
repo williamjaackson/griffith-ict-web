@@ -12,16 +12,16 @@
         </p>
         <div class="flex items-center gap-4">
           <a href="<%= socials[:discord] %>" target="_blank" rel="noopener" class="text-white/40 hover:text-white transition-colors" aria-label="Discord">
-            <%= icon "discord", library: "brands" %>
+            <%= helpers.icon"discord", library: "brands" %>
           </a>
           <a href="<%= socials[:github] %>" target="_blank" rel="noopener" class="text-white/40 hover:text-white transition-colors" aria-label="GitHub">
-            <%= icon "github", library: "brands" %>
+            <%= helpers.icon"github", library: "brands" %>
           </a>
           <a href="<%= socials[:linkedin] %>" target="_blank" rel="noopener" class="text-white/40 hover:text-white transition-colors" aria-label="LinkedIn">
-            <%= icon "linkedin", library: "brands" %>
+            <%= helpers.icon"linkedin", library: "brands" %>
           </a>
           <a href="<%= socials[:instagram] %>" target="_blank" rel="noopener" class="text-white/40 hover:text-white transition-colors" aria-label="Instagram">
-            <%= icon "instagram", library: "brands" %>
+            <%= helpers.icon"instagram", library: "brands" %>
           </a>
         </div>
       </div>
@@ -46,7 +46,7 @@
         <a href="https://jaackson.com/" target="_blank" rel="noopener" class="hover:text-white/50 transition-colors">Built and Operated by William Jackson</a>
         <a href="https://www.griffith.edu.au" target="_blank" rel="noopener" class="hover:text-white/50 transition-colors">Griffith University</a>
       </div>
-      <a href="<%= helpers.new_session_path %>" class="absolute -top-4 right-0 text-white/15 hover:text-white/30 transition-colors leading-none" aria-label="Staff login"><%= icon "settings", class: "w-3.5 h-3.5" %></a>
+      <a href="<%= helpers.new_session_path %>" class="absolute -top-4 right-0 text-white/15 hover:text-white/30 transition-colors leading-none" aria-label="Staff login"><%= helpers.icon"settings", class: "w-3.5 h-3.5" %></a>
     </div>
   </div>
 </footer>

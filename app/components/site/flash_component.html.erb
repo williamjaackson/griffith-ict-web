@@ -4,7 +4,7 @@
       <div data-flash-target="toast" class="<%= styles_for(msg[:type]) %> border-3 border-brand-black px-5 py-3 text-sm font-semibold text-center relative">
         <%= msg[:message] %>
         <button data-action="flash#dismiss" class="absolute right-3 top-0 bottom-0 flex items-center opacity-60 hover:opacity-100 transition-opacity cursor-pointer" aria-label="Dismiss">
-          <%= icon "x", class: "w-4 h-4", stroke_width: "2.5" %>
+          <%= helpers.icon"x", class: "w-4 h-4", stroke_width: "2.5" %>
         </button>
       </div>
     <% end %>
