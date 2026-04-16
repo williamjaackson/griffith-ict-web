@@ -31,7 +31,7 @@
                 <% if unassigned %>
                   <div class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream">
                     <div class="w-10 h-10 bg-brand-gray/10 flex items-center justify-center mb-4">
-                      <%= lucide_icon(member["icon"], class: "w-5 h-5 opacity-40") %>
+                      <%= icon(member["icon"], class: "w-5 h-5 opacity-40") %>
                     </div>
                     <h3 class="heading heading-4"><%= member["role"] %></h3>
                     <p class="text-brand-gray/50 text-sm italic">Unassigned</p>
@@ -39,7 +39,7 @@
                 <% else %>
                   <div class="card" style="box-shadow: 5px 5px 0px var(--color-brand-red);">
                     <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
-                      <%= lucide_icon(member["icon"], class: "w-5 h-5 text-brand-red") %>
+                      <%= icon(member["icon"], class: "w-5 h-5 text-brand-red") %>
                     </div>
                     <h3 class="heading heading-4"><%= member["role"] %></h3>
                     <p class="text-sm"><%= member["name"] %></p>
@@ -62,7 +62,7 @@
                 <% if unassigned %>
                   <div class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream">
                     <div class="w-10 h-10 bg-brand-gray/10 flex items-center justify-center mb-4">
-                      <%= lucide_icon(member["icon"], class: "w-5 h-5 opacity-40") %>
+                      <%= icon(member["icon"], class: "w-5 h-5 opacity-40") %>
                     </div>
                     <h3 class="heading heading-4"><%= member["role"] %></h3>
                     <p class="text-brand-gray/50 text-sm italic">Unassigned</p>
@@ -70,7 +70,7 @@
                 <% else %>
                   <div class="card" style="box-shadow: 5px 5px 0px var(--color-brand-red-300);">
                     <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
-                      <%= lucide_icon(member["icon"], class: "w-5 h-5 text-brand-red") %>
+                      <%= icon(member["icon"], class: "w-5 h-5 text-brand-red") %>
                     </div>
                     <h3 class="heading heading-4"><%= member["role"] %></h3>
                     <p class="text-sm"><%= member["name"] %></p>
