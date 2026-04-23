@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount RailsIcons::Engine, at: "/rails_icons" if Rails.env.development?
+
   resource :session, only: %i[new create destroy]
   resource :account, only: %i[show], controller: "account"
 
