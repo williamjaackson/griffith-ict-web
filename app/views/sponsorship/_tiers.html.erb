@@ -20,13 +20,13 @@
             <ul class="flex flex-col gap-3 text-sm">
               <% accumulated_perks.each do |perk| %>
                 <li class="flex items-start gap-2">
-                  <span class="font-bold mt-0.5" style="color: var(--color-tier-<%= perk[:tier] %>);">&#10003;</span>
+                  <span class="mt-0.5 shrink-0" style="color: var(--color-tier-<%= perk[:tier] %>);"><%= icon "check", class: "w-4 h-4", stroke_width: "3" %></span>
                   <%= perk[:label] %>
                 </li>
               <% end %>
               <% tier["perks"].each do |perk| %>
                 <li class="flex items-start gap-2">
-                  <span class="font-bold mt-0.5" style="color: var(--color-tier-<%= tier_key %>);">&#10003;</span>
+                  <span class="mt-0.5 shrink-0" style="color: var(--color-tier-<%= tier_key %>);"><%= icon "check", class: "w-4 h-4", stroke_width: "3" %></span>
                   <%= perk %>
                 </li>
               <% end %>

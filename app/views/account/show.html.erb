@@ -10,7 +10,7 @@
       <a href="/" class="btn btn-secondary">Back to home</a>
     </div>
     <% if current_user.admin? %>
-      <%= link_to "Manage invites →", admin_invites_path, class: "text-brand-red font-semibold hover:underline" %>
+      <%= link_to admin_invites_path, class: "text-brand-red font-semibold hover:underline inline-flex items-center gap-1" do %>Manage invites <%= icon "arrow-right", class: "w-4 h-4" %><% end %>
     <% end %>
   </div>
 </header>
