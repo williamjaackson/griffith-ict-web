@@ -2,16 +2,16 @@ campuses:
   - name: Gold Coast
     elected:
       - role: President
-        name: Owen Richardson
+        name: William Jackson
         icon: crown
       - role: Vice President
         name: Tylar Pinniger
         icon: shield
       - role: Treasurer
-        name: William Jackson
+        name: ~
         icon: wallet
       - role: Secretary
-        name: Zain Abrahams
+        name: Julio Medeiros
         icon: file-text
     appointed:
       - role: Events Co-ordinator
@@ -20,10 +20,6 @@ campuses:
       - role: Social Media Manager
         name: ~
         icon: megaphone
-      - role: Industry Liaison
-        name: Julio Medeiros
-        icon: briefcase
-
   - name: Brisbane
     elected:
       - role: President
