@@ -89,8 +89,10 @@ jobs:
               # Install dependencies and build
               bundle install --jobs 4
               set -a && source /opt/previews/.env && set +a
-              RAILS_ENV=production bin/rails db:prepare
-              RAILS_ENV=production bin/rails db:seed
+              : "\${DATABASE_URL:?DATABASE_URL must be set in /opt/previews/.env}"
+              : "\${DIRECT_DATABASE_URL:?DIRECT_DATABASE_URL must be set in /opt/previews/.env}"
+              DATABASE_URL="\$DIRECT_DATABASE_URL" RAILS_ENV=production bin/rails db:migrate
+              DATABASE_URL="\$DIRECT_DATABASE_URL" RAILS_ENV=production bin/rails db:seed
               RAILS_ENV=production bin/rails assets:precompile
 
               # Write systemd override with PORT and SECRET_KEY_BASE

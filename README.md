@@ -17,7 +17,7 @@ https://griffithict.club/
 | Styling   | Tailwind CSS                        |
 | UI        | ViewComponent, Stimulus, Lucide     |
 | Assets    | Propshaft, Importmap                |
-| Database  | SQLite 3                            |
+| Database  | SQLite 3 (local/test), PostgreSQL (deployed) |
 | Server    | Puma                                |
 | Deploy    | GitHub Actions → VPS via SSH        |
 
@@ -71,7 +71,32 @@ Site content is driven by YAML files in `config/`:
 - **`sponsors.yml`** — Current sponsors
 - **`sponsorship_tiers.yml`** — Sponsorship tier names, prices, and perks
 
+### Databases
+
+Local development and automated tests use SQLite, so no database service or
+credentials are needed to run the app locally.
+
+Production and VPS previews use Neon PostgreSQL. Each deployed environment
+requires two variables in its protected `.env` file:
+
+- `DATABASE_URL` — the pooled Neon connection string used by Puma.
+- `DIRECT_DATABASE_URL` — the matching direct connection string used only for
+  migrations and seeds.
+
+Do not commit either value. Copy `.env.example` only when configuring a deployed
+environment. Store production values in `~/griffith-ict-web/.env` and preview
+values in `/opt/previews/.env`, keep the values shell-quoted because the URLs
+contain `&`, then restrict each file with `chmod 600`.
+
+All preview sites share the preview database. Migrations deployed to previews
+must therefore remain backward-compatible with other preview branches, and
+preview teardown never reverses database migrations.
+
 ## Deployment
 
 Merging to `master` triggers an automatic deploy via GitHub Actions.
 
+Before the first PostgreSQL deploy, back up `storage/production.sqlite3`, rotate
+the Neon owner passwords, and place the new pooled and direct URLs in the VPS
+environment files. The VPS connects outbound to Neon; it does not run a local
+PostgreSQL server.

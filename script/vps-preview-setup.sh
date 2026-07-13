@@ -4,6 +4,11 @@ set -euo pipefail
 echo "==> Creating preview directory"
 mkdir -p /opt/previews
 
+if [ -f /opt/previews/.env ]; then
+  chmod 600 /opt/previews/.env
+  echo "    Protected existing /opt/previews/.env"
+fi
+
 echo "==> Generating shared SECRET_KEY_BASE"
 if [ ! -f /opt/previews/.secret_key_base ]; then
   openssl rand -hex 64 > /opt/previews/.secret_key_base
@@ -52,5 +57,11 @@ echo "3. Ensure nginx includes conf.d/*.conf in its http block:"
 echo "   include /etc/nginx/conf.d/*.conf;"
 echo ""
 echo "4. Create a 'preview' label in the GitHub repository."
+echo ""
+echo "5. Create /opt/previews/.env with shell-quoted values for:"
+echo "   DATABASE_URL (pooled Neon URL)"
+echo "   DIRECT_DATABASE_URL (matching direct Neon URL)"
+echo "   ADMIN_PASSWORD"
+echo "   Then run: chmod 600 /opt/previews/.env"
 echo ""
 echo "Setup complete."

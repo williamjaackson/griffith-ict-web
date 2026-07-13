@@ -20,12 +20,25 @@ jobs:
             ssh -o StrictHostKeyChecking=no -o ConnectTimeout=30 -i /tmp/deploy_key root@${{ secrets.VPS_HOST }} '
               export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
               cd ~/griffith-ict-web
+              if [ -f storage/production.sqlite3 ]; then
+                mkdir -p ~/griffith-ict-backups
+                cp -n storage/production.sqlite3 ~/griffith-ict-backups/production-before-postgresql.sqlite3
+                chmod 600 ~/griffith-ict-backups/production-before-postgresql.sqlite3
+              fi
               git pull
               bundle install
               set -a && source .env && set +a
-              RAILS_ENV=production bin/rails db:migrate
-              RAILS_ENV=production bin/rails db:seed
+              : "${DATABASE_URL:?DATABASE_URL must be set in .env}"
+              : "${DIRECT_DATABASE_URL:?DIRECT_DATABASE_URL must be set in .env}"
+              DATABASE_URL="$DIRECT_DATABASE_URL" RAILS_ENV=production bin/rails db:migrate
+              DATABASE_URL="$DIRECT_DATABASE_URL" RAILS_ENV=production bin/rails db:seed
               RAILS_ENV=production bin/rails assets:precompile
+              mkdir -p /etc/systemd/system/griffith-web.service.d
+              cat > /etc/systemd/system/griffith-web.service.d/environment.conf <<EOF
+            [Service]
+            EnvironmentFile=/root/griffith-ict-web/.env
+            EOF
+              systemctl daemon-reload
               systemctl restart griffith-web
             '
             rm -f /tmp/deploy_key
