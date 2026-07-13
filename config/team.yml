@@ -44,3 +44,48 @@ campuses:
       - role: Industry Liaison
         name: Johnroy Real
         icon: briefcase
+
+roles:
+  President:
+    responsibilities:
+      - Chair executive meetings and general meetings.
+      - Set committee priorities and assign work.
+      - Represent the club to Griffith, the Guild, and external organisations.
+      - Ensure the committee follows the constitution and its decisions.
+  Vice President:
+    note: The Vice President may act independently and does not require the President’s approval for routine club work.
+    responsibilities:
+      - Lead club projects without requiring the President’s approval.
+      - Chair meetings and represent the club when needed.
+      - Coordinate committee members and follow up unfinished work.
+      - Perform the President’s duties when they are unavailable.
+  Treasurer:
+    responsibilities:
+      - Maintain records of all money received and spent.
+      - Prepare and monitor the club’s budget.
+      - Process purchases, reimbursements, and invoices.
+      - Present financial reports to the committee, members, and Guild.
+  Secretary:
+    responsibilities:
+      - Prepare and distribute meeting agendas.
+      - Record and distribute meeting minutes.
+      - Maintain official club records and correspondence.
+      - Organise notices and documents for AGMs and general meetings.
+  Events Co-ordinator:
+    responsibilities:
+      - Plan the club’s event calendar.
+      - Book venues, equipment, catering, and other event requirements.
+      - Prepare event plans and coordinate volunteers.
+      - Run events and complete required risk or Guild paperwork.
+  Social Media Manager:
+    responsibilities:
+      - Maintain the club’s content calendar.
+      - Create and publish posts across club platforms.
+      - Promote events, opportunities, sponsors, and announcements.
+      - Photograph or collect content from club activities.
+  Industry Liaison:
+    responsibilities:
+      - Contact companies and professional organisations.
+      - Arrange industry speakers, workshops, and networking opportunities.
+      - Maintain records of industry contacts and conversations.
+      - Coordinate sponsor commitments with the committee.

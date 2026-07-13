@@ -19,7 +19,7 @@
   }
 %>
 
-<section id="team" data-controller="tabs">
+<section id="team" data-controller="tabs role-modal">
   <div class="container">
     <div class="mb-12 reveal">
       <h2 class="heading heading-2">Executive team.</h2>
@@ -51,22 +51,34 @@
                 <% row.each do |member| %>
                   <div>
                     <% unassigned = member["name"].nil? %>
+                    <% role_details = @team_roles.fetch(member["role"]) %>
                     <% if unassigned %>
-                      <div class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream h-full">
+                      <button type="button"
+                              data-action="role-modal#open"
+                              data-role="<%= member["role"] %>"
+                              data-responsibilities="<%= role_details["responsibilities"].to_json %>"
+                              data-note="<%= role_details["note"] %>"
+                              class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream h-full w-full text-left cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:border-brand-black focus-visible:outline-3 focus-visible:outline-brand-red">
                         <div class="w-10 h-10 bg-brand-gray/10 flex items-center justify-center mb-4">
                           <%= icon(member["icon"], class: "w-5 h-5 opacity-40") %>
                         </div>
                         <h3 class="heading heading-4"><%= member["role"] %></h3>
                         <p class="text-brand-gray/50 text-sm italic">Unassigned</p>
-                      </div>
+                      </button>
                     <% else %>
-                      <div class="card" style="box-shadow: 5px 5px 0px var(--color-brand-red);">
+                      <button type="button"
+                              data-action="role-modal#open"
+                              data-role="<%= member["role"] %>"
+                              data-responsibilities="<%= role_details["responsibilities"].to_json %>"
+                              data-note="<%= role_details["note"] %>"
+                              class="card card-link w-full text-left cursor-pointer focus-visible:outline-3 focus-visible:outline-brand-red"
+                              style="box-shadow: 5px 5px 0px var(--color-brand-red);">
                         <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
                           <%= icon(member["icon"], class: "w-5 h-5 text-brand-red") %>
                         </div>
                         <h3 class="heading heading-4"><%= member["role"] %></h3>
                         <p class="text-sm"><%= member["name"] %></p>
-                      </div>
+                      </button>
                     <% end %>
                   </div>
                 <% end %>
@@ -86,22 +98,34 @@
                 <% row.each do |member| %>
                   <div>
                     <% unassigned = member["name"].nil? %>
+                    <% role_details = @team_roles.fetch(member["role"]) %>
                     <% if unassigned %>
-                      <div class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream h-full">
+                      <button type="button"
+                              data-action="role-modal#open"
+                              data-role="<%= member["role"] %>"
+                              data-responsibilities="<%= role_details["responsibilities"].to_json %>"
+                              data-note="<%= role_details["note"] %>"
+                              class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream h-full w-full text-left cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:border-brand-black focus-visible:outline-3 focus-visible:outline-brand-red">
                         <div class="w-10 h-10 bg-brand-gray/10 flex items-center justify-center mb-4">
                           <%= icon(member["icon"], class: "w-5 h-5 opacity-40") %>
                         </div>
                         <h3 class="heading heading-4"><%= member["role"] %></h3>
                         <p class="text-brand-gray/50 text-sm italic">Unassigned</p>
-                      </div>
+                      </button>
                     <% else %>
-                      <div class="card" style="box-shadow: 5px 5px 0px var(--color-brand-red-300);">
+                      <button type="button"
+                              data-action="role-modal#open"
+                              data-role="<%= member["role"] %>"
+                              data-responsibilities="<%= role_details["responsibilities"].to_json %>"
+                              data-note="<%= role_details["note"] %>"
+                              class="card card-link w-full text-left cursor-pointer focus-visible:outline-3 focus-visible:outline-brand-red"
+                              style="box-shadow: 5px 5px 0px var(--color-brand-red-300);">
                         <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
                           <%= icon(member["icon"], class: "w-5 h-5 text-brand-red") %>
                         </div>
                         <h3 class="heading heading-4"><%= member["role"] %></h3>
                         <p class="text-sm"><%= member["name"] %></p>
-                      </div>
+                      </button>
                     <% end %>
                   </div>
                 <% end %>
@@ -111,5 +135,30 @@
         <% end %>
       </div>
     <% end %>
+  </div>
+
+  <div data-role-modal-target="backdrop"
+       data-action="click->role-modal#closeBackdrop"
+       role="presentation"
+       aria-hidden="true"
+       class="fixed inset-0 z-50 bg-brand-black/50 flex items-center justify-center px-6 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div data-role-modal-target="panel"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="role-modal-title"
+         class="relative bg-brand-bg border-3 border-brand-black shadow-[6px_6px_0px_var(--color-brand-red)] w-full max-w-lg p-8 scale-95 opacity-0 transition-all duration-300">
+      <button type="button"
+              data-role-modal-target="close"
+              data-action="role-modal#close"
+              aria-label="Close role responsibilities"
+              class="absolute top-4 right-4 w-10 h-10 inline-flex items-center justify-center border-3 border-brand-black bg-white text-brand-black cursor-pointer transition-colors hover:bg-brand-red hover:text-white focus-visible:outline-3 focus-visible:outline-brand-red">
+        <%= icon "x", class: "w-5 h-5" %>
+      </button>
+
+      <span class="badge badge-sm mb-5">ROLE</span>
+      <h2 id="role-modal-title" data-role-modal-target="title" class="heading heading-3 pr-12"></h2>
+      <ul data-role-modal-target="responsibilities" class="list-disc pl-5 space-y-3 mt-6"></ul>
+      <p data-role-modal-target="note" class="hidden mt-6 p-4 border-l-4 border-brand-red bg-brand-red/10 font-semibold text-brand-black"></p>
+    </div>
   </div>
 </section>
