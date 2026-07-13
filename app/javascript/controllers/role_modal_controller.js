@@ -59,15 +59,16 @@ export default class extends Controller {
       ...JSON.parse(card.dataset.history).reverse().map((entry) => {
         const item = document.createElement("li")
         item.className = "relative pl-6 pb-5 last:pb-0"
+        const isUnassigned = entry.name === "Unassigned"
 
         const marker = document.createElement("span")
-        marker.className = "absolute -left-[7px] top-1.5 w-3 h-3 bg-brand-red border-2 border-brand-bg"
+        marker.className = `absolute -left-[7px] top-1.5 w-3 h-3 border-2 border-brand-bg ${isUnassigned ? "bg-brand-gray/30" : "bg-brand-red"}`
 
         const nameRow = document.createElement("div")
         nameRow.className = "flex flex-wrap items-center gap-2"
 
         const name = document.createElement("p")
-        name.className = "font-bold text-brand-black"
+        name.className = isUnassigned ? "font-semibold italic text-brand-gray/50" : "font-bold text-brand-black"
         name.textContent = entry.name
         nameRow.append(name)
 
