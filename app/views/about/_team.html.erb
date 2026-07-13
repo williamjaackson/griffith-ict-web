@@ -1,3 +1,24 @@
+<%
+  balanced_team_rows = lambda do |members|
+    remaining = members.dup
+    rows = []
+
+    while remaining.length > 4
+      rows << remaining.shift(remaining.length == 5 ? 3 : 4)
+    end
+
+    rows << remaining if remaining.any?
+    rows
+  end
+
+  team_row_columns = {
+    1 => "md:grid-cols-1",
+    2 => "md:grid-cols-2",
+    3 => "md:grid-cols-3",
+    4 => "md:grid-cols-4"
+  }
+%>
+
 <section id="team" data-controller="tabs">
   <div class="container">
     <div class="mb-12 reveal">
@@ -24,25 +45,29 @@
             <span class="badge badge-sm">ELECTED</span>
             <p class="text-sm mt-2">Voted on by members at the Annual General Meeting.</p>
           </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 reveal stagger <%= 'mb-12' if campus["appointed"]&.any? %>">
-            <% campus["elected"].each do |member| %>
-              <div>
-                <% unassigned = member["name"].nil? %>
-                <% if unassigned %>
-                  <div class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream">
-                    <div class="w-10 h-10 bg-brand-gray/10 flex items-center justify-center mb-4">
-                      <%= icon(member["icon"], class: "w-5 h-5 opacity-40") %>
-                    </div>
-                    <h3 class="heading heading-4"><%= member["role"] %></h3>
-                    <p class="text-brand-gray/50 text-sm italic">Unassigned</p>
-                  </div>
-                <% else %>
-                  <div class="card" style="box-shadow: 5px 5px 0px var(--color-brand-red);">
-                    <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
-                      <%= icon(member["icon"], class: "w-5 h-5 text-brand-red") %>
-                    </div>
-                    <h3 class="heading heading-4"><%= member["role"] %></h3>
-                    <p class="text-sm"><%= member["name"] %></p>
+          <div class="flex flex-col gap-5 reveal stagger <%= 'mb-12' if campus["appointed"]&.any? %>">
+            <% balanced_team_rows.call(campus["elected"]).each do |row| %>
+              <div class="grid grid-cols-1 sm:grid-cols-2 <%= team_row_columns.fetch(row.length) %> gap-5">
+                <% row.each do |member| %>
+                  <div>
+                    <% unassigned = member["name"].nil? %>
+                    <% if unassigned %>
+                      <div class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream h-full">
+                        <div class="w-10 h-10 bg-brand-gray/10 flex items-center justify-center mb-4">
+                          <%= icon(member["icon"], class: "w-5 h-5 opacity-40") %>
+                        </div>
+                        <h3 class="heading heading-4"><%= member["role"] %></h3>
+                        <p class="text-brand-gray/50 text-sm italic">Unassigned</p>
+                      </div>
+                    <% else %>
+                      <div class="card" style="box-shadow: 5px 5px 0px var(--color-brand-red);">
+                        <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
+                          <%= icon(member["icon"], class: "w-5 h-5 text-brand-red") %>
+                        </div>
+                        <h3 class="heading heading-4"><%= member["role"] %></h3>
+                        <p class="text-sm"><%= member["name"] %></p>
+                      </div>
+                    <% end %>
                   </div>
                 <% end %>
               </div>
@@ -55,25 +80,29 @@
             <span class="badge badge-dark badge-sm">APPOINTED</span>
             <p class="text-sm mt-2">Voted on by the executive team. Applications are opened as needed.</p>
           </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 reveal stagger">
-            <% campus["appointed"].each do |member| %>
-              <div>
-                <% unassigned = member["name"].nil? %>
-                <% if unassigned %>
-                  <div class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream">
-                    <div class="w-10 h-10 bg-brand-gray/10 flex items-center justify-center mb-4">
-                      <%= icon(member["icon"], class: "w-5 h-5 opacity-40") %>
-                    </div>
-                    <h3 class="heading heading-4"><%= member["role"] %></h3>
-                    <p class="text-brand-gray/50 text-sm italic">Unassigned</p>
-                  </div>
-                <% else %>
-                  <div class="card" style="box-shadow: 5px 5px 0px var(--color-brand-red-300);">
-                    <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
-                      <%= icon(member["icon"], class: "w-5 h-5 text-brand-red") %>
-                    </div>
-                    <h3 class="heading heading-4"><%= member["role"] %></h3>
-                    <p class="text-sm"><%= member["name"] %></p>
+          <div class="flex flex-col gap-5 reveal stagger">
+            <% balanced_team_rows.call(campus["appointed"]).each do |row| %>
+              <div class="grid grid-cols-1 sm:grid-cols-2 <%= team_row_columns.fetch(row.length) %> gap-5">
+                <% row.each do |member| %>
+                  <div>
+                    <% unassigned = member["name"].nil? %>
+                    <% if unassigned %>
+                      <div class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream h-full">
+                        <div class="w-10 h-10 bg-brand-gray/10 flex items-center justify-center mb-4">
+                          <%= icon(member["icon"], class: "w-5 h-5 opacity-40") %>
+                        </div>
+                        <h3 class="heading heading-4"><%= member["role"] %></h3>
+                        <p class="text-brand-gray/50 text-sm italic">Unassigned</p>
+                      </div>
+                    <% else %>
+                      <div class="card" style="box-shadow: 5px 5px 0px var(--color-brand-red-300);">
+                        <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
+                          <%= icon(member["icon"], class: "w-5 h-5 text-brand-red") %>
+                        </div>
+                        <h3 class="heading heading-4"><%= member["role"] %></h3>
+                        <p class="text-sm"><%= member["name"] %></p>
+                      </div>
+                    <% end %>
                   </div>
                 <% end %>
               </div>
