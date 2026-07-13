@@ -4,8 +4,15 @@ on:
   pull_request:
     branches: [master]
 
+permissions:
+  contents: read
+
+concurrency:
+  group: checks-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
 jobs:
-  sanity:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,5 +22,5 @@ jobs:
         with:
           bundler-cache: true
 
-      - name: Sanity checks
-        run: bin/rails sanity:check
+      - name: Run CI
+        run: bin/ci
