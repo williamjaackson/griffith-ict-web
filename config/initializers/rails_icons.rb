@@ -1,5 +1,6 @@
 RailsIcons.configure do |config|
   config.default_library = "lucide"
+  config.icons_path = Rails.root.join("vendor/icons")
 
   config.libraries.lucide.outline.default.css = "w-5 h-5"
   config.libraries.lucide.outline.default.stroke_width = "2"

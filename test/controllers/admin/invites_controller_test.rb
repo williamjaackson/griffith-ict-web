@@ -26,6 +26,7 @@ module Admin
       assert_select "h1", text: "Invites"
       assert_select "[data-controller=clipboard]", minimum: 1
       assert_select "button[data-clipboard-target=button][aria-live=polite]", minimum: 1
+      assert_select "form[data-controller=confirm][data-action='submit->confirm#check']", minimum: 1
     end
 
     test "renders a natively accessible invite form" do

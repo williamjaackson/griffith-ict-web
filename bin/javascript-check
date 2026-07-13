@@ -4,6 +4,11 @@ set -o pipefail
 
 node_binary="${NODE_BINARY:-$(command -v node || true)}"
 if [[ -z "$node_binary" ]]; then
+  if [[ -n "${CI:-}" ]]; then
+    echo "JavaScript syntax checks require Node.js in CI." >&2
+    exit 1
+  fi
+
   echo "Skipping JavaScript syntax checks: Node.js is not installed."
   exit 0
 fi

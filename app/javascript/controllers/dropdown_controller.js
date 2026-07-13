@@ -11,6 +11,7 @@ export default class extends Controller {
 
   disconnect() {
     document.removeEventListener("click", this._close)
+    if (this.open) this.#hide()
   }
 
   toggle(event) {

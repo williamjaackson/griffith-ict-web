@@ -4,7 +4,7 @@ else
   ENV.fetch("ADMIN_PASSWORD", "password")
 end
 
-User.find_or_create_by!(email_address: "admin@griffithict.club") do |user|
-  user.password = password
-  user.role = :admin
-end
+admin = User.find_or_initialize_by(email_address: "admin@griffithict.club")
+admin.password = password if admin.new_record?
+admin.role = :admin
+admin.save!

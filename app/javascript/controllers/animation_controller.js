@@ -27,14 +27,12 @@ export default class extends Controller {
 
   #scan() {
     this.element.querySelectorAll(".stagger").forEach((parent) => {
-      if (parent.dataset.staggerApplied) return
-      const interval = parseInt(parent.dataset.staggerInterval) || 100
+      const interval = this.#numberValue(parent.dataset.staggerInterval, 100)
       const defaultOffset = parent.classList.contains("enter") ? 0 : 100
-      const offset = parseInt(parent.dataset.staggerOffset) || defaultOffset
+      const offset = this.#numberValue(parent.dataset.staggerOffset, defaultOffset)
       Array.from(parent.children).forEach((child, i) => {
         child.style.setProperty("--stagger", `${offset + i * interval}ms`)
       })
-      parent.dataset.staggerApplied = true
     })
 
     this.element.querySelectorAll(".reveal:not(.entered)").forEach((el) => {
@@ -44,5 +42,12 @@ export default class extends Controller {
         el.classList.add("entered")
       }
     })
+  }
+
+  #numberValue(value, fallback) {
+    if (value === undefined) return fallback
+
+    const number = Number.parseInt(value, 10)
+    return Number.isNaN(number) ? fallback : number
   }
 }

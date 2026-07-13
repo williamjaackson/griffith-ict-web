@@ -9,6 +9,11 @@ export default class extends Controller {
   }
 
   disconnect() {
+    if (this.openDialog) {
+      this.#hide(this.openDialog, false)
+      return
+    }
+
     document.removeEventListener("keydown", this.handleKeydown)
     document.body.classList.remove("overflow-hidden")
     this.#restorePage()

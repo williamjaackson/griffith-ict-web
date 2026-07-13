@@ -93,6 +93,13 @@ The shared component handles the backdrop, close button, Escape key, focus trap,
 focus restoration, scroll locking, and ARIA state. A feature-specific Stimulus
 controller only needs to populate or update its modal's content.
 
+### Icons
+
+SVG icon source files live in `vendor/icons` because Rails Icons reads and
+inlines them at render time. Keeping them outside `app/assets` prevents Propshaft
+from copying them into production releases. Only icons used by the application
+are vendored; add a new SVG there when introducing a new icon reference.
+
 ### Databases
 
 Local development and automated tests use SQLite, so no database service or

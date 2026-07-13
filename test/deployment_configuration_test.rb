@@ -23,6 +23,17 @@ class DeploymentConfigurationTest < ActiveSupport::TestCase
     end
   end
 
+  test "third-party actions are pinned to immutable commits" do
+    uses = Dir[Rails.root.join(".github/workflows/*.yml")].flat_map do |path|
+      File.read(path).scan(/^\s*uses:\s+([^\s#]+)/).flatten
+    end
+
+    assert uses.any?
+    uses.each do |action|
+      assert_match %r{\A[^@]+@[0-9a-f]{40}\z}, action
+    end
+  end
+
   test "SSH requires verified host keys" do
     workflows = Dir[Rails.root.join(".github/workflows/*.yml")].map { |path| File.read(path) }.join
     runner = Rails.root.join(".github/scripts/run-remote").read

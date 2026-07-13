@@ -7,10 +7,12 @@ class InvitesControllerTest < ActionDispatch::IntegrationTest
     get accept_invite_path(token: invite.token)
 
     assert_response :success
+    assert_select "title", text: "Create Account | Griffith ICT Club"
+    assert_select "meta[name=robots][content='noindex, nofollow']"
     assert_select "input[type=email][value='#{invite.email}'][disabled]"
     assert_select "label[for=invited_email]", text: "Email address"
-    assert_select "label[for=password]", text: "Password"
-    assert_select "label[for=password_confirmation]", text: "Confirm password"
+    assert_select "label[for=account_password]", text: "Password"
+    assert_select "label[for=account_password_confirmation]", text: "Confirm password"
   end
 
   test "rejects an expired invite" do
@@ -31,10 +33,10 @@ class InvitesControllerTest < ActionDispatch::IntegrationTest
     invite = invites(:pending)
 
     assert_difference([ "User.count", "Session.count" ], 1) do
-      post complete_invite_path(token: invite.token), params: {
+      post complete_invite_path(token: invite.token), params: { account: {
         password: "secure-password",
         password_confirmation: "secure-password"
-      }
+      } }
     end
 
     assert_redirected_to root_path
@@ -47,10 +49,10 @@ class InvitesControllerTest < ActionDispatch::IntegrationTest
     invite = invites(:pending)
 
     assert_no_difference([ "User.count", "Session.count" ]) do
-      post complete_invite_path(token: invite.token), params: {
+      post complete_invite_path(token: invite.token), params: { account: {
         password: "one-password",
         password_confirmation: "different-password"
-      }
+      } }
     end
 
     assert_response :unprocessable_entity

@@ -21,7 +21,7 @@ class InvitesController < ApplicationController
   private
 
   def passwords
-    params.permit(:password, :password_confirmation).to_h.symbolize_keys
+    params.expect(account: %i[password password_confirmation]).to_h.symbolize_keys
   end
 
   def set_invite

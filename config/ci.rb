@@ -5,6 +5,7 @@ CI.run do
 
   step "Style: Ruby", "bin/rubocop"
   step "Style: JavaScript", "bin/javascript-check"
+  step "Build: Production assets", "env RAILS_ENV=production DATABASE_URL=postgresql://localhost/griffith_asset_check SECRET_KEY_BASE_DUMMY=1 bin/rails assets:precompile"
 
   step "Security: Gem audit", "bin/bundler-audit"
   step "Security: Importmap audit", "bin/importmap audit"

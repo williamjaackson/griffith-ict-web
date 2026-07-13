@@ -6,13 +6,15 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   test "new" do
     get new_session_path
     assert_response :success
-    assert_select "label[for=email_address]", text: "Email address"
-    assert_select "label[for=password]", text: "Password"
+    assert_select "title", text: "Staff Sign In | Griffith ICT Club"
+    assert_select "meta[name=robots][content='noindex, nofollow']"
+    assert_select "label[for=session_email_address]", text: "Email address"
+    assert_select "label[for=session_password]", text: "Password"
   end
 
   test "create with valid credentials" do
     assert_difference("Session.count", 1) do
-      post session_path, params: { email_address: @user.email_address, password: "password" }
+      post session_path, params: { session: { email_address: @user.email_address, password: "password" } }
     end
 
     assert_redirected_to root_path
@@ -20,10 +22,10 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "normalizes email credentials" do
-    post session_path, params: {
+    post session_path, params: { session: {
       email_address: "  #{ @user.email_address.upcase }  ",
       password: "password"
-    }
+    } }
 
     assert_redirected_to root_path
     assert cookies[:session_id]
@@ -33,13 +35,13 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     get account_path
     assert_redirected_to new_session_path
 
-    post session_path, params: { email_address: @user.email_address, password: "password" }
+    post session_path, params: { session: { email_address: @user.email_address, password: "password" } }
 
     assert_redirected_to account_path
   end
 
   test "create with invalid credentials" do
-    post session_path, params: { email_address: @user.email_address, password: "wrong" }
+    post session_path, params: { session: { email_address: @user.email_address, password: "wrong" } }
 
     assert_redirected_to new_session_path
     assert_nil cookies[:session_id]

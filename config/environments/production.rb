@@ -18,6 +18,13 @@ Rails.application.configure do
   # Cache assets for far-future expiry since they are all digest stamped.
   config.public_file_server.headers = { "cache-control" => "public, max-age=#{1.year.to_i}" }
 
+  # Development-only preview assets and unused legacy UJS should not ship.
+  config.assets.excluded_paths += [
+    RailsIcons::Engine.root.join("app/assets/javascripts"),
+    RailsIcons::Engine.root.join("app/assets/stylesheets"),
+    Pathname(Gem.loaded_specs.fetch("actionview").full_gem_path).join("app/assets/javascripts")
+  ]
+
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
 

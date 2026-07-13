@@ -6,12 +6,21 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Griffith ICT Club">
     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#FAF7F2">
+    <% if content_for?(:robots) %>
+      <meta name="robots" content="<%= content_for(:robots) %>">
+    <% end %>
     <% meta = Rails.application.config.meta %>
+    <% canonical_url = "#{meta[:url]}#{request.path == '/' ? '' : request.path}" %>
     <meta name="description" content="<%= meta[:description] %>">
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="<%= meta[:site_name] %>">
     <meta property="og:title" content="<%= meta[:site_name] %>">
     <meta property="og:description" content="<%= meta[:description] %>">
     <meta property="og:image" content="<%= meta[:url] %><%= meta[:og_image] %>">
+    <meta property="og:url" content="<%= canonical_url %>">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="<%= canonical_url %>">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 

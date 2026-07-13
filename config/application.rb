@@ -38,5 +38,8 @@ module GriffithIctWeb
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.action_dispatch.default_headers["Permissions-Policy"] =
+      "camera=(), geolocation=(), microphone=(), payment=(), usb=()"
   end
 end

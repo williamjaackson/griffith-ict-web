@@ -24,6 +24,10 @@ class PublicPagesControllerTest < ActionDispatch::IntegrationTest
     assert_includes policy, "frame-ancestors 'none'"
     assert_match(/script-src 'self' 'nonce-[^']+'/, policy)
     assert_select "script[nonce]", minimum: 1
+    assert_equal "camera=(), geolocation=(), microphone=(), payment=(), usb=()",
+      response.headers["Permissions-Policy"]
+    assert_select "link[rel=canonical][href='https://griffithict.club']"
+    assert_select "meta[property='og:url'][content='https://griffithict.club']"
   end
 
   test "renders the about page and configured team" do

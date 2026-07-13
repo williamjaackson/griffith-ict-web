@@ -22,6 +22,6 @@ class SessionsController < ApplicationController
   private
 
   def credentials
-    params.permit(:email_address, :password).to_h.symbolize_keys
+    params.expect(session: %i[email_address password]).to_h.symbolize_keys
   end
 end

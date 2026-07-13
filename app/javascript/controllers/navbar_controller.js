@@ -26,8 +26,7 @@ export default class extends Controller {
   disconnect() {
     window.removeEventListener("scroll", this._scroll)
     this.desktopQuery?.removeEventListener("change", this.closeAtDesktop)
-    document.body.classList.remove("overflow-hidden")
-    this.#setPageInert(false)
+    this.#setOpen(false)
   }
 
   toggleMenu() {

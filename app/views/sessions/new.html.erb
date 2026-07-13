@@ -1,3 +1,6 @@
+<% content_for(:title, "Staff Sign In | Griffith ICT Club") %>
+<% content_for(:robots, "noindex, nofollow") %>
+
 <section class="px-6 py-24 md:py-32">
   <div class="max-w-md mx-auto">
     <div class="mb-8">
@@ -8,10 +11,10 @@
     </div>
 
     <div class="bg-white border-3 border-brand-black p-8 shadow-[6px_6px_0px_var(--color-brand-black)]">
-      <%= form_with url: session_url, class: "space-y-5" do |form| %>
+      <%= form_with url: session_url, scope: :session, class: "space-y-5" do |form| %>
         <div>
           <%= form.label :email_address, "Email address", class: "input-label" %>
-          <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "you@griffithict.club", value: params[:email_address], class: "input-field" %>
+          <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "you@griffithict.club", value: params.dig(:session, :email_address), class: "input-field" %>
         </div>
 
         <div>
