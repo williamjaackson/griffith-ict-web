@@ -71,6 +71,28 @@ Site content is driven by YAML files in `config/`:
 - **`sponsors.yml`** — Current sponsors
 - **`sponsorship_tiers.yml`** — Sponsorship tier names, prices, and perks
 
+## Reusable modals
+
+Render `Ui::ModalComponent` once and give it a unique ID and accessible name:
+
+```erb
+<%= render Ui::ModalComponent.new(id: "example-modal", title: "Example") do %>
+  Modal content
+<% end %>
+```
+
+Any button can open it through the shared controller. The component helper keeps
+the Stimulus action and modal ID consistent:
+
+```erb
+<%= button_tag "Open", type: "button",
+      data: Ui::ModalComponent.trigger_data("example-modal") %>
+```
+
+The shared component handles the backdrop, close button, Escape key, focus trap,
+focus restoration, scroll locking, and ARIA state. A feature-specific Stimulus
+controller only needs to populate or update its modal's content.
+
 ### Databases
 
 Local development and automated tests use SQLite, so no database service or

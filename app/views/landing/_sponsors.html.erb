@@ -46,7 +46,8 @@
           <% @perks.each do |perk| %>
             <button type="button"
                     class="group flex items-center justify-center relative border-3 border-brand-black bg-white p-3 h-20 overflow-visible cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-[5px_5px_0px_var(--color-brand-red)] active:translate-y-0 active:shadow-none"
-                    data-action="perk-modal#open"
+                    data-action="perk-modal#populate modal#open"
+                    data-modal-id-param="perk-modal"
                     data-perk-name="<%= perk["name"] %>"
                     data-perk-icon="<%= perk["icon"] %>"
                     data-perk-description="<%= perk["description"] %>"
@@ -66,17 +67,13 @@
     <% end %>
   </div>
 
-  <%# Perk detail modal (at section level to avoid transformed ancestor clipping fixed positioning) %>
-  <div data-perk-modal-target="backdrop" data-action="click->perk-modal#closeBackdrop"
-       class="fixed inset-0 z-50 bg-brand-black/50 flex items-center justify-center px-6 opacity-0 pointer-events-none transition-opacity duration-300">
-    <div data-perk-modal-target="panel"
-         class="bg-brand-bg border-3 border-brand-black shadow-[6px_6px_0px_var(--color-brand-black)] w-full max-w-md p-8 scale-95 opacity-0 transition-all duration-300">
-      <img data-perk-modal-target="icon" src="" alt="" class="max-h-16 max-w-2/3 object-contain mb-4">
-      <h3 data-perk-modal-target="name" class="heading heading-3 mb-3"></h3>
-      <p data-perk-modal-target="description" class="mb-6"></p>
-      <a data-perk-modal-target="link" href="#" target="_blank" rel="noopener" class="btn btn-primary">
-        Check it out
-      </a>
-    </div>
-  </div>
+  <%# Kept at section level to avoid transformed ancestor clipping fixed positioning. %>
+  <%= render Ui::ModalComponent.new(id: "perk-modal", labelled_by: "perk-modal-title") do %>
+    <img data-perk-modal-target="icon" src="" alt="" class="max-h-16 max-w-2/3 object-contain mb-4">
+    <h3 id="perk-modal-title" data-perk-modal-target="name" class="heading heading-3 mb-3"></h3>
+    <p data-perk-modal-target="description" class="mb-6"></p>
+    <a data-perk-modal-target="link" href="#" target="_blank" rel="noopener" class="btn btn-primary">
+      Check it out
+    </a>
+  <% end %>
 </section>

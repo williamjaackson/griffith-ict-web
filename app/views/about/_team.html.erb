@@ -55,7 +55,8 @@
                     <% role_history = member["history"] || [{ "name" => member["name"] || "Unassigned", "period" => "Present" }] %>
                     <% if unassigned %>
                       <button type="button"
-                              data-action="role-modal#open"
+                              data-action="role-modal#populate modal#open"
+                              data-modal-id-param="role-modal"
                               data-role="<%= member["role"] %>"
                               data-role-type="elected"
                               data-member-name="Unassigned"
@@ -72,7 +73,8 @@
                       </button>
                     <% else %>
                       <button type="button"
-                              data-action="role-modal#open"
+                              data-action="role-modal#populate modal#open"
+                              data-modal-id-param="role-modal"
                               data-role="<%= member["role"] %>"
                               data-role-type="elected"
                               data-member-name="<%= member["name"] %>"
@@ -111,7 +113,8 @@
                     <% role_history = member["history"] || [{ "name" => member["name"] || "Unassigned", "period" => "Present" }] %>
                     <% if unassigned %>
                       <button type="button"
-                              data-action="role-modal#open"
+                              data-action="role-modal#populate modal#open"
+                              data-modal-id-param="role-modal"
                               data-role="<%= member["role"] %>"
                               data-role-type="appointed"
                               data-member-name="Unassigned"
@@ -128,7 +131,8 @@
                       </button>
                     <% else %>
                       <button type="button"
-                              data-action="role-modal#open"
+                              data-action="role-modal#populate modal#open"
+                              data-modal-id-param="role-modal"
                               data-role="<%= member["role"] %>"
                               data-role-type="appointed"
                               data-member-name="<%= member["name"] %>"
@@ -155,28 +159,17 @@
     <% end %>
   </div>
 
-  <div data-role-modal-target="backdrop"
-       data-action="click->role-modal#closeBackdrop"
-       role="presentation"
-       aria-hidden="true"
-       class="fixed inset-0 z-50 bg-brand-black/50 flex items-center justify-center px-6 opacity-0 pointer-events-none transition-opacity duration-300">
-    <div data-role-modal-target="panel"
-         role="dialog"
-         aria-modal="true"
-         aria-labelledby="role-modal-title"
-         tabindex="-1"
-         class="relative bg-brand-bg border-3 border-brand-black shadow-[6px_6px_0px_var(--color-brand-red)] w-full max-w-lg max-h-[calc(100vh-3rem)] overflow-y-auto p-8 scale-95 opacity-0 transition-all duration-300 focus:outline-none">
-      <span class="badge badge-sm mb-5">ROLE</span>
-      <h2 id="role-modal-title" data-role-modal-target="title" class="heading heading-3"></h2>
-      <p data-role-modal-target="member" class="font-semibold text-brand-red"></p>
-      <ul data-role-modal-target="responsibilities" class="list-disc pl-5 space-y-3 mt-6"></ul>
+  <%= render Ui::ModalComponent.new(id: "role-modal", labelled_by: "role-modal-title", size: :large) do %>
+    <span class="badge badge-sm mb-5">ROLE</span>
+    <h2 id="role-modal-title" data-role-modal-target="title" class="heading heading-3"></h2>
+    <p data-role-modal-target="member" class="font-semibold text-brand-red"></p>
+    <ul data-role-modal-target="responsibilities" class="list-disc pl-5 space-y-3 mt-6"></ul>
 
-      <div data-role-modal-target="applicationActions" class="hidden mt-8 pt-6 border-t-3 border-brand-cream"></div>
+    <div data-role-modal-target="applicationActions" class="hidden mt-8 pt-6 border-t-3 border-brand-cream"></div>
 
-      <div class="mt-8 pt-6 border-t-3 border-brand-cream">
-        <h3 class="heading heading-5">Role history</h3>
-        <ol data-role-modal-target="timeline" class="ml-2 border-l-2 border-brand-gray/30"></ol>
-      </div>
+    <div class="mt-8 pt-6 border-t-3 border-brand-cream">
+      <h3 class="heading heading-5">Role history</h3>
+      <ol data-role-modal-target="timeline" class="ml-2 border-l-2 border-brand-gray/30"></ol>
     </div>
-  </div>
+  <% end %>
 </section>

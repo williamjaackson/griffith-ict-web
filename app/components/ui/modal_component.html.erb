@@ -1,17 +1,24 @@
-<%= tag.div data: wrapper_data do %>
-  <%# Backdrop %>
-  <%= tag.div data: backdrop_data,
-              class: "fixed inset-0 z-50 bg-brand-black/50 flex items-center justify-center px-6 opacity-0 pointer-events-none transition-opacity duration-300" do %>
+<%= tag.div id: id,
+            data: dialog_data,
+            aria: { hidden: true },
+            inert: true,
+            class: "fixed inset-0 z-50 bg-brand-black/50 flex items-center justify-center px-6 opacity-0 pointer-events-none transition-opacity duration-300" do %>
+  <%= tag.div data: { modal_target: "panel" },
+              role: "dialog",
+              aria: dialog_aria,
+              tabindex: -1,
+              class: panel_classes do %>
+    <button type="button"
+            data-action="modal#close"
+            aria-label="Close modal"
+            class="absolute top-4 right-4 p-2 text-brand-gray hover:text-brand-black transition-colors cursor-pointer focus-visible:outline-3 focus-visible:outline-brand-red">
+      <%= helpers.icon "x", class: "w-5 h-5", stroke_width: "2.5" %>
+    </button>
 
-    <%# Panel %>
-    <%= tag.div data: panel_data,
-                class: "bg-brand-bg border-3 border-brand-black shadow-[6px_6px_0px_var(--color-brand-black)] w-full max-w-md p-8 scale-95 opacity-0 transition-all duration-300" do %>
-
-      <% if title %>
-        <h2 class="heading heading-3"><%= title %></h2>
-      <% end %>
-
-      <%= content %>
+    <% if title %>
+      <h2 id="<%= title_id %>" class="heading heading-3"><%= title %></h2>
     <% end %>
+
+    <%= content %>
   <% end %>
 <% end %>

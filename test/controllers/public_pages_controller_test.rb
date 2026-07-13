@@ -7,6 +7,10 @@ class PublicPagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "h2", text: /Build\. Learn\./
     assert_select "section#sponsors"
+    assert_select "body[data-controller~='modal']"
+    assert_select "#membership-modal[aria-hidden='true'][inert] [role='dialog'][aria-modal='true']"
+    assert_select "#perk-modal[aria-hidden='true'][inert] [role='dialog'][aria-modal='true']"
+    assert_select "[onclick]", count: 0
   end
 
   test "renders the about page and configured team" do
@@ -16,6 +20,7 @@ class PublicPagesControllerTest < ActionDispatch::IntegrationTest
     assert_select "h1", text: /Meet/
     assert_select "section#team"
     assert_select "button", text: /Gold Coast/
+    assert_select "#role-modal[aria-hidden='true'][inert] [role='dialog'][aria-modal='true']"
   end
 
   test "renders the sponsorship page and every configured tier" do

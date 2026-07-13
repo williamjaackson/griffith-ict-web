@@ -1,5 +1,7 @@
 module Site
   class MembershipModalComponent < ViewComponent::Base
+    ID = "membership-modal"
+
     private
 
     def discord_url

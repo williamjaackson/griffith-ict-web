@@ -31,7 +31,13 @@
     <% if helpers.authenticated? %>
       <a href="<%= helpers.account_path %>" class="btn btn-secondary" data-action="navbar#closeMenu">Account</a>
     <% else %>
-      <button class="btn btn-primary" data-action="navbar#closeMenu" onclick="window.dispatchEvent(new CustomEvent('membership-modal:open'))"><%= cta[:label] %></button>
+      <%= helpers.button_tag cta[:label],
+            type: "button",
+            class: "btn btn-primary",
+            data: Ui::ModalComponent.trigger_data(
+              Site::MembershipModalComponent::ID,
+              before: "navbar#closeMenu"
+            ) %>
     <% end %>
   </div>
 </nav>
