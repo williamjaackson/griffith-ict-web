@@ -27,8 +27,8 @@ class PublicPagesControllerTest < ActionDispatch::IntegrationTest
     get sponsorship_path
 
     assert_response :success
-    YAML.safe_load_file(Rails.root.join("config/sponsorship_tiers.yml")).fetch("tiers").each do |tier|
-      assert_select ".badge", text: tier.fetch("name").upcase
+    Rails.application.config.site.dig(:sponsorship_tiers, :tiers).each do |tier|
+      assert_select ".badge", text: tier.fetch(:name).upcase
     end
   end
 

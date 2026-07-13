@@ -8,32 +8,13 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start reveal stagger stamp" data-stagger-interval="150">
-      <% accumulated_perks = [] %>
-      <% @tiers.each_with_index do |tier, i| %>
-        <% tier_key = tier["name"].downcase %>
+      <% @tiers.each_with_index do |tier, index| %>
         <div>
-          <div class="card <%= tier["rotation"] %>">
-            <div class="absolute left-0 top-0 bottom-0 w-3" style="background-color: <%= tier["color"] %>;"></div>
-            <span class="badge badge-sm" style="background-color: <%= tier["color"] %>;"><%= tier["name"].upcase %></span>
-            <p class="text-2xl font-extrabold text-brand-black mt-3 heading"><%= tier["price"] %></p>
-            <p class="text-sm mt-4 mb-6"><%= tier["description"] %></p>
-            <ul class="flex flex-col gap-3 text-sm">
-              <% accumulated_perks.each do |perk| %>
-                <li class="flex items-start gap-2">
-                  <span class="mt-0.5 shrink-0" style="color: var(--color-tier-<%= perk[:tier] %>);"><%= icon "check", class: "w-4 h-4", stroke_width: "3" %></span>
-                  <%= perk[:label] %>
-                </li>
-              <% end %>
-              <% tier["perks"].each do |perk| %>
-                <li class="flex items-start gap-2">
-                  <span class="mt-0.5 shrink-0" style="color: var(--color-tier-<%= tier_key %>);"><%= icon "check", class: "w-4 h-4", stroke_width: "3" %></span>
-                  <%= perk %>
-                </li>
-              <% end %>
-            </ul>
-          </div>
+          <%= render Site::SponsorshipTierComponent.new(
+                tier: tier,
+                inherited_tiers: @tiers.take(index)
+              ) %>
         </div>
-        <% tier["perks"].each { |p| accumulated_perks << { label: p, tier: tier_key } } %>
       <% end %>
     </div>
   </div>

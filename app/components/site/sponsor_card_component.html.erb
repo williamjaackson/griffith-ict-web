@@ -1,0 +1,14 @@
+<% if placeholder? %>
+  <div class="flex items-center justify-center h-24 bg-white border-3 border-dashed border-brand-black/30 text-brand-gray/40 text-sm font-bold">
+    Your logo here
+  </div>
+<% else %>
+  <%= link_to website,
+              target: "_blank",
+              rel: "noopener",
+              class: "card card-sm card-link group flex items-center justify-center hover:shadow-[5px_5px_0px_var(--color-brand-red)]" do %>
+    <span class="badge badge-sm absolute -top-3 -right-3 rotate-12" style="background-color: <%= tier_color %>;"><%= tier %></span>
+    <%= helpers.image_tag logo, alt: name, class: "max-h-14 max-w-full object-contain" %>
+    <span class="badge badge-dark badge-sm absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity"><%= name.upcase %></span>
+  <% end %>
+<% end %>

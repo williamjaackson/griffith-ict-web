@@ -1,0 +1,22 @@
+<div class="mt-16 reveal">
+  <p class="text-base mb-6">
+    Our <%= link_to "perks program", helpers.sponsorship_path(anchor: "perks-program"), class: "text-brand-red font-bold hover:underline" %>
+    partners with companies and organisations that support our members.
+  </p>
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+    <% perks.each do |perk| %>
+      <%= tag.button type: "button",
+                     class: "group flex items-center justify-center relative border-3 border-brand-black bg-white p-3 h-20 overflow-visible cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-[5px_5px_0px_var(--color-brand-red)] active:translate-y-0 active:shadow-none",
+                     data: button_data(perk) do %>
+        <%= helpers.image_tag perk.fetch(:logo), alt: perk.fetch(:name), class: "max-h-10 max-w-full object-contain" %>
+        <span class="badge badge-dark badge-sm absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+          <%= perk.fetch(:name).upcase %>
+        </span>
+      <% end %>
+    <% end %>
+
+    <% placeholder_count.times do %>
+      <div class="flex items-center justify-center h-20 bg-white border-3 border-dashed border-brand-black/30 text-brand-gray/40 text-sm font-bold">Your logo here</div>
+    <% end %>
+  </div>
+</div>

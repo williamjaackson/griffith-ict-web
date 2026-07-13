@@ -1,0 +1,10 @@
+<%= tag.button type: "button",
+               data: button_data,
+               class: button_classes,
+               style: button_style do %>
+  <div class="w-10 h-10 flex items-center justify-center mb-4 <%= icon_container_classes %>">
+    <%= helpers.icon member.fetch(:icon), class: icon_classes %>
+  </div>
+  <h3 class="heading heading-4"><%= role_name %></h3>
+  <p class="<%= name_classes %>"><%= member_name %></p>
+<% end %>

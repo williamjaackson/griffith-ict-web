@@ -1,0 +1,18 @@
+<div class="mb-6 reveal">
+  <span class="<%= badge_classes %>"><%= label %></span>
+  <p class="text-sm mt-2"><%= description %></p>
+</div>
+
+<div class="flex flex-col gap-5 reveal stagger <%= 'mb-12' if separated? %>">
+  <% rows.each do |row| %>
+    <div class="grid grid-cols-1 sm:grid-cols-2 <%= columns_for(row) %> gap-5">
+      <% row.each do |member| %>
+        <%= render Site::Team::MemberComponent.new(
+              member: member,
+              role: roles.fetch(member.fetch(:role).to_sym),
+              type: type
+            ) %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

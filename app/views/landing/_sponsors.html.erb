@@ -1,10 +1,3 @@
-<%
-  sponsor_count = @sponsors.size
-  # Total slots = next multiple of 4, last slot is always the CTA
-  total = [(((sponsor_count + 1) / 4.0).ceil * 4), 4].max
-  placeholder_count = total - 1 - sponsor_count
-%>
-
 <section id="sponsors" data-controller="perk-modal">
   <div class="container">
     <div class="mb-16 reveal">
@@ -16,59 +9,12 @@
       </p>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 reveal">
-      <% @sponsors.each do |sponsor| %>
-        <%= render "landing/sponsor_card",
-              name: sponsor["name"],
-              tier: sponsor["tier"],
-              logo: sponsor["logo"],
-              website: sponsor["website"] %>
-      <% end %>
-
-      <% placeholder_count.times do %>
-        <%= render "landing/sponsor_card", placeholder: true %>
-      <% end %>
-
-      <a href="/sponsorship" class="card card-link hover:shadow-[5px_5px_0px_var(--color-brand-black)] grid place-items-center h-24" style="background-color: var(--color-brand-red);">
-        <p class="text-white font-bold inline-flex items-center gap-1">Sponsor Us <%= icon "arrow-right", class: "w-4 h-4" %></p>
-      </a>
-    </div>
-
-    <% if @perks.any? %>
-      <%
-        perk_count = @perks.size
-        perk_total = [((perk_count / 6.0).ceil * 6), 6].max
-        perk_placeholder_count = perk_total - perk_count
-      %>
-      <div class="mt-16 reveal">
-        <p class="text-base mb-6">Our <a href="/sponsorship#perks-program" class="text-brand-red font-bold hover:underline">perks program</a> partners with companies and organisations that support our members.</p>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-4">
-          <% @perks.each do |perk| %>
-            <button type="button"
-                    class="group flex items-center justify-center relative border-3 border-brand-black bg-white p-3 h-20 overflow-visible cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-[5px_5px_0px_var(--color-brand-red)] active:translate-y-0 active:shadow-none"
-                    data-action="perk-modal#populate modal#open"
-                    data-modal-id-param="perk-modal"
-                    data-perk-name="<%= perk["name"] %>"
-                    data-perk-icon="<%= perk["icon"] %>"
-                    data-perk-description="<%= perk["description"] %>"
-                    data-perk-website="<%= perk["website"] %>">
-              <%= image_tag perk["logo"], alt: perk["name"], class: "max-h-10 max-w-full object-contain" %>
-              <span class="badge badge-dark badge-sm absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity"><%= perk["name"].upcase %></span>
-            </button>
-          <% end %>
-
-          <% perk_placeholder_count.times do |i| %>
-            <% last = i == perk_placeholder_count - 1 %>
-            <div class="flex items-center justify-center h-20 bg-white border-3 border-dashed border-brand-black/30 text-brand-gray/40 text-sm font-bold<%= ' md:hidden lg:flex' if last %>">Your logo here</div>
-          <% end %>
-        </div>
-
-      </div>
-    <% end %>
+    <%= render Site::SponsorGridComponent.new(sponsors: @sponsors) %>
+    <%= render Site::PerksGridComponent.new(perks: @perks) %>
   </div>
 
   <%# Kept at section level to avoid transformed ancestor clipping fixed positioning. %>
-  <%= render Ui::ModalComponent.new(id: "perk-modal", labelled_by: "perk-modal-title") do %>
+  <%= render Ui::ModalComponent.new(id: Site::PerksGridComponent::MODAL_ID, labelled_by: "perk-modal-title") do %>
     <img data-perk-modal-target="icon" src="" alt="" class="max-h-16 max-w-2/3 object-contain mb-4">
     <h3 id="perk-modal-title" data-perk-modal-target="name" class="heading heading-3 mb-3"></h3>
     <p data-perk-modal-target="description" class="mb-6"></p>

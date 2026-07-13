@@ -2,6 +2,6 @@ class SponsorshipController < ApplicationController
   allow_unauthenticated_access
 
   def show
-    @tiers = YAML.load_file(Rails.root.join("config/sponsorship_tiers.yml"))["tiers"]
+    @tiers = Rails.application.config.site.fetch(:sponsorship_tiers).fetch(:tiers)
   end
 end
