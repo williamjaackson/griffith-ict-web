@@ -29,14 +29,8 @@ module Site
       def button_classes
         return "p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream h-full w-full text-left cursor-pointer transition-transform duration-200 hover:-translate-y-1 focus-visible:outline-3 focus-visible:outline-brand-red" if unassigned?
 
-        "card card-link h-full w-full text-left cursor-pointer focus-visible:outline-3 focus-visible:outline-brand-red"
-      end
-
-      def button_style
-        return if unassigned?
-
-        shadow = type == :elected ? "var(--color-brand-red)" : "var(--color-brand-red-300)"
-        "box-shadow: 5px 5px 0px #{shadow};"
+        shadow = type == :elected ? "shadow-[5px_5px_0px_var(--color-brand-red)]" : "shadow-[5px_5px_0px_var(--color-brand-red-300)]"
+        "card card-link h-full w-full text-left cursor-pointer focus-visible:outline-3 focus-visible:outline-brand-red #{shadow}"
       end
 
       def icon_container_classes

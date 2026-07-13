@@ -23,7 +23,7 @@ module Site
         assert_equal [ "Lead the club." ], JSON.parse(button["data-responsibilities"])
         assert_equal "open", button["data-application-status"]
         assert_equal "https://example.com/apply", button["data-application-url"]
-        assert_includes button["style"], "var(--color-brand-red)"
+        assert_includes button["class"], "shadow-[5px_5px_0px_var(--color-brand-red)]"
       end
 
       test "renders unassigned members with safe defaults" do

@@ -16,6 +16,14 @@ class PublicPagesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#membership-modal[aria-hidden='true'][inert] [role='dialog'][aria-modal='true']"
     assert_select "#perk-modal[aria-hidden='true'][inert] [role='dialog'][aria-modal='true']"
     assert_select "[onclick]", count: 0
+    assert_select "[style]", count: 0
+    assert_select "style", count: 0
+
+    policy = response.headers.fetch("Content-Security-Policy")
+    assert_includes policy, "default-src 'self'"
+    assert_includes policy, "frame-ancestors 'none'"
+    assert_match(/script-src 'self' 'nonce-[^']+'/, policy)
+    assert_select "script[nonce]", minimum: 1
   end
 
   test "renders the about page and configured team" do

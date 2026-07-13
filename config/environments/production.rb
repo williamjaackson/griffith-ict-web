@@ -56,12 +56,13 @@ Rails.application.configure do
   # Only use :id for inspections in production.
   config.active_record.attributes_for_inspect = [ :id ]
 
-  # Enable DNS rebinding protection and other `Host` header attacks.
-  # config.hosts = [
-  #   "example.com",     # Allow requests from example.com
-  #   /.*\.example\.com/ # Allow requests from subdomains like `www.example.com`
-  # ]
-  #
-  # Skip DNS rebinding protection for the default health check endpoint.
-  # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+  # Enable DNS rebinding protection while allowing isolated pull-request previews.
+  config.hosts = [
+    "griffithict.club",
+    "www.griffithict.club",
+    /\Apreview-\d+\.griffithict\.club\z/
+  ]
+
+  # Allow local process monitors to reach the health endpoint by IP or localhost.
+  config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 end

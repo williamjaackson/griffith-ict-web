@@ -11,8 +11,8 @@ module Site
       perks = document.css("li")
 
       assert_equal [ "Website logo", "Job promotion" ], perks.map { |item| item.text.strip }
-      assert_includes perks.first.at_css("span")["style"], "--color-tier-opal"
-      assert_includes perks.last.at_css("span")["style"], "--color-tier-amber"
+      assert_includes perks.first.at_css("span")["class"], "text-tier-opal"
+      assert_includes perks.last.at_css("span")["class"], "text-tier-amber"
     end
 
     private
@@ -21,7 +21,6 @@ module Site
       {
         name: name,
         price: "$500",
-        color: "var(--color-tier-#{name.downcase})",
         rotation: "rotate-2",
         description: "Example tier",
         perks: perks

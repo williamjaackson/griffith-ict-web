@@ -35,5 +35,10 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 end
 
+group :development do
+  # Run the web and CSS processes declared in Procfile.dev
+  gem "foreman", require: false
+end
+
 gem "importmap-rails", "~> 2.2"
 gem "stimulus-rails", "~> 1.3"

@@ -33,6 +33,22 @@ body {
   line-height: 1.625; /* leading-relaxed */
 }
 
+#preview-banner {
+  @apply fixed top-0 left-0 right-0 z-[9999] text-center text-sm font-bold py-1.5 bg-[#F5C518] text-black;
+}
+
+#preview-banner a {
+  @apply underline text-inherit;
+}
+
+body.has-preview-banner {
+  padding-top: var(--preview-height, 3.5rem);
+}
+
+.has-preview-banner nav[data-controller~="navbar"] {
+  top: var(--preview-height, 3.5rem);
+}
+
 :where(a, button, input, select, textarea):focus-visible {
   outline: 3px solid var(--color-brand-red);
   outline-offset: 3px;

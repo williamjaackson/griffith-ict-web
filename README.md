@@ -13,7 +13,7 @@ https://griffithict.club/
 | Layer     | Technology                          |
 | --------- | ----------------------------------- |
 | Framework | Ruby on Rails 8                     |
-| Ruby      | 3.4.1                               |
+| Ruby      | 3.4.10                              |
 | Styling   | Tailwind CSS                        |
 | UI        | ViewComponent, Stimulus, Lucide     |
 | Assets    | Propshaft, Importmap                |
@@ -23,7 +23,7 @@ https://griffithict.club/
 
 ## Getting Started
 
-**Prerequisites:** Ruby 3.4.1 (see `.ruby-version`)
+**Prerequisites:** Ruby 3.4.10 (see `.ruby-version`)
 
 ```bash
 # Install dependencies

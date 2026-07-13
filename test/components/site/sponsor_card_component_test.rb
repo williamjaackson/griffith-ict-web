@@ -14,7 +14,7 @@ module Site
       assert_equal "https://example.com", document.at_css("a")["href"]
       assert_equal "Example", document.at_css("img")["alt"]
       assert_equal "RUBY", document.at_css(".badge").text
-      assert_includes document.at_css(".badge")["style"], "--color-tier-ruby"
+      assert_includes document.at_css(".badge")["class"], "bg-tier-ruby"
     end
 
     test "renders a placeholder without sponsor data" do
