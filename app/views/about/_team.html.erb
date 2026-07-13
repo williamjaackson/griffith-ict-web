@@ -57,9 +57,12 @@
                       <button type="button"
                               data-action="role-modal#open"
                               data-role="<%= member["role"] %>"
+                              data-role-type="elected"
                               data-member-name="Unassigned"
                               data-responsibilities="<%= role_details["responsibilities"].to_json %>"
                               data-history="<%= role_history.to_json %>"
+                              data-application-status="<%= role_details.dig("applications", "status") || "closed" %>"
+                              data-application-url="<%= role_details.dig("applications", "url") %>"
                               class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream h-full w-full text-left cursor-pointer transition-transform duration-200 hover:-translate-y-1 focus-visible:outline-3 focus-visible:outline-brand-red">
                         <div class="w-10 h-10 bg-brand-gray/10 flex items-center justify-center mb-4">
                           <%= icon(member["icon"], class: "w-5 h-5 opacity-40") %>
@@ -71,9 +74,12 @@
                       <button type="button"
                               data-action="role-modal#open"
                               data-role="<%= member["role"] %>"
+                              data-role-type="elected"
                               data-member-name="<%= member["name"] %>"
                               data-responsibilities="<%= role_details["responsibilities"].to_json %>"
                               data-history="<%= role_history.to_json %>"
+                              data-application-status="<%= role_details.dig("applications", "status") || "closed" %>"
+                              data-application-url="<%= role_details.dig("applications", "url") %>"
                               class="card card-link w-full text-left cursor-pointer focus-visible:outline-3 focus-visible:outline-brand-red"
                               style="box-shadow: 5px 5px 0px var(--color-brand-red);">
                         <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
@@ -107,9 +113,12 @@
                       <button type="button"
                               data-action="role-modal#open"
                               data-role="<%= member["role"] %>"
+                              data-role-type="appointed"
                               data-member-name="Unassigned"
                               data-responsibilities="<%= role_details["responsibilities"].to_json %>"
                               data-history="<%= role_history.to_json %>"
+                              data-application-status="<%= role_details.dig("applications", "status") || "closed" %>"
+                              data-application-url="<%= role_details.dig("applications", "url") %>"
                               class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream h-full w-full text-left cursor-pointer transition-transform duration-200 hover:-translate-y-1 focus-visible:outline-3 focus-visible:outline-brand-red">
                         <div class="w-10 h-10 bg-brand-gray/10 flex items-center justify-center mb-4">
                           <%= icon(member["icon"], class: "w-5 h-5 opacity-40") %>
@@ -121,9 +130,12 @@
                       <button type="button"
                               data-action="role-modal#open"
                               data-role="<%= member["role"] %>"
+                              data-role-type="appointed"
                               data-member-name="<%= member["name"] %>"
                               data-responsibilities="<%= role_details["responsibilities"].to_json %>"
                               data-history="<%= role_history.to_json %>"
+                              data-application-status="<%= role_details.dig("applications", "status") || "closed" %>"
+                              data-application-url="<%= role_details.dig("applications", "url") %>"
                               class="card card-link w-full text-left cursor-pointer focus-visible:outline-3 focus-visible:outline-brand-red"
                               style="box-shadow: 5px 5px 0px var(--color-brand-red-300);">
                         <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
@@ -159,13 +171,7 @@
       <p data-role-modal-target="member" class="font-semibold text-brand-red"></p>
       <ul data-role-modal-target="responsibilities" class="list-disc pl-5 space-y-3 mt-6"></ul>
 
-      <div data-role-modal-target="applicationActions" class="hidden mt-8 pt-6 border-t-3 border-brand-cream">
-        <button type="button"
-                disabled
-                class="btn btn-disabled w-full">
-          Applications (closed)
-        </button>
-      </div>
+      <div data-role-modal-target="applicationActions" class="hidden mt-8 pt-6 border-t-3 border-brand-cream"></div>
 
       <div class="mt-8 pt-6 border-t-3 border-brand-cream">
         <h3 class="heading heading-5">Role history</h3>

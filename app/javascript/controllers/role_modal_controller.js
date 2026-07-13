@@ -34,8 +34,27 @@ export default class extends Controller {
       })
     )
 
-    const roleIsUnassigned = card.dataset.memberName === "Unassigned"
-    this.applicationActionsTarget.classList.toggle("hidden", !roleIsUnassigned)
+    const applicationsAreOpen = card.dataset.applicationStatus === "open" && card.dataset.applicationUrl
+    const shouldShowApplications = card.dataset.roleType === "appointed" || applicationsAreOpen
+
+    this.applicationActionsTarget.classList.toggle("hidden", !shouldShowApplications)
+    this.applicationActionsTarget.replaceChildren()
+
+    if (shouldShowApplications) {
+      const applicationControl = document.createElement(applicationsAreOpen ? "a" : "button")
+      applicationControl.className = applicationsAreOpen ? "btn btn-primary w-full" : "btn btn-disabled w-full"
+      applicationControl.textContent = applicationsAreOpen ? "Applications open" : "Applications closed"
+
+      if (applicationsAreOpen) {
+        applicationControl.href = card.dataset.applicationUrl
+      } else {
+        applicationControl.type = "button"
+        applicationControl.disabled = true
+      }
+
+      this.applicationActionsTarget.append(applicationControl)
+    }
+
     this.timelineTarget.replaceChildren(
       ...JSON.parse(card.dataset.history).reverse().map((entry) => {
         const item = document.createElement("li")
@@ -61,7 +80,8 @@ export default class extends Controller {
 
         const period = document.createElement("p")
         period.className = "text-sm"
-        period.textContent = entry.period
+        const duration = this.formatDuration(entry.period)
+        period.textContent = duration ? `${entry.period} · ${duration}` : entry.period
 
         item.append(marker, nameRow, period)
         return item
@@ -95,5 +115,27 @@ export default class extends Controller {
 
   handleKeydown(event) {
     if (event.key === "Escape") this.close()
+  }
+
+  formatDuration(period) {
+    if (!period.includes(" - ")) return null
+
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    const [start, end] = period.split(" - ")
+    const [startMonth, startYear] = start.split(" ")
+    const now = new Date()
+    const [endMonth, endYear] = end === "Present"
+      ? [months[now.getMonth()], now.getFullYear().toString()]
+      : end.split(" ")
+
+    const monthCount = ((Number(endYear) - Number(startYear)) * 12) + months.indexOf(endMonth) - months.indexOf(startMonth) + 1
+    const years = Math.floor(monthCount / 12)
+    const remainingMonths = monthCount % 12
+    const parts = []
+
+    if (years) parts.push(`${years} yr${years === 1 ? "" : "s"}`)
+    if (remainingMonths) parts.push(`${remainingMonths} mo${remainingMonths === 1 ? "" : "s"}`)
+
+    return parts.join(" ")
   }
 }
