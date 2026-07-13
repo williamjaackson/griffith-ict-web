@@ -19,7 +19,7 @@
   }
 %>
 
-<section id="team" data-controller="tabs">
+<section id="team" data-controller="tabs role-modal">
   <div class="container">
     <div class="mb-12 reveal">
       <h2 class="heading heading-2">Executive team.</h2>
@@ -51,22 +51,43 @@
                 <% row.each do |member| %>
                   <div>
                     <% unassigned = member["name"].nil? %>
+                    <% role_details = @team_roles.fetch(member["role"]) %>
+                    <% role_history = member["history"] || [{ "name" => member["name"] || "Unassigned", "period" => "Present" }] %>
                     <% if unassigned %>
-                      <div class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream h-full">
+                      <button type="button"
+                              data-action="role-modal#open"
+                              data-role="<%= member["role"] %>"
+                              data-role-type="elected"
+                              data-member-name="Unassigned"
+                              data-responsibilities="<%= role_details["responsibilities"].to_json %>"
+                              data-history="<%= role_history.to_json %>"
+                              data-application-status="<%= member.dig("applications", "status") || "closed" %>"
+                              data-application-url="<%= member.dig("applications", "url") %>"
+                              class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream h-full w-full text-left cursor-pointer transition-transform duration-200 hover:-translate-y-1 focus-visible:outline-3 focus-visible:outline-brand-red">
                         <div class="w-10 h-10 bg-brand-gray/10 flex items-center justify-center mb-4">
                           <%= icon(member["icon"], class: "w-5 h-5 opacity-40") %>
                         </div>
                         <h3 class="heading heading-4"><%= member["role"] %></h3>
                         <p class="text-brand-gray/50 text-sm italic">Unassigned</p>
-                      </div>
+                      </button>
                     <% else %>
-                      <div class="card" style="box-shadow: 5px 5px 0px var(--color-brand-red);">
+                      <button type="button"
+                              data-action="role-modal#open"
+                              data-role="<%= member["role"] %>"
+                              data-role-type="elected"
+                              data-member-name="<%= member["name"] %>"
+                              data-responsibilities="<%= role_details["responsibilities"].to_json %>"
+                              data-history="<%= role_history.to_json %>"
+                              data-application-status="<%= member.dig("applications", "status") || "closed" %>"
+                              data-application-url="<%= member.dig("applications", "url") %>"
+                              class="card card-link w-full text-left cursor-pointer focus-visible:outline-3 focus-visible:outline-brand-red"
+                              style="box-shadow: 5px 5px 0px var(--color-brand-red);">
                         <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
                           <%= icon(member["icon"], class: "w-5 h-5 text-brand-red") %>
                         </div>
                         <h3 class="heading heading-4"><%= member["role"] %></h3>
                         <p class="text-sm"><%= member["name"] %></p>
-                      </div>
+                      </button>
                     <% end %>
                   </div>
                 <% end %>
@@ -86,22 +107,43 @@
                 <% row.each do |member| %>
                   <div>
                     <% unassigned = member["name"].nil? %>
+                    <% role_details = @team_roles.fetch(member["role"]) %>
+                    <% role_history = member["history"] || [{ "name" => member["name"] || "Unassigned", "period" => "Present" }] %>
                     <% if unassigned %>
-                      <div class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream h-full">
+                      <button type="button"
+                              data-action="role-modal#open"
+                              data-role="<%= member["role"] %>"
+                              data-role-type="appointed"
+                              data-member-name="Unassigned"
+                              data-responsibilities="<%= role_details["responsibilities"].to_json %>"
+                              data-history="<%= role_history.to_json %>"
+                              data-application-status="<%= member.dig("applications", "status") || "closed" %>"
+                              data-application-url="<%= member.dig("applications", "url") %>"
+                              class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream h-full w-full text-left cursor-pointer transition-transform duration-200 hover:-translate-y-1 focus-visible:outline-3 focus-visible:outline-brand-red">
                         <div class="w-10 h-10 bg-brand-gray/10 flex items-center justify-center mb-4">
                           <%= icon(member["icon"], class: "w-5 h-5 opacity-40") %>
                         </div>
                         <h3 class="heading heading-4"><%= member["role"] %></h3>
                         <p class="text-brand-gray/50 text-sm italic">Unassigned</p>
-                      </div>
+                      </button>
                     <% else %>
-                      <div class="card" style="box-shadow: 5px 5px 0px var(--color-brand-red-300);">
+                      <button type="button"
+                              data-action="role-modal#open"
+                              data-role="<%= member["role"] %>"
+                              data-role-type="appointed"
+                              data-member-name="<%= member["name"] %>"
+                              data-responsibilities="<%= role_details["responsibilities"].to_json %>"
+                              data-history="<%= role_history.to_json %>"
+                              data-application-status="<%= member.dig("applications", "status") || "closed" %>"
+                              data-application-url="<%= member.dig("applications", "url") %>"
+                              class="card card-link w-full text-left cursor-pointer focus-visible:outline-3 focus-visible:outline-brand-red"
+                              style="box-shadow: 5px 5px 0px var(--color-brand-red-300);">
                         <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
                           <%= icon(member["icon"], class: "w-5 h-5 text-brand-red") %>
                         </div>
                         <h3 class="heading heading-4"><%= member["role"] %></h3>
                         <p class="text-sm"><%= member["name"] %></p>
-                      </div>
+                      </button>
                     <% end %>
                   </div>
                 <% end %>
@@ -111,5 +153,30 @@
         <% end %>
       </div>
     <% end %>
+  </div>
+
+  <div data-role-modal-target="backdrop"
+       data-action="click->role-modal#closeBackdrop"
+       role="presentation"
+       aria-hidden="true"
+       class="fixed inset-0 z-50 bg-brand-black/50 flex items-center justify-center px-6 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div data-role-modal-target="panel"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="role-modal-title"
+         tabindex="-1"
+         class="relative bg-brand-bg border-3 border-brand-black shadow-[6px_6px_0px_var(--color-brand-red)] w-full max-w-lg max-h-[calc(100vh-3rem)] overflow-y-auto p-8 scale-95 opacity-0 transition-all duration-300 focus:outline-none">
+      <span class="badge badge-sm mb-5">ROLE</span>
+      <h2 id="role-modal-title" data-role-modal-target="title" class="heading heading-3"></h2>
+      <p data-role-modal-target="member" class="font-semibold text-brand-red"></p>
+      <ul data-role-modal-target="responsibilities" class="list-disc pl-5 space-y-3 mt-6"></ul>
+
+      <div data-role-modal-target="applicationActions" class="hidden mt-8 pt-6 border-t-3 border-brand-cream"></div>
+
+      <div class="mt-8 pt-6 border-t-3 border-brand-cream">
+        <h3 class="heading heading-5">Role history</h3>
+        <ol data-role-modal-target="timeline" class="ml-2 border-l-2 border-brand-gray/30"></ol>
+      </div>
+    </div>
   </div>
 </section>
