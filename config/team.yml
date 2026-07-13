@@ -53,8 +53,8 @@ roles:
       - Represent the club to Griffith, the Guild, and external organisations.
       - Ensure the committee follows the constitution and its decisions.
   Vice President:
-    note: The Vice President may act independently and does not require the President’s approval for routine club work.
     responsibilities:
+      - The Vice President may act independently and does not require the President’s approval for routine club work.
       - Lead club projects without requiring the President’s approval.
       - Chair meetings and represent the club when needed.
       - Coordinate committee members and follow up unfinished work.

@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["backdrop", "panel", "title", "responsibilities", "note", "close"]
+  static targets = ["backdrop", "panel", "title", "member", "responsibilities"]
 
   connect() {
     this.handleKeydown = this.handleKeydown.bind(this)
@@ -17,6 +17,7 @@ export default class extends Controller {
 
     this.previouslyFocused = card
     this.titleTarget.textContent = card.dataset.role
+    this.memberTarget.textContent = card.dataset.memberName
     this.responsibilitiesTarget.replaceChildren(
       ...JSON.parse(card.dataset.responsibilities).map((responsibility) => {
         const item = document.createElement("li")
@@ -25,14 +26,6 @@ export default class extends Controller {
       })
     )
 
-    if (card.dataset.note) {
-      this.noteTarget.textContent = card.dataset.note
-      this.noteTarget.classList.remove("hidden")
-    } else {
-      this.noteTarget.textContent = ""
-      this.noteTarget.classList.add("hidden")
-    }
-
     this.backdropTarget.classList.remove("opacity-0", "pointer-events-none")
     this.backdropTarget.classList.add("opacity-100", "pointer-events-auto")
     this.panelTarget.classList.remove("scale-95", "opacity-0")
@@ -40,7 +33,7 @@ export default class extends Controller {
     this.backdropTarget.setAttribute("aria-hidden", "false")
     document.body.classList.add("overflow-hidden")
     document.addEventListener("keydown", this.handleKeydown)
-    this.closeTarget.focus()
+    this.panelTarget.focus()
   }
 
   close() {
@@ -60,9 +53,5 @@ export default class extends Controller {
 
   handleKeydown(event) {
     if (event.key === "Escape") this.close()
-    if (event.key === "Tab") {
-      event.preventDefault()
-      this.closeTarget.focus()
-    }
   }
 }
