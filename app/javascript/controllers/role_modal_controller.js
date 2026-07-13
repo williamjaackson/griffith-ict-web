@@ -37,7 +37,7 @@ export default class extends Controller {
     const roleIsUnassigned = card.dataset.memberName === "Unassigned"
     this.applicationActionsTarget.classList.toggle("hidden", !roleIsUnassigned)
     this.timelineTarget.replaceChildren(
-      ...JSON.parse(card.dataset.history).map((entry) => {
+      ...JSON.parse(card.dataset.history).reverse().map((entry) => {
         const item = document.createElement("li")
         item.className = "relative pl-6 pb-5 last:pb-0"
 
