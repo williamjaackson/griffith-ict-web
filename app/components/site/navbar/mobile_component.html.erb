@@ -1,14 +1,27 @@
-<nav data-navbar-target="menu" class="fixed inset-0 z-10 flex flex-col items-center justify-center bg-brand-bg opacity-0 pointer-events-none transition-all duration-500 md:hidden heading">
+<div id="mobile-navigation"
+     data-navbar-target="menu"
+     aria-hidden="true"
+     inert
+     class="fixed inset-0 z-10 flex flex-col items-center justify-center bg-brand-bg opacity-0 pointer-events-none transition-all duration-500 md:hidden heading">
   <ul class="flex flex-col items-center text-center">
     <% links.each do |link| %>
       <li>
         <% if link[:children] %>
-          <div data-controller="dropdown">
-            <button data-action="dropdown#toggle" class="text-2xl font-bold text-brand-black hover:text-brand-red transition-colors inline-flex items-center gap-2 cursor-pointer py-3">
+          <div data-controller="dropdown" data-action="keydown->dropdown#keydown">
+            <button type="button"
+                    data-dropdown-target="trigger"
+                    data-action="dropdown#toggle"
+                    aria-expanded="false"
+                    aria-controls="<%= dropdown_id(link) %>"
+                    class="text-2xl font-bold text-brand-black hover:text-brand-red transition-colors inline-flex items-center gap-2 cursor-pointer py-3">
               <%= link[:label] %>
-              <%= helpers.icon"chevron-down", class: "w-5 h-5 transition-transform duration-200", stroke_width: "2.5", data: { dropdown_target: "chevron" } %>
+              <%= helpers.icon "chevron-down", class: "w-5 h-5 transition-transform duration-200", stroke_width: "2.5", data: { dropdown_target: "chevron" } %>
             </button>
-            <div data-dropdown-target="menu" class="grid grid-rows-[0fr] transition-[grid-template-rows,opacity] duration-300 opacity-0">
+            <div id="<%= dropdown_id(link) %>"
+                 data-dropdown-target="menu"
+                 aria-hidden="true"
+                 inert
+                 class="grid grid-rows-[0fr] transition-[grid-template-rows,opacity] duration-300 opacity-0">
               <div class="overflow-hidden flex flex-col items-center">
                 <% link[:children].each do |child| %>
                   <a href="<%= child[:href] %>" class="text-lg font-bold hover:text-brand-red transition-colors py-2" data-action="navbar#closeMenu">
@@ -40,4 +53,4 @@
             ) %>
     <% end %>
   </div>
-</nav>
+</div>

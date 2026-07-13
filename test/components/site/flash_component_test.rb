@@ -18,6 +18,9 @@ module Site
 
       assert document.at_css("[data-controller=flash]")
       assert_equal 2, document.css("[data-flash-target=toast]").size
+      assert_equal "status", document.at_css("[data-flash-target=toast]")["role"]
+      assert_equal "alert", document.css("[data-flash-target=toast]").last["role"]
+      assert document.at_css("button[type=button][aria-label=Dismiss]")
       assert_includes document.text, "Saved successfully."
       assert_includes document.text, "Something went wrong."
     end

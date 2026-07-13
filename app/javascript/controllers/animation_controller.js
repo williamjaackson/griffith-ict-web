@@ -2,14 +2,16 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   connect() {
-    this.intersectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("entered")
-          this.intersectionObserver.unobserve(entry.target)
-        }
-      })
-    }, { threshold: 0.15 })
+    if ("IntersectionObserver" in window) {
+      this.intersectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("entered")
+            this.intersectionObserver.unobserve(entry.target)
+          }
+        })
+      }, { threshold: 0.15 })
+    }
 
     this.mutationObserver = new MutationObserver(() => this.#scan())
 
@@ -36,7 +38,11 @@ export default class extends Controller {
     })
 
     this.element.querySelectorAll(".reveal:not(.entered)").forEach((el) => {
-      this.intersectionObserver.observe(el)
+      if (this.intersectionObserver) {
+        this.intersectionObserver.observe(el)
+      } else {
+        el.classList.add("entered")
+      }
     })
   }
 }

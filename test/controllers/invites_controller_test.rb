@@ -8,6 +8,9 @@ class InvitesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "input[type=email][value='#{invite.email}'][disabled]"
+    assert_select "label[for=invited_email]", text: "Email address"
+    assert_select "label[for=password]", text: "Password"
+    assert_select "label[for=password_confirmation]", text: "Confirm password"
   end
 
   test "rejects an expired invite" do

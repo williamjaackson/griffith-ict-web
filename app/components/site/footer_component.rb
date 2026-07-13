@@ -1,29 +1,29 @@
 module Site
   class FooterComponent < ViewComponent::Base
-    LINK_GROUPS = [
-      {
-        title: "Club",
-        links: [
-          { label: "Home", href: "/#" },
-          { label: "About", href: "/about#" },
-          { label: "Community", href: "/#community" },
-          { label: "Sponsors", href: "/#sponsors" }
-        ]
-      },
-      {
-        title: "Resources",
-        links: [
-          { label: "Sponsorship", href: "/sponsorship#" },
-          { label: "Perks Program", href: "/sponsorship#perks-program" },
-          { label: "Executive Team", href: "/about#team" },
-          { label: "Contact Us", href: "mailto:#{Rails.application.config.socials[:email]}" }
-        ]
-      }
-    ].freeze
-
     private
 
-    def link_groups = LINK_GROUPS
+    def link_groups
+      [
+        {
+          title: "Club",
+          links: [
+            { label: "Home", href: helpers.root_path },
+            { label: "About", href: helpers.about_path },
+            { label: "Community", href: helpers.root_path(anchor: "community") },
+            { label: "Sponsors", href: helpers.root_path(anchor: "sponsors") }
+          ]
+        },
+        {
+          title: "Resources",
+          links: [
+            { label: "Sponsorship", href: helpers.sponsorship_path },
+            { label: "Perks Program", href: helpers.sponsorship_path(anchor: "perks-program") },
+            { label: "Executive Team", href: helpers.about_path(anchor: "team") },
+            { label: "Contact Us", href: "mailto:#{socials.fetch(:email)}" }
+          ]
+        }
+      ]
+    end
 
     def socials
       Rails.application.config.socials

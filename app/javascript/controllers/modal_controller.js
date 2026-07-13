@@ -1,13 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-
-const FOCUSABLE_SELECTOR = [
-  "a[href]",
-  "button:not([disabled])",
-  "input:not([disabled])",
-  "select:not([disabled])",
-  "textarea:not([disabled])",
-  "[tabindex]:not([tabindex='-1'])"
-].join(",")
+import { focusableElements, trapFocus } from "lib/focus"
 
 export default class extends Controller {
   static targets = ["dialog"]
@@ -19,6 +11,7 @@ export default class extends Controller {
   disconnect() {
     document.removeEventListener("keydown", this.handleKeydown)
     document.body.classList.remove("overflow-hidden")
+    this.#restorePage()
   }
 
   open(event) {
@@ -28,11 +21,12 @@ export default class extends Controller {
     if (this.openDialog) this.#hide(this.openDialog, false)
 
     this.openDialog = dialog
-    this.previouslyFocused = event.currentTarget
+    this.previouslyFocused = document.activeElement === document.body ? event.currentTarget : document.activeElement
     dialog.inert = false
     dialog.setAttribute("aria-hidden", "false")
     dialog.classList.remove("opacity-0", "pointer-events-none")
     dialog.classList.add("opacity-100", "pointer-events-auto")
+    this.#isolate(dialog)
 
     const panel = this.#panelFor(dialog)
     panel.classList.remove("scale-95", "opacity-0")
@@ -44,7 +38,7 @@ export default class extends Controller {
 
     requestAnimationFrame(() => {
       const initialFocus = dialog.querySelector("[data-modal-initial-focus]")
-      const firstControl = this.#focusableElements(dialog)[0]
+      const firstControl = focusableElements(dialog)[0]
       const focusTarget = initialFocus || firstControl || panel
       focusTarget.focus()
     })
@@ -63,7 +57,8 @@ export default class extends Controller {
     if (event.key === "Escape") {
       this.close()
     } else if (event.key === "Tab") {
-      this.#trapFocus(event)
+      const panel = this.#panelFor(this.openDialog)
+      trapFocus(event, focusableElements(this.openDialog), panel)
     }
   }
 
@@ -80,6 +75,7 @@ export default class extends Controller {
     document.body.classList.remove("overflow-hidden")
     document.removeEventListener("keydown", this.handleKeydown)
     dialog.dispatchEvent(new CustomEvent("modal:closed", { bubbles: true }))
+    this.#restorePage()
 
     this.openDialog = null
     if (restoreFocus && this.previouslyFocused?.isConnected) this.previouslyFocused.focus()
@@ -90,31 +86,23 @@ export default class extends Controller {
     return dialog.querySelector("[data-modal-target='panel']")
   }
 
-  #focusableElements(dialog) {
-    return Array.from(dialog.querySelectorAll(FOCUSABLE_SELECTOR)).filter((element) => (
-      element.tabIndex >= 0 && element.getClientRects().length > 0
-    ))
+  #isolate(dialog) {
+    this.inertedElements = []
+    let current = dialog
+
+    while (current.parentElement && current !== document.body) {
+      Array.from(current.parentElement.children).forEach((sibling) => {
+        if (sibling !== current && !sibling.inert) {
+          sibling.inert = true
+          this.inertedElements.push(sibling)
+        }
+      })
+      current = current.parentElement
+    }
   }
 
-  #trapFocus(event) {
-    if (!this.openDialog) return
-
-    const controls = this.#focusableElements(this.openDialog)
-    if (controls.length === 0) {
-      event.preventDefault()
-      this.#panelFor(this.openDialog).focus()
-      return
-    }
-
-    const first = controls[0]
-    const last = controls[controls.length - 1]
-
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault()
-      last.focus()
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault()
-      first.focus()
-    }
+  #restorePage() {
+    this.inertedElements?.forEach((element) => { element.inert = false })
+    this.inertedElements = []
   }
 }

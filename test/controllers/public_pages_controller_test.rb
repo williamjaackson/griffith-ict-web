@@ -8,6 +8,11 @@ class PublicPagesControllerTest < ActionDispatch::IntegrationTest
     assert_select "h2", text: /Build\. Learn\./
     assert_select "section#sponsors"
     assert_select "body[data-controller~='modal']"
+    assert_select "nav[aria-label='Primary']"
+    assert_select "button[aria-controls='mobile-navigation'][aria-expanded='false']"
+    assert_select "#mobile-navigation[aria-hidden='true'][inert]"
+    assert_select "[data-controller='dropdown'] [data-dropdown-target='trigger'][aria-expanded='false']", minimum: 1
+    assert_select "[data-dropdown-target='menu'][aria-hidden='true'][inert]", minimum: 1
     assert_select "#membership-modal[aria-hidden='true'][inert] [role='dialog'][aria-modal='true']"
     assert_select "#perk-modal[aria-hidden='true'][inert] [role='dialog'][aria-modal='true']"
     assert_select "[onclick]", count: 0
@@ -20,6 +25,11 @@ class PublicPagesControllerTest < ActionDispatch::IntegrationTest
     assert_select "h1", text: /Meet/
     assert_select "section#team"
     assert_select "button", text: /Gold Coast/
+    assert_select "[role='tablist'][aria-label='Campus']"
+    assert_select "button[role='tab'][aria-selected='true'][tabindex='0']", count: 1
+    assert_select "button[role='tab'][aria-selected='false'][tabindex='-1']", minimum: 1
+    assert_select "[role='tabpanel'][aria-labelledby]", count: 2
+    assert_select "[role='tabpanel'][hidden]", count: 1
     assert_select "#role-modal[aria-hidden='true'][inert] [role='dialog'][aria-modal='true']"
   end
 

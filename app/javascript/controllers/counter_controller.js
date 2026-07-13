@@ -14,7 +14,7 @@ export default class extends Controller {
   }
 
   update() {
-    const elapsed = Math.floor(Date.now() / 1000) - this.sinceValue
+    const elapsed = Math.max(0, Math.floor(Date.now() / 1000) - this.sinceValue)
     const days = Math.floor(elapsed / 86400)
     const hours = Math.floor((elapsed % 86400) / 3600)
     const minutes = Math.floor((elapsed % 3600) / 60)

@@ -25,6 +25,19 @@ module Admin
       assert_response :success
       assert_select "h1", text: "Invites"
       assert_select "[data-controller=clipboard]", minimum: 1
+      assert_select "button[data-clipboard-target=button][aria-live=polite]", minimum: 1
+    end
+
+    test "renders a natively accessible invite form" do
+      sign_in_as(users(:admin))
+
+      get new_admin_invite_path
+
+      assert_response :success
+      assert_select "label[for=invite_email]", text: "Email address"
+      assert_select "label[for=invite_role]", text: "Role"
+      assert_select "select#invite_role[name='invite[role]'] option", count: Invite.roles.length
+      assert_select "[data-controller=select]", count: 0
     end
 
     test "creates an invite attributed to the administrator" do

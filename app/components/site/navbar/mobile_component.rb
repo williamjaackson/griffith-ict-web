@@ -9,6 +9,10 @@ module Site
       private
 
       attr_reader :links, :cta
+
+      def dropdown_id(link)
+        "mobile-#{link.fetch(:label).parameterize}-navigation"
+      end
     end
   end
 end

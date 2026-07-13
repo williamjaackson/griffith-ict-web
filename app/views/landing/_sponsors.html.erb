@@ -15,7 +15,7 @@
 
   <%# Kept at section level to avoid transformed ancestor clipping fixed positioning. %>
   <%= render Ui::ModalComponent.new(id: Site::PerksGridComponent::MODAL_ID, labelled_by: "perk-modal-title") do %>
-    <img data-perk-modal-target="icon" src="" alt="" class="max-h-16 max-w-2/3 object-contain mb-4">
+    <img data-perk-modal-target="icon" alt="" class="max-h-16 max-w-2/3 object-contain mb-4">
     <h3 id="perk-modal-title" data-perk-modal-target="name" class="heading heading-3 mb-3"></h3>
     <p data-perk-modal-target="description" class="mb-6"></p>
     <a data-perk-modal-target="link" href="#" target="_blank" rel="noopener" class="btn btn-primary">

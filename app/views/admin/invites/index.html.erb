@@ -26,7 +26,11 @@
           <% unless invite.accepted? %>
             <div class="flex items-center gap-2">
               <% unless invite.expired? %>
-                <button data-action="clipboard#copy" class="text-sm font-semibold text-brand-black border-2 border-brand-black px-3 py-1.5 cursor-pointer hover:bg-brand-cream transition-colors">
+                <button type="button"
+                        data-clipboard-target="button"
+                        data-action="clipboard#copy"
+                        aria-live="polite"
+                        class="text-sm font-semibold text-brand-black border-2 border-brand-black px-3 py-1.5 cursor-pointer hover:bg-brand-cream disabled:cursor-wait disabled:opacity-60 transition-colors">
                   Copy link
                 </button>
               <% end %>

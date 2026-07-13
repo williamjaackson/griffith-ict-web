@@ -8,9 +8,17 @@
     </div>
 
     <%# Campus tabs %>
-    <div class="flex gap-8 mb-10 border-b-3 border-brand-gray/20">
+    <div class="flex gap-8 mb-10 border-b-3 border-brand-gray/20" role="tablist" aria-label="Campus">
       <% @campuses.each_with_index do |campus, index| %>
-        <button data-tabs-target="btn" data-action="tabs#select" data-index="<%= index %>"
+        <button type="button"
+                id="team-tab-<%= index %>"
+                role="tab"
+                aria-controls="team-panel-<%= index %>"
+                aria-selected="<%= index == 0 %>"
+                tabindex="<%= index == 0 ? 0 : -1 %>"
+                data-tabs-target="btn"
+                data-action="tabs#select keydown->tabs#navigate"
+                data-index="<%= index %>"
                 class="pb-3 text-sm font-bold cursor-pointer transition-colors duration-200 -mb-[3px] heading <%= index == 0 ? 'text-brand-black border-b-3 border-brand-red' : 'border-b-3 border-transparent' %>">
           <%= campus.fetch(:name) %>
         </button>
@@ -18,7 +26,13 @@
     </div>
 
     <% @campuses.each_with_index do |campus, index| %>
-      <div data-tabs-target="panel" class="<%= 'hidden' unless index == 0 %>">
+      <div id="team-panel-<%= index %>"
+           role="tabpanel"
+           aria-labelledby="team-tab-<%= index %>"
+           tabindex="0"
+           data-tabs-target="panel"
+           class="<%= 'hidden' unless index == 0 %>"
+           <%= 'hidden' unless index == 0 %>>
         <%= render Site::Team::GroupComponent.new(
               members: campus.fetch(:elected, []),
               roles: @team_roles,

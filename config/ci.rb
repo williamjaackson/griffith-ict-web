@@ -4,6 +4,7 @@ CI.run do
   step "Setup", "bin/setup --skip-server"
 
   step "Style: Ruby", "bin/rubocop"
+  step "Style: JavaScript", "bin/javascript-check"
 
   step "Security: Gem audit", "bin/bundler-audit"
   step "Security: Importmap audit", "bin/importmap audit"

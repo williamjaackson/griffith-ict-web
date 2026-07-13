@@ -9,7 +9,24 @@ export default class extends Controller {
   }
 
   select(event) {
-    this.indexValue = parseInt(event.currentTarget.dataset.index, 10)
+    this.indexValue = Number.parseInt(event.currentTarget.dataset.index, 10)
+  }
+
+  navigate(event) {
+    const currentIndex = this.btnTargets.indexOf(event.currentTarget)
+    const lastIndex = this.btnTargets.length - 1
+    const nextIndex = {
+      ArrowLeft: (currentIndex - 1 + this.btnTargets.length) % this.btnTargets.length,
+      ArrowRight: (currentIndex + 1) % this.btnTargets.length,
+      Home: 0,
+      End: lastIndex
+    }[event.key]
+
+    if (nextIndex === undefined) return
+
+    event.preventDefault()
+    this.indexValue = nextIndex
+    this.btnTargets[nextIndex].focus()
   }
 
   indexValueChanged() {
@@ -23,10 +40,14 @@ export default class extends Controller {
       btn.classList.toggle("border-brand-red", active)
       btn.classList.toggle("text-brand-gray", !active)
       btn.classList.toggle("border-transparent", !active)
+      btn.setAttribute("aria-selected", String(active))
+      btn.tabIndex = active ? 0 : -1
     })
 
     this.panelTargets.forEach((panel, i) => {
-      panel.classList.toggle("hidden", i !== this.indexValue)
+      const active = i === this.indexValue
+      panel.classList.toggle("hidden", !active)
+      panel.hidden = !active
     })
   }
 }

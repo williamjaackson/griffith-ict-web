@@ -6,6 +6,8 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   test "new" do
     get new_session_path
     assert_response :success
+    assert_select "label[for=email_address]", text: "Email address"
+    assert_select "label[for=password]", text: "Password"
   end
 
   test "create with valid credentials" do

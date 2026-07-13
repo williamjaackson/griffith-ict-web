@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["menu", "chevron"]
+  static targets = ["trigger", "menu", "chevron"]
 
   connect() {
     this._close = this._close.bind(this)
@@ -16,27 +16,40 @@ export default class extends Controller {
   toggle(event) {
     event.preventDefault()
     event.stopPropagation()
-    this.open ? this._hide() : this._show()
+    this.open ? this.#hide() : this.#show()
   }
 
   show() {
     if (this.open) return
-    this._show()
+    this.#show()
   }
 
-  hide() {
+  hide(event) {
     if (!this.open) return
-    this._hide()
+    if (event?.relatedTarget && this.element.contains(event.relatedTarget)) return
+
+    this.#hide()
   }
 
-  _isMobile() {
+  keydown(event) {
+    if (event.key !== "Escape" || !this.open) return
+
+    event.preventDefault()
+    this.#hide()
+    this.triggerTarget.focus()
+  }
+
+  #isMobile() {
     return this.menuTarget.classList.contains("grid")
   }
 
-  _show() {
+  #show() {
     this.open = true
+    this.triggerTarget.setAttribute("aria-expanded", "true")
+    this.menuTarget.setAttribute("aria-hidden", "false")
+    this.menuTarget.inert = false
 
-    if (this._isMobile()) {
+    if (this.#isMobile()) {
       this.menuTarget.style.gridTemplateRows = "1fr"
       this.menuTarget.classList.remove("opacity-0")
       this.menuTarget.classList.add("opacity-100")
@@ -50,10 +63,13 @@ export default class extends Controller {
     }
   }
 
-  _hide() {
+  #hide() {
     this.open = false
+    this.triggerTarget.setAttribute("aria-expanded", "false")
+    this.menuTarget.setAttribute("aria-hidden", "true")
+    this.menuTarget.inert = true
 
-    if (this._isMobile()) {
+    if (this.#isMobile()) {
       this.menuTarget.style.gridTemplateRows = "0fr"
       this.menuTarget.classList.remove("opacity-100")
       this.menuTarget.classList.add("opacity-0")
@@ -68,8 +84,6 @@ export default class extends Controller {
   }
 
   _close(event) {
-    if (!this.element.contains(event.target)) {
-      this._hide()
-    }
+    if (this.open && !this.element.contains(event.target)) this.#hide()
   }
 }

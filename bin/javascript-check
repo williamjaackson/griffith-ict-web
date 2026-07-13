@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o pipefail
+
+node_binary="${NODE_BINARY:-$(command -v node || true)}"
+if [[ -z "$node_binary" ]]; then
+  echo "Skipping JavaScript syntax checks: Node.js is not installed."
+  exit 0
+fi
+
+while IFS= read -r -d '' file; do
+  "$node_binary" --check "$file"
+done < <(find app/javascript -name '*.js' -print0)
