@@ -99,13 +99,17 @@ Local development and automated tests use SQLite, so no database service or
 credentials are needed to run the app locally.
 
 Production and VPS previews use Neon PostgreSQL. Each deployed environment
-requires two variables in its protected `.env` file:
+requires these variables in its protected `.env` file:
 
 - `DATABASE_URL` — the pooled Neon connection string used by Puma.
 - `DIRECT_DATABASE_URL` — the matching direct connection string used only for
   migrations and seeds.
+- `ADMIN_PASSWORD` — used only while seeding the administrator account.
+- `SECRET_KEY_BASE` — generated with `bin/rails secret` and used to sign runtime
+  data. An existing `RAILS_MASTER_KEY` may provide this value through encrypted
+  credentials instead.
 
-Do not commit either value. Copy `.env.example` only when configuring a deployed
+Do not commit any of these values. Copy `.env.example` only when configuring a deployed
 environment. Store production values in `~/griffith-ict-web/.env` and preview
 values in `/opt/previews/.env`, keep the values shell-quoted because the URLs
 contain `&`, then restrict each file with `chmod 600`.
@@ -114,9 +118,25 @@ All preview sites share the preview database. Migrations deployed to previews
 must therefore remain backward-compatible with other preview branches, and
 preview teardown never reverses database migrations.
 
+Deployments generate a separate `.env.runtime` file containing only the values
+the web process needs. The direct database URL and seed password are therefore
+not exposed to the long-running Puma service.
+
 ## Deployment
 
 Merging to `master` triggers an automatic deploy via GitHub Actions.
+
+Configure these repository Actions secrets before deploying:
+
+- `VPS_HOST` — the VPS hostname or IP address.
+- `VPS_SSH_KEY` — the private key for the deployment account.
+- `VPS_SSH_KNOWN_HOSTS` — the VPS host-key line captured with `ssh-keyscan -H`
+  after verifying its fingerprint through a trusted channel.
+
+Deploy and preview workflows check out the exact commit from the GitHub event,
+run migrations and assets once, restart the corresponding systemd service, and
+wait for `/up` to return successfully. Concurrent production deploys are
+serialized. Preview deploys are restricted to branches in this repository.
 
 Before the first PostgreSQL deploy, back up `storage/production.sqlite3`, rotate
 the Neon owner passwords, and place the new pooled and direct URLs in the VPS

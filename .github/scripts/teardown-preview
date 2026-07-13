@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+readonly pr_number=${1:-}
+
+if [[ ! $pr_number =~ ^[1-9][0-9]*$ ]] || (( pr_number > 1000 )); then
+  echo "Invalid pull request number: $pr_number" >&2
+  exit 64
+fi
+
+readonly service="griffith-preview@$pr_number"
+readonly nginx_config="/etc/nginx/conf.d/preview-pr-$pr_number.conf"
+readonly disabled_nginx_config="$nginx_config.disabled"
+
+systemctl stop "$service" 2>/dev/null || true
+systemctl disable "$service" 2>/dev/null || true
+rm -rf -- "/etc/systemd/system/$service.service.d"
+systemctl daemon-reload
+
+if [[ -f $nginx_config ]]; then
+  mv "$nginx_config" "$disabled_nginx_config"
+  if nginx -t && systemctl reload nginx; then
+    rm -f -- "$disabled_nginx_config"
+  else
+    mv "$disabled_nginx_config" "$nginx_config"
+    nginx -t && systemctl reload nginx || true
+    echo "Nginx configuration is invalid; restored preview config" >&2
+    exit 1
+  fi
+fi
+
+rm -rf -- "/opt/previews/pr-$pr_number"

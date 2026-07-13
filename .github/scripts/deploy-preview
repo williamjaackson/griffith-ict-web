@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+readonly pr_number=${1:-}
+readonly deploy_sha=${2:-}
+readonly repository_url=${3:-}
+
+if [[ ! $pr_number =~ ^[1-9][0-9]*$ ]] || (( pr_number > 1000 )); then
+  echo "Invalid pull request number: $pr_number" >&2
+  exit 64
+fi
+
+if [[ ! $deploy_sha =~ ^[0-9a-f]{40}$ ]]; then
+  echo "Invalid deployment SHA: $deploy_sha" >&2
+  exit 64
+fi
+
+if [[ ! $repository_url =~ ^https://github\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+\.git$ ]]; then
+  echo "Invalid GitHub repository URL" >&2
+  exit 64
+fi
+
+export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
+readonly preview_directory="/opt/previews/pr-$pr_number"
+
+if [[ -d "$preview_directory/.git" ]]; then
+  cd "$preview_directory"
+  if [[ $(git remote get-url origin) != "$repository_url" ]]; then
+    echo "Existing preview has an unexpected origin" >&2
+    exit 1
+  fi
+else
+  if [[ -e $preview_directory ]]; then
+    echo "Preview path exists but is not a Git repository" >&2
+    exit 1
+  fi
+
+  git clone --no-checkout "$repository_url" "$preview_directory"
+  cd "$preview_directory"
+fi
+
+readonly preview_ref="refs/remotes/origin/pull-$pr_number"
+git fetch --force origin "refs/pull/$pr_number/head:$preview_ref"
+
+if [[ $(git rev-parse "$preview_ref") != "$deploy_sha" ]]; then
+  echo "Fetched preview SHA does not match the pull request event" >&2
+  exit 1
+fi
+
+git checkout --detach "$deploy_sha"
+exec script/deploy-release preview "$pr_number"

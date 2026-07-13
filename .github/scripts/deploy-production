@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+readonly deploy_sha=${1:-}
+readonly application_directory=/root/griffith-ict-web
+
+if [[ ! $deploy_sha =~ ^[0-9a-f]{40}$ ]]; then
+  echo "Invalid deployment SHA: $deploy_sha" >&2
+  exit 64
+fi
+
+export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
+cd "$application_directory"
+
+git fetch --prune origin master
+git merge-base --is-ancestor "$deploy_sha" origin/master
+git checkout --detach "$deploy_sha"
+
+exec script/deploy-release production

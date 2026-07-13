@@ -1,0 +1,216 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+readonly environment=${1:-}
+readonly identifier=${2:-}
+
+require_value() {
+  local name=$1
+
+  if [[ -z ${!name:-} ]]; then
+    echo "$name must be set in $deployment_environment_file" >&2
+    exit 64
+  fi
+}
+
+write_runtime_environment() {
+  local target=$1
+  local temporary_file
+  local name
+  local value
+
+  temporary_file=$(mktemp)
+  chmod 600 "$temporary_file"
+
+  for name in DATABASE_URL SECRET_KEY_BASE RAILS_MASTER_KEY RAILS_MAX_THREADS WEB_CONCURRENCY PORT; do
+    value=${!name:-}
+    [[ -z $value ]] && continue
+
+    if [[ $value =~ [[:space:]] ]]; then
+      echo "$name contains whitespace and cannot be written safely" >&2
+      rm -f -- "$temporary_file"
+      exit 64
+    fi
+
+    printf '%s=%s\n' "$name" "$value" >> "$temporary_file"
+  done
+
+  install -m 600 "$temporary_file" "$target"
+  rm -f -- "$temporary_file"
+}
+
+write_systemd_override() {
+  local service=$1
+  local contents=$2
+  local directory="/etc/systemd/system/$service.service.d"
+  local temporary_file
+
+  mkdir -p "$directory"
+  temporary_file=$(mktemp)
+  printf '%s\n' "$contents" > "$temporary_file"
+  install -m 644 "$temporary_file" "$directory/environment.conf"
+  rm -f -- "$temporary_file"
+}
+
+wait_for_health() {
+  local service=$1
+  local port=$2
+  local attempt
+
+  for attempt in {1..15}; do
+    if curl --fail --silent --show-error --max-time 3 "http://127.0.0.1:$port/up" > /dev/null; then
+      echo "Release is healthy on port $port"
+      return
+    fi
+
+    sleep 2
+  done
+
+  systemctl --no-pager --full status "$service" || true
+  echo "Release failed its health check" >&2
+  exit 1
+}
+
+install_preview_nginx_config() {
+  local pr_number=$1
+  local port=$2
+  local destination="/etc/nginx/conf.d/preview-pr-$pr_number.conf"
+  local backup="${destination}.backup"
+  local temporary_file
+
+  temporary_file=$(mktemp)
+  cat > "$temporary_file" <<EOF
+server {
+    listen 443 ssl;
+    server_name preview-$pr_number.griffithict.club;
+
+    ssl_certificate /etc/ssl/cloudflare-origin.pem;
+    ssl_certificate_key /etc/ssl/cloudflare-origin-key.pem;
+
+    location / {
+        proxy_pass http://127.0.0.1:$port;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;
+    }
+}
+
+server {
+    listen 80;
+    server_name preview-$pr_number.griffithict.club;
+    return 301 https://\$host\$request_uri;
+}
+EOF
+
+  rm -f -- "$backup"
+  [[ -f $destination ]] && cp "$destination" "$backup"
+  install -m 644 "$temporary_file" "$destination"
+  rm -f -- "$temporary_file"
+
+  if nginx -t && systemctl reload nginx; then
+    rm -f -- "$backup"
+    return
+  fi
+
+  if [[ -f $backup ]]; then
+    mv "$backup" "$destination"
+  else
+    rm -f -- "$destination"
+  fi
+
+  nginx -t && systemctl reload nginx || true
+  echo "Nginx rejected the preview configuration; restored its previous state" >&2
+  exit 1
+}
+
+case $environment in
+  production)
+    if [[ -n $identifier ]]; then
+      echo "Production deployment does not accept an identifier" >&2
+      exit 64
+    fi
+
+    readonly deployment_environment_file="$PWD/.env"
+    readonly runtime_environment_file="$PWD/.env.runtime"
+    readonly service=griffith-web
+    ;;
+  preview)
+    if [[ ! $identifier =~ ^[1-9][0-9]*$ ]] || (( identifier > 1000 )); then
+      echo "Invalid preview identifier: $identifier" >&2
+      exit 64
+    fi
+
+    readonly deployment_environment_file=/opt/previews/.env
+    readonly runtime_environment_file=/opt/previews/.env.runtime
+    readonly service="griffith-preview@$identifier"
+    ;;
+  *)
+    echo "Usage: $0 {production|preview} [PR_NUMBER]" >&2
+    exit 64
+    ;;
+esac
+
+if [[ ! -f $deployment_environment_file ]]; then
+  echo "Missing deployment environment: $deployment_environment_file" >&2
+  exit 66
+fi
+
+if [[ $environment == production && -f storage/production.sqlite3 ]]; then
+  mkdir -p /root/griffith-ict-backups
+  if [[ ! -f /root/griffith-ict-backups/production-before-postgresql.sqlite3 ]]; then
+    install -m 600 storage/production.sqlite3 /root/griffith-ict-backups/production-before-postgresql.sqlite3
+  fi
+fi
+
+bundle config set --local without "development test"
+bundle check || bundle install --jobs 4
+
+set -a
+# shellcheck disable=SC1090
+source "$deployment_environment_file"
+set +a
+
+if [[ $environment == preview && -z ${SECRET_KEY_BASE:-} && -f /opt/previews/.secret_key_base ]]; then
+  SECRET_KEY_BASE=$(< /opt/previews/.secret_key_base)
+  export SECRET_KEY_BASE
+fi
+
+require_value DATABASE_URL
+require_value DIRECT_DATABASE_URL
+require_value ADMIN_PASSWORD
+
+if [[ -z ${SECRET_KEY_BASE:-} && -z ${RAILS_MASTER_KEY:-} ]]; then
+  echo "SECRET_KEY_BASE or RAILS_MASTER_KEY must be set in $deployment_environment_file" >&2
+  exit 64
+fi
+
+write_runtime_environment "$runtime_environment_file"
+
+DATABASE_URL="$DIRECT_DATABASE_URL" RAILS_ENV=production bin/rails db:migrate
+DATABASE_URL="$DIRECT_DATABASE_URL" RAILS_ENV=production bin/rails db:seed
+RAILS_ENV=production bin/rails assets:precompile
+
+if [[ $environment == production ]]; then
+  readonly port=${PORT:-3000}
+  write_systemd_override "$service" "[Service]
+EnvironmentFile=$runtime_environment_file"
+else
+  readonly port=$((4000 + identifier))
+  write_systemd_override "$service" "[Service]
+Environment=PORT=$port
+Environment=PREVIEW_PR_NUMBER=$identifier
+EnvironmentFile=$runtime_environment_file"
+fi
+
+systemctl daemon-reload
+systemctl enable "$service"
+if ! systemctl restart "$service"; then
+  systemctl --no-pager --full status "$service" || true
+  exit 1
+fi
+wait_for_health "$service" "$port"
+
+if [[ $environment == preview ]]; then
+  install_preview_nginx_config "$identifier" "$port"
+fi

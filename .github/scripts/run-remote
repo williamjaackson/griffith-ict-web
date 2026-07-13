@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if (( $# < 1 )); then
+  echo "Usage: $0 REMOTE_SCRIPT [ARGUMENT ...]" >&2
+  exit 64
+fi
+
+readonly remote_script=$1
+shift
+
+for name in VPS_HOST VPS_SSH_KEY VPS_SSH_KNOWN_HOSTS; do
+  if [[ -z ${!name:-} ]]; then
+    echo "$name must be set" >&2
+    exit 64
+  fi
+done
+
+if [[ ! -f $remote_script ]]; then
+  echo "Remote script not found: $remote_script" >&2
+  exit 66
+fi
+
+ssh_directory=$(mktemp -d "${RUNNER_TEMP:-/tmp}/griffith-deploy-ssh.XXXXXX")
+trap 'rm -rf -- "$ssh_directory"' EXIT
+
+readonly private_key="$ssh_directory/private_key"
+readonly known_hosts="$ssh_directory/known_hosts"
+
+printf '%s\n' "$VPS_SSH_KEY" > "$private_key"
+printf '%s\n' "$VPS_SSH_KNOWN_HOSTS" > "$known_hosts"
+chmod 600 "$private_key" "$known_hosts"
+
+printf -v remote_command '%q ' bash -s -- "$@"
+
+ssh \
+  -F /dev/null \
+  -o BatchMode=yes \
+  -o ConnectTimeout=30 \
+  -o IdentitiesOnly=yes \
+  -o StrictHostKeyChecking=yes \
+  -o "UserKnownHostsFile=$known_hosts" \
+  -i "$private_key" \
+  "root@$VPS_HOST" \
+  "$remote_command" < "$remote_script"

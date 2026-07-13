@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+readonly pr_number=${1:-}
+
+if [[ ! $pr_number =~ ^[1-9][0-9]*$ ]]; then
+  echo "Invalid pull request number: $pr_number" >&2
+  exit 64
+fi
+
+if (( pr_number > 1000 )); then
+  echo "::error::PR #$pr_number exceeds the preview port range (4001-5000)."
+  exit 1
+fi
