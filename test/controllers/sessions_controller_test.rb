@@ -17,6 +17,25 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert cookies[:session_id]
   end
 
+  test "normalizes email credentials" do
+    post session_path, params: {
+      email_address: "  #{ @user.email_address.upcase }  ",
+      password: "password"
+    }
+
+    assert_redirected_to root_path
+    assert cookies[:session_id]
+  end
+
+  test "returns to the requested page after authentication" do
+    get account_path
+    assert_redirected_to new_session_path
+
+    post session_path, params: { email_address: @user.email_address, password: "password" }
+
+    assert_redirected_to account_path
+  end
+
   test "create with invalid credentials" do
     post session_path, params: { email_address: @user.email_address, password: "wrong" }
 
@@ -31,5 +50,14 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to new_session_path
     assert_empty cookies[:session_id]
+  end
+
+  test "does not resume an expired session" do
+    expired_session = @user.sessions.create!(created_at: Session::LIFETIME.ago - 1.second)
+    sign_in_with_session(expired_session)
+
+    get account_path
+
+    assert_redirected_to new_session_path
   end
 end

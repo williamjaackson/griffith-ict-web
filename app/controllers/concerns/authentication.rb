@@ -26,29 +26,34 @@ module Authentication
     end
 
     def find_session_by_cookie
-      if cookies.signed[:session_id]
-        Session.where("created_at > ?", 30.days.ago).find_by(id: cookies.signed[:session_id])
-      end
+      session_id = cookies.signed[:session_id]
+      Session.active.find_by(id: session_id) if session_id
     end
 
     def request_authentication
-      session[:return_to_after_authenticating] = request.url
+      session[:return_to_after_authenticating] = request.fullpath if request.get? || request.head?
       redirect_to new_session_path
     end
 
     def after_authentication_url
-      session.delete(:return_to_after_authenticating) || root_url
+      url_from(session.delete(:return_to_after_authenticating)) || root_path
     end
 
     def start_new_session_for(user)
       user.sessions.create!(user_agent: request.user_agent, ip_address: request.remote_ip).tap do |session|
         Current.session = session
-        cookies.signed[:session_id] = { value: session.id, httponly: true, same_site: :lax, secure: Rails.env.production?, expires: 30.days.from_now }
+        cookies.signed[:session_id] = {
+          value: session.id,
+          expires: Session::LIFETIME.from_now,
+          httponly: true,
+          same_site: :lax,
+          secure: Rails.env.production?
+        }
       end
     end
 
     def terminate_session
-      Current.session.destroy
+      Current.session&.destroy!
       cookies.delete(:session_id)
     end
 end

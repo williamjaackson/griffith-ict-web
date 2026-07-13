@@ -55,6 +55,19 @@ module Admin
       assert_select "p", text: /Email is invalid/
     end
 
+    test "rejects an unsupported role without an exception" do
+      sign_in_as(users(:admin))
+
+      assert_no_difference("Invite.count") do
+        post admin_invites_path, params: {
+          invite: { email: "invalid-role@example.com", role: "unsupported" }
+        }
+      end
+
+      assert_response :unprocessable_entity
+      assert_select "p", text: /Role is not included/
+    end
+
     test "revokes a pending invite" do
       sign_in_as(users(:admin))
       invite = invites(:pending)

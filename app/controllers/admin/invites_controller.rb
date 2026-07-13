@@ -13,7 +13,7 @@ module Admin
     def create
       @invite = Invite.new(invite_params)
       @invite.invited_by = Current.user
-      @invite.expires_at = 7.days.from_now
+      @invite.expires_at = Invite::LIFETIME.from_now
 
       if @invite.save
         redirect_to admin_invites_path, notice: "Invite created."
@@ -30,14 +30,14 @@ module Admin
         return
       end
 
-      invite.destroy
+      invite.destroy!
       redirect_to admin_invites_path, notice: "Invite revoked.", status: :see_other
     end
 
     private
 
     def invite_params
-      params.require(:invite).permit(:email, :role)
+      params.expect(invite: %i[email role])
     end
   end
 end
