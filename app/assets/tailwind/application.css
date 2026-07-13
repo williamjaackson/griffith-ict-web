@@ -104,6 +104,11 @@ main > section:nth-of-type(odd) {
 }
 .btn-primary { @apply bg-brand-red text-white hover:shadow-[5px_5px_0px_var(--color-brand-black)]; }
 .btn-secondary { @apply bg-white text-brand-black hover:shadow-[5px_5px_0px_var(--color-brand-red)]; }
+.btn-disabled,
+.btn-disabled:hover,
+.btn-disabled:active {
+  @apply bg-brand-cream border-brand-gray/30 text-brand-gray/50 translate-y-0 shadow-none cursor-not-allowed;
+}
 .btn-sm { @apply px-5 py-2.5 text-sm; }
 
 .badge {
