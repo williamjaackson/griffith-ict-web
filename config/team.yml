@@ -9,6 +9,7 @@ campuses:
             period: Mar 2025 - Jun 2026
           - name: William Jackson
             period: Jul 2026 - Present
+            acting: true
       - role: Vice President
         name: Tylar Pinniger
         icon: shield
@@ -25,6 +26,7 @@ campuses:
             period: Mar 2025 - Jun 2026
           - name: Novak Bigic
             period: Jul 2026 - Present
+            acting: true
       - role: Secretary
         name: Julio Medeiros
         icon: file-text
@@ -33,6 +35,7 @@ campuses:
             period: Mar 2025 - Jun 2026
           - name: Julio Medeiros
             period: Jul 2026 - Present
+            acting: true
     appointed:
       - role: Events Co-ordinator
         name: Tylar Pinniger

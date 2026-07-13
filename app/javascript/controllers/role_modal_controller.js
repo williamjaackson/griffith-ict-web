@@ -44,15 +44,26 @@ export default class extends Controller {
         const marker = document.createElement("span")
         marker.className = "absolute -left-[7px] top-1.5 w-3 h-3 bg-brand-red border-2 border-brand-bg"
 
+        const nameRow = document.createElement("div")
+        nameRow.className = "flex flex-wrap items-center gap-2"
+
         const name = document.createElement("p")
         name.className = "font-bold text-brand-black"
         name.textContent = entry.name
+        nameRow.append(name)
+
+        if (entry.acting) {
+          const actingBadge = document.createElement("span")
+          actingBadge.className = "inline-flex bg-brand-red/10 text-brand-red px-2 py-0.5 text-xs font-bold uppercase"
+          actingBadge.textContent = "Acting"
+          nameRow.append(actingBadge)
+        }
 
         const period = document.createElement("p")
         period.className = "text-sm"
         period.textContent = entry.period
 
-        item.append(marker, name, period)
+        item.append(marker, nameRow, period)
         return item
       })
     )
