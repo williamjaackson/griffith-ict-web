@@ -58,7 +58,9 @@
                               data-role="<%= member["role"] %>"
                               data-member-name="Unassigned"
                               data-responsibilities="<%= role_details["responsibilities"].to_json %>"
-                              class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream h-full w-full text-left cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:border-brand-black focus-visible:outline-3 focus-visible:outline-brand-red">
+                              data-application-status="<%= role_details.dig("applications", "status") || "closed" %>"
+                              data-application-url="<%= role_details.dig("applications", "url") %>"
+                              class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream h-full w-full text-left cursor-pointer transition-transform duration-200 hover:-translate-y-1 focus-visible:outline-3 focus-visible:outline-brand-red">
                         <div class="w-10 h-10 bg-brand-gray/10 flex items-center justify-center mb-4">
                           <%= icon(member["icon"], class: "w-5 h-5 opacity-40") %>
                         </div>
@@ -105,7 +107,9 @@
                               data-role="<%= member["role"] %>"
                               data-member-name="Unassigned"
                               data-responsibilities="<%= role_details["responsibilities"].to_json %>"
-                              class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream h-full w-full text-left cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:border-brand-black focus-visible:outline-3 focus-visible:outline-brand-red">
+                              data-application-status="<%= role_details.dig("applications", "status") || "closed" %>"
+                              data-application-url="<%= role_details.dig("applications", "url") %>"
+                              class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream h-full w-full text-left cursor-pointer transition-transform duration-200 hover:-translate-y-1 focus-visible:outline-3 focus-visible:outline-brand-red">
                         <div class="w-10 h-10 bg-brand-gray/10 flex items-center justify-center mb-4">
                           <%= icon(member["icon"], class: "w-5 h-5 opacity-40") %>
                         </div>
@@ -152,6 +156,19 @@
       <h2 id="role-modal-title" data-role-modal-target="title" class="heading heading-3"></h2>
       <p data-role-modal-target="member" class="font-semibold text-brand-red"></p>
       <ul data-role-modal-target="responsibilities" class="list-disc pl-5 space-y-3 mt-6"></ul>
+      <div data-role-modal-target="applicationActions" class="hidden mt-8 pt-6 border-t-3 border-brand-cream">
+        <a data-role-modal-target="applicationsOpen"
+           href="#"
+           class="hidden btn btn-primary w-full">
+          Apply now
+        </a>
+        <button data-role-modal-target="applicationsClosed"
+                type="button"
+                disabled
+                class="btn btn-secondary w-full opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0">
+          Applications (closed)
+        </button>
+      </div>
     </div>
   </div>
 </section>

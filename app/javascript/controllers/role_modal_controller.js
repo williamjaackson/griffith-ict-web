@@ -1,7 +1,16 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["backdrop", "panel", "title", "member", "responsibilities"]
+  static targets = [
+    "backdrop",
+    "panel",
+    "title",
+    "member",
+    "responsibilities",
+    "applicationActions",
+    "applicationsOpen",
+    "applicationsClosed"
+  ]
 
   connect() {
     this.handleKeydown = this.handleKeydown.bind(this)
@@ -25,6 +34,14 @@ export default class extends Controller {
         return item
       })
     )
+
+    const roleIsUnassigned = card.dataset.memberName === "Unassigned"
+    const applicationsAreOpen = card.dataset.applicationStatus === "open" && card.dataset.applicationUrl
+
+    this.applicationActionsTarget.classList.toggle("hidden", !roleIsUnassigned)
+    this.applicationsOpenTarget.classList.toggle("hidden", !applicationsAreOpen)
+    this.applicationsClosedTarget.classList.toggle("hidden", applicationsAreOpen)
+    this.applicationsOpenTarget.href = applicationsAreOpen ? card.dataset.applicationUrl : "#"
 
     this.backdropTarget.classList.remove("opacity-0", "pointer-events-none")
     this.backdropTarget.classList.add("opacity-100", "pointer-events-auto")

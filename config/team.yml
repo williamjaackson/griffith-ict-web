@@ -78,6 +78,9 @@ roles:
       - Prepare event plans and coordinate volunteers.
       - Run events and complete required risk or Guild paperwork.
   Social Media Manager:
+    applications:
+      status: closed
+      url: ~
     responsibilities:
       - Maintain the club’s content calendar.
       - Create and publish posts across club platforms.
