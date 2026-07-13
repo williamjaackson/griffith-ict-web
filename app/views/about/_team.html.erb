@@ -61,8 +61,8 @@
                               data-member-name="Unassigned"
                               data-responsibilities="<%= role_details["responsibilities"].to_json %>"
                               data-history="<%= role_history.to_json %>"
-                              data-application-status="<%= role_details.dig("applications", "status") || "closed" %>"
-                              data-application-url="<%= role_details.dig("applications", "url") %>"
+                              data-application-status="<%= member.dig("applications", "status") || "closed" %>"
+                              data-application-url="<%= member.dig("applications", "url") %>"
                               class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream h-full w-full text-left cursor-pointer transition-transform duration-200 hover:-translate-y-1 focus-visible:outline-3 focus-visible:outline-brand-red">
                         <div class="w-10 h-10 bg-brand-gray/10 flex items-center justify-center mb-4">
                           <%= icon(member["icon"], class: "w-5 h-5 opacity-40") %>
@@ -78,8 +78,8 @@
                               data-member-name="<%= member["name"] %>"
                               data-responsibilities="<%= role_details["responsibilities"].to_json %>"
                               data-history="<%= role_history.to_json %>"
-                              data-application-status="<%= role_details.dig("applications", "status") || "closed" %>"
-                              data-application-url="<%= role_details.dig("applications", "url") %>"
+                              data-application-status="<%= member.dig("applications", "status") || "closed" %>"
+                              data-application-url="<%= member.dig("applications", "url") %>"
                               class="card card-link w-full text-left cursor-pointer focus-visible:outline-3 focus-visible:outline-brand-red"
                               style="box-shadow: 5px 5px 0px var(--color-brand-red);">
                         <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
@@ -117,8 +117,8 @@
                               data-member-name="Unassigned"
                               data-responsibilities="<%= role_details["responsibilities"].to_json %>"
                               data-history="<%= role_history.to_json %>"
-                              data-application-status="<%= role_details.dig("applications", "status") || "closed" %>"
-                              data-application-url="<%= role_details.dig("applications", "url") %>"
+                              data-application-status="<%= member.dig("applications", "status") || "closed" %>"
+                              data-application-url="<%= member.dig("applications", "url") %>"
                               class="p-6 border-3 border-dashed border-brand-gray/30 bg-brand-cream h-full w-full text-left cursor-pointer transition-transform duration-200 hover:-translate-y-1 focus-visible:outline-3 focus-visible:outline-brand-red">
                         <div class="w-10 h-10 bg-brand-gray/10 flex items-center justify-center mb-4">
                           <%= icon(member["icon"], class: "w-5 h-5 opacity-40") %>
@@ -134,8 +134,8 @@
                               data-member-name="<%= member["name"] %>"
                               data-responsibilities="<%= role_details["responsibilities"].to_json %>"
                               data-history="<%= role_history.to_json %>"
-                              data-application-status="<%= role_details.dig("applications", "status") || "closed" %>"
-                              data-application-url="<%= role_details.dig("applications", "url") %>"
+                              data-application-status="<%= member.dig("applications", "status") || "closed" %>"
+                              data-application-url="<%= member.dig("applications", "url") %>"
                               class="card card-link w-full text-left cursor-pointer focus-visible:outline-3 focus-visible:outline-brand-red"
                               style="box-shadow: 5px 5px 0px var(--color-brand-red-300);">
                         <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
