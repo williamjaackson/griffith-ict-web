@@ -4,22 +4,52 @@ campuses:
       - role: President
         name: William Jackson
         icon: crown
+        history:
+          - name: Owen Richardson
+            period: Mar 2025 - Jun 2026
+          - name: William Jackson
+            period: Jul 2026 - Present
       - role: Vice President
         name: Tylar Pinniger
         icon: shield
+        history:
+          - name: Michael Geurts
+            period: Sep 2025 - Jan 2026
+          - name: Tylar Pinniger
+            period: Feb 2026 - Present
       - role: Treasurer
         name: Novak Bigic
         icon: wallet
+        history:
+          - name: William Jackson
+            period: Mar 2025 - Jun 2026
+          - name: Novak Bigic
+            period: Jul 2026 - Present
       - role: Secretary
         name: Julio Medeiros
         icon: file-text
+        history:
+          - name: Zain Abrahams
+            period: Mar 2025 - Jun 2026
+          - name: Julio Medeiros
+            period: Jul 2026 - Present
     appointed:
       - role: Events Co-ordinator
         name: Tylar Pinniger
         icon: calendar
+        history:
+          - name: Michael Geurts
+            period: Mar 2025 - Aug 2025
+          - name: Tylar Pinniger
+            period: Sep 2025 - Present
       - role: Social Media Manager
         name: ~
         icon: megaphone
+        history:
+          - name: Zarli Wilcock
+            period: Mar 2025 - Aug 2025
+          - name: Unassigned
+            period: Sep 2025 - Present
   - name: Brisbane
     elected:
       - role: President
@@ -78,9 +108,6 @@ roles:
       - Prepare event plans and coordinate volunteers.
       - Run events and complete required risk or Guild paperwork.
   Social Media Manager:
-    applications:
-      status: closed
-      url: ~
     responsibilities:
       - Maintain the club’s content calendar.
       - Create and publish posts across club platforms.

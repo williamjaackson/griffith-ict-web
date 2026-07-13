@@ -8,8 +8,7 @@ export default class extends Controller {
     "member",
     "responsibilities",
     "applicationActions",
-    "applicationsOpen",
-    "applicationsClosed"
+    "timeline"
   ]
 
   connect() {
@@ -36,12 +35,27 @@ export default class extends Controller {
     )
 
     const roleIsUnassigned = card.dataset.memberName === "Unassigned"
-    const applicationsAreOpen = card.dataset.applicationStatus === "open" && card.dataset.applicationUrl
-
     this.applicationActionsTarget.classList.toggle("hidden", !roleIsUnassigned)
-    this.applicationsOpenTarget.classList.toggle("hidden", !applicationsAreOpen)
-    this.applicationsClosedTarget.classList.toggle("hidden", applicationsAreOpen)
-    this.applicationsOpenTarget.href = applicationsAreOpen ? card.dataset.applicationUrl : "#"
+    this.timelineTarget.replaceChildren(
+      ...JSON.parse(card.dataset.history).map((entry) => {
+        const item = document.createElement("li")
+        item.className = "relative pl-6 pb-5 last:pb-0"
+
+        const marker = document.createElement("span")
+        marker.className = "absolute -left-[7px] top-1.5 w-3 h-3 bg-brand-red border-2 border-brand-bg"
+
+        const name = document.createElement("p")
+        name.className = "font-bold text-brand-black"
+        name.textContent = entry.name
+
+        const period = document.createElement("p")
+        period.className = "text-sm"
+        period.textContent = entry.period
+
+        item.append(marker, name, period)
+        return item
+      })
+    )
 
     this.backdropTarget.classList.remove("opacity-0", "pointer-events-none")
     this.backdropTarget.classList.add("opacity-100", "pointer-events-auto")
