@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   get "about", to: "about#show"
   get "sponsorship", to: "sponsorship#show"
+  resources :events, only: %i[index show], param: :slug
 
   root "landing#show"
 end

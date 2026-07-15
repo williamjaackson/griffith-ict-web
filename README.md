@@ -54,6 +54,7 @@ app/
         └── sponsorship/  # Sponsorship tiers
 
 config/
+├── events/               # One validated YAML file per public event
 ├── meta.yml              # Site metadata & SEO
 ├── team.yml              # Leadership by campus
 ├── socials.yml           # Social media links
@@ -70,6 +71,24 @@ Site content is driven by YAML files in `config/`:
 - **`socials.yml`** — Discord, GitHub, LinkedIn, Instagram links
 - **`sponsors.yml`** — Current sponsors
 - **`sponsorship_tiers.yml`** — Sponsorship tier names, prices, and perks
+
+### Events
+
+Public events are managed in Git rather than the database. Add one file per
+event at `config/events/<slug>.yml` and place its artwork under
+`app/assets/images/events/`. Use the existing Hackathon file as the canonical
+example for the required identity, timing, location, admission, details,
+prizes, and terms fields.
+
+Times must be quoted ISO-8601 values with an explicit offset and a valid IANA
+timezone. An available ticket must have an HTTPS URL; published terms must have
+at least one reviewed item. Event text is rendered as plain structured content,
+so YAML must not contain HTML or Markdown intended for rendering.
+
+The catalog is validated while Rails boots. Invalid YAML, duplicate slugs,
+invalid dates or states, and missing artwork stop boot and CI with the source
+file and field. An event stays upcoming through its end time, then moves into
+the permanent past-events archive automatically.
 
 ### Databases
 

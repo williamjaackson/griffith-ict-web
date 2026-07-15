@@ -1,0 +1,25 @@
+<article class="card card-link p-0" style="box-shadow: 6px 6px 0px var(--color-brand-red);">
+  <%= link_to event_path(event.slug), class: "block h-full", aria: { label: "View #{event.title}" } do %>
+    <div class="aspect-square border-b-3 border-brand-black overflow-hidden bg-brand-cream">
+      <%= image_tag event.image, alt: event.image_alt, loading: "lazy", class: "w-full h-full object-cover transition-transform duration-300 hover:scale-[1.02]" %>
+    </div>
+    <div class="p-6">
+      <span class="badge badge-sm mb-5"><%= event_status_label(event) %></span>
+      <h3 class="heading heading-3"><%= event.title %></h3>
+      <p class="mb-6"><%= event.summary %></p>
+      <dl class="space-y-3 text-sm text-brand-black font-semibold">
+        <div class="flex items-start gap-3">
+          <%= icon("calendar-days", class: "w-5 h-5 text-brand-red shrink-0 mt-0.5") %>
+          <div><dt class="sr-only">Date</dt><dd><%= event_date(event) %></dd></div>
+        </div>
+        <div class="flex items-start gap-3">
+          <%= icon("map-pin", class: "w-5 h-5 text-brand-red shrink-0 mt-0.5") %>
+          <div><dt class="sr-only">Location</dt><dd><%= event_location(event) %></dd></div>
+        </div>
+      </dl>
+      <span class="inline-flex items-center gap-2 mt-7 text-brand-red font-bold">
+        View event <%= icon("arrow-right", class: "w-4 h-4") %>
+      </span>
+    </div>
+  <% end %>
+</article>

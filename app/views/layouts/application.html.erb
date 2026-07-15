@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title><%= content_for(:title) || "Griffith ICT Club" %></title>
+    <% meta = Rails.application.config.meta %>
+    <% page_title = content_for(:title).presence || meta[:site_name] %>
+    <% page_description = content_for(:meta_description).presence || meta[:description] %>
+    <% page_image = content_for(:meta_image).presence || "#{meta[:url]}#{meta[:og_image]}" %>
+    <% canonical_url = content_for(:canonical_url).presence %>
+    <title><%= page_title %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Griffith ICT Club">
     <meta name="mobile-web-app-capable" content="yes">
-    <% meta = Rails.application.config.meta %>
-    <meta name="description" content="<%= meta[:description] %>">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="<%= meta[:site_name] %>">
-    <meta property="og:description" content="<%= meta[:description] %>">
-    <meta property="og:image" content="<%= meta[:url] %><%= meta[:og_image] %>">
+    <meta name="description" content="<%= page_description %>">
+    <meta property="og:type" content="<%= content_for(:og_type).presence || "website" %>">
+    <meta property="og:title" content="<%= page_title %>">
+    <meta property="og:description" content="<%= page_description %>">
+    <meta property="og:image" content="<%= page_image %>">
+    <% if canonical_url %>
+      <meta property="og:url" content="<%= canonical_url %>">
+      <link rel="canonical" href="<%= canonical_url %>">
+    <% end %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -55,7 +63,7 @@
     <% end %>
   </head>
 
-  <body class="min-h-screen flex flex-col" data-controller="animation">
+  <body class="min-h-screen flex flex-col overflow-x-clip" data-controller="animation">
     <% if preview_env %>
       <div id="preview-banner">
         <% if preview_env == :preview %>

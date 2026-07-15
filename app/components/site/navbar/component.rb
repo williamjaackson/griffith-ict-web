@@ -6,7 +6,7 @@ module Site
           { label: "About Us", href: "/about#" },
           { label: "Executive Team", href: "/about#team" }
         ] },
-        { label: "Events", href: "/#events" },
+        { label: "Events", href: "/events" },
         { label: "Community", href: "/#community" },
         { label: "Sponsors", href: "/#sponsors", children: [
           { label: "Our Sponsors", href: "/#sponsors" },
