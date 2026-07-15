@@ -1,0 +1,33 @@
+<section id="events">
+  <div class="container">
+    <% if @next_event %>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div class="reveal">
+          <div class="border-3 border-brand-black bg-white -rotate-1" style="box-shadow: 8px 8px 0px var(--color-brand-red);">
+            <%= image_tag @next_event.image, alt: @next_event.image_alt, loading: "lazy", class: "w-full h-auto" %>
+          </div>
+        </div>
+        <div class="reveal stagger">
+          <span class="badge rotate-1 mb-8">NEXT EVENT</span>
+          <h2 class="heading heading-2"><%= @next_event.title %></h2>
+          <p class="text-lg mb-8"><%= @next_event.summary %></p>
+          <div class="space-y-3 mb-9 text-brand-black font-semibold">
+            <p class="flex items-center gap-3"><%= icon("calendar-days", class: "w-5 h-5 text-brand-red") %> <%= event_date(@next_event) %> · <%= event_time(@next_event) %></p>
+            <p class="flex items-center gap-3"><%= icon("map-pin", class: "w-5 h-5 text-brand-red") %> <%= event_location(@next_event) %></p>
+          </div>
+          <div class="flex flex-wrap gap-4">
+            <%= link_to "View event", event_path(@next_event.slug), class: "btn btn-primary" %>
+            <%= link_to "All events", events_path, class: "btn btn-secondary" %>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <div class="max-w-3xl reveal stagger">
+        <span class="badge rotate-1 mb-8">EVENTS</span>
+        <h2 class="heading heading-2">More events coming soon.</h2>
+        <p class="text-lg mb-8">We're planning the next round of workshops, social nights, and ambitious builds.</p>
+        <%= link_to "Browse past events", events_path(anchor: "past"), class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</section>

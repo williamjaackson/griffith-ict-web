@@ -6,6 +6,7 @@ module Site
         links: [
           { label: "Home", href: "/#" },
           { label: "About", href: "/about#" },
+          { label: "Events", href: "/events" },
           { label: "Community", href: "/#community" },
           { label: "Sponsors", href: "/#sponsors" }
         ]
