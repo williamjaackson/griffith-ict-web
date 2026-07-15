@@ -21,12 +21,9 @@
 
         <div class="flex flex-wrap gap-4">
           <% if @event.rsvp_open? %>
-            <%= link_to "RSVP now", "#rsvp", class: "btn btn-primary" %>
-          <% end %>
-          <% if @event.ticket_state == "available" %>
-            <%= link_to event_ticket_label(@event), @event.admission.fetch("url"), class: "btn btn-primary", target: "_blank", rel: "noopener" %>
+            <button class="btn btn-primary" onclick="window.dispatchEvent(new CustomEvent('event-rsvp:open'))">RSVP now</button>
           <% else %>
-            <span class="btn btn-disabled" aria-disabled="true"><%= event_ticket_label(@event) %></span>
+            <span class="btn btn-disabled" aria-disabled="true">Event ended</span>
           <% end %>
           <div>
             <button class="btn btn-secondary" onclick="window.dispatchEvent(new CustomEvent('membership-modal:open'))">Become a member</button>
@@ -115,53 +112,6 @@
   </div>
 </section>
 
-<% if @event.rsvp_open? %>
-  <section id="rsvp">
-    <div class="container max-w-4xl">
-      <div class="reveal">
-        <span class="badge -rotate-1 mb-6">RSVP</span>
-        <h2 class="heading heading-2">Save your spot.</h2>
-        <p class="text-lg max-w-2xl mb-3">Event details will be sent to your Griffith student email.</p>
-        <p class="font-bold text-brand-black mb-8">Double-check that your student number is correct before submitting.</p>
-
-        <div class="card" style="box-shadow: 6px 6px 0px var(--color-brand-red);">
-          <% if @rsvp.errors.any? %>
-            <div class="p-4 bg-brand-red-50 border-2 border-brand-red mb-6 text-brand-red font-semibold" role="alert">
-              <p class="font-extrabold mb-2">Please check your RSVP:</p>
-              <ul class="list-disc pl-5 space-y-1">
-                <% @rsvp.errors.full_messages.each do |message| %>
-                  <li><%= message %></li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
-
-          <%= form_with model: @rsvp, url: event_rsvp_path(@event.slug), class: "space-y-5" do |form| %>
-            <div>
-              <%= form.label :full_name, "Full name", class: "input-label" %>
-              <%= form.text_field :full_name, required: true, autocomplete: "name", maxlength: 120, class: "input-field" %>
-            </div>
-
-            <div>
-              <%= form.label :student_email, "Griffith student email", class: "input-label" %>
-              <%= form.email_field :student_email, required: true, autocomplete: "email", placeholder: "preferred.name@griffithuni.edu.au", class: "input-field" %>
-            </div>
-
-            <div>
-              <%= form.label :student_number, "Griffith student number", class: "input-label" %>
-              <%= form.text_field :student_number, required: true, inputmode: "text", pattern: "[sS][0-9]{6,8}", placeholder: "s1234567", aria: { describedby: "student-number-help" }, class: "input-field" %>
-              <p id="student-number-help" class="mt-2 text-sm">Use your Griffith sNumber: the letter “s” followed by 6–8 digits.</p>
-            </div>
-
-            <%= form.submit "Record my RSVP", class: "btn btn-primary cursor-pointer" %>
-            <p class="text-sm">This form records your RSVP only. It does not send an automated email.</p>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </section>
-<% end %>
-
 <section id="terms">
   <div class="container max-w-4xl">
     <div class="reveal">
@@ -182,3 +132,5 @@
     </div>
   </div>
 </section>
+
+<%= render "events/rsvp_modal", event: @event, rsvp: @rsvp if @event.rsvp_open? %>

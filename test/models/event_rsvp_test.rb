@@ -5,35 +5,41 @@ class EventRsvpTest < ActiveSupport::TestCase
     rsvp = EventRsvp.create!(
       event_slug: "griffith-ai-hackathon-2026",
       full_name: "  Alex Student  ",
-      student_email: "  ALEX.STUDENT@GRIFFITHUNI.EDU.AU ",
-      student_number: " S1234567 "
+      student_number: " S1234567 ",
+      membership_confirmed: true
     )
 
     assert_equal "Alex Student", rsvp.full_name
-    assert_equal "alex.student@griffithuni.edu.au", rsvp.student_email
+    assert_equal "s1234567@griffithuni.edu.au", rsvp.student_email
     assert_equal "s1234567", rsvp.student_number
+    assert rsvp.membership_confirmed?
   end
 
-  test "rejects non-student email and invalid student number" do
+  test "rejects an invalid student number" do
     rsvp = EventRsvp.new(
       event_slug: "griffith-ai-hackathon-2026",
       full_name: "Alex Student",
-      student_email: "alex@example.com",
-      student_number: "1234"
+      student_number: "1234",
+      membership_confirmed: true
     )
 
     assert_not rsvp.valid?
-    assert_includes rsvp.errors[:student_email], "must be a Griffith student email ending in @griffithuni.edu.au"
-    assert_includes rsvp.errors[:student_number], "must start with s followed by 6 to 8 digits"
+    assert_includes rsvp.errors[:student_number], "must look like s1234567"
+    assert_nil rsvp.student_email
   end
 
-  test "allows only one RSVP per event for an email or student number" do
+  test "requires membership confirmation" do
+    rsvp = EventRsvp.new(valid_attributes.merge(membership_confirmed: false))
+
+    assert_not rsvp.valid?
+    assert_includes rsvp.errors[:membership_confirmed], "must be accepted"
+  end
+
+  test "allows only one RSVP per event for a student number" do
     EventRsvp.create!(valid_attributes)
 
-    duplicate_email = EventRsvp.new(valid_attributes.merge(student_number: "s7654321"))
-    duplicate_number = EventRsvp.new(valid_attributes.merge(student_email: "another.student@griffithuni.edu.au"))
+    duplicate_number = EventRsvp.new(valid_attributes)
 
-    assert_not duplicate_email.valid?
     assert_not duplicate_number.valid?
   end
 
@@ -43,8 +49,8 @@ class EventRsvpTest < ActiveSupport::TestCase
     {
       event_slug: "griffith-ai-hackathon-2026",
       full_name: "Alex Student",
-      student_email: "alex.student@griffithuni.edu.au",
-      student_number: "s1234567"
+      student_number: "s1234567",
+      membership_confirmed: true
     }
   end
 end

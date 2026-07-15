@@ -13,6 +13,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_select "nav a[href='#{events_path}']", minimum: 1
     assert_select "footer a[href='#{events_path}']", minimum: 1
     assert_select "article img[loading='lazy']", minimum: 1
+    assert_select ".event-announcement.bg-brand-red.text-white a[href='#{event_path('griffith-ai-hackathon-2026')}']", text: /RSVP now/
   end
 
   test "index has an intentional empty upcoming state" do
@@ -24,7 +25,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_select "h3", text: "More events coming soon."
   end
 
-  test "show presents the Hackathon details and disabled actions" do
+  test "show presents the Hackathon details and RSVP modal" do
     get event_path("griffith-ai-hackathon-2026")
 
     assert_response :success
@@ -39,43 +40,52 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_select "body", text: /Lunch provided/
     assert_select "body", text: /Tokens provided/
     assert_select "body", text: /\$100/
-    assert_select "[aria-disabled='true']", text: "Tickets coming soon"
     assert_select "header img[loading='eager'][fetchpriority='high']", count: 1
-    assert_select "a[href='#rsvp']", text: "RSVP now"
-    assert_select "#rsvp", text: /Event details will be sent to your Griffith student email/
-    assert_select "#rsvp", text: /Double-check that your student number is correct/
+    assert_select "header button", text: "RSVP now"
+    assert_select "header", text: /Tickets coming soon/, count: 0
+    assert_select "[data-controller='event-rsvp']" do
+      assert_select "input[name='event_rsvp[full_name]']", count: 1
+      assert_select "input[name='event_rsvp[student_number]'][placeholder='s1234567'][pattern='[sS][0-9]{7}']", count: 1
+      assert_select "input[name='event_rsvp[student_email]']", count: 0
+      assert_select "input[name='event_rsvp[membership_confirmed]'][required]", count: 1
+      assert_select "input[type='submit'][disabled]", count: 1
+      assert_select "strong", text: "s1234567@griffithuni.edu.au"
+      assert_select "button", text: "Become a member"
+    end
     assert_select "#terms", text: /Reviewed event terms will be published here/
   end
 
-  test "records an RSVP without sending an email" do
+  test "records an RSVP and derives the student email" do
     assert_difference "EventRsvp.count", 1 do
       post event_rsvp_path("griffith-ai-hackathon-2026"), params: {
         event_rsvp: {
           full_name: "Alex Student",
-          student_email: "alex.student@griffithuni.edu.au",
-          student_number: "s1234567"
+          student_email: "forged@example.com",
+          student_number: "s1234567",
+          membership_confirmed: "1"
         }
       }
     end
 
-    assert_redirected_to event_path("griffith-ai-hackathon-2026", anchor: "rsvp")
-    assert_equal "alex.student@griffithuni.edu.au", EventRsvp.last.student_email
+    assert_redirected_to event_path("griffith-ai-hackathon-2026")
+    assert_equal "s1234567@griffithuni.edu.au", EventRsvp.last.student_email
     assert_equal "s1234567", EventRsvp.last.student_number
+    assert EventRsvp.last.membership_confirmed?
   end
 
-  test "does not record an RSVP with invalid student details" do
+  test "does not record an RSVP without membership confirmation" do
     assert_no_difference "EventRsvp.count" do
       post event_rsvp_path("griffith-ai-hackathon-2026"), params: {
         event_rsvp: {
           full_name: "Alex Student",
-          student_email: "alex@example.com",
-          student_number: "1234"
+          student_number: "s1234567",
+          membership_confirmed: "0"
         }
       }
     end
 
     assert_response :unprocessable_content
-    assert_select "#rsvp [role='alert']", text: /must be a Griffith student email/
+    assert_select "[data-controller='event-rsvp'][data-event-rsvp-open-value='true'] [role='alert']", text: /Membership confirmed must be accepted/
   end
 
   test "show returns not found for an unknown event" do
@@ -101,8 +111,8 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
         post event_rsvp_path("griffith-ai-hackathon-2026"), params: {
           event_rsvp: {
             full_name: "Alex Student",
-            student_email: "alex.student@griffithuni.edu.au",
-            student_number: "s1234567"
+            student_number: "s1234567",
+            membership_confirmed: "1"
           }
         }
       end
@@ -137,5 +147,14 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#events a[href='#{event_path('griffith-ai-hackathon-2026')}']", text: "View event"
     assert_select "a[href='#{events_path}']", text: "All events"
     assert_select "#events img[loading='lazy']", count: 1
+  end
+
+  test "event announcement disappears after the event ends" do
+    travel_to Time.iso8601("2026-08-02T10:00:00+10:00") do
+      get root_path
+    end
+
+    assert_response :success
+    assert_select ".event-announcement", count: 0
   end
 end

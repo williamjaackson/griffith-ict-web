@@ -1,0 +1,57 @@
+<%= render Ui::ModalComponent.new(
+      title: "RSVP for the Hackathon",
+      controller: "event-rsvp",
+      event_rsvp_open_value: rsvp.errors.any?
+    ) do %>
+  <p class="mb-6">Reserve your place now. Membership is required.</p>
+
+  <% if rsvp.errors.any? %>
+    <div class="p-4 bg-brand-red-50 border-2 border-brand-red mb-6 text-brand-red font-semibold" role="alert">
+      <p class="font-extrabold mb-2">Please check your RSVP:</p>
+      <ul class="list-disc pl-5 space-y-1">
+        <% rsvp.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form_with model: rsvp, url: event_rsvp_path(event.slug), class: "space-y-5" do |form| %>
+    <div>
+      <%= form.label :full_name, "Full name", class: "input-label" %>
+      <%= form.text_field :full_name, required: true, autocomplete: "name", maxlength: 120, class: "input-field" %>
+    </div>
+
+    <div>
+      <%= form.label :student_number, "Student number", class: "input-label" %>
+      <%= form.text_field :student_number,
+            required: true,
+            inputmode: "text",
+            pattern: "[sS][0-9]{7}",
+            placeholder: "s1234567",
+            autocomplete: "off",
+            class: "input-field",
+            data: { event_rsvp_target: "studentNumber", action: "input->event-rsvp#updateEmail" } %>
+      <p class="mt-3 text-sm">
+        Tickets and confirmation will be sent to
+        <strong class="text-brand-black" data-event-rsvp-target="emailPreview">s1234567@griffithuni.edu.au</strong>.
+      </p>
+    </div>
+
+    <div class="flex items-start gap-3">
+      <%= form.check_box :membership_confirmed,
+            required: true,
+            class: "mt-1 h-5 w-5 accent-brand-red shrink-0",
+            data: { event_rsvp_target: "membership", action: "change->event-rsvp#updateSubmit" } %>
+      <div class="text-sm">
+        <%= form.label :membership_confirmed, "I am a member of the Griffith ICT Club.", class: "font-bold text-brand-black" %>
+        <button type="button" class="block mt-1 text-brand-red font-bold underline cursor-pointer" data-action="event-rsvp#openMembership">Become a member</button>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-3 pt-2">
+      <%= form.submit "Record my RSVP", disabled: !rsvp.membership_confirmed, class: "btn btn-primary cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed", data: { event_rsvp_target: "submit" } %>
+      <button type="button" class="btn btn-secondary" data-action="event-rsvp#close">Cancel</button>
+    </div>
+  <% end %>
+<% end %>

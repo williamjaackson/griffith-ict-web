@@ -21,6 +21,7 @@ module Site
 
       def links = LINKS
       def cta = CTA
+      def featured_event = EventCatalog.upcoming.first
     end
   end
 end

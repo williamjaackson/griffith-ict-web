@@ -87,8 +87,8 @@ so YAML must not contain HTML or Markdown intended for rendering.
 
 Set `admission.rsvp_state` to `available` to show the internal RSVP form or
 `closed` to hide it. RSVPs are stored in `event_rsvps` with the event slug, name,
-Griffith student email, student number, and timestamps. Submission does not send
-an automated email. Records can be reviewed from the Rails console with
+student number, membership confirmation, derived Griffith student email, and
+timestamps. Submission does not send an automated email. Records can be reviewed from the Rails console with
 `EventRsvp.where(event_slug: "<slug>")`.
 
 The catalog is validated while Rails boots. Invalid YAML, duplicate slugs,

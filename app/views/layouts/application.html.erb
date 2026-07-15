@@ -83,9 +83,17 @@
       </script>
     <% end %>
     <%= render Site::Navbar::Component.new %>
+    <script>
+      (() => {
+        const navbar = document.querySelector('nav[data-controller="navbar"]');
+        const update = () => document.documentElement.style.setProperty('--site-nav-h', navbar.offsetHeight + 'px');
+        update();
+        new ResizeObserver(update).observe(navbar);
+      })();
+    </script>
     <%= render Site::MembershipModalComponent.new %>
 
-    <main class="flex-1 pt-20">
+    <main class="flex-1" style="padding-top: var(--site-nav-h, 5rem);">
       <%= render Site::FlashComponent.new(flash: flash) %>
       <%= yield %>
     </main>

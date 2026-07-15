@@ -13,7 +13,7 @@ class EventRsvpsController < ApplicationController
     @rsvp = EventRsvp.new(rsvp_params.merge(event_slug: @event.slug))
 
     if @rsvp.save
-      redirect_to event_path(@event.slug, anchor: "rsvp"), notice: "Your RSVP has been recorded. No automated email was sent."
+      redirect_to event_path(@event.slug), notice: "Your RSVP has been recorded."
     else
       render "events/show", status: :unprocessable_content
     end
@@ -22,6 +22,6 @@ class EventRsvpsController < ApplicationController
   private
 
   def rsvp_params
-    params.require(:event_rsvp).permit(:full_name, :student_email, :student_number)
+    params.require(:event_rsvp).permit(:full_name, :student_number, :membership_confirmed)
   end
 end

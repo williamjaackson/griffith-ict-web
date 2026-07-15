@@ -16,4 +16,14 @@
   </div>
 
   <%= render Site::Navbar::MobileComponent.new(links: links, cta: cta) %>
+
+  <% if featured_event %>
+    <div class="event-announcement bg-brand-red text-white">
+      <%= link_to helpers.event_path(featured_event.slug), class: "flex flex-wrap items-center justify-center gap-x-2 px-4 py-2 text-center text-xs sm:text-sm font-bold text-white hover:text-white" do %>
+        <span class="font-extrabold">AI HACKATHON:</span>
+        <span><%= featured_event.local_starts_at.strftime("%-d %B %Y") %></span>
+        <span class="underline underline-offset-2">RSVP now →</span>
+      <% end %>
+    </div>
+  <% end %>
 </nav>
