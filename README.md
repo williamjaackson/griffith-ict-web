@@ -85,6 +85,12 @@ timezone. An available ticket must have an HTTPS URL; published terms must have
 at least one reviewed item. Event text is rendered as plain structured content,
 so YAML must not contain HTML or Markdown intended for rendering.
 
+Set `admission.rsvp_state` to `available` to show the internal RSVP form or
+`closed` to hide it. RSVPs are stored in `event_rsvps` with the event slug, name,
+Griffith student email, student number, and timestamps. Submission does not send
+an automated email. Records can be reviewed from the Rails console with
+`EventRsvp.where(event_slug: "<slug>")`.
+
 The catalog is validated while Rails boots. Invalid YAML, duplicate slugs,
 invalid dates or states, and missing artwork stop boot and CI with the source
 file and field. An event stays upcoming through its end time, then moves into

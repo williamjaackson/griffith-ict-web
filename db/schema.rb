@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_04_040025) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_15_080000) do
+  create_table "event_rsvps", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "event_slug", null: false
+    t.string "full_name", null: false
+    t.string "student_email", null: false
+    t.string "student_number", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_slug", "student_email"], name: "index_event_rsvps_on_event_slug_and_student_email", unique: true
+    t.index ["event_slug", "student_number"], name: "index_event_rsvps_on_event_slug_and_student_number", unique: true
+  end
+
   create_table "invites", force: :cascade do |t|
     t.datetime "accepted_at"
     t.datetime "created_at", null: false

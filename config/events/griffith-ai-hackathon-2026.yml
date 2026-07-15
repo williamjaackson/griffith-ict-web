@@ -17,6 +17,7 @@ location:
   venue_tba: true
 admission:
   state: coming_soon
+  rsvp_state: available
   url:
   price_cents: 500
   currency: AUD

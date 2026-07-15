@@ -34,13 +34,48 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_select "body", text: /Gold Coast · Venue TBA/
     assert_select "body", text: /\$5 AUD/
     assert_select "body", text: /Membership is free/
+    assert_select "body", text: /MEMBERSHIP IS REQUIRED\./
     assert_select "body", text: /2–4 people/
     assert_select "body", text: /Lunch provided/
     assert_select "body", text: /Tokens provided/
     assert_select "body", text: /\$100/
     assert_select "[aria-disabled='true']", text: "Tickets coming soon"
     assert_select "header img[loading='eager'][fetchpriority='high']", count: 1
+    assert_select "a[href='#rsvp']", text: "RSVP now"
+    assert_select "#rsvp", text: /Event details will be sent to your Griffith student email/
+    assert_select "#rsvp", text: /Double-check that your student number is correct/
     assert_select "#terms", text: /Reviewed event terms will be published here/
+  end
+
+  test "records an RSVP without sending an email" do
+    assert_difference "EventRsvp.count", 1 do
+      post event_rsvp_path("griffith-ai-hackathon-2026"), params: {
+        event_rsvp: {
+          full_name: "Alex Student",
+          student_email: "alex.student@griffithuni.edu.au",
+          student_number: "s1234567"
+        }
+      }
+    end
+
+    assert_redirected_to event_path("griffith-ai-hackathon-2026", anchor: "rsvp")
+    assert_equal "alex.student@griffithuni.edu.au", EventRsvp.last.student_email
+    assert_equal "s1234567", EventRsvp.last.student_number
+  end
+
+  test "does not record an RSVP with invalid student details" do
+    assert_no_difference "EventRsvp.count" do
+      post event_rsvp_path("griffith-ai-hackathon-2026"), params: {
+        event_rsvp: {
+          full_name: "Alex Student",
+          student_email: "alex@example.com",
+          student_number: "1234"
+        }
+      }
+    end
+
+    assert_response :unprocessable_content
+    assert_select "#rsvp [role='alert']", text: /must be a Griffith student email/
   end
 
   test "show returns not found for an unknown event" do
@@ -57,6 +92,24 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select ".badge", text: "Past event"
     assert_select "[aria-disabled='true']", text: "Event ended"
+    assert_select "#rsvp", count: 0
+  end
+
+  test "does not accept an RSVP after the event ends" do
+    travel_to Time.iso8601("2026-08-02T10:00:00+10:00") do
+      assert_no_difference "EventRsvp.count" do
+        post event_rsvp_path("griffith-ai-hackathon-2026"), params: {
+          event_rsvp: {
+            full_name: "Alex Student",
+            student_email: "alex.student@griffithuni.edu.au",
+            student_number: "s1234567"
+          }
+        }
+      end
+    end
+
+    assert_redirected_to event_path("griffith-ai-hackathon-2026")
+    assert_equal "RSVPs are closed for this event.", flash[:alert]
   end
 
   test "show emits event-specific metadata and JSON-LD without an offer" do

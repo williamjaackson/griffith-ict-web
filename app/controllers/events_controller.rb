@@ -8,6 +8,8 @@ class EventsController < ApplicationController
 
   def show
     @event = EventCatalog.find(params[:slug])
-    head :not_found unless @event
+    return head :not_found unless @event
+
+    @rsvp = EventRsvp.new(event_slug: @event.slug)
   end
 end

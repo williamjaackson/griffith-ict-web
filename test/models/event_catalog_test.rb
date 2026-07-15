@@ -90,6 +90,14 @@ class EventCatalogTest < ActiveSupport::TestCase
     assert_includes error.message, "admission.url must be an HTTPS URL"
   end
 
+  test "validates the RSVP state" do
+    event = base_event.deep_merge("admission" => { "rsvp_state" => "maybe" })
+    write_event("rsvp.yml", event)
+
+    error = assert_raises(EventCatalog::InvalidEvent) { build_catalog.all }
+    assert_includes error.message, "admission.rsvp_state must be one of"
+  end
+
   test "requires reviewed items for published terms" do
     event = base_event.deep_merge("terms" => { "state" => "published", "items" => [] })
     write_event("terms.yml", event)
@@ -128,6 +136,7 @@ class EventCatalogTest < ActiveSupport::TestCase
       },
       "admission" => {
         "state" => "coming_soon",
+        "rsvp_state" => "available",
         "url" => nil,
         "price_cents" => 500,
         "currency" => "AUD",

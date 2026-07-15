@@ -1,5 +1,6 @@
 class Event
   TICKET_STATES = %w[coming_soon available sold_out closed].freeze
+  RSVP_STATES = %w[available closed].freeze
   TERMS_STATES = %w[coming_soon published].freeze
 
   attr_reader :slug, :title, :summary, :description, :starts_at, :ends_at,
@@ -50,6 +51,10 @@ class Event
     past?(at: at) ? "closed" : admission.fetch("state")
   end
 
+  def rsvp_open?(at: Time.current)
+    admission.fetch("rsvp_state") == "available" && upcoming?(at: at)
+  end
+
   def local_starts_at = starts_at.in_time_zone(timezone)
   def local_ends_at = ends_at.in_time_zone(timezone)
 
@@ -92,6 +97,8 @@ class Event
     url = optional_string!(value, "url", prefix: "admission")
     validate_https_url!(url, "admission.url") if url
     error!("admission.url is required when tickets are available") if state == "available" && url.nil?
+    rsvp_state = string!(value, "rsvp_state", prefix: "admission")
+    error!("admission.rsvp_state must be one of: #{RSVP_STATES.join(', ')}") unless RSVP_STATES.include?(rsvp_state)
 
     price_cents = integer!(value, "price_cents", prefix: "admission")
     error!("admission.price_cents cannot be negative") if price_cents.negative?
@@ -100,6 +107,7 @@ class Event
 
     {
       "state" => state,
+      "rsvp_state" => rsvp_state,
       "url" => url,
       "price_cents" => price_cents,
       "currency" => currency,
