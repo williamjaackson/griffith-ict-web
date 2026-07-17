@@ -1,7 +1,7 @@
 module Site
   class NavbarComponentPreview < ViewComponent::Preview
     def default
-      render NavbarComponent.new
+      render Site::NavbarComponent.new
     end
   end
 end

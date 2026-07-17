@@ -9,6 +9,7 @@ gem "bcrypt", "~> 3.1.7"
 gem "tailwindcss-rails"
 gem "view_component"
 gem "rails_icons"
+gem "lookbook", "~> 2.3", require: false
 
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 

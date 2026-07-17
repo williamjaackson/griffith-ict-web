@@ -102,6 +102,8 @@ stay as partials until they have a genuine reuse case.
 
 Previews live in `test/components/previews`. They document the supported UI
 and site compositions without turning visual details into test contracts.
+Run the app and open `/lookbook` to browse them. Lookbook is also available on
+PR preview deployments and remains unmounted on production.
 
 ## Checks
 

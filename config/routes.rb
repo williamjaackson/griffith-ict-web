@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Lookbook::Engine, at: "/lookbook", as: :lookbook if defined?(Lookbook)
   mount RailsIcons::Engine, at: "/rails_icons" if Rails.env.development?
 
   resource :session, only: %i[new create destroy]
