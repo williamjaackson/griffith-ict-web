@@ -1,0 +1,8 @@
+<div class="grid grid-cols-2 gap-6">
+  <% %i[default cream red dark].each do |tone| %>
+    <%= render Ui::CardComponent.new(tone: tone) do %>
+      <h2 class="heading heading-4"><%= tone.to_s.humanize %></h2>
+      <p>A consistent card surface.</p>
+    <% end %>
+  <% end %>
+</div>

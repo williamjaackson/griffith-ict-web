@@ -10,21 +10,8 @@ module Site
 
     private
 
-    def messages
-      @flash.map do |type, message|
-        { type: type.to_sym, message: message }
-      end
-    end
+    def messages = @flash.map { |type, message| [ type.to_sym, message ] }
 
-    def styles_for(type)
-      case type
-      when :alert
-        "bg-brand-red text-white"
-      when :notice
-        "bg-green-600 text-white"
-      else
-        "bg-brand-cream text-brand-black"
-      end
-    end
+    def variant(type) = %i[alert notice].include?(type) ? type : :neutral
   end
 end

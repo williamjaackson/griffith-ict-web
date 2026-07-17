@@ -11,16 +11,11 @@ export default class extends Controller {
       })
     }, { threshold: 0.15 })
 
-    this.mutationObserver = new MutationObserver(() => this.#scan())
-
     this.#scan()
-
-    this.mutationObserver.observe(this.element, { childList: true, subtree: true })
   }
 
   disconnect() {
     this.intersectionObserver?.disconnect()
-    this.mutationObserver?.disconnect()
   }
 
   #scan() {

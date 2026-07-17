@@ -1,0 +1,10 @@
+<%= tag.ol(**attributes) do %>
+  <% labels.each.with_index(1) do |label, step| %>
+    <%= tag.li class: "step",
+               data: { steps_target: "step", state: state_for(step) },
+               aria: ({ current: "step" } if step == @current) do %>
+      <span class="step-marker"><%= step %></span>
+      <span><%= label %></span>
+    <% end %>
+  <% end %>
+<% end %>

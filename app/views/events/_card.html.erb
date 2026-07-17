@@ -1,10 +1,10 @@
-<article class="card card-link p-0" style="box-shadow: 6px 6px 0px var(--color-brand-red);">
+<%= render Ui::CardComponent.new(tag: :article, padding: :none, shadow: :red, interactive: true) do %>
   <%= link_to event_path(event.slug), class: "block h-full", aria: { label: "View #{event.title}" } do %>
     <div class="aspect-square border-b-3 border-brand-black overflow-hidden bg-brand-cream">
       <%= image_tag event.image, alt: event.image_alt, loading: "lazy", class: "w-full h-full object-cover transition-transform duration-300 hover:scale-[1.02]" %>
     </div>
     <div class="p-6">
-      <span class="badge badge-sm mb-5"><%= event_status_label(event) %></span>
+      <%= render Ui::BadgeComponent.new(size: :small, class: "mb-5").with_content(event_status_label(event)) %>
       <h3 class="heading heading-3"><%= event.title %></h3>
       <p class="mb-6"><%= event.summary %></p>
       <dl class="space-y-3 text-sm text-brand-black font-semibold">
@@ -22,4 +22,4 @@
       </span>
     </div>
   <% end %>
-</article>
+<% end %>

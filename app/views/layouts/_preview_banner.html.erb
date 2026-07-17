@@ -1,0 +1,13 @@
+<aside class="preview-banner">
+  <% if environment == :preview %>
+    <div>You are on a preview branch. Information may be outdated or incorrect.</div>
+    <div>
+      <%= link_to "Return to griffithict.club", site_meta[:url] %>
+      ·
+      <%= link_to "View PR ##{ENV.fetch("PREVIEW_PR_NUMBER")}", "#{site_socials[:github]}pull/#{ENV.fetch("PREVIEW_PR_NUMBER")}", target: "_blank", rel: "noopener" %>
+    </div>
+  <% else %>
+    <div>You are on a development branch. Information may be outdated or incorrect.</div>
+    <div><%= link_to "Return to griffithict.club", site_meta[:url] %></div>
+  <% end %>
+</aside>

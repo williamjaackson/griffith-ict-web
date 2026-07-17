@@ -1,0 +1,26 @@
+<title><%= page_title %></title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="application-name" content="Griffith ICT Club">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="description" content="<%= page_description %>">
+<meta property="og:type" content="<%= content_for(:og_type).presence || "website" %>">
+<meta property="og:title" content="<%= page_title %>">
+<meta property="og:description" content="<%= page_description %>">
+<meta property="og:image" content="<%= page_image %>">
+<% if canonical_url %>
+  <meta property="og:url" content="<%= canonical_url %>">
+  <link rel="canonical" href="<%= canonical_url %>">
+<% end %>
+<%= csrf_meta_tags %>
+<%= csp_meta_tag %>
+<%= yield :head %>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Unbounded:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/favicon.ico">
+
+<%= stylesheet_link_tag :app %>
+<%= javascript_importmap_tags %>

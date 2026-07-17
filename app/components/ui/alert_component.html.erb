@@ -1,0 +1,8 @@
+<%= tag.div(**attributes) do %>
+  <%= content %>
+  <% if dismissible %>
+    <button type="button" data-action="alert#dismiss" class="alert-close" aria-label="Dismiss">
+      <%= helpers.icon "x", class: "w-4 h-4", stroke_width: "2.5" %>
+    </button>
+  <% end %>
+<% end %>

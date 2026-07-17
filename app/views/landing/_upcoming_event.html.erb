@@ -8,7 +8,7 @@
           </div>
         </div>
         <div class="reveal stagger">
-          <span class="badge rotate-1 mb-8">NEXT EVENT</span>
+          <%= render Ui::BadgeComponent.new(class: "rotate-1 mb-8").with_content("Next event") %>
           <h2 class="heading heading-2"><%= @next_event.title %></h2>
           <p class="text-lg mb-8"><%= @next_event.summary %></p>
           <div class="space-y-3 mb-9 text-brand-black font-semibold">
@@ -16,17 +16,17 @@
             <p class="flex items-center gap-3"><%= icon("map-pin", class: "w-5 h-5 text-brand-red") %> <%= event_location(@next_event) %></p>
           </div>
           <div class="flex flex-wrap gap-4">
-            <%= link_to "View event", event_path(@next_event.slug), class: "btn btn-primary" %>
-            <%= link_to "All events", events_path, class: "btn btn-secondary" %>
+            <%= render Ui::ButtonComponent.new(href: event_path(@next_event.slug)).with_content("View event") %>
+            <%= render Ui::ButtonComponent.new(href: events_path, variant: :secondary).with_content("All events") %>
           </div>
         </div>
       </div>
     <% else %>
       <div class="max-w-3xl reveal stagger">
-        <span class="badge rotate-1 mb-8">EVENTS</span>
+        <%= render Ui::BadgeComponent.new(class: "rotate-1 mb-8").with_content("Events") %>
         <h2 class="heading heading-2">More events coming soon.</h2>
         <p class="text-lg mb-8">We're planning the next round of workshops, social nights, and ambitious builds.</p>
-        <%= link_to "Browse past events", events_path(anchor: "past"), class: "btn btn-primary" %>
+        <%= render Ui::ButtonComponent.new(href: events_path(anchor: "past")).with_content("Browse past events") %>
       </div>
     <% end %>
   </div>

@@ -1,0 +1,5 @@
+<div class="space-y-4">
+  <% %i[notice alert neutral].each do |variant| %>
+    <%= render Ui::AlertComponent.new(variant: variant).with_content("A #{variant} message.") %>
+  <% end %>
+</div>

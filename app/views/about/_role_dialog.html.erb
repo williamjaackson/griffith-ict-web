@@ -1,0 +1,47 @@
+<% role = @team_roles.fetch(member.fetch("role")) %>
+<% history = member["history"] || [{ "name" => member["name"] || "Unassigned", "period" => "Present" }] %>
+<% applications_open = member.dig("applications", "status") == "open" && member.dig("applications", "url").present? %>
+
+<%= render Ui::DialogComponent.new(id: dialog_id, size: :large) do %>
+  <%= render Ui::BadgeComponent.new(size: :small, class: "mb-5").with_content("Role") %>
+  <h2 class="heading heading-3"><%= member.fetch("role") %></h2>
+  <p class="font-semibold text-brand-red"><%= member["name"] || "Unassigned" %></p>
+
+  <ul class="list-disc pl-5 space-y-3 mt-6">
+    <% role.fetch("responsibilities").each do |responsibility| %>
+      <li><%= responsibility %></li>
+    <% end %>
+  </ul>
+
+  <% if type == :appointed %>
+    <div class="mt-8 pt-6 border-t-3 border-brand-cream">
+      <% if applications_open %>
+        <%= render Ui::ButtonComponent.new(href: member.dig("applications", "url")).with_content("Applications open") %>
+      <% else %>
+        <%= render Ui::ButtonComponent.new(disabled: true).with_content("Applications closed") %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="mt-8 pt-6 border-t-3 border-brand-cream">
+    <h3 class="heading heading-5">Role history</h3>
+    <ol class="ml-2 border-l-2 border-brand-gray/30">
+      <% history.reverse_each do |entry| %>
+        <% unassigned = entry.fetch("name") == "Unassigned" %>
+        <li class="relative pl-6 pb-5 last:pb-0">
+          <span class="absolute -left-[7px] top-1.5 w-3 h-3 border-2 border-brand-bg <%= unassigned ? "bg-brand-gray/30" : "bg-brand-red" %>"></span>
+          <div class="flex flex-wrap items-center gap-2">
+            <p class="<%= unassigned ? "font-semibold italic text-brand-gray/50" : "font-bold text-brand-black" %>"><%= entry.fetch("name") %></p>
+            <% if entry["acting"] %>
+              <%= render Ui::BadgeComponent.new(size: :small).with_content("Acting") %>
+            <% end %>
+          </div>
+          <p class="text-sm">
+            <% duration = role_duration(entry.fetch("period")) %>
+            <%= entry.fetch("period") %><%= " · #{duration}" if duration %>
+          </p>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+<% end %>

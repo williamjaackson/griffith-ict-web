@@ -1,0 +1,5 @@
+<div class="grid grid-cols-3 gap-8">
+  <% %i[none black red].each do |shadow| %>
+    <%= render Ui::CardComponent.new(shadow: shadow).with_content(shadow.to_s.humanize) %>
+  <% end %>
+</div>

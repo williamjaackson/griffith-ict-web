@@ -11,9 +11,7 @@ module Admin
     end
 
     def create
-      @invite = Invite.new(invite_params)
-      @invite.invited_by = Current.user
-      @invite.expires_at = 7.days.from_now
+      @invite = Current.user.invites.build(invite_params.merge(expires_at: 7.days.from_now))
 
       if @invite.save
         redirect_to admin_invites_path, notice: "Invite created."

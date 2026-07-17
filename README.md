@@ -1,12 +1,10 @@
 # Griffith ICT Club
 
-**Build. Learn. Connect.**
+Build. Learn. Connect.
 
 The official website for Griffith University's student-run tech club.
 
 https://griffithict.club/
-
----
 
 ## Tech Stack
 
@@ -42,16 +40,14 @@ The site will be available at `http://localhost:3000`.
 
 ```
 app/
-├── components/           # ViewComponent UI components
-│   ├── ui/               # Reusable primitives (Button, Card, etc.)
-│   └── site/             # Site-wide components (Navbar, Footer)
+├── components/
+│   ├── ui/               # Core primitives and supporting patterns
+│   └── site/             # Shared site compositions
 ├── javascript/
-│   └── controllers/      # Stimulus controllers
-└── views/
-    └── pages/            # Page templates
-        ├── landing/      # Home page sections
-        ├── about/        # Team & leadership
-        └── sponsorship/  # Sponsorship tiers
+│   └── controllers/      # Small behavior-only Stimulus controllers
+└── views/                  # Page templates and section partials
+
+test/components/previews/       # Native ViewComponent previews
 
 config/
 ├── events/               # One validated YAML file per public event
@@ -95,6 +91,25 @@ The catalog is validated while Rails boots. Invalid YAML, duplicate slugs,
 invalid dates or states, and missing artwork stop boot and CI with the source
 file and field. An event stays upcoming through its end time, then moves into
 the permanent past-events archive automatically.
+
+## Design system
+
+Reusable UI starts with five core primitives in `app/components/ui`. Supporting
+patterns, such as the progress indicator for multi-step dialogs, live beside
+them. Components validate their supported variants and accept ordinary HTML
+attributes. Site-wide compositions live in `app/components/site`; page sections
+stay as partials until they have a genuine reuse case.
+
+Previews live in `test/components/previews`. They document the supported UI
+and site compositions without turning visual details into test contracts.
+
+## Checks
+
+Run the same behavioral, style, loading, seed, and asset checks as CI:
+
+```bash
+bin/ci
+```
 
 ### Databases
 

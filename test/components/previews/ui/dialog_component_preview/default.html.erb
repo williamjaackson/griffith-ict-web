@@ -1,0 +1,4 @@
+<%= render Ui::ButtonComponent.new(data: { action: "dialog#open", dialog_id_param: "preview-dialog" }).with_content("Open dialog") %>
+<%= render Ui::DialogComponent.new(id: "preview-dialog", title: "Dialog title") do %>
+  <p>Dialog content is rendered on the server.</p>
+<% end %>

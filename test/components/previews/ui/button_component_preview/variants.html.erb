@@ -1,0 +1,5 @@
+<div class="flex flex-wrap gap-4">
+  <% %i[primary secondary danger quiet].each do |variant| %>
+    <%= render Ui::ButtonComponent.new(variant: variant).with_content(variant.to_s.humanize) %>
+  <% end %>
+</div>

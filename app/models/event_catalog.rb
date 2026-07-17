@@ -8,6 +8,7 @@ class EventCatalog
   def self.upcoming(at: Time.current) = catalog.upcoming(at: at)
   def self.past(at: Time.current) = catalog.past(at: at)
   def self.find(slug) = catalog.find(slug)
+  def self.find!(slug) = catalog.find!(slug)
 
   def self.reload!
     @catalog = nil
@@ -40,6 +41,10 @@ class EventCatalog
 
   def find(slug)
     published.find { |event| event.slug == slug }
+  end
+
+  def find!(slug)
+    find(slug) || raise(ActiveRecord::RecordNotFound, "Couldn't find event #{slug}")
   end
 
   private

@@ -1,17 +1,15 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  email: MyString
+  email: pending@example.com
   role: 1
   token: invite-token-one
-  expires_at: 2026-04-04 14:00:25
-  accepted_at: 2026-04-04 14:00:25
+  expires_at: 2027-04-04 14:00:25
+  accepted_at:
   invited_by: one
 
 two:
-  email: MyString
+  email: accepted@example.com
   role: 1
   token: invite-token-two
-  expires_at: 2026-04-04 14:00:25
+  expires_at: 2027-04-04 14:00:25
   accepted_at: 2026-04-04 14:00:25
   invited_by: two
