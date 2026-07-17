@@ -24,7 +24,7 @@
     </ul>
 
     <div class="hidden md:block">
-      <% if helpers.authenticated? %>
+      <% if authenticated? %>
         <%= render Ui::ButtonComponent.new(href: helpers.account_path, variant: :secondary, size: :small).with_content("Account") %>
       <% else %>
         <%= render Ui::ButtonComponent.new(size: :small, data: { action: "dialog#open", dialog_id_param: "membership-dialog" }).with_content("Become a member") %>
@@ -46,7 +46,7 @@
             <%= link_to link[:label], link[:href] %>
           <% end %>
         <% end %>
-        <% if helpers.authenticated? %>
+        <% if authenticated? %>
           <%= render Ui::ButtonComponent.new(href: helpers.account_path, variant: :secondary).with_content("Account") %>
         <% else %>
           <%= render Ui::ButtonComponent.new(data: { action: "dialog#open", dialog_id_param: "membership-dialog" }).with_content("Become a member") %>

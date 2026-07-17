@@ -2,6 +2,10 @@ module Site
   class NavbarComponent < ViewComponent::Base
     private
 
+    def authenticated?
+      helpers.respond_to?(:authenticated?) && helpers.authenticated?
+    end
+
     def links
       [
         {

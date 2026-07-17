@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   connect() {
-    this.element.querySelectorAll("dialog[data-dialog-open-value='true']").forEach((dialog) => dialog.showModal())
+    this.element.querySelectorAll("dialog[data-dialog-open-value='true']").forEach((dialog) => this.#show(dialog))
   }
 
   open(event) {
@@ -10,8 +10,7 @@ export default class extends Controller {
     if (!dialog || dialog.open) return
 
     event.currentTarget.closest("dialog")?.close()
-    dialog.returnFocusTo = event.currentTarget
-    dialog.showModal()
+    this.#show(dialog, event.currentTarget)
   }
 
   close(event) {
@@ -24,5 +23,11 @@ export default class extends Controller {
 
   restoreFocus(event) {
     event.currentTarget.returnFocusTo?.focus()
+  }
+
+  #show(dialog, returnFocusTo) {
+    dialog.returnFocusTo = returnFocusTo
+    dialog.showModal()
+    dialog.querySelector("[data-dialog-panel]")?.focus({ preventScroll: true })
   }
 }

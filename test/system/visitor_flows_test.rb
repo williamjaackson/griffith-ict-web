@@ -10,6 +10,7 @@ class VisitorFlowsTest < ApplicationSystemTestCase
 
     within "#membership-dialog" do
       assert_link "Open Discord", href: Rails.application.config.socials[:discord]
+      click_on "Continue"
       assert_link "Gold Coast", href: Rails.application.config.socials.dig(:campus_groups, :gold_coast)
     end
 

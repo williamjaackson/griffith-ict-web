@@ -1,20 +1,24 @@
 <%= render Ui::DialogComponent.new(id: "membership-dialog", title: "Become a member", size: :medium) do %>
-  <p class="mb-6">Join the community, then register with the campus where you study.</p>
+  <div data-controller="steps">
+    <%= render Ui::StepsComponent.new(labels: [ "Join Discord", "Register" ], current: 1) %>
 
-  <div class="space-y-4">
-    <%= render Ui::CardComponent.new(shadow: :red) do %>
-      <h3 class="heading heading-4">1. Join our Discord</h3>
-      <p class="mb-4">Meet members, hear about events, and ask for help.</p>
-      <%= render Ui::ButtonComponent.new(href: socials[:discord], size: :small, target: "_blank", rel: "noopener").with_content("Open Discord") %>
-    <% end %>
+    <section data-steps-target="panel">
+      <h3 class="heading heading-4 outline-none" tabindex="-1" data-steps-focus>Join our Discord</h3>
+      <p class="mb-6">Meet members, hear about events, and ask for help.</p>
+      <div class="flex flex-wrap gap-3">
+        <%= render Ui::ButtonComponent.new(href: socials[:discord], size: :small, target: "_blank", rel: "noopener").with_content("Open Discord") %>
+        <%= render Ui::ButtonComponent.new(type: :button, variant: :secondary, size: :small, data: { action: "steps#next" }).with_content("Continue") %>
+      </div>
+    </section>
 
-    <%= render Ui::CardComponent.new do %>
-      <h3 class="heading heading-4">2. Register with Griffith</h3>
-      <p class="mb-4">Choose your campus. Online students can use the Brisbane registration.</p>
+    <section data-steps-target="panel">
+      <h3 class="heading heading-4 outline-none" tabindex="-1" data-steps-focus>Register with Griffith</h3>
+      <p class="mb-6">Choose your campus. Online students can use the Brisbane registration.</p>
       <div class="flex flex-wrap gap-3">
         <%= render Ui::ButtonComponent.new(href: socials.dig(:campus_groups, :gold_coast), variant: :secondary, size: :small, target: "_blank", rel: "noopener").with_content("Gold Coast") %>
         <%= render Ui::ButtonComponent.new(href: socials.dig(:campus_groups, :brisbane), variant: :secondary, size: :small, target: "_blank", rel: "noopener").with_content("Brisbane or online") %>
+        <%= render Ui::ButtonComponent.new(type: :button, variant: :quiet, size: :small, data: { action: "steps#previous" }).with_content("Back") %>
       </div>
-    <% end %>
+    </section>
   </div>
 <% end %>

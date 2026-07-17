@@ -24,16 +24,21 @@ module Ui
 
     def attributes
       data = @attributes.fetch(:data, {})
+      aria = @attributes.fetch(:aria, {})
       data = data.merge(
         action: class_names(data[:action], "click->dialog#closeBackdrop close->dialog#restoreFocus"),
         dialog_open_value: @open
       )
+      aria = aria.merge(labelledby: title_id) if title && !aria.key?(:label) && !aria.key?(:labelledby)
 
       @attributes.merge(
         id: id,
         data: data,
+        aria: aria,
         class: class_names("dialog", @size, @attributes[:class])
       )
     end
+
+    def title_id = "#{id}-title"
   end
 end

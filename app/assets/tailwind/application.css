@@ -149,16 +149,39 @@ main > section:nth-of-type(odd) {
 }
 
 .dialog {
-  @apply w-full bg-transparent p-0 overflow-visible;
+  @apply fixed inset-0 m-auto w-[calc(100%-3rem)] bg-transparent p-0 overflow-visible;
 }
 .dialog::backdrop { @apply bg-brand-black/50; }
 .dialog-panel {
-  @apply relative bg-brand-bg border-3 border-brand-black p-8 max-h-[calc(100vh-3rem)] overflow-y-auto;
+  @apply relative bg-brand-bg border-3 border-brand-black p-8 max-h-[calc(100vh-3rem)] overflow-y-auto outline-none;
   box-shadow: 6px 6px 0 var(--color-brand-black);
 }
 .dialog-close {
   @apply absolute right-4 top-4 p-2 text-brand-black hover:text-brand-red cursor-pointer;
 }
+
+.steps {
+  @apply grid grid-cols-2 mb-8;
+}
+.step {
+  @apply relative flex items-center gap-3 text-sm font-bold text-brand-gray;
+}
+.step:not(:last-child)::after {
+  content: '';
+  @apply absolute left-8 right-0 top-4 h-0.5 bg-brand-cream;
+}
+.step-marker {
+  @apply relative z-10 grid size-8 place-items-center rounded-full border-2 border-brand-gray bg-brand-bg text-xs;
+}
+.step[data-state="current"] { @apply text-brand-black; }
+.step[data-state="current"] .step-marker {
+  @apply border-brand-red bg-brand-red text-white;
+}
+.step[data-state="complete"] { @apply text-brand-black; }
+.step[data-state="complete"] .step-marker {
+  @apply border-brand-black bg-brand-black text-white;
+}
+.step[data-state="complete"]::after { @apply bg-brand-black; }
 
 .preview-banner {
   @apply relative z-[60] text-center text-sm font-bold py-1.5 px-4 bg-amber-300 text-black;
