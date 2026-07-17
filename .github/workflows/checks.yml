@@ -15,5 +15,5 @@ jobs:
         with:
           bundler-cache: true
 
-      - name: Sanity checks
-        run: bin/rails sanity:check
+      - name: Run CI
+        run: bin/ci

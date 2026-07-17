@@ -1,0 +1,16 @@
+<div class="mb-6 reveal">
+  <%= render Ui::BadgeComponent.new(variant: type == :appointed ? :dark : :brand, size: :small).with_content(type.to_s.upcase) %>
+  <p class="text-sm mt-2">
+    <%= type == :elected ? "Voted on by members at the Annual General Meeting." : "Voted on by the executive team. Applications are opened as needed." %>
+  </p>
+</div>
+
+<div class="flex flex-col gap-5 reveal stagger <%= "mb-12" if type == :elected %>">
+  <% team_rows(members).each do |row| %>
+    <div class="grid grid-cols-1 sm:grid-cols-2 <%= team_columns(row.length) %> gap-5">
+      <% row.each do |member| %>
+        <%= render "about/team_member", campus: campus, member: member, type: type %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

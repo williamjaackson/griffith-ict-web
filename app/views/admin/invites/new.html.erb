@@ -1,49 +1,23 @@
 <div class="max-w-lg mx-auto px-4 py-12">
   <h1 class="heading heading-2 mb-8">New invite</h1>
+  <%= render "shared/errors", errors: @invite.errors %>
 
-  <% if @invite.errors.any? %>
-    <div class="py-2 px-3 bg-brand-red-50 mb-5 text-brand-red font-medium rounded-lg">
-      <% @invite.errors.full_messages.each do |message| %>
-        <p><%= message %></p>
-      <% end %>
-    </div>
-  <% end %>
-
-  <div class="bg-white border-3 border-brand-black p-8 shadow-[6px_6px_0px_var(--color-brand-black)]">
+  <%= render Ui::CardComponent.new(shadow: :black, padding: :large) do %>
     <%= form_with model: [:admin, @invite], class: "space-y-5" do |form| %>
       <div>
-        <label class="input-label">Email address</label>
+        <%= form.label :email, "Email address", class: "input-label" %>
         <%= form.email_field :email, required: true, autofocus: true, placeholder: "name@example.com", class: "input-field" %>
       </div>
 
       <div>
-        <label class="input-label">Role</label>
-        <% role_options = Invite.roles.keys.map { |r| { label: r.capitalize, value: r } } %>
-        <% selected_role = role_options.find { |o| o[:value].to_s == (@invite.role || "exec").to_s } || role_options.first %>
-        <div data-controller="select" class="relative">
-          <input type="hidden" name="invite[role]" value="<%= selected_role[:value] %>" data-select-target="input">
-          <button type="button" data-select-target="button" data-action="select#toggle"
-                  class="input-field flex text-left cursor-pointer items-center justify-between">
-            <span data-role="label"><%= selected_role[:label] %></span>
-            <%= icon "chevron-down", class: "w-4 h-4 transition-transform duration-200", stroke_width: "2.5", data: { select_target: "chevron" } %>
-          </button>
-          <div data-select-target="menu" class="absolute top-full left-0 right-0 mt-1 z-10 opacity-0 pointer-events-none scale-95 transition-all duration-200 origin-top">
-            <div class="bg-white rounded-md border-2 border-brand-cream overflow-hidden shadow-lg">
-              <% role_options.each do |option| %>
-                <button type="button" data-action="select#pick" data-value="<%= option[:value] %>" data-label="<%= option[:label] %>"
-                        class="block w-full text-left px-3 py-2.5 text-sm hover:text-brand-black hover:bg-brand-bg transition-colors duration-150 cursor-pointer border-b border-brand-cream last:border-b-0">
-                  <%= option[:label] %>
-                </button>
-              <% end %>
-            </div>
-          </div>
-        </div>
+        <%= form.label :role, class: "input-label" %>
+        <%= form.select :role, Invite.roles.keys.map { |role| [role.humanize, role] }, {}, class: "input-field" %>
       </div>
 
       <div class="flex items-center gap-3">
-        <button type="submit" class="btn btn-primary btn-sm">Create invite</button>
-        <%= link_to "Cancel", admin_invites_path, class: "text-sm font-semibold hover:text-brand-black" %>
+        <%= render Ui::ButtonComponent.new(type: :submit, size: :small).with_content("Create invite") %>
+        <%= render Ui::ButtonComponent.new(href: admin_invites_path, variant: :quiet, size: :small).with_content("Cancel") %>
       </div>
     <% end %>
-  </div>
+  <% end %>
 </div>

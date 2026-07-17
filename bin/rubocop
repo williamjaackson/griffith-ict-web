@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require_relative "../config/boot"
+ENV["RUBOCOP_CACHE_ROOT"] ||= File.expand_path("../tmp/rubocop_cache", __dir__)
+load Gem.bin_path("rubocop", "rubocop")

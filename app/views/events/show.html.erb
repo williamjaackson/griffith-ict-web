@@ -15,18 +15,18 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
       <div class="enter stagger">
-        <span class="badge -rotate-2 mb-8"><%= event_status_label(@event) %></span>
+        <%= render Ui::BadgeComponent.new(class: "-rotate-2 mb-8").with_content(event_status_label(@event)) %>
         <h1 class="heading heading-2 md:!text-6xl"><%= @event.title %></h1>
         <p class="text-lg md:text-xl max-w-2xl mb-10"><%= @event.summary %></p>
 
         <div class="flex flex-wrap gap-4">
           <% if @event.rsvp_open? %>
-            <button class="btn btn-primary" onclick="window.dispatchEvent(new CustomEvent('event-rsvp:open'))">RSVP now</button>
+            <%= render Ui::ButtonComponent.new(data: { action: "dialog#open", dialog_id_param: "event-rsvp-dialog" }).with_content("RSVP now") %>
           <% else %>
-            <span class="btn btn-disabled" aria-disabled="true">Event ended</span>
+            <%= render Ui::ButtonComponent.new(disabled: true).with_content("Event ended") %>
           <% end %>
           <div>
-            <button class="btn btn-secondary" onclick="window.dispatchEvent(new CustomEvent('membership-modal:open'))">Become a member</button>
+            <%= render Ui::ButtonComponent.new(variant: :secondary, data: { action: "dialog#open", dialog_id_param: "membership-dialog" }).with_content("Become a member") %>
             <p class="mt-2 text-xs font-extrabold tracking-wider text-brand-black">MEMBERSHIP IS REQUIRED.</p>
           </div>
         </div>
@@ -50,15 +50,15 @@
         ["map-pin", "Location", event_location(@event)],
         ["ticket", "Admission", event_price(@event)]
       ].each do |icon_name, label, value| %>
-        <div class="card" style="box-shadow: 4px 4px 0px var(--color-brand-red-300);">
+        <%= render Ui::CardComponent.new(shadow: :red) do %>
           <%= icon(icon_name, class: "w-7 h-7 text-brand-red mb-4") %>
           <p class="text-xs uppercase font-bold tracking-wider mb-1"><%= label %></p>
           <p class="heading font-bold text-brand-black"><%= value %></p>
-        </div>
+        <% end %>
       <% end %>
     </div>
 
-    <% if @event.admission.fetch("members_only") %>
+    <% if @event.members_only? %>
       <div class="mt-8 p-5 border-3 border-brand-black bg-brand-red-50 reveal">
         <p class="font-bold text-brand-black">This event is for Griffith ICT Club members only. Membership is free and only takes a moment.</p>
       </div>
@@ -69,7 +69,7 @@
 <section>
   <div class="container grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20">
     <div class="lg:col-span-3 reveal">
-      <span class="badge badge-dark -rotate-1 mb-6">THE CHALLENGE</span>
+      <%= render Ui::BadgeComponent.new(variant: :dark, class: "-rotate-1 mb-6").with_content("The challenge") %>
       <h2 class="heading heading-2">Nothing useful.</h2>
       <div class="space-y-5 text-lg">
         <% @event.description.each do |paragraph| %>
@@ -79,12 +79,12 @@
     </div>
 
     <div class="lg:col-span-2 reveal stagger">
-      <div class="card" style="box-shadow: 6px 6px 0px var(--color-brand-red);">
+      <%= render Ui::CardComponent.new(shadow: :red) do %>
         <%= icon("users", class: "w-8 h-8 text-brand-red mb-4") %>
         <h3 class="heading heading-4">Teams</h3>
-        <p class="text-lg font-bold text-brand-black"><%= @event.details.fetch("team_size") %></p>
-      </div>
-      <% @event.details.fetch("inclusions").each do |inclusion| %>
+        <p class="text-lg font-bold text-brand-black"><%= @event.team_size %></p>
+      <% end %>
+      <% @event.inclusions.each do |inclusion| %>
         <div class="flex items-center gap-3 border-3 border-brand-black bg-white p-4 mt-4">
           <%= icon("check", class: "w-5 h-5 text-brand-red shrink-0") %>
           <span class="font-bold text-brand-black"><%= inclusion %></span>
@@ -97,16 +97,16 @@
 <section>
   <div class="container">
     <div class="mb-12 reveal">
-      <span class="badge -rotate-1 mb-6">PRIZES</span>
+      <%= render Ui::BadgeComponent.new(class: "-rotate-1 mb-6").with_content("Prizes") %>
       <h2 class="heading heading-2">Build weird. Win big.</h2>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 reveal stagger stamp">
       <% @event.prizes.each do |prize| %>
-        <div class="card text-center" style="box-shadow: 6px 6px 0px var(--color-brand-red);">
+        <%= render Ui::CardComponent.new(shadow: :red, class: "text-center") do %>
           <%= icon("trophy", class: "w-10 h-10 text-brand-red mx-auto mb-5") %>
-          <p class="heading text-sm font-bold uppercase mb-2"><%= prize.fetch("place") %></p>
-          <p class="heading text-3xl font-extrabold text-brand-black"><%= prize.fetch("award") %></p>
-        </div>
+          <p class="heading text-sm font-bold uppercase mb-2"><%= prize.place %></p>
+          <p class="heading text-3xl font-extrabold text-brand-black"><%= prize.award %></p>
+        <% end %>
       <% end %>
     </div>
   </div>
@@ -115,19 +115,19 @@
 <section id="terms">
   <div class="container max-w-4xl">
     <div class="reveal">
-      <span class="badge badge-dark rotate-1 mb-6">THE FINE PRINT</span>
+      <%= render Ui::BadgeComponent.new(variant: :dark, class: "rotate-1 mb-6").with_content("The fine print") %>
       <h2 class="heading heading-2">Terms &amp; conditions.</h2>
-      <% if @event.terms.fetch("state") == "published" %>
+      <% if @event.terms_published? %>
         <ol class="space-y-4 list-decimal pl-6 text-lg">
-          <% @event.terms.fetch("items").each do |term| %>
+          <% @event.term_items.each do |term| %>
             <li class="pl-2"><%= term %></li>
           <% end %>
         </ol>
       <% else %>
-        <div class="card mt-8" style="box-shadow: 5px 5px 0px var(--color-brand-red-300);">
+        <%= render Ui::CardComponent.new(shadow: :red, class: "mt-8") do %>
           <h3 class="heading heading-4">Coming soon.</h3>
           <p>Reviewed event terms will be published here before tickets become available.</p>
-        </div>
+        <% end %>
       <% end %>
     </div>
   </div>

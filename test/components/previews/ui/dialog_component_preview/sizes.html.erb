@@ -1,0 +1,8 @@
+<div class="flex gap-4">
+  <% %i[small medium large].each do |size| %>
+    <%= render Ui::ButtonComponent.new(size: :small, data: { action: "dialog#open", dialog_id_param: "#{size}-dialog" }).with_content(size.to_s.humanize) %>
+    <%= render Ui::DialogComponent.new(id: "#{size}-dialog", title: "#{size.to_s.humanize} dialog", size: size) do %>
+      <p>This is the <%= size %> dialog size.</p>
+    <% end %>
+  <% end %>
+</div>

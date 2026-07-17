@@ -7,22 +7,22 @@
       </p>
     </div>
 
-    <div class="bg-white border-3 border-brand-black p-8 shadow-[6px_6px_0px_var(--color-brand-black)]">
+    <%= render Ui::CardComponent.new(shadow: :black, padding: :large) do %>
       <%= form_with url: session_url, class: "space-y-5" do |form| %>
         <div>
-          <label class="input-label">Email address</label>
+          <%= form.label :email_address, class: "input-label" %>
           <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "you@griffithict.club", value: params[:email_address], class: "input-field" %>
         </div>
 
         <div>
-          <label class="input-label">Password</label>
+          <%= form.label :password, class: "input-label" %>
           <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72, class: "input-field" %>
         </div>
 
         <div>
-          <button type="submit" class="btn btn-primary w-full">Sign in</button>
+          <%= render Ui::ButtonComponent.new(type: :submit, class: "w-full").with_content("Sign in") %>
         </div>
       <% end %>
-    </div>
+    <% end %>
   </div>
 </section>

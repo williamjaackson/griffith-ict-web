@@ -1,0 +1,19 @@
+<% dialog_id = "#{campus.fetch("name")}-#{member.fetch("role")}".parameterize %>
+<% unassigned = member["name"].nil? %>
+
+<%= render Ui::CardComponent.new(
+      tag: :button,
+      shadow: unassigned ? :none : :red,
+      interactive: true,
+      type: "button",
+      class: class_names("w-full text-left focus-visible:outline-3 focus-visible:outline-brand-red", "border-dashed border-brand-gray/30": unassigned),
+      data: { action: "dialog#open", dialog_id_param: dialog_id }
+    ) do %>
+  <div class="w-10 h-10 <%= unassigned ? "bg-brand-gray/10" : "bg-brand-red/10" %> flex items-center justify-center mb-4">
+    <%= icon member.fetch("icon"), class: class_names("w-5 h-5", "opacity-40": unassigned, "text-brand-red": !unassigned) %>
+  </div>
+  <h3 class="heading heading-4"><%= member.fetch("role") %></h3>
+  <p class="text-sm <%= "italic text-brand-gray/50" if unassigned %>"><%= member["name"] || "Unassigned" %></p>
+<% end %>
+
+<%= render "about/role_dialog", dialog_id: dialog_id, member: member, type: type %>

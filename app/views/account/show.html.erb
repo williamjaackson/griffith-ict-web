@@ -1,13 +1,15 @@
 <header>
   <div class="container enter stagger">
-    <span class="badge -rotate-2 mb-8"><%= current_user.role.upcase %></span>
+    <%= render Ui::BadgeComponent.new(class: "-rotate-2 mb-8").with_content(current_user.role) %>
     <h1 class="heading heading-1">Your <span class="heading-highlight">account.</span></h1>
     <p class="text-lg md:text-xl max-w-2xl mb-10">
       Signed in as <span class="text-brand-black font-semibold"><%= current_user.email_address %></span>
     </p>
     <div class="flex flex-wrap gap-4">
-      <%= button_to "Sign out", session_path, method: :delete, class: "btn btn-primary" %>
-      <a href="/" class="btn btn-secondary">Back to home</a>
+      <%= form_with url: session_path, method: :delete do %>
+        <%= render Ui::ButtonComponent.new(type: :submit).with_content("Sign out") %>
+      <% end %>
+      <%= render Ui::ButtonComponent.new(href: root_path, variant: :secondary).with_content("Back to home") %>
     </div>
     <% if current_user.admin? %>
       <%= link_to admin_invites_path, class: "text-brand-red font-semibold hover:underline inline-flex items-center gap-1" do %>Manage invites <%= icon "arrow-right", class: "w-4 h-4" %><% end %>

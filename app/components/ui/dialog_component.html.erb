@@ -1,0 +1,11 @@
+<%= tag.dialog(**attributes) do %>
+  <div class="dialog-panel">
+    <button type="button" class="dialog-close" data-action="dialog#close" aria-label="Close dialog">
+      <%= helpers.icon "x", class: "w-5 h-5" %>
+    </button>
+    <% if title %>
+      <h2 class="heading heading-3"><%= title %></h2>
+    <% end %>
+    <%= content %>
+  </div>
+<% end %>

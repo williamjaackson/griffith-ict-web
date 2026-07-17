@@ -9,12 +9,12 @@
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start reveal stagger stamp" data-stagger-interval="150">
       <% accumulated_perks = [] %>
-      <% @tiers.each_with_index do |tier, i| %>
+      <% @tiers.each do |tier| %>
         <% tier_key = tier["name"].downcase %>
         <div>
-          <div class="card <%= tier["rotation"] %>">
+          <%= render Ui::CardComponent.new(class: tier.fetch("rotation")) do %>
             <div class="absolute left-0 top-0 bottom-0 w-3" style="background-color: <%= tier["color"] %>;"></div>
-            <span class="badge badge-sm" style="background-color: <%= tier["color"] %>;"><%= tier["name"].upcase %></span>
+            <%= render Ui::BadgeComponent.new(size: :small, style: "background-color: #{tier.fetch("color")}").with_content(tier.fetch("name")) %>
             <p class="text-2xl font-extrabold text-brand-black mt-3 heading"><%= tier["price"] %></p>
             <p class="text-sm mt-4 mb-6"><%= tier["description"] %></p>
             <ul class="flex flex-col gap-3 text-sm">
@@ -31,7 +31,7 @@
                 </li>
               <% end %>
             </ul>
-          </div>
+          <% end %>
         </div>
         <% tier["perks"].each { |p| accumulated_perks << { label: p, tier: tier_key } } %>
       <% end %>

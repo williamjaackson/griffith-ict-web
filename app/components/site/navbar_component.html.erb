@@ -1,0 +1,67 @@
+<nav class="site-navbar">
+  <div class="container px-6 py-4 flex items-center justify-between gap-6">
+    <%= link_to helpers.root_path, class: "flex items-center gap-3", aria: { label: "Griffith ICT Club home" } do %>
+      <%= image_tag "/logo/GriffithICTClubIcon.svg", alt: "", class: "h-8 w-auto", draggable: "false" %>
+    <% end %>
+
+    <ul class="hidden md:flex items-center gap-8">
+      <% links.each do |link| %>
+        <li>
+          <% if link[:children] %>
+            <details class="navigation-group">
+              <summary><%= link[:label] %> <%= helpers.icon "chevron-down", class: "w-3.5 h-3.5" %></summary>
+              <div class="navigation-menu">
+                <% link[:children].each do |label, href| %>
+                  <%= link_to label, href %>
+                <% end %>
+              </div>
+            </details>
+          <% else %>
+            <%= link_to link[:label], link[:href], class: "navigation-link" %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+
+    <div class="hidden md:block">
+      <% if helpers.authenticated? %>
+        <%= render Ui::ButtonComponent.new(href: helpers.account_path, variant: :secondary, size: :small).with_content("Account") %>
+      <% else %>
+        <%= render Ui::ButtonComponent.new(size: :small, data: { action: "dialog#open", dialog_id_param: "membership-dialog" }).with_content("Become a member") %>
+      <% end %>
+    </div>
+
+    <details class="mobile-navigation md:hidden">
+      <summary aria-label="Toggle navigation"><%= helpers.icon "menu", class: "w-6 h-6" %></summary>
+      <div class="mobile-navigation-menu">
+        <% links.each do |link| %>
+          <% if link[:children] %>
+            <details>
+              <summary><%= link[:label] %></summary>
+              <% link[:children].each do |label, href| %>
+                <%= link_to label, href %>
+              <% end %>
+            </details>
+          <% else %>
+            <%= link_to link[:label], link[:href] %>
+          <% end %>
+        <% end %>
+        <% if helpers.authenticated? %>
+          <%= render Ui::ButtonComponent.new(href: helpers.account_path, variant: :secondary).with_content("Account") %>
+        <% else %>
+          <%= render Ui::ButtonComponent.new(data: { action: "dialog#open", dialog_id_param: "membership-dialog" }).with_content("Become a member") %>
+        <% end %>
+      </div>
+    </details>
+  </div>
+
+  <% if featured_event %>
+    <div class="event-announcement bg-brand-red text-white">
+      <%= link_to helpers.event_path(featured_event.slug), class: "flex flex-wrap items-center justify-center gap-x-2 px-4 py-2 text-center text-xs sm:text-sm font-bold text-white" do %>
+        <strong><%= featured_event.title %>:</strong>
+        <span><%= featured_event.local_starts_at.strftime("%-d %B %Y") %></span>
+        <span class="underline underline-offset-2">RSVP now →</span>
+      <% end %>
+    </div>
+  <% end %>
+</nav>

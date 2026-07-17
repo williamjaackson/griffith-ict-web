@@ -1,10 +1,9 @@
 class EventRsvpsController < ApplicationController
   allow_unauthenticated_access
 
-  def create
-    @event = EventCatalog.find(params[:event_slug])
-    return head :not_found unless @event
+  before_action :set_event
 
+  def create
     unless @event.rsvp_open?
       redirect_to event_path(@event.slug), alert: "RSVPs are closed for this event."
       return
@@ -20,6 +19,10 @@ class EventRsvpsController < ApplicationController
   end
 
   private
+
+  def set_event
+    @event = EventCatalog.find!(params[:event_slug])
+  end
 
   def rsvp_params
     params.require(:event_rsvp).permit(:full_name, :student_number, :membership_confirmed)

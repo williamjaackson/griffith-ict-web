@@ -10,14 +10,14 @@ module EventsHelper
   end
 
   def event_price(event)
-    amount = event.admission.fetch("price_cents")
+    amount = event.price_cents
     formatted = amount.modulo(100).zero? ? "$#{amount / 100}" : format("$%.2f", amount / 100.0)
-    "#{formatted} #{event.admission.fetch('currency')}"
+    "#{formatted} #{event.currency}"
   end
 
   def event_location(event)
-    parts = [ event.location.fetch("region") ]
-    parts << (event.location.fetch("venue_tba") ? "Venue TBA" : event.location.fetch("venue"))
+    parts = [ event.region ]
+    parts << (event.venue_tba? ? "Venue TBA" : event.venue)
     parts.compact.join(" · ")
   end
 
@@ -59,8 +59,8 @@ module EventsHelper
         "name" => event_location(event),
         "address" => {
           "@type" => "PostalAddress",
-          "addressLocality" => event.location.fetch("region"),
-          "streetAddress" => event.location.fetch("address")
+          "addressLocality" => event.region,
+          "streetAddress" => event.address
         }.compact
       },
       "organizer" => {
@@ -73,9 +73,9 @@ module EventsHelper
     if event.ticket_state == "available"
       data["offers"] = {
         "@type" => "Offer",
-        "url" => event.admission.fetch("url"),
-        "price" => format("%.2f", event.admission.fetch("price_cents") / 100.0),
-        "priceCurrency" => event.admission.fetch("currency"),
+        "url" => event.ticket_url,
+        "price" => format("%.2f", event.price_cents / 100.0),
+        "priceCurrency" => event.currency,
         "availability" => "https://schema.org/InStock"
       }
     end

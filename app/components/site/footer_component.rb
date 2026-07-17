@@ -1,37 +1,35 @@
 module Site
   class FooterComponent < ViewComponent::Base
-    LINK_GROUPS = [
-      {
-        title: "Club",
-        links: [
-          { label: "Home", href: "/#" },
-          { label: "About", href: "/about#" },
-          { label: "Events", href: "/events" },
-          { label: "Community", href: "/#community" },
-          { label: "Sponsors", href: "/#sponsors" }
-        ]
-      },
-      {
-        title: "Resources",
-        links: [
-          { label: "Sponsorship", href: "/sponsorship#" },
-          { label: "Perks Program", href: "/sponsorship#perks-program" },
-          { label: "Executive Team", href: "/about#team" },
-          { label: "Contact Us", href: "mailto:#{Rails.application.config.socials[:email]}" }
-        ]
-      }
-    ].freeze
-
     private
 
-    def link_groups = LINK_GROUPS
+    def link_groups
+      [
+        {
+          title: "Club",
+          links: [
+            [ "Home", helpers.root_path ],
+            [ "About", helpers.about_path ],
+            [ "Events", helpers.events_path ],
+            [ "Community", "#{helpers.root_path}#community" ],
+            [ "Sponsors", "#{helpers.root_path}#sponsors" ]
+          ]
+        },
+        {
+          title: "Resources",
+          links: [
+            [ "Sponsorship", helpers.sponsorship_path ],
+            [ "Perks Program", "#{helpers.sponsorship_path}#perks-program" ],
+            [ "Executive Team", "#{helpers.about_path}#team" ],
+            [ "Contact Us", "mailto:#{socials[:email]}" ]
+          ]
+        }
+      ]
+    end
 
     def socials
       Rails.application.config.socials
     end
 
-    def year
-      Date.current.year
-    end
+    def year = Date.current.year
   end
 end

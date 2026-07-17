@@ -1,0 +1,5 @@
+<div class="flex items-center gap-4">
+  <% %i[small medium].each do |size| %>
+    <%= render Ui::ButtonComponent.new(size: size).with_content(size.to_s.humanize) %>
+  <% end %>
+</div>

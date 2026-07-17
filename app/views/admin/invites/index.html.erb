@@ -1,7 +1,7 @@
 <div class="max-w-4xl mx-auto px-4 py-12">
   <div class="flex items-center justify-between mb-8">
     <h1 class="heading heading-2">Invites</h1>
-    <a href="<%= new_admin_invite_path %>" class="btn btn-primary btn-sm">New invite</a>
+    <%= render Ui::ButtonComponent.new(href: new_admin_invite_path, size: :small).with_content("New invite") %>
   </div>
 
   <% if @invites.any? %>
@@ -26,18 +26,18 @@
           <% unless invite.accepted? %>
             <div class="flex items-center gap-2">
               <% unless invite.expired? %>
-                <button data-action="clipboard#copy" class="text-sm font-semibold text-brand-black border-2 border-brand-black px-3 py-1.5 cursor-pointer hover:bg-brand-cream transition-colors">
-                  Copy link
-                </button>
+                <%= render Ui::ButtonComponent.new(variant: :quiet, size: :small, data: { action: "clipboard#copy" }).with_content("Copy link") %>
               <% end %>
 
-              <%= button_to "Revoke", admin_invite_path(invite), method: :delete, class: "text-sm font-semibold text-brand-red border-2 border-brand-red px-3 py-1.5 cursor-pointer hover:bg-brand-red-50 transition-colors", data: { turbo_confirm: "Revoke this invite?" } %>
+              <%= form_with url: admin_invite_path(invite), method: :delete do %>
+                <%= render Ui::ButtonComponent.new(variant: :danger, size: :small, type: :submit).with_content("Revoke") %>
+              <% end %>
             </div>
           <% end %>
         </div>
       <% end %>
     </div>
   <% else %>
-    <p class="">No invites yet.</p>
+    <p>No invites yet.</p>
   <% end %>
 </div>

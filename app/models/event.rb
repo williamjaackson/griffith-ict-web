@@ -1,11 +1,12 @@
 class Event
+  Prize = Data.define(:place, :award)
+
   TICKET_STATES = %w[coming_soon available sold_out closed].freeze
   RSVP_STATES = %w[available closed].freeze
   TERMS_STATES = %w[coming_soon published].freeze
 
   attr_reader :slug, :title, :summary, :description, :starts_at, :ends_at,
-    :timezone, :image, :image_alt, :location, :admission, :details, :prizes,
-    :terms, :source
+    :timezone, :image, :image_alt, :prizes, :source
 
   def initialize(attributes:, source:, asset_root: Rails.root.join("app/assets/images"))
     @source = source.to_s
@@ -58,7 +59,26 @@ class Event
   def local_starts_at = starts_at.in_time_zone(timezone)
   def local_ends_at = ends_at.in_time_zone(timezone)
 
+  def region = location.fetch("region")
+  def venue = location.fetch("venue")
+  def address = location.fetch("address")
+  def venue_tba? = location.fetch("venue_tba")
+
+  def ticket_url = admission.fetch("url")
+  def price_cents = admission.fetch("price_cents")
+  def currency = admission.fetch("currency")
+  def members_only? = admission.fetch("members_only")
+  def membership_free? = admission.fetch("membership_free")
+
+  def team_size = details.fetch("team_size")
+  def inclusions = details.fetch("inclusions")
+
+  def terms_published? = terms.fetch("state") == "published"
+  def term_items = terms.fetch("items")
+
   private
+
+  attr_reader :location, :admission, :details, :terms
 
   def validate_root!(attributes)
     error!("event must be a mapping") unless attributes.is_a?(Hash)
@@ -126,10 +146,10 @@ class Event
   def prizes!(values)
     values.map.with_index do |value, index|
       error!("prizes[#{index}] must be a mapping") unless value.is_a?(Hash)
-      {
-        "place" => string!(value, "place", prefix: "prizes[#{index}]"),
-        "award" => string!(value, "award", prefix: "prizes[#{index}]")
-      }.freeze
+      Prize.new(
+        place: string!(value, "place", prefix: "prizes[#{index}]"),
+        award: string!(value, "award", prefix: "prizes[#{index}]")
+      )
     end.freeze
   end
 
@@ -203,7 +223,7 @@ class Event
     hash[key]
   end
 
-  def field_name(prefix, key) = [prefix, key].compact.join(".")
+  def field_name(prefix, key) = [ prefix, key ].compact.join(".")
 
   def error!(message)
     raise EventCatalog::InvalidEvent, "#{source}: #{message}"

@@ -5,7 +5,7 @@
       Reach out and we'll send you our full sponsorship prospectus. We'd love to work with you.
     </p>
     <div class="flex flex-wrap justify-center gap-4">
-      <a href="mailto:<%= Rails.application.config.socials[:email] %>" class="btn btn-primary">Get in touch</a>
+      <%= render Ui::ButtonComponent.new(href: "mailto:#{site_socials[:email]}").with_content("Get in touch") %>
     </div>
   </div>
 </section>

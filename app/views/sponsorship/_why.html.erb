@@ -1,60 +1,27 @@
+<% reasons = [
+  ["users", "#{site_meta[:member_count]} members", "Engaged students across software engineering, cybersecurity, computer science, and IT. These are your future hires."],
+  ["calendar", "Weekly events", "Workshops, hackathons, game nights, and industry panels. Consistent touchpoints with students all year round."],
+  ["map-pin", "2 campuses", "Presence on Griffith's two largest campuses: Gold Coast and Nathan. Reaching students all across Queensland."],
+  ["monitor", "Real visibility", "Your brand on our website, socials, Discord, and at every event we run. Consistent, visible placement wherever we show up."]
+] %>
+
 <section>
   <div class="container">
     <div class="mb-16 reveal">
       <h2 class="heading heading-2">Why sponsor us?</h2>
-      <p class="text-lg max-w-2xl">
-        We're the largest tech club at Griffith. Here's what you get access to.
-      </p>
+      <p class="text-lg max-w-2xl">We're the largest tech club at Griffith. Here's what you get access to.</p>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 reveal stagger">
-      <div>
-        <div class="card" style="box-shadow: 5px 5px 0px var(--color-brand-red-300);">
+      <% reasons.each do |icon_name, title, description| %>
+        <%= render Ui::CardComponent.new(shadow: :red) do %>
           <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
-            <%= icon("users", class: "w-5 h-5 text-brand-red") %>
+            <%= icon icon_name, class: "w-5 h-5 text-brand-red" %>
           </div>
-          <h3 class="heading heading-4"><%= Rails.application.config.meta[:member_count] %> members</h3>
-          <p class="text-sm">
-            Engaged students across software engineering, cybersecurity, computer science, and IT. These are your future hires.
-          </p>
-        </div>
-      </div>
-
-      <div>
-        <div class="card" style="box-shadow: 5px 5px 0px var(--color-brand-red-dark);">
-          <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
-            <%= icon("calendar", class: "w-5 h-5 text-brand-red") %>
-          </div>
-          <h3 class="heading heading-4">Weekly events</h3>
-          <p class="text-sm">
-            Workshops, hackathons, game nights, and industry panels. Consistent touchpoints with students all year round.
-          </p>
-        </div>
-      </div>
-
-      <div>
-        <div class="card" style="box-shadow: 5px 5px 0px var(--color-brand-red);">
-          <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
-            <%= icon("map-pin", class: "w-5 h-5 text-brand-red") %>
-          </div>
-          <h3 class="heading heading-4">2 campuses</h3>
-          <p class="text-sm">
-            Presence on Griffith's two largest campuses: Gold Coast and Nathan. Reaching students all across Queensland.
-          </p>
-        </div>
-      </div>
-
-      <div>
-        <div class="card" style="box-shadow: 5px 5px 0px var(--color-brand-red-200);">
-          <div class="w-10 h-10 bg-brand-red/10 flex items-center justify-center mb-4">
-            <%= icon("monitor", class: "w-5 h-5 text-brand-red") %>
-          </div>
-          <h3 class="heading heading-4">Real visibility</h3>
-          <p class="text-sm">
-            Your brand on our website, socials, Discord, and at every event we run. Consistent, visible placement wherever we show up.
-          </p>
-        </div>
-      </div>
+          <h3 class="heading heading-4"><%= title %></h3>
+          <p class="text-sm"><%= description %></p>
+        <% end %>
+      <% end %>
     </div>
   </div>
 </section>

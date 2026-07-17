@@ -1,0 +1,10 @@
+<% if errors.any? %>
+  <%= render Ui::AlertComponent.new(variant: :alert, class: "mb-6 text-left") do %>
+    <p class="font-extrabold mb-2"><%= local_assigns.fetch(:heading, "Please check the form") %>:</p>
+    <ul class="list-disc pl-5 space-y-1">
+      <% errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>

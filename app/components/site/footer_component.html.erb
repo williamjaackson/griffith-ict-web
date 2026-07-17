@@ -30,9 +30,9 @@
         <div>
           <p class="heading heading-5 text-brand-red"><%= group[:title] %></p>
           <ul class="flex flex-col gap-3">
-            <% group[:links].each do |link| %>
+            <% group[:links].each do |label, href| %>
               <li>
-                <a href="<%= link[:href] %>" class="text-white/50 hover:text-white transition-colors text-sm"><%= link[:label] %></a>
+                <%= link_to label, href, class: "text-white/50 hover:text-white transition-colors text-sm" %>
               </li>
             <% end %>
           </ul>
@@ -46,7 +46,9 @@
         <a href="https://jaackson.com/" target="_blank" rel="noopener" class="hover:text-white/50 transition-colors">Built and Operated by William Jackson</a>
         <a href="https://www.griffith.edu.au" target="_blank" rel="noopener" class="hover:text-white/50 transition-colors">Griffith University</a>
       </div>
-      <a href="<%= helpers.new_session_path %>" class="absolute -top-6 right-0 text-white/15 hover:text-white/30 transition-colors" aria-label="Staff login"><%= helpers.icon"settings", class: "w-2.5 h-2.5" %></a>
+      <%= link_to helpers.new_session_path, class: "absolute -top-6 right-0 text-white/15 hover:text-white/30 transition-colors", aria: { label: "Staff login" } do %>
+        <%= helpers.icon "settings", class: "w-2.5 h-2.5" %>
+      <% end %>
     </div>
   </div>
 </footer>
