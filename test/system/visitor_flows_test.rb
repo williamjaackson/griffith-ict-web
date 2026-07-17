@@ -15,7 +15,7 @@ class VisitorFlowsTest < ApplicationSystemTestCase
     end
 
     visit event_path("griffith-ai-hackathon-2026")
-    click_on "RSVP now"
+    click_button "RSVP now"
 
     assert_difference "EventRsvp.count", 1 do
       within "#event-rsvp-dialog" do
