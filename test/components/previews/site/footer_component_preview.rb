@@ -1,7 +1,7 @@
 module Site
   class FooterComponentPreview < ViewComponent::Preview
     def default
-      render FooterComponent.new
+      render Site::FooterComponent.new
     end
   end
 end

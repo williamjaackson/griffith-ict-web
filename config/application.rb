@@ -17,6 +17,8 @@ require "rails/test_unit/railtie"
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+require "lookbook" if Rails.env.development? || ENV["PREVIEW_PR_NUMBER"].present?
+Lookbook.config.preview_paths = [] if defined?(Lookbook)
 
 module GriffithIctWeb
   class Application < Rails::Application
@@ -27,6 +29,9 @@ module GriffithIctWeb
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
+    if Rails.env.development? || ENV["PREVIEW_PR_NUMBER"].present?
+      config.eager_load_paths << Rails.root.join("test/components/previews").to_s
+    end
 
     # Configuration for the application, engines, and railties goes here.
     #
