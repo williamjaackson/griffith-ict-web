@@ -41,7 +41,7 @@ The site will be available at `http://localhost:3000`.
 ```
 app/
 ├── components/
-│   ├── ui/               # Five reusable UI primitives
+│   ├── ui/               # Core primitives and supporting patterns
 │   └── site/             # Shared site compositions
 ├── javascript/
 │   └── controllers/      # Small behavior-only Stimulus controllers
@@ -94,10 +94,11 @@ the permanent past-events archive automatically.
 
 ## Design system
 
-Reusable UI starts with the five components in `app/components/ui`. Each
-component validates its supported variants and accepts ordinary HTML
-attributes. Site-wide compositions live in `app/components/site`; page
-sections stay as partials until they have a genuine reuse case.
+Reusable UI starts with five core primitives in `app/components/ui`. Supporting
+patterns, such as the progress indicator for multi-step dialogs, live beside
+them. Components validate their supported variants and accept ordinary HTML
+attributes. Site-wide compositions live in `app/components/site`; page sections
+stay as partials until they have a genuine reuse case.
 
 Previews live in `test/components/previews`. They document the supported UI
 and site compositions without turning visual details into test contracts.
