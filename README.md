@@ -74,6 +74,13 @@ Site content is driven by YAML files in `config/`:
 
 ### Events
 
+Event announcements and ticket sales happen in Discord, so the site does not
+link to the event pages. The landing page's `#events` section, the navbar, and
+the footer all point at the Discord invite in `config/socials.yml` instead. The
+`/events` index and `/events/<slug>` pages stay live and fully functional for
+anyone following a direct link, and relinking them is a matter of pointing those
+navigation entries back at `/events`.
+
 Public events are managed in Git rather than the database. Add one file per
 event at `config/events/<slug>.yml` and place its artwork under
 `app/assets/images/events/`. Use the existing Hackathon file as the canonical
