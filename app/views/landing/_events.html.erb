@@ -1,0 +1,17 @@
+<section id="events">
+  <div class="container">
+    <div class="max-w-3xl reveal stagger">
+      <span class="badge rotate-1 mb-8">EVENTS</span>
+      <h2 class="heading heading-2">It all happens on <span class="heading-highlight">Discord.</span></h2>
+      <p class="text-lg mb-8">
+        Event announcements, dates, and ticket sales go out in our Discord first. Join the server to hear about the next hackathon, workshop, or social night before anyone else.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a href="<%= Rails.application.config.socials[:discord] %>" target="_blank" rel="noopener" class="btn btn-primary">Join our Discord</a>
+        <button class="btn btn-secondary" onclick="window.dispatchEvent(new CustomEvent('membership-modal:open'))">Become a Member</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%= render "events/event_types" %>

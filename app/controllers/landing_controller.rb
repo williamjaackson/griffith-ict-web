@@ -5,6 +5,5 @@ class LandingController < ApplicationController
     config = YAML.load_file(Rails.root.join("config/sponsors.yml"))
     @sponsors = config["sponsors"] || []
     @perks = config["perks"] || []
-    @next_event = EventCatalog.upcoming.first
   end
 end

@@ -1,23 +1,49 @@
 require "test_helper"
 
 class EventsControllerTest < ActionDispatch::IntegrationTest
-  test "index shows upcoming events, event types, and an empty archive" do
-    get events_path
+  # The event pages are no longer linked from the site, but they stay live for
+  # anyone holding a direct link. The Hackathon runs on 1 August 2026, so tests
+  # that need it to be upcoming pin the clock rather than relying on today.
+  BEFORE_EVENT = "2026-07-13T09:00:00+10:00".freeze
+  AFTER_EVENT = "2026-08-02T10:00:00+10:00".freeze
+
+  test "index shows upcoming events and event types" do
+    travel_to Time.iso8601(BEFORE_EVENT) do
+      get events_path
+    end
 
     assert_response :success
     assert_select "h1", text: /What's on/
-    assert_select "h3", text: "Griffith AI-Hackathon 2026"
+    assert_select "#upcoming h3", text: "Griffith AI-Hackathon 2026"
     assert_select "h3", text: "Social Events"
-    assert_select "h2", text: "Past events."
-    assert_select "h3", text: "The archive starts here."
-    assert_select "nav a[href='#{events_path}']", minimum: 1
-    assert_select "footer a[href='#{events_path}']", minimum: 1
     assert_select "article img[loading='lazy']", minimum: 1
-    assert_select ".event-announcement.bg-brand-red.text-white a[href='#{event_path('griffith-ai-hackathon-2026')}']", text: /RSVP now/
+  end
+
+  test "index has no past events archive" do
+    travel_to Time.iso8601(BEFORE_EVENT) do
+      get events_path
+    end
+
+    assert_response :success
+    assert_select "#past", count: 0
+    assert_select "h2", text: "Past events.", count: 0
+  end
+
+  test "the site does not link to the event pages" do
+    travel_to Time.iso8601(BEFORE_EVENT) do
+      get events_path
+    end
+
+    assert_response :success
+    assert_select "nav a[href='#{events_path}']", count: 0
+    assert_select "footer a[href='#{events_path}']", count: 0
+    assert_select "nav a[href='/#events']", minimum: 1
+    assert_select "footer a[href='/#events']", minimum: 1
+    assert_select ".event-announcement", count: 0
   end
 
   test "index has an intentional empty upcoming state" do
-    travel_to Time.iso8601("2026-08-02T10:00:00+10:00") do
+    travel_to Time.iso8601(AFTER_EVENT) do
       get events_path
     end
 
@@ -25,8 +51,20 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_select "h3", text: "More events coming soon."
   end
 
+  test "index does not list a completed event anywhere" do
+    travel_to Time.iso8601(AFTER_EVENT) do
+      get events_path
+    end
+
+    assert_response :success
+    assert_select "h3", text: "Griffith AI-Hackathon 2026", count: 0
+    assert_select "a[href='#{event_path('griffith-ai-hackathon-2026')}']", count: 0
+  end
+
   test "show presents the Hackathon details and RSVP modal" do
-    get event_path("griffith-ai-hackathon-2026")
+    travel_to Time.iso8601(BEFORE_EVENT) do
+      get event_path("griffith-ai-hackathon-2026")
+    end
 
     assert_response :success
     assert_select "h1", text: "Griffith AI-Hackathon 2026"
@@ -57,14 +95,16 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
 
   test "records an RSVP and derives the student email" do
     assert_difference "EventRsvp.count", 1 do
-      post event_rsvp_path("griffith-ai-hackathon-2026"), params: {
-        event_rsvp: {
-          full_name: "Alex Student",
-          student_email: "forged@example.com",
-          student_number: "s1234567",
-          membership_confirmed: "1"
+      travel_to Time.iso8601(BEFORE_EVENT) do
+        post event_rsvp_path("griffith-ai-hackathon-2026"), params: {
+          event_rsvp: {
+            full_name: "Alex Student",
+            student_email: "forged@example.com",
+            student_number: "s1234567",
+            membership_confirmed: "1"
+          }
         }
-      }
+      end
     end
 
     assert_redirected_to event_path("griffith-ai-hackathon-2026")
@@ -75,13 +115,15 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
 
   test "does not record an RSVP without membership confirmation" do
     assert_no_difference "EventRsvp.count" do
-      post event_rsvp_path("griffith-ai-hackathon-2026"), params: {
-        event_rsvp: {
-          full_name: "Alex Student",
-          student_number: "s1234567",
-          membership_confirmed: "0"
+      travel_to Time.iso8601(BEFORE_EVENT) do
+        post event_rsvp_path("griffith-ai-hackathon-2026"), params: {
+          event_rsvp: {
+            full_name: "Alex Student",
+            student_number: "s1234567",
+            membership_confirmed: "0"
+          }
         }
-      }
+      end
     end
 
     assert_response :unprocessable_content
@@ -95,7 +137,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "completed events remain accessible with closed tickets" do
-    travel_to Time.iso8601("2026-08-02T10:00:00+10:00") do
+    travel_to Time.iso8601(AFTER_EVENT) do
       get event_path("griffith-ai-hackathon-2026")
     end
 
@@ -106,7 +148,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "does not accept an RSVP after the event ends" do
-    travel_to Time.iso8601("2026-08-02T10:00:00+10:00") do
+    travel_to Time.iso8601(AFTER_EVENT) do
       assert_no_difference "EventRsvp.count" do
         post event_rsvp_path("griffith-ai-hackathon-2026"), params: {
           event_rsvp: {
@@ -123,7 +165,9 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "show emits event-specific metadata and JSON-LD without an offer" do
-    get event_path("griffith-ai-hackathon-2026")
+    travel_to Time.iso8601(BEFORE_EVENT) do
+      get event_path("griffith-ai-hackathon-2026")
+    end
 
     assert_select "title", text: "Griffith AI-Hackathon 2026 | Griffith ICT Club"
     assert_select "meta[property='og:type'][content='event']", count: 1
@@ -139,22 +183,4 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_not json.key?("offers")
   end
 
-  test "homepage features the next event and links to event browsing" do
-    get root_path
-
-    assert_response :success
-    assert_select "#events h2", text: "Griffith AI-Hackathon 2026"
-    assert_select "#events a[href='#{event_path('griffith-ai-hackathon-2026')}']", text: "View event"
-    assert_select "a[href='#{events_path}']", text: "All events"
-    assert_select "#events img[loading='lazy']", count: 1
-  end
-
-  test "event announcement disappears after the event ends" do
-    travel_to Time.iso8601("2026-08-02T10:00:00+10:00") do
-      get root_path
-    end
-
-    assert_response :success
-    assert_select ".event-announcement", count: 0
-  end
 end

@@ -1,5 +1,5 @@
 <% content_for(:title, "Events | Griffith ICT Club") %>
-<% content_for(:meta_description, "Discover upcoming and past Griffith ICT Club hackathons, workshops, social events, and industry events.") %>
+<% content_for(:meta_description, "Discover upcoming Griffith ICT Club hackathons, workshops, social events, and industry events.") %>
 <% content_for(:canonical_url, "#{Rails.application.config.meta[:url]}#{events_path}") %>
 
 <header>
@@ -7,7 +7,7 @@
     <span class="badge -rotate-2 mb-8">EVENTS</span>
     <h1 class="heading heading-1">What's <span class="heading-highlight">on.</span></h1>
     <p class="text-lg md:text-xl max-w-2xl">
-      Build things, meet people, and learn something useful. Browse what's coming up and look back at what we've run.
+      Build things, meet people, and learn something useful. Here's what's coming up.
     </p>
   </div>
 </header>
@@ -36,26 +36,3 @@
 </section>
 
 <%= render "events/event_types" %>
-
-<section id="past">
-  <div class="container">
-    <div class="mb-12 reveal">
-      <span class="badge -rotate-1 mb-6">ARCHIVE</span>
-      <h2 class="heading heading-2">Past events.</h2>
-      <p class="text-lg max-w-2xl">The ideas, workshops, and good times that got us here.</p>
-    </div>
-
-    <% if @past_events.any? %>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 reveal stagger">
-        <% @past_events.each do |event| %>
-          <%= render "events/card", event: event %>
-        <% end %>
-      </div>
-    <% else %>
-      <div class="card max-w-2xl reveal">
-        <h3 class="heading heading-4">The archive starts here.</h3>
-        <p>Completed events will move into this section automatically.</p>
-      </div>
-    <% end %>
-  </div>
-</section>
