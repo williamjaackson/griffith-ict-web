@@ -76,9 +76,9 @@ Site content is driven by YAML files in `config/`:
 
 Public events are managed in Git rather than the database. Add one file per
 event at `config/events/<slug>.yml` and place its artwork under
-`app/assets/images/events/`. Use the existing Hackathon file as the canonical
-example for the required identity, timing, location, admission, details,
-prizes, and terms fields.
+`app/assets/images/events/`. Use `test/fixtures/files/events/test-hackathon.yml`
+as the canonical example for the required identity, timing, location, admission,
+details, prizes, and terms fields.
 
 Times must be quoted ISO-8601 values with an explicit offset and a valid IANA
 timezone. An available ticket must have an HTTPS URL; published terms must have
@@ -94,7 +94,13 @@ timestamps. Submission does not send an automated email. Records can be reviewed
 The catalog is validated while Rails boots. Invalid YAML, duplicate slugs,
 invalid dates or states, and missing artwork stop boot and CI with the source
 file and field. An event stays upcoming through its end time, then moves into
-the permanent past-events archive automatically.
+the past-events archive automatically. Removing an event's YAML file removes it
+from the site entirely, archive included; its `event_rsvps` rows are unaffected.
+
+Tests never read `config/events`. `test/test_helper.rb` points `EventCatalog` at
+the fixture events in `test/fixtures/files/events` (with posters in
+`test/fixtures/files/images/events`), so the suite stays stable no matter which
+real events are published or what today's date is.
 
 ### Databases
 

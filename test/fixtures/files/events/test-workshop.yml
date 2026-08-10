@@ -1,0 +1,34 @@
+slug: test-workshop
+title: Test Workshop 2026
+summary: A fixture workshop with published terms and an external ticket link.
+description:
+  - Learn something useful in a short, hands-on session.
+published: true
+starts_at: "2026-05-09T13:00:00+10:00"
+ends_at: "2026-05-09T16:00:00+10:00"
+timezone: Australia/Brisbane
+image: events/test-workshop.png
+image_alt: Test Workshop poster with the date, time, and venue
+location:
+  region: Nathan
+  venue: N44 Lecture Theatre
+  address: 170 Kessels Rd, Nathan QLD 4111
+  venue_tba: false
+admission:
+  state: available
+  rsvp_state: closed
+  url: https://example.com/tickets/test-workshop
+  price_cents: 1250
+  currency: AUD
+  members_only: false
+  membership_free: true
+details:
+  team_size: Solo
+  inclusions:
+    - Snacks provided
+prizes: []
+terms:
+  state: published
+  items:
+    - Attendees must bring a laptop.
+    - Tickets are non-refundable.

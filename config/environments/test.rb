@@ -39,4 +39,8 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions.
   config.action_controller.raise_on_missing_callback_actions = true
+
+  # Events come from fixtures rather than config/events so the suite does not
+  # depend on which real events happen to be published, or on the current date.
+  config.assets.paths << Rails.root.join("test/fixtures/files/images")
 end

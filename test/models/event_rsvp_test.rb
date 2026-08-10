@@ -3,7 +3,7 @@ require "test_helper"
 class EventRsvpTest < ActiveSupport::TestCase
   test "accepts and normalizes Griffith student details" do
     rsvp = EventRsvp.create!(
-      event_slug: "griffith-ai-hackathon-2026",
+      event_slug: "test-hackathon",
       full_name: "  Alex Student  ",
       student_number: " S1234567 ",
       membership_confirmed: true
@@ -17,7 +17,7 @@ class EventRsvpTest < ActiveSupport::TestCase
 
   test "rejects an invalid student number" do
     rsvp = EventRsvp.new(
-      event_slug: "griffith-ai-hackathon-2026",
+      event_slug: "test-hackathon",
       full_name: "Alex Student",
       student_number: "1234",
       membership_confirmed: true
@@ -47,7 +47,7 @@ class EventRsvpTest < ActiveSupport::TestCase
 
   def valid_attributes
     {
-      event_slug: "griffith-ai-hackathon-2026",
+      event_slug: "test-hackathon",
       full_name: "Alex Student",
       student_number: "s1234567",
       membership_confirmed: true

@@ -3,6 +3,10 @@ require_relative "../config/environment"
 require "rails/test_help"
 require_relative "test_helpers/session_test_helper"
 
+EventCatalog.directory = Rails.root.join("test/fixtures/files/events")
+EventCatalog.asset_root = Rails.root.join("test/fixtures/files/images")
+EventCatalog.reload!
+
 module ActiveSupport
   class TestCase
     # Run tests in parallel with specified workers

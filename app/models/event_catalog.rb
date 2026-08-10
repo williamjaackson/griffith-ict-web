@@ -9,12 +9,19 @@ class EventCatalog
   def self.past(at: Time.current) = catalog.past(at: at)
   def self.find(slug) = catalog.find(slug)
 
+  class << self
+    attr_writer :directory, :asset_root
+
+    def directory = @directory || Rails.root.join("config/events")
+    def asset_root = @asset_root || Rails.root.join("app/assets/images")
+  end
+
   def self.reload!
     @catalog = nil
   end
 
   def self.catalog
-    @catalog ||= new
+    @catalog ||= new(directory: directory, asset_root: asset_root)
   end
 
   def initialize(directory: Rails.root.join("config/events"), asset_root: Rails.root.join("app/assets/images"))

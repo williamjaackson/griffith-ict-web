@@ -1,0 +1,40 @@
+slug: test-hackathon
+title: Test Hackathon 2027
+summary: A fixture hackathon used to exercise the events pages.
+description:
+  - Team up with other Griffith students for a full day of building something ambitious.
+  - Work in a small team, compete for prizes, and enjoy lunch on the club.
+published: true
+starts_at: "2027-03-06T10:00:00+10:00"
+ends_at: "2027-03-06T17:00:00+10:00"
+timezone: Australia/Brisbane
+image: events/test-hackathon.png
+image_alt: Test Hackathon poster with the date, time, location, team size, and prizes
+location:
+  region: Gold Coast
+  venue:
+  address:
+  venue_tba: true
+admission:
+  state: coming_soon
+  rsvp_state: available
+  url:
+  price_cents: 500
+  currency: AUD
+  members_only: true
+  membership_free: true
+details:
+  team_size: 2–4 people
+  inclusions:
+    - Lunch provided
+    - Tokens provided
+prizes:
+  - place: 1st
+    award: $100
+  - place: 2nd
+    award: $50
+  - place: 3rd
+    award: Chocolate
+terms:
+  state: coming_soon
+  items: []
