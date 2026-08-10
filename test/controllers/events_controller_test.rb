@@ -7,18 +7,26 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   BEFORE_EVENT = "2026-07-13T09:00:00+10:00".freeze
   AFTER_EVENT = "2026-08-02T10:00:00+10:00".freeze
 
-  test "index shows upcoming events, event types, and an empty archive" do
+  test "index shows upcoming events and event types" do
     travel_to Time.iso8601(BEFORE_EVENT) do
       get events_path
     end
 
     assert_response :success
     assert_select "h1", text: /What's on/
-    assert_select "h3", text: "Griffith AI-Hackathon 2026"
+    assert_select "#upcoming h3", text: "Griffith AI-Hackathon 2026"
     assert_select "h3", text: "Social Events"
-    assert_select "h2", text: "Past events."
-    assert_select "h3", text: "The archive starts here."
     assert_select "article img[loading='lazy']", minimum: 1
+  end
+
+  test "index has no past events archive" do
+    travel_to Time.iso8601(BEFORE_EVENT) do
+      get events_path
+    end
+
+    assert_response :success
+    assert_select "#past", count: 0
+    assert_select "h2", text: "Past events.", count: 0
   end
 
   test "the site does not link to the event pages" do
@@ -41,6 +49,16 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "h3", text: "More events coming soon."
+  end
+
+  test "index does not list a completed event anywhere" do
+    travel_to Time.iso8601(AFTER_EVENT) do
+      get events_path
+    end
+
+    assert_response :success
+    assert_select "h3", text: "Griffith AI-Hackathon 2026", count: 0
+    assert_select "a[href='#{event_path('griffith-ai-hackathon-2026')}']", count: 0
   end
 
   test "show presents the Hackathon details and RSVP modal" do

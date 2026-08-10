@@ -100,8 +100,11 @@ timestamps. Submission does not send an automated email. Records can be reviewed
 
 The catalog is validated while Rails boots. Invalid YAML, duplicate slugs,
 invalid dates or states, and missing artwork stop boot and CI with the source
-file and field. An event stays upcoming through its end time, then moves into
-the permanent past-events archive automatically.
+file and field. An event is listed on `/events` until its end time passes, after
+which it stops being listed anywhere; there is no past-events archive. Its own
+`/events/<slug>` page still renders with closed tickets for anyone holding the
+link. `EventCatalog.past` is still available for anything that wants completed
+events, it just is not rendered.
 
 ### Databases
 
